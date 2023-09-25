@@ -1,22 +1,20 @@
 package com.fpoly.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.Instant;
-import java.util.UUID;
 
 @Entity
 @Table(name = "don_hang")
 public class DonHang {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_don_hang", nullable = false)
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nguoi_dat_hang")
+    private NguoiDung nguoiDatHang;
 
     @Column(name = "ngay_dat")
     private Instant ngayDat;
@@ -24,12 +22,20 @@ public class DonHang {
     @Column(name = "ngay_lay")
     private Instant ngayLay;
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public NguoiDung getNguoiDatHang() {
+        return nguoiDatHang;
+    }
+
+    public void setNguoiDatHang(NguoiDung nguoiDatHang) {
+        this.nguoiDatHang = nguoiDatHang;
     }
 
     public Instant getNgayDat() {

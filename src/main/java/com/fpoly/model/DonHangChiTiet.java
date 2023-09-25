@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 @Table(name = "don_hang_chi_tiet")
 public class DonHangChiTiet {
     @Id
-    @Column(name = "id_don_hang_chi_tiet", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_don_hang_chi_tiet", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

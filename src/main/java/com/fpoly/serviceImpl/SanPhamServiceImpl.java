@@ -19,4 +19,9 @@ public class SanPhamServiceImpl implements SanPhamService{
 		return sanPhamRepository.findAll();
 	}
 
+	@Override
+	public SanPham findOneSanPham(Integer idProduct) {
+		return sanPhamRepository.findById(idProduct).orElse(null);
+	}
+
 }

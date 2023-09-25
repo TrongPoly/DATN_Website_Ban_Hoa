@@ -8,4 +8,6 @@ public interface SanPhamService {
 
 	List<SanPham> findAllSanPham();
 
+	SanPham findOneSanPham(Integer idProduct);
+
 }
