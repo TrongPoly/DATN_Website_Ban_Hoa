@@ -14,7 +14,7 @@ public class Order {
     @Column(name = "order_id", nullable = false)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -61,5 +61,13 @@ public class Order {
     public void setStatus(String status) {
         this.status = status;
     }
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
 }
