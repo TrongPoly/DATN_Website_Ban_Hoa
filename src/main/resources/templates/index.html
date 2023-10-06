@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>Toast Notification | CodingNepal</title>
+<link rel="stylesheet" href="/css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Font Awesome CDN link for icons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	
+<script src="/js/script.js"></script>
+<script src="/js/order.js"></script>
+<script src="/js/controller/cartController.js"></script>
+<script src="/js/app/app.js"></script>
+<script src="/js/service/cartService.js"></script>
+<script src="/js/service/thongBao.js"></script>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="checkoutCtrl">
+		<div>{{amount}} VNĐ</div>
+		<!-- <input id="so"> -->
+<ul class="notifications">
+      <!-- Add ng-repeat directive to loop through toasts -->
+      <li ng-repeat="toast in toasts" class="toast {{toast.type}}">
+        <div class="column">
+          <i class="fa-solid {{toast.icon}}"></i>
+          <span>{{toast.text}}</span>
+        </div>
+        <i class="fa-solid fa-xmark" ng-click="removeToast(toast)"></i>
+      </li>
+    </ul>
+		<div class="buttons">
+			<button ng-click="checkout(amount)" class="btn" id="success">checkout</button>
+			<!-- <button class="btn" id="error">Error</button>
+      <button class="btn" id="warning">Warning</button>
+      <button class="btn" id="info">Info</button> -->
+		</div>
+	</div>
+
+  <div ng-controller="IndexController">
+    <h1>Trang chủ</h1>
+    <ul>
+      <li ng-repeat="product in products">
+        {{ product.name }}
+        <button ng-click="addToCart()">Thêm vào giỏ hàng</button>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
+</body>
+</html>
