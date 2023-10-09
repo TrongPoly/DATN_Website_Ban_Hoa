@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Zay Shop - Product Detail Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
+    <!-- Slick -->
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+    <style>
+        .nav-link.active {
+            background-color: brown;
+            color: white;
+            font-weight: bolder;
+        }
+
+        .nav-link_01 {
+            background-color: rgba(128, 128, 128, 0.281);
+            color: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Start Top Nav -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+        <div class="container text-light">
+            <div class="w-100 d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-envelope mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none"
+                        href="mailto:info@company.com">info@company.com</a>
+                    <i class="fa fa-phone mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                </div>
+                <div>
+                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i
+                            class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i
+                            class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://twitter.com/" target="_blank"><i
+                            class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i
+                            class="fab fa-linkedin fa-sm fa-fw"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Close Top Nav -->
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+                Zay
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+                id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html">Sản Phẩm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="informationCart.html">Chính Sách</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar align-self-center d-flex">
+                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                            <div class="input-group-text">
+                                <i class="fa fa-fw fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
+                        data-bs-target="#templatemo_search">
+                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="cart.html">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+
+    <!-- Modal -->
+    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="w-100 pt-1 mb-5 text-right">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                    <button type="submit" class="input-group-text bg-success text-light">
+                        <i class="fa fa-fw fa-search text-white"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- Open Content -->
+    <div class="container mt-3">
+        <h2>Hoá Đơn</h2>
+        <br>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs text-black-50 text-center" role="tablist">
+            <li class="nav-item col">
+                <a class="nav-link nav-link_01 mx-1 active" data-bs-toggle="tab" href="#home">Tất Cả</a>
+            </li>
+            <li class="nav-item col">
+                <a class="nav-link nav-link_01 mx-1" data-bs-toggle="tab" href="#menu1">Chờ Xác Nhận</a>
+            </li>
+            <li class="nav-item col">
+                <a class="nav-link nav-link_01 mx-1" data-bs-toggle="tab" href="#menu2">Chờ Lấy Hàng</a>
+            </li>
+            <li class="nav-item col">
+                <a class="nav-link nav-link_01 mx-1" data-bs-toggle="tab" href="#menu3">Đang Giao</a>
+            </li>
+            <li class="nav-item col">
+                <a class="nav-link nav-link_01 mx-1" data-bs-toggle="tab" href="#menu4">Đã Giao</a>
+            </li>
+            <li class="nav-item col">
+                <a class="nav-link nav-link_01 mx-1" data-bs-toggle="tab" href="#menu5">Đã Lấy</a>
+            </li>
+            <li class="nav-item col">
+                <a class="nav-link nav-link_01 mx-1" data-bs-toggle="tab" href="#menu6">Trả Hàng</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div id="home" class="container tab-pane my-1 active"><br>
+                <!-- Card item start -->
+                <div class="card mb-3" style="background-color: blanchedalmond;">
+                    <div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <h6><b>HD0001903200</b>
+                            </h6>
+                            <div class="text-center" style="font-size: 15px;">Chờ Xác Nhận</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-start">
+                                    <p class="col">Phí Vận Chuyển</p>
+                                    <div class="col"></div>
+                                    <p class="col">32.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="col">Tổng Tiền</p>
+                                    <div class="col"></div>
+                                    <p class="col">555.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <button type="button" class="btn btn-outline-warning">Chi tiết đơn hàng</button>
+                            <button type="button" class="btn btn-outline-warning">Huỷ Đơn</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item end -->
+                <!-- Card item start -->
+                <div class="card mb-3" style="background-color: blanchedalmond;">
+                    <div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <h6><b>HD0001903200</b>
+                            </h6>
+                            <div class="text-center" style="font-size: 15px;">Chờ Thanh Toán</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-start">
+                                    <p class="col">Phí Vận Chuyển</p>
+                                    <div class="col"></div>
+                                    <p class="col">32.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="col">Tổng Tiền</p>
+                                    <div class="col"></div>
+                                    <p class="col">555.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <div></div>
+                            <button type="button " class="btn btn-outline-warning ">Huỷ Đơn</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item end -->
+                <!-- Card item start -->
+                <div class="card mb-3" style="background-color: blanchedalmond;">
+                    <div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <h6><b>HD0001903200</b>
+                            </h6>
+                            <div class="text-center" style="font-size: 15px;">Hoàn Thành</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-start">
+                                    <p class="col">Phí Vận Chuyển</p>
+                                    <div class="col"></div>
+                                    <p class="col">32.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="col">Tổng Tiền</p>
+                                    <div class="col"></div>
+                                    <p class="col">555.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <button type="button" class="btn btn-outline-warning">Chi tiết hoá đơn</button>
+
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item end -->
+            </div>
+            <div id="menu1" class="container tab-pane my-1 fade"><br>
+                <!-- Card item start -->
+                <div class="card mb-3" style="background-color: blanchedalmond;">
+                    <div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <h6><b>HD0001903200</b>
+                            </h6>
+                            <div class="text-center" style="font-size: 15px;">Chờ Xác Nhận</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-start">
+                                    <p class="col">Phí Vận Chuyển</p>
+                                    <div class="col"></div>
+                                    <p class="col">32.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="col">Tổng Tiền</p>
+                                    <div class="col"></div>
+                                    <p class="col">555.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <button type="button" class="btn btn-outline-warning">Chi tiết đơn hàng</button>
+                            <button type="button" class="btn btn-outline-warning">Huỷ Đơn</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item end -->
+            </div>
+            <div id="menu2" class="container tab-pane mt-1 fade"><br>
+                <!-- Card item start -->
+                <div class="card mb-3" style="background-color: blanchedalmond;">
+                    <div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <h6><b>HD0001903200</b>
+                            </h6>
+                            <div class="text-center" style="font-size: 15px;">Chờ Lấy Hàng</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-start">
+                                    <p class="col">Phí Vận Chuyển</p>
+                                    <div class="col"></div>
+                                    <p class="col">32.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="col">Tổng Tiền</p>
+                                    <div class="col"></div>
+                                    <p class="col">555.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <button type="button" class="btn btn-outline-warning">Chi tiết đơn hàng</button>
+                            <button type="button" class="btn btn-outline-warning">Huỷ Đơn</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item end -->
+            </div>
+            <div id="menu3" class="container tab-pane mt-1 fade"><br>
+                <!-- Card item start -->
+                <div class="card mb-3" style="background-color: blanchedalmond;">
+                    <div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <h6><b>HD0001903200</b>
+                            </h6>
+                            <div class="text-center" style="font-size: 15px;">Đang Giao</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-start">
+                                    <p class="col">Phí Vận Chuyển</p>
+                                    <div class="col"></div>
+                                    <p class="col">32.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="col">Tổng Tiền</p>
+                                    <div class="col"></div>
+                                    <p class="col">555.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <button type="button" class="btn btn-outline-warning">Chi tiết đơn hàng</button>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item end -->
+            </div>
+            <div id="menu4" class="container tab-pane my-1 fade"><br>
+
+                <!-- Card item start -->
+                <div class="card mb-3" style="background-color: blanchedalmond;">
+                    <div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <h6><b>HD0001903200</b>
+                            </h6>
+                            <div class="text-center" style="font-size: 15px;">Hoàn Thành</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-start">
+                                    <p class="col">Phí Vận Chuyển</p>
+                                    <div class="col"></div>
+                                    <p class="col">32.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="col">Tổng Tiền</p>
+                                    <div class="col"></div>
+                                    <p class="col">555.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <button type="button" class="btn btn-outline-warning">Chi tiết hoá đơn</button>
+                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">Hoàn trả</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item end -->
+                <!-- Card item start -->
+                <div class="card mb-3" style="background-color: blanchedalmond;">
+                    <div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <h6><b>HD0001903200</b>
+                            </h6>
+                            <div class="text-center" style="font-size: 15px;">Hoàn Thành</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-start">
+                                    <p class="col">Phí Vận Chuyển</p>
+                                    <div class="col"></div>
+                                    <p class="col">32.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="col">Tổng Tiền</p>
+                                    <div class="col"></div>
+                                    <p class="col">555.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <button type="button" class="btn btn-outline-warning">Chi tiết hoá đơn</button>
+
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item end -->
+            </div>
+            <div id="menu5" class="container tab-pane mt-1 fade"><br>
+                <!-- Card item start -->
+                <div class="card mb-3" style="background-color: blanchedalmond;">
+                    <div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <h6><b>HD0001903200</b>
+                            </h6>
+                            <div class="text-center" style="font-size: 15px;">Giao Thành Công</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-start">
+                                    <p class="col">Phí Vận Chuyển</p>
+                                    <div class="col"></div>
+                                    <p class="col">32.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="col">Tổng Tiền</p>
+                                    <div class="col"></div>
+                                    <p class="col">555.000 VND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between p-3 align-items-center mt-3">
+                            <button type="button" class="btn btn-outline-success">Đã Nhận Hàng</button>
+                            <button type="button" class="btn btn-outline-success">Đánh Giá</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item end -->
+            </div>
+            <div id="menu6" class="container tab-pane mt-1 fade"><br>
+                <h3>Menu 6</h3>
+                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
+                    quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Close Content -->
+
+
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Zay Shop</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt fa-fw"></i> 123 Consectetur at ligula 10660
+                        </li>
+                        <li>
+                            <i class="fa fa-phone fa-fw"></i>
+                            <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="#">Luxury</a></li>
+                        <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
+                        <li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
+                        <li><a class="text-decoration-none" href="#">Women's Shoes</a></li>
+                        <li><a class="text-decoration-none" href="#">Popular Dress</a></li>
+                        <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
+                        <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="#">Home</a></li>
+                        <li><a class="text-decoration-none" href="#">About Us</a></li>
+                        <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
+                        <li><a class="text-decoration-none" href="#">FAQs</a></li>
+                        <li><a class="text-decoration-none" href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="row text-light mb-4">
+                <div class="col-12 mb-3">
+                    <div class="w-100 my-3 border-top border-light"></div>
+                </div>
+                <div class="col-auto me-auto">
+                    <ul class="list-inline text-left footer-icons">
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i
+                                    class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i
+                                    class="fab fa-twitter fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="subscribeEmail">Email address</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control bg-dark border-light" id="subscribeEmail"
+                            placeholder="Email address">
+                        <div class="input-group-text btn-success text-light">Subscribe</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-100 bg-black py-3">
+            <div class="container">
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <p class="text-left text-light">
+                            Copyright &copy; 2021 Company Name | Designed by <a rel="sponsored"
+                                href="https://templatemo.com" target="_blank">TemplateMo</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Start Script -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <!-- End Script -->
+
+    <!-- Start Slider Script -->
+    <script src="assets/js/slick.min.js"></script>
+    <script>
+        $('#carousel-related-product').slick({
+            infinite: true,
+            arrows: false,
+            slidesToShow: 4,
+            slidesToScroll: 3,
+            dots: true,
+            responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                }
+            }, {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 3
+                }
+            }, {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 3
+                }
+            }]
+        });
+    </script>
+    <!-- End Slider Script -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog w-100 ">
+            <div style="display: flex;align-items: center; margin-top: 30vh;">
+                <div class="modal-content" style="background-color: rgba(252, 252, 252, 0.69);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <div class="d-flex">
+                                <b>Trả Hàng</b>
+                            </div>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col"><input class="form-check-input" type="checkbox" id="checkboxNoLabel"
+                                            value="" aria-label="..."></th>
+                                    <th scope="col">Sản Phẩm</th>
+                                    <th scope="col">Đơn Giá</th>
+                                    <th scope="col">Số Lượng</th>
+                                    <th scope="col">Ghi chú</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><input class="form-check-input" type="checkbox" id="checkboxNoLabel"
+                                            value="" aria-label="..."></th>
+                                    <td>Giày Chạy Bộ Nam Biti's Hunter Running HSM003800</td>
+                                    <td>1.050.000 VNĐ</td>
+                                    <td><input type="number" class="form-control" style="width: 60px;"></td>
+                                    <td><textarea class="form-control" placeholder="Ghi chú" id="floatingTextarea2"
+                                            style="height: 100px;width: 100px;"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-primary" href="billChange.html">Trả Hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
