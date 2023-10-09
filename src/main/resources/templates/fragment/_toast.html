@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+		<ul th:fragment="toast" class="notifications">
+			<li ng-repeat="toast in toasts" class="toast {{toast.type}}"
+				ng-class="{ 'show': $index === toasts.length - 1 }">
+				<div class="column">
+					<i class="fa-solid {{toast.icon}}"></i> <span>{{toast.text}}</span>
+				</div> <i class="fa-solid fa-xmark" ng-click="removeToast(toast)"></i>
+			</li>
+		</ul>
+
+</body>
+</html>
