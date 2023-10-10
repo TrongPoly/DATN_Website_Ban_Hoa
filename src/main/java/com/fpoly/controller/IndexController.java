@@ -9,14 +9,6 @@ public class IndexController {
 	public String index () {
 		return "shop";
 	}
-	@GetMapping("/shopSingle")
-	public String shopSingle () {
-		return "shop-single";
-	}
-	@GetMapping("/informationCart")
-	public String informationCart () {
-		return "informationCart";
-	}
 	@GetMapping("/contact")
 	public String contact () {
 		return "contact";
@@ -28,10 +20,6 @@ public class IndexController {
 	@GetMapping("/billChange")
 	public String billChange () {
 		return "billChange";
-	}
-	@GetMapping("/cart")
-	public String cart () {
-		return "cart";
 	}
 	@GetMapping("/about")
 	public String about () {

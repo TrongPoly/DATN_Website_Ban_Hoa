@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/cart")
 public class CartController {
+
 	@GetMapping("")
 	public String getCart() {
 		return "cart";
 	}
+
 }
