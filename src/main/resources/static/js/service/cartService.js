@@ -41,6 +41,16 @@ app.service('CartService', function() {
 		cart = [];
 		saveCartToLocalStorage();
 	};
+	//Tăng số lượng sản phẩm
+	this.increase = function(item){
+		item.quantity +=1;
+		saveCartToLocalStorage();
+	}
+	//Tăng số lượng sản phẩm
+	this.reduce = function(item){
+		item.quantity -=1;
+		saveCartToLocalStorage();
+	}
 
 	// Lưu giỏ hàng vào LocalStorage
 	function saveCartToLocalStorage() {
