@@ -9,8 +9,9 @@
 <!-- Font Awesome CDN link for icons -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
 <script src="/js/script.js"></script>
 <script src="/js/order.js"></script>
 <script src="/js/controller/cartController.js"></script>
@@ -22,16 +23,14 @@
 	<div ng-controller="checkoutCtrl">
 		<div>{{amount}} VNĐ</div>
 		<!-- <input id="so"> -->
-<ul class="notifications">
-      <!-- Add ng-repeat directive to loop through toasts -->
-      <li ng-repeat="toast in toasts" class="toast {{toast.type}}">
-        <div class="column">
-          <i class="fa-solid {{toast.icon}}"></i>
-          <span>{{toast.text}}</span>
-        </div>
-        <i class="fa-solid fa-xmark" ng-click="removeToast(toast)"></i>
-      </li>
-    </ul>
+		<ul class="notifications">
+			<!-- Add ng-repeat directive to loop through toasts -->
+			<li ng-repeat="toast in toasts" class="toast {{toast.type}}">
+				<div class="column">
+					<i class="fa-solid {{toast.icon}}"></i> <span>{{toast.text}}</span>
+				</div> <i class="fa-solid fa-xmark" ng-click="removeToast(toast)"></i>
+			</li>
+		</ul>
 		<div class="buttons">
 			<button ng-click="checkout(amount)" class="btn" id="success">checkout</button>
 			<!-- <button class="btn" id="error">Error</button>
@@ -40,16 +39,14 @@
 		</div>
 	</div>
 
-  <div ng-controller="IndexController">
-    <h1>Trang chủ</h1>
-    <ul>
-      <li ng-repeat="product in products">
-        {{ product.name }}
-        <button ng-click="addToCart()">Thêm vào giỏ hàng</button>
-      </li>
-    </ul>
-  </div>
-</body>
-</html>
+	<div ng-controller="IndexController">
+		<h1>Trang chủ</h1>
+		<ul>
+			<li ng-repeat="product in products">{{ product.name }}
+				<button ng-click="addToCart()">Thêm vào giỏ hàng</button>
+			</li>
+		</ul>
+	</div>
+
 </body>
 </html>

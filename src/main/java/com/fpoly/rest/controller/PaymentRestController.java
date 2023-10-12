@@ -29,7 +29,7 @@ import com.fpoly.config.Config;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/payment")
-public class PaymentController {
+public class PaymentRestController {
 
 	@GetMapping("/create_payment")
 	public ResponseEntity<?> createPayment(@RequestParam("amount") BigDecimal am) throws UnsupportedEncodingException {
@@ -37,7 +37,7 @@ public class PaymentController {
 		String vnp_Command = "pay";
 		String orderType = "other";
 		long amount = Integer.parseInt(am.toString()) * 100;
-		String bankCode = "NCB";
+		String bankCode = "";
 
 		String vnp_TxnRef = Config.getRandomNumber(8);
 		String vnp_IpAddr = Config.getIpAddress();

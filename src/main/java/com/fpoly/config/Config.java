@@ -18,12 +18,11 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.context.annotation.Configuration;
 
-import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
 public class Config {
 	public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-	public static String vnp_ReturnUrl = "http://localhost:8080";
+	public static String vnp_ReturnUrl = "http://localhost:8080/payment/success";
 	public static String vnp_TmnCode = "C9KTDCVS";
 	public static String secretKey = "AUFGWQIDHHPMZLQICXUQKPAETPPAPNQV";
 	public static String vnp_Version = "2.1.0";
