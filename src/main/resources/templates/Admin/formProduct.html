@@ -1,615 +1,1024 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Form product</title>
-  <!-- base:css -->
-  <link rel="stylesheet" href="../admin/vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="../admin/vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <link rel="stylesheet" href="../admin/vendors/select2/select2.min.css">
-  <link rel="stylesheet" href="../admin/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="../admin/css/vertical-layout-light/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="../admin/images/favicon.png"/>
+
+<!-- Required meta tags-->
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="au theme template">
+<meta name="author" content="Hau Nguyen">
+<meta name="keywords" content="au theme template">
+
+<!-- Title Page-->
+<title>Form Product</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+<!-- Fontfaces CSS-->
+<link href="admin/css/font-face.css" rel="stylesheet" media="all">
+<link href="admin/vendor/font-awesome-5/css/fontawesome-all.min.css"
+	rel="stylesheet" media="all">
+<link href="admin/vendor/font-awesome-4.7/css/font-awesome.min.css"
+	rel="stylesheet" media="all">
+<link
+	href="admin/vendor/mdi-font/css/material-design-iconic-font.min.css"
+	rel="stylesheet" media="all">
+<!-- Latest compiled and minified CSS -->
+
+
+<!-- Optional theme -->
+
+<!-- Bootstrap CSS-->
+<link href="admin/vendor/bootstrap-4.1/bootstrap.min.css"
+	rel="stylesheet" media="all">
+
+<!-- Vendor CSS-->
+<link href="admin/vendor/animsition/animsition.min.css" rel="stylesheet"
+	media="all">
+<link
+	href="admin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+	rel="stylesheet" media="all">
+<link href="admin/vendor/wow/animate.css" rel="stylesheet" media="all">
+<link href="admin/vendor/css-hamburgers/hamburgers.min.css"
+	rel="stylesheet" media="all">
+<link href="admin/vendor/slick/slick.css" rel="stylesheet" media="all">
+<link href="admin/vendor/select2/select2.min.css" rel="stylesheet"
+	media="all">
+<link href="admin/vendor/perfect-scrollbar/perfect-scrollbar.css"
+	rel="stylesheet" media="all">
+
+<!-- Main CSS-->
+<link href="admin/css/theme.css" rel="stylesheet" media="all">
 
 </head>
-<body>
-  <div class="container-scroller">
-    <!-- partial:../admin/partials/_navbar.html -->
-    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-      <div class="navbar-brand-wrapper d-flex justify-content-center">
-        <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-          <a class="navbar-brand brand-logo" href="../admin/index.html"><img src="../admin/images/logo.svg" alt="logo"/></a>
-          <a class="navbar-brand brand-logo-mini" href="../admin/index.html"><img src="../admin/images/logo-mini.svg" alt="logo"/></a>
-          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="typcn typcn-th-menu"></span>
-          </button>
-        </div>
-      </div>
-      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-        <ul class="navbar-nav mr-lg-2">
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="../admin/images/faces/face5.jpg" alt="profile"/>
-              <span class="nav-profile-name">Eugenia Mullins</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
-                <i class="typcn typcn-cog-outline text-primary"></i>
-                Settings
-              </a>
-              <a class="dropdown-item">
-                <i class="typcn typcn-eject text-primary"></i>
-                Logout
-              </a>
-            </div>
-          </li>
-          <li class="nav-item nav-user-status dropdown">
-              <p class="mb-0">Last login was 23 hours ago.</p>
-          </li>
-        </ul>
-        <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item nav-date dropdown">
-            <a class="nav-link d-flex justify-content-center align-items-center" href="javascript:;">
-              <h6 class="date mb-0">Today : Mar 23</h6>
-              <i class="typcn typcn-calendar"></i>
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-              <i class="typcn typcn-cog-outline mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                    <img src="../admin/images/faces/face4.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="preview-item-content flex-grow">
-                  <h6 class="preview-subject ellipsis font-weight-normal">David Grey
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    The meeting is cancelled
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                    <img src="../admin/images/faces/face2.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="preview-item-content flex-grow">
-                  <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    New product launch
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                    <img src="../admin/images/faces/face3.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="preview-item-content flex-grow">
-                  <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    Upcoming board meeting
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
-          <li class="nav-item dropdown mr-0">
-            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
-              <i class="typcn typcn-bell mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-success">
-                    <i class="typcn typcn-info mx-0"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Just now
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-warning">
-                    <i class="typcn typcn-cog-outline mx-0"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <h6 class="preview-subject font-weight-normal">Settings</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Private message
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-info">
-                    <i class="typcn typcn-user mx-0"></i> 
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    2 days ago
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-          <span class="typcn typcn-th-menu"></span>
-        </button>
-      </div>
-    </nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-      <!-- partial:../admin/partials/_settings-panel.html -->
-      <div class="theme-setting-wrapper">
-        <div id="settings-trigger"><i class="typcn typcn-cog-outline"></i></div>
-        <div id="theme-settings" class="settings-panel">
-          <i class="settings-close typcn typcn-times"></i>
-          <p class="settings-heading">SIDEBAR SKINS</p>
-          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
-          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
-          <p class="settings-heading mt-2">HEADER SKINS</p>
-          <div class="color-tiles mx-0 px-4">
-            <div class="tiles success"></div>
-            <div class="tiles warning"></div>
-            <div class="tiles danger"></div>
-            <div class="tiles info"></div>
-            <div class="tiles dark"></div>
-            <div class="tiles default"></div>
-          </div>
-        </div>
-      </div>
-      <div id="right-sidebar" class="settings-panel">
-        <i class="settings-close typcn typcn-times"></i>
-        <ul class="nav nav-tabs" id="setting-panel" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
-            <div class="add-items d-flex px-3 mb-0">
-              <form class="form w-100">
-                <div class="form-group d-flex">
-                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
-                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
-                </div>
-              </form>
-            </div>
-            <div class="list-wrapper px-3">
-              <ul class="d-flex flex-column-reverse todo-list">
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Team review meeting at 3.00 PM
-                    </label>
-                  </div>
-                  <i class="remove typcn typcn-delete-outline"></i>
-                </li>
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Prepare for presentation
-                    </label>
-                  </div>
-                  <i class="remove typcn typcn-delete-outline"></i>
-                </li>
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Resolve all the low priority tickets due today
-                    </label>
-                  </div>
-                  <i class="remove typcn typcn-delete-outline"></i>
-                </li>
-                <li class="completed">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox" checked>
-                      Schedule meeting for next week
-                    </label>
-                  </div>
-                  <i class="remove typcn typcn-delete-outline"></i>
-                </li>
-                <li class="completed">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox" checked>
-                      Project review
-                    </label>
-                  </div>
-                  <i class="remove typcn typcn-delete-outline"></i>
-                </li>
-              </ul>
-            </div>
-            <div class="events py-4 border-bottom px-3">
-              <div class="wrapper d-flex mb-2">
-                <i class="typcn typcn-media-record-outline text-primary mr-2"></i>
-                <span>Feb 11 2018</span>
-              </div>
-              <p class="mb-0 font-weight-thin text-gray">Creating component page</p>
-              <p class="text-gray mb-0">build a js based app</p>
-            </div>
-            <div class="events pt-4 px-3">
-              <div class="wrapper d-flex mb-2">
-                <i class="typcn typcn-media-record-outline text-primary mr-2"></i>
-                <span>Feb 7 2018</span>
-              </div>
-              <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
-              <p class="text-gray mb-0 ">Call Sarah Graves</p>
-            </div>
-          </div>
-          <!-- To do section tab ends -->
-          <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
-            <div class="d-flex align-items-center justify-content-between border-bottom">
-              <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See All</small>
-            </div>
-            <ul class="chat-list">
-              <li class="list active">
-                <div class="profile"><img src="../admin/images/faces/face1.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Thomas Douglas</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">19 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../admin/images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
-                <div class="info">
-                  <div class="wrapper d-flex">
-                    <p>Catherine</p>
-                  </div>
-                  <p>Away</p>
-                </div>
-                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
-                <small class="text-muted my-auto">23 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../admin/images/faces/face3.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Daniel Russell</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">14 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../admin/images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
-                <div class="info">
-                  <p>James Richardson</p>
-                  <p>Away</p>
-                </div>
-                <small class="text-muted my-auto">2 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../admin/images/faces/face5.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Madeline Kennedy</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">5 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../admin/images/faces/face6.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Sarah Graves</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">47 min</small>
-              </li>
-            </ul>
-          </div>
-          <!-- chat tab ends -->
-        </div>
-      </div>
-      <!-- partial -->
-      <!-- partial:../admin/partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../admin/index.html">
-              <i class="typcn typcn-device-desktop menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-              <div class="badge badge-danger">new</div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="typcn typcn-document-text menu-icon"></i>
-              <span class="menu-title">UI Elements</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../admin/pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../admin/pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../admin/pages/ui-features/typography.html">Typography</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
-              <i class="typcn typcn-film menu-icon"></i>
-              <span class="menu-title">Form elements</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="../admin/pages/forms/basic_elements.html">Basic Elements</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-              <i class="typcn typcn-chart-pie-outline menu-icon"></i>
-              <span class="menu-title">Charts</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../admin/pages/charts/chartjs.html">ChartJs</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-              <i class="typcn typcn-th-small-outline menu-icon"></i>
-              <span class="menu-title">Tables</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="tables">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../admin/pages/tables/basic-table.html">Basic table</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-              <i class="typcn typcn-compass menu-icon"></i>
-              <span class="menu-title">Icons</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="icons">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../admin/pages/icons/mdi.html">Mdi icons</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
-              <span class="menu-title">User Pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../admin/pages/samples/login.html"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="../admin/pages/samples/register.html"> Register </a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
-              <i class="typcn typcn-globe-outline menu-icon"></i>
-              <span class="menu-title">Error pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="error">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../admin/pages/samples/error-404.html"> 404 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="../admin/pages/samples/error-500.html"> 500 </a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://bootstrapdash.com/demo/polluxui-free/docs/documentation.html">
-              <i class="typcn typcn-mortar-board menu-icon"></i>
-              <span class="menu-title">Documentation</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- partial -->
-      <div class="main-panel">        
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Form Product</h4>
-                  <form class="forms-sample">
-                    <div class="form-group">
-                      <label for="id">ID Product</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="ID Product">
-                    </div>
-                    <div class="form-group">
-                      <label for="id">Category</label>
-                        <select class="form-control" id="Id">
-                          <option>Hoa hồng</option>
-                          <option>Hoa lan</option>
-                        </select>
-                      </div>
-                    <div class="form-group">
-                      <label for="exampleInputName1">Name</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
-                    </div>
-                    <div class="form-group">
-                      <label>Image</label>
-                      <input sty type="file" name="img[]" class="file-upload-default">
-                      <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                        <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="quantity">Quantity</label>
-                      <input type="number" class="form-control" id="Price" placeholder="quantity">
-                    </div>
-                    <div class="form-group">
-                      <label for="Price">Price</label>
-                      <input type="number" class="form-control" id="Price" placeholder="Price (VND)">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleSelectGender"> Status</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option>Products available</option>
-                          <option>Out of stock</option>
-                        </select>
-                      </div>
-                    <button type="button" class="btn btn-primary">Create</button>
-                    <button type="button" class="btn btn-secondary">Edit</button> 
-                  </form>
-                </div>
-                
-              </div>
-              
-            </div>
 
-    <!--TABLE-->
-            <div class="col-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username">
-                      <div class="input-group-append">
-                        <button class="btn btn-sm btn-primary" type="button">Search</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Id Product</th>
-                          <th>Category</th>
-                          <th>Name</th>
-                          <th>Quantity</th>
-                          <th>Price</th>
-                          <th>Status</th>
-                          <th>Image</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>01</td>
-                          <td>Hoa Hồng</td>
-                          <td>Hoa hồng bó nhỏ</td>
-                          <td>100</td>
-                          <td>200.000</td>
-                          <td> <div class="form-check">
-                            <label class="toggle-switch">
-                              <input type="checkbox" checked>
-                              <span class="toggle-slider round"></span>
-                            </label>                      
-                          </div></td>
-                          <td>anh.jpg</td>
-                          <td>
-                            <button type="button" class="btn btn-inverse-primary btn-rounded btn-icon">
-                              <i class=" typcn typcn-pen"></i>
-                            </button></td>
-                        </tr>
-                      
-                      </tbody>
-                    </table>
-                  </div>
-                  <nav aria-label="Page navigation example" >
-                    <ul class="pagination  justify-content-center">
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-               
-              </div>
-            
-            </div>
-            
-              
-            </div>
-            <!--END TABLE-->
-            
-          </div>
-        </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:../admin/partials/_footer.html -->
-        <footer class="footer">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="https://www.bootstrapdash.com/" class="text-muted" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-muted">Free <a href="https://www.bootstrapdash.com/" class="text-muted" target="_blank">Bootstrap dashboard</a> templates from Bootstrapdash.com</span>
-                    </div>
-                </div>    
-            </div>        
-        </footer>
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
-  <!-- base:js -->
-  <script src="../admin/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- inject:js -->
-  <script src="../admin/js/off-canvas.js"></script>
-  <script src="../admin/js/hoverable-collapse.js"></script>
-  <script src="../admin/js/template.js"></script>
-  <script src="../admin/js/settings.js"></script>
-  <script src="../admin/js/todolist.js"></script>
-  <!-- endinject -->
-  <!-- plugin js for this page -->
-  <script src="../admin/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-  <script src="../admin/vendors/select2/select2.min.js"></script>
-  <!-- End plugin js for this page -->
-  <!-- Custom js for this page-->
-  <script src="../admin/js/file-upload.js"></script>
-  <script src="../admin/js/typeahead.js"></script>
-  <script src="../admin/js/select2.js"></script>
-  <!-- End custom js for this page-->
+<body class="animsition">
+	<div class="page-wrapper">
+		<!-- HEADER MOBILE-->`
+		<nav th:insert="~{fragment/_AdminHeader.html::adminheader}"></nav>
+		<!-- END HEADER MOBILE-->
+
+		<!-- MENU SIDEBAR-->
+		<nav th:insert="~{fragment/_AdminSideBar.html::adminsidebar}"></nav>
+		<!-- END MENU SIDEBAR-->
+
+		<!-- PAGE CONTAINER-->
+		<div class="page-container">
+			<!-- HEADER DESKTOP-->
+			<nav
+				th:insert="~{fragment/_AdminHeaderSearch.html::adminheadersearch}"></nav>
+			<!-- HEADER DESKTOP-->
+
+			<!-- MAIN CONTENT-->
+			<div class="main-content">
+				<div class="section__content section__content--p0">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12 .col-sm-6 .col-md-8">
+								<div class="card">
+
+									<div class="card-header">
+										<strong>Product</strong> <small> Form </small>
+									</div>
+									<div class="card-body card-block">
+
+										<!--TABS-->
+										<div id="main">
+											<div class="container">
+
+												<div class="group-tabs">
+													<!-- Nav tabs -->
+													<ul class="nav nav-tabs">
+														<li class="nav-item"><a class="nav-link active"
+															href="#SanPham" aria-controls="SanPham" role="tab"
+															data-toggle="tab">Sản Phẩm</a></li>
+														<li class="nav-item"><a class="nav-link" a
+															href="#SanPhamCT" aria-controls="SanPhamCT" role="tab"
+															data-toggle="tab">Sản phẩm chi tiết</a></li>
+
+													</ul>
+
+
+
+													<!-- Tab panes -->
+													<div class="tab-content">
+														<!-- Tabs SanPham-->
+														<div role="tabpanel" class="tab-pane active " id="SanPham">
+															<div>
+																<button type="button" class="btn btn-secondary"
+																	style="margin-top: 20px;" data-toggle="modal"
+																	data-target="#exampleModalCenter">+Thêm</button>
+															</div>
+
+
+															<div class="form-outline">
+																<input
+																	style="margin-top: 10px; margin-bottom: 10px; font-size: 14px;"
+																	type="search" id="form1" class="form-control"
+																	placeholder="Tìm kiếm tên sản phẩm theo tên"
+																	aria-label="Search" />
+
+															</div>
+
+															<table class="table">
+																<thead class="thead-light">
+
+																	<tr>
+																		<th>Tên sản phẩm</th>
+																		<th>Trạng thái</th>
+																		<th></th>
+																	</tr>
+
+																</thead>
+
+																<tbody>
+																	<tr>
+
+																		<td>NIKE AF1</td>
+
+																		<td>
+																			<!-- Default switch --> <input type="checkbox"
+																			id="action" checked data-toggle="toggle"
+																			data-style="ios" value="1" /> <script
+																				language="javascript">
+																				document
+																						.getElementById('action').onclick = function(
+																						e) {
+																					if (this.checked) {
+																						alert("Bạn vừa thay trạng thái");
+																					} else {
+																						alert("Bạn vừa thay đổi trạng thái");
+																					}
+																				};
+																			</script>
+																		</td>
+																		<td>
+																			<div class="d-flex flex-row-reverse">
+																				<button type="button" style="margin-left: 10px;"
+																					class="btn btn-outline-danger" data-toggle="modal"
+																					data-target="#modalDeleteSP">Xóa</button>
+																				<button type="button"
+																					class="btn btn-outline-primary" data-toggle="modal"
+																					data-target="#modalEdit">Sữa</button>
+
+																			</div>
+
+
+
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+															<div>
+																<div class="row">
+																	<div class="col-md-5 offset-md-3">
+																		<!-- pagination-->
+																		<div>
+																			<ul class="pagination justify-content-center">
+																				<select name="select" id="select"
+																					class="form-control" style="width: 70px;">
+																					<option value="0">5</option>
+																					<option value="1">10</option>
+																					<option value="2">15</option>
+																					<option value="3">20</option>
+																				</select>
+																				<li class="page-item"><a class="page-link"
+																					href="#" aria-label="Previous"> <span
+																						aria-hidden="true">&laquo;</span> <span
+																						class="sr-only">Previous</span>
+																				</a></li>
+																				<li class="page-item"><a class="page-link"
+																					href="#">1</a></li>
+																				<li class="page-item"><a class="page-link"
+																					href="#">2</a></li>
+																				<li class="page-item"><a class="page-link"
+																					href="#">3</a></li>
+																				<li class="page-item"><a class="page-link"
+																					href="#" aria-label="Next"> <span
+																						aria-hidden="true">&raquo;</span> <span
+																						class="sr-only">Next</span>
+																				</a></li>
+
+																			</ul>
+																		</div>
+																	</div>
+																	<!--End pagination-->
+
+
+
+																	<!-- <div class="col-md-1 offset-md-3">
+                                                        <button type="button"
+                                                            class="btn btn-outline-info ">Tạo</button>
+                                                    </div> -->
+																</div>
+															</div>
+														</div>
+
+
+
+														<!-- End Tabs SanPham-->
+
+
+
+
+														<!--Tabs SanPhamCT-->
+														<div role="tabpanel" class="tab-pane" id="SanPhamCT">
+															<!-- Nav tabs -->
+															<ul class="nav nav-tabs">
+																<li class="nav-item"><a class="nav-link active"
+																	href="#DanhSachCT" aria-controls="#DanhSachCT"
+																	role="tab" data-toggle="tab">Danh sách</a></li>
+																<li class="nav-item"><a class="nav-link" a
+																	href="#TaoMoiCT" aria-controls="TaoMoiCT" role="tab"
+																	data-toggle="tab">Tạo mới</a></li>
+
+															</ul>
+
+
+															<!-- Tab panes sản phẩm chi tiết -->
+															<!-- Tabs danh sách sản phẩm chi tiết-->
+															<div class="tab-content">
+
+																<div role="tabpanel" class="tab-pane active "
+																	id="DanhSachCT">
+																	<div class="form-outline">
+																		<input
+																			style="margin-top: 50px; margin-bottom: 30px; font-size: 13;"
+																			type="search" id="form1" class="form-control"
+																			placeholder="Tìm kiếm tên sản phẩm theo tên"
+																			aria-label="Search" />
+
+																	</div>
+																	<table class="table">
+																		<thead class="thead-light">
+
+																			<tr>
+																				<th>Tên sản phẩm</th>
+																				<th>Thuế(%)</th>
+																				<th>Giá nhập(VNĐ)</th>
+																				<th>Giá bán(VNĐ)</th>
+																				<th>Số lượng</th>
+																				<th>Được khuyến mãi</th>
+																				<th>Trạng thái</th>
+																				<th></th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr>
+
+																				<td>GIÀY NIKE</td>
+																				<td>10</td>
+																				<td>500000</td>
+																				<td>595000</td>
+																				<td>919</td>
+																				<td>có</td>
+																				<td>
+																					<!-- Default switch --> <input type="checkbox"
+																					checked data-toggle="toggle" data-style="ios">
+
+																				</td>
+																				<td>
+
+																					<div class="table-data-feature">
+																						<button class="item"
+																							data-target="#modalEditDanhSach"
+																							data-toggle="modal" data-placement="top"
+																							title="edit">
+																							<i class="zmdi zmdi-edit"></i>
+																						</button>
+
+																					</div>
+																				</td>
+
+																			</tr>
+																		</tbody>
+																	</table>
+																	<div>
+
+																		<!-- pagination-->
+																		<div>
+																			<ul class="pagination justify-content-center">
+																				<li class="page-item"><a class="page-link"
+																					href="#" aria-label="Previous"> <span
+																						aria-hidden="true">&laquo;</span> <span
+																						class="sr-only">Previous</span>
+																				</a></li>
+																				<li class="page-item"><a class="page-link"
+																					href="#">1</a></li>
+																				<li class="page-item"><a class="page-link"
+																					href="#">2</a></li>
+																				<li class="page-item"><a class="page-link"
+																					href="#">3</a></li>
+																				<li class="page-item"><a class="page-link"
+																					href="#" aria-label="Next"> <span
+																						aria-hidden="true">&raquo;</span> <span
+																						class="sr-only">Next</span>
+																				</a></li>
+																			</ul>
+																		</div>
+																	</div>
+																	<!--End pagination-->
+																</div>
+																<!-- End Tabs danh sách-->
+
+
+
+
+																<!--Tabs taomoi sản phẩm chi tiết-->
+
+																<div role="tabpanel" class="tab-pane" id="TaoMoiCT">
+																	<!-- <div class="col-12"> -->
+																	<div class="form-outline">
+																		<input
+																			style="margin-top: 50px; margin-bottom: 5px; font-size: 14px;"
+																			type="search" id="form1" class="form-control"
+																			placeholder="Tìm kiếm tên sản phẩm theo tên"
+																			aria-label="Search" />
+
+																	</div>
+
+
+																	<div class="form-group">
+																		<label for="SanPham" class=" form-control-label">
+																			Sản phẩm</label>
+
+
+																		<div class="row no-gutters">
+																			<div class="col-12 col-sm-0 col-md-11">
+																				<select name="select" id="select"
+																					class="form-control">
+																					<option value="0">Nike</option>
+																					<option value="1">Adidas</option>
+																					<option value="2">btits</option>
+																					<option value="3">ananas</option>
+																				</select>
+																			</div>
+
+																			<div class="col-6 col-md-1">
+
+																				<button type="button" class="btn btn-secondary mb-1"
+																					data-toggle="modal" data-target="#mediumModal">
+																					+Thêm</button>
+																			</div>
+																		</div>
+																	</div>
+																	<!--Thuộc tính-->
+																	<div class="accordion" id="myaccordion">
+																		<div class="card">
+																			<div class="card-header btn"
+																				style="text-align: left;" data-toggle="collapse"
+																				data-target="#themthuoctinh"
+																				data-parent="#myaccordion">Thuộc tính</div>
+
+																			<div class="card-body collapse"
+																				data-toggle="collapse" aria-expanded="false"
+																				id="themthuoctinh">
+
+																				<!--Table-->
+																				<table class="table table-hover">
+																					<thead>
+																					</thead>
+																					<tbody>
+
+																						<td>Size</td>
+																						<td>36</td>
+																						<td>37</td>
+																						<td>
+																							<div class="table-data-feature">
+																								<button type="button"
+																									class="btn btn-outline-primary btn-sm"
+																									data-toggle="modal"
+																									data-target="#modalThemGiaTri">+Thêm</button>
+
+																							</div>
+																						</td>
+
+																						</td>
+
+
+																					</tbody>
+																				</table>
+																				<!--End table-->
+
+
+																				<div class="modal-footer">
+
+																					<button type="button"
+																						class="btn btn-outline-secondary btn-sm"
+																						data-toggle="modal"
+																						data-target="#modalThemThuocTinhSanPham">Thêm
+																						thuộc tính</button>
+
+																				</div>
+
+
+																				<!--end form-->
+
+																			</div>
+
+																		</div>
+																	</div>
+
+
+
+
+																	<table class="table" id="my_table_1"
+																		data-toggle="table" data-sort-stable="true">
+																		<thead class="thead-light">
+																			<tr>
+																				<th colspan="9">Danh sách sản phẩm cùng loại</th>
+																			</tr>
+
+
+																		</thead>
+																		<tr>
+																			<th>#</th>
+																			<th>Sản phẩm</th>
+																			<th>Số lượng</th>
+																			<th>Giá nhập(VNĐ)</th>
+																			<th>Giá bán(VNĐ)</th>
+																			<th>Thuế(%)</th>
+																			<th>Được khuyến mãi</th>
+																			<th>Ảnh</th>
+																			<th></th>
+
+																		</tr>
+																		<tbody>
+																			<tr>
+																				<!--NOTE Input-->
+																				<td></td>
+																				<td>GIÀY NIKE</td>
+																				<td>10</td>
+																				<td>500000</td>
+																				<td>595000</td>
+																				<td>919</td>
+
+																				<td>
+																					<!-- Default switch --> <input type="checkbox"
+																					checked data-toggle="toggle" data-style="ios">
+
+																				</td>
+																				<td>anh1.png</td>
+																				<td>
+																					<div class="table-data-feature">
+																						<button data-target="#confirmModal"
+																							data-placement="top" title="Delete"
+																							data-toggle="modal">
+																							<i class="zmdi zmdi-delete"></i>
+																						</button>
+
+																					</div>
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																	<div>
+																		<div class="row">
+																			<div class="col-md-5 offset-md-3">
+																				<!-- pagination-->
+																				<div>
+																					<ul class="pagination justify-content-center">
+																						<li class="page-item"><a class="page-link"
+																							href="#" aria-label="Previous"> <span
+																								aria-hidden="true">&laquo;</span> <span
+																								class="sr-only">Previous</span>
+																						</a></li>
+																						<li class="page-item"><a class="page-link"
+																							href="#">1</a></li>
+																						<li class="page-item"><a class="page-link"
+																							href="#">2</a></li>
+																						<li class="page-item"><a class="page-link"
+																							href="#">3</a></li>
+																						<li class="page-item"><a class="page-link"
+																							href="#" aria-label="Next"> <span
+																								aria-hidden="true">&raquo;</span> <span
+																								class="sr-only">Next</span>
+																						</a></li>
+																					</ul>
+																				</div>
+																			</div>
+																			<!--End pagination-->
+																			<div class="col-md-1 offset-md-3">
+																				<button type="button"
+																					data-target="#modalThemDanhSach"
+																					data-toggle="modal"
+																					class="btn btn-outline-primary ">Tạo</button>
+																			</div>
+																		</div>
+																	</div>
+
+
+
+																</div>
+																<!--End taomoi-->
+															</div>
+														</div>
+														<!--End SanPhamCT-->
+
+
+													</div>
+													<!-- END TABS-->
+
+												</div>
+
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+
+								<!-- END DATA TABLE-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<!-- Modal xác nhận xóa sản phẩm -->
+		<div class="modal fade" id="confirmModal" tabindex="-1"
+			aria-labelledby="confirmModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="confirmModalLabel">Xác nhận</h5>
+						<button type="button" class="btn-close" data-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Bạn có đồng ý xóa sản phẩm này không?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-primary"
+							data-dismiss="modal">Đóng</button>
+						<button type="button" class="btn btn-outline-danger">Xóa</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--END XÁC NHẬN SÓA SP CỦA DANH SÁCH SẢN PHẨM CÙNG LOẠI-->
+		<!--MODAL XÓA DANH SÁCH SP -->
+		<!-- Modal xác nhận xóa sản phẩm -->
+		<div class="modal fade" id="modalDeleteSP" tabindex="-1"
+			aria-labelledby="modalDeleteSPLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalDeleteSPLabel">Xác nhận</h5>
+						<button type="button" class="btn-close" data-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Bạn có đồng ý xóa sản phẩm này không?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-primary"
+							data-dismiss="modal">Đóng</button>
+						<button type="button" class="btn btn-outline-danger">Xóa</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modalThemDanhSach" tabindex="-1"
+			aria-labelledby="modalThemDanhSachLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalThemDanhSachLabel">Xác nhận</h5>
+						<button type="button" class="btn-close" data-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Bạn có chắc là muốn thêm mới sản phẩm này không?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary"
+							data-dismiss="modal">Đóng</button>
+						<button type="button" class="btn btn-outline-primary">Thêm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+		<!-- modal ThemCT -->
+		<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog"
+			aria-labelledby="mediumModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="mediumModalLabel">Tạo mới sản
+							phẩm</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="was-validated form-group">
+							<div class="mb-3 mt-3">
+								<label for="giatri" class="form-label">Tên sản phẩm</label> <input
+									type="text" class="form-control" id="giatri"
+									placeholder="Nhập giá tri" name="giatri" required>
+								<div class="valid-feedback">Hợp lệ.</div>
+								<div class="invalid-feedback">Điền đầy đủ thông tin.</div>
+							</div>
+						</div>
+						<!--End Danh sách giá trị-->
+						<div class="accordion" id="myaccordion">
+							<div class="card">
+								<div class="card-header btn" style="text-align: left;"
+									data-toggle="collapse" data-target="#themthuoctinhgiatri"
+									data-parent="#myaccordion">Danh sách sản phẩm đi kèm</div>
+								<div class="card-body collapse" data-toggle="collapse"
+									aria-expanded="false" id="themthuoctinhgiatri">
+
+									<!--Table-->
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>Thuộc tính</th>
+											</tr>
+
+										</thead>
+										<tbody>
+											<tr>
+												<td>Size</td>
+												<td>
+													<div class="table-data-feature">
+														<button class="item" data-toggle="tooltip"
+															data-placement="top" title="Delete">
+															<i class="zmdi zmdi-delete"></i>
+														</button>
+
+													</div>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+
+
+									<!--ID MOdal thêm thuộc tính cho sản phẩm-->
+									<div class="modal-footer">
+
+										<button type="button" class="btn btn-primary"
+											data-toggle="modal" data-target="#modalThemThuocTinhSanPham">Thêm
+											thuộc tính cho sản phẩm</button>
+
+									</div>
+
+
+									<!--end form-->
+
+								</div>
+
+							</div>
+						</div>
+
+
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Đóng</button>
+						<button type="button" class="btn btn-primary">Tạo</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- end modal ThemCT -->
+
+		<!--MODAL Thêm thuộc tính cho sản phẩm chi tiết -->
+		<div class="modal fade" id="modalThemThuocTinhSanPham" tabindex="-1"
+			role="dialog" aria-labelledby="modalThemThuocTinhSanPhamLabel"
+			aria-hidden="true">
+			<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalThemThuocTinhSanPhamLabel"></h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label for="giatri" class="form-label">Thuộc tính</label> <select
+							name="select" id="select" class="form-control">
+							<option value="0">size</option>
+							<option value="1">chất liệu</option>
+							<option value="2">màu</option>
+
+						</select>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Đóng</button>
+						<button type="button" class="btn btn-primary">Thêm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--END MODAL Thêm thuộc tính cho sản phẩm chi tiết-->
+
+		<!--MODAL THEMTT giá trị-->
+		<div class="modal fade" id="modalThemGiaTri" tabindex="-1"
+			role="dialog" aria-labelledby="modalThemGiaTriLabel"
+			aria-hidden="true">
+			<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalThemGiaTriLabel">Giá trị
+							thuộc tính</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label for="giatri" class="form-label">Thuộc tính</label> <select
+							name="select" id="select" class="form-control">
+							<option value="0">36</option>
+							<option value="1">37</option>
+							<option value="2">40</option>
+						</select>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Đóng</button>
+						<button type="button" class="btn btn-primary" id="addButton">Thêm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--END MODAL THEMTT CT1-->
+		<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+			aria-labelledby="confirmModalLabel" aria-hidden="true">
+			<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="confirmModalLabel">Giá trị thuộc
+							tính</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label for="giatri" class="form-label">Thuộc tính</label> <select
+							name="select" id="select" class="form-control">
+							<option value="0">36</option>
+							<option value="1">37</option>
+							<option value="2">40</option>
+						</select>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Đóng</button>
+						<button type="button" class="btn btn-primary" id="addButton">Thêm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--MODAL CHỈNH SỮA DANH SÁCH-->
+
+		<div class="modal fade" id="modalEditDanhSach" tabindex="-1"
+			role="dialog" aria-labelledby="modalEditDanhSachLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalEditDanhSachLabel">Chỉnh sữa</h5>
+					</div>
+					<div class="section__content--p30">
+						<form>
+							<div class="form-row">
+								<div class="col-6">
+									<div class="was-validated form-group">
+										<div class="mb-3 mt-3">
+											<label for="giaNhap" class="form-label">Giá Nhập</label> <input
+												type="text" class="form-control" id="giaNhap"
+												placeholder="Nhập giá tri" name="giatri" required>
+											<div class="valid-feedback">Hợp lệ.</div>
+											<div class="invalid-feedback">Điền đầy đủ thông tin.</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="was-validated form-group">
+										<div class="mb-3 mt-3">
+											<label for="giaBan" class="form-label">Giá bán</label> <input
+												type="text" class="form-control" id="giaBan"
+												placeholder="Nhập giá tri" name="giatri" required>
+											<div class="valid-feedback">Hợp lệ.</div>
+											<div class="invalid-feedback">Điền đầy đủ thông tin.</div>
+										</div>
+									</div>
+								</div>
+
+								<div class=" form-group col-6 ">
+									<div class="was-validated form-group">
+										<div class="mb-3 mt-3">
+											<label for="thue" class="form-label">Thuế</label> <input
+												type="text" class="form-control" id="giatri"
+												placeholder="Nhập giá tri" name="giatri" required>
+											<div class="valid-feedback">Hợp lệ.</div>
+											<div class="invalid-feedback">Điền đầy đủ thông tin.</div>
+										</div>
+									</div>
+								</div>
+								<div class=" form-group col-6">
+									<div class="was-validated form-group">
+										<div class="mb-3 mt-3">
+											<label for="giaNhap" class="form-label">Số lượng bán
+											</label> <input type="text" class="form-control" id="giaNhap"
+												placeholder="Nhập giá tri" name="giatri" required>
+											<div class="valid-feedback">Hợp lệ.</div>
+											<div class="invalid-feedback">Điền đầy đủ thông tin.</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-6 ">
+									<div class="was-validated form-group">
+										<div class="mb-3 mt-3">
+											<label for="giaBan" class="form-label">số lượng lỗi</label> <input
+												type="text" class="form-control" id="giaBan"
+												placeholder="Nhập giá tri" name="giatri" required>
+											<div class="valid-feedback">Hợp lệ.</div>
+											<div class="invalid-feedback">Điền đầy đủ thông tin.</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-6 form-group">
+								<div class="was-validated form-group">
+									<div class="mb-3 mt-3">
+										<label for="giaNhap" class="form-label">Nhân viên tạo</label>
+										<input type="text" class="form-control" id="giaNhap"
+											placeholder="Nhập giá tri" name="giatri" required>
+										<div class="valid-feedback">Hợp lệ.</div>
+										<div class="invalid-feedback">Điền đầy đủ thông tin.</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6 form-group">
+								<div class="was-validated form-group">
+									<div class="mb-3 mt-3">
+										<label for="giaBan" class="form-label">Ngày tạo</label> <input
+											type="text" class="form-control" id="giaBan"
+											placeholder="Nhập giá tri" name="giatri" required>
+										<div class="valid-feedback">Hợp lệ.</div>
+										<div class="invalid-feedback">Điền đầy đủ thông tin.</div>
+									</div>
+								</div>
+							</div>
+					</div>
+					<div class="col-6">
+						<div class="was-validated form-group">
+							<div class="mb-3 mt-3">
+								<label for="giaNhap" class="form-label">Nhân viên chỉnh
+									sữa cuối</label> <input type="text" class="form-control" id="giaNhap"
+									placeholder="Nhập giá tri" name="giatri" required>
+								<div class="valid-feedback">Hợp lệ.</div>
+								<div class="invalid-feedback">Điền đầy đủ thông tin.</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="was-validated form-group">
+							<div class="mb-3 mt-3">
+								<label for="giaBan" class="form-label">Ngày chỉnh sữa
+									cuối</label> <input type="text" class="form-control" id="giaBan"
+									placeholder="Nhập giá tri" name="giatri" required>
+								<div class="valid-feedback">Hợp lệ.</div>
+								<div class="invalid-feedback">Điền đầy đủ thông tin.</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</form>
+
+
+
+
+			<!--End Danh sách giá trị-->
+			<div class="accordion" id="myaccordion">
+				<div class="card">
+					<div class="card-header btn" style="text-align: left;"
+						data-toggle="collapse" data-target="#themthuoctinhgiatri"
+						data-parent="#myaccordion">Danh sách sản phẩm đi kèm</div>
+					<div class="card-body collapse" data-toggle="collapse"
+						aria-expanded="false" id="themthuoctinhgiatri">
+
+						<!--Table-->
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Thuộc tính</th>
+								</tr>
+
+							</thead>
+							<tbody>
+								<tr>
+									<td>Size</td>
+									<td>
+										<div class="table-data-feature">
+											<button class="item" data-toggle="tooltip"
+												data-placement="top" title="Delete">
+												<i class="zmdi zmdi-delete"></i>
+											</button>
+
+										</div>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+
+						<!--ID MOdal thêm thuộc tính cho sản phẩm-->
+						<div class="modal-footer">
+
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#modalThemThuocTinhSanPham">Thêm thuộc
+								tính cho sản phẩm</button>
+
+						</div>
+
+
+						<!--end form-->
+
+					</div>
+
+				</div>
+			</div>
+
+
+
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+			<button type="button" class="btn btn-primary">Tạo</button>
+		</div>
+	</div>
+
+
+	<!--END MODAL CHỈNH SỮA DANH SÁCH-->
+	<!-- END CONTENT-->
+
+
+
+	<!-- Jquery JS-->
+	<script src="admin/vendor/jquery-3.2.1.min.js"></script>
+	<!-- Bootstrap JS-->
+	<script src="admin/vendor/bootstrap-4.1/popper.min.js"></script>
+	<script src="admin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+	<!-- Vendor JS       -->
+	<script src="admin/vendor/slick/slick.min.js">
+		
+	</script>
+	<script src="admin/vendor/wow/wow.min.js"></script>
+	<script src="admin/vendor/animsition/animsition.min.js"></script>
+	<script
+		src="admin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+		
+	</script>
+	<script src="admin/vendor/counter-up/jquery.waypoints.min.js"></script>
+	<script src="admin/vendor/counter-up/jquery.counterup.min.js">
+		
+	</script>
+	<script src="admin/vendor/circle-progress/circle-progress.min.js"></script>
+	<script src="admin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+	<script src="admin/vendor/chartjs/Chart.bundle.min.js"></script>
+	<script src="admin/vendor/select2/select2.min.js">
+		
+	</script>
+
+	<!-- Main JS-->
+	<script src="admin/js/main.js"></script>
+
+
+
 </body>
 
 </html>
+<!-- end document-->
