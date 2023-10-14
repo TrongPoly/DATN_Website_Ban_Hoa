@@ -40,7 +40,15 @@ public class Account {
         this.password = password;
     }
 
-    public Boolean getActive() {
+    public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Boolean getActive() {
         return active;
     }
 

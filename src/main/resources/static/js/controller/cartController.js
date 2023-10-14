@@ -1,11 +1,14 @@
-app.controller('CartCtrl', ["$scope", "CartService", "ToastService", function($scope, CartService, ToastService) {
+app.controller('CartCtrl', ["$scope", "CartService", "ToastService", 
+function($scope, CartService, ToastService) {
 	$scope.carts = [];
 	$scope.toasts = [];
 	$scope.total = 0;
+	$scope.user = {};
+
+	
 	$scope.get = function() {
 		$scope.carts = CartService.getCart();
 		$scope.totalCart();
-		console.log($scope.carts);
 	}
 
 	$scope.totalCart = function() {
@@ -45,8 +48,8 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", function($s
 		}
 		if (check === false) {
 			ToastService.createToast("error", "Chưa chọn sản phẩm nào", $scope.toasts)
-		}else{
-			location.href="http://localhost:8080/checkout";
+		} else {
+			location.href = "http://localhost:8080/checkout";
 		}
 	}
 

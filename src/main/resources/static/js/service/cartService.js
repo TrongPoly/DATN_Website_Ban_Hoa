@@ -1,12 +1,19 @@
 // Tạo một AngularJS service mới và đăng ký nó trong ứng dụng AngularJS của bạn
-app.service('CartService', function() {
+app.service('CartService', function($http) {
 	var cart = [];
-
+	var user = {}
 	// Lấy giỏ hàng từ LocalStorage khi khởi động service
-	if (localStorage.getItem('cartItems-user@gmail.com')) {
-		cart = JSON.parse(localStorage.getItem('cartItems-user@gmail.com'));
-
+	
+	if (localStorage.getItem('cartItems-' + sessionStorage.getItem("email"))) {
+		cart = JSON.parse(localStorage.getItem('cartItems-'+sessionStorage.getItem("email")));
 	}
+	// Lấy giỏ hàng hiện tại
+	this.getCart = function() {
+		cart.forEach(function(item) {
+			delete item.$$hashKey;
+		});
+		return cart;
+	};
 	// Kiểm tra một item đã có trong giỏ hàng hay chưa
 	this.isItemInCart = function(item) {
 		for (var i = 0; i < cart.length; i++) {
@@ -62,17 +69,11 @@ app.service('CartService', function() {
 
 	// Lưu giỏ hàng vào LocalStorage
 	function saveCartToLocalStorage() {
-		localStorage.setItem('cartItems-user@gmail.com', JSON.stringify(cart));
+		localStorage.setItem('cartItems-' + user.email, JSON.stringify(cart));
 	};
 
 
-	// Lấy giỏ hàng hiện tại
-	this.getCart = function() {
-		cart.forEach(function(item) {
-			delete item.$$hashKey;
-		});
-		return cart;
-	};
+
 
 	//Tính tổng tiền
 	this.total = function() {
@@ -85,6 +86,7 @@ app.service('CartService', function() {
 		}
 		return total;
 	}
+	console.log(this.getCart());
 
 
 });
