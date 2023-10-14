@@ -41,12 +41,12 @@ https://templatemo.com/tm-559-zay-shop
 </head>
 
 <body ng-app="myApp">
-    <!-- Start Top Nav -->
-    <nav th:insert="~{fragment/_nav.html::nav}"></nav>
-    <!-- Close Top Nav -->
-     <!-- Header -->
-    <nav th:insert="~{fragment/_header.html::header}"></nav>
-    <!-- Close Header -->
+	<!-- Start Top Nav -->
+	<nav th:insert="~{fragment/_nav.html::nav}"></nav>
+	<!-- Close Top Nav -->
+	<!-- Header -->
+	<nav th:insert="~{fragment/_header.html::header}"></nav>
+	<!-- Close Header -->
 
 	<!-- Modal -->
 	<div class="modal fade bg-white" id="templatemo_search" tabindex="-1"
@@ -79,49 +79,67 @@ https://templatemo.com/tm-559-zay-shop
 		<!-- END TOAST -->
 		<div class="container p-5">
 			<div class="d-flex justify-content-center row w-100">
-				<div class="col-md-8">
+				<div class="">
 					<div class="p-2">
 						<h4>Giỏ Hàng</h4>
-
 					</div>
-					<div ng-repeat="product in carts"
-						class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded ">
-						<div class="mr-1">
-							<img class="rounded" src="/img/{{product.image}}" width="70">
-						</div>
-						<div class="d-flex flex-column align-items-center product-details">
-							<span class="font-weight-bold">{{product.name}}</span>
-						</div>
-						<div class="d-flex flex-row align-items-center qty">
-							<i class="fa fa-minus text-danger btn"
-								ng-click="reduceProduct(product)"></i>
-							<h5 class="text-grey mt-1 mr-1 ml-1 btn">{{product.quantity}}</h5>
-							<i class="fa fa-plus text-success btn"
-								ng-click="increaseProduct(product)"></i>
-						</div>
-						<div>
-							<h5 class="text-grey">
-								{{product.price | number : 0}} <span>VND</span>
-							</h5>
-						</div>
-						<div>
-							<h5 class="text-grey">
-								{{product.price * product.quantity | number : 0}} <span>VND</span>
-							</h5>
-						</div>
-						<div class="d-flex align-items-center">
-							<i class="fa fa-trash mb-1 text-danger btn"
-								ng-click="remove(product)"></i>
-						</div>
-					</div>
+					<table class="table table-bordered mt-4">
+						<thead>
+							<tr>
+								<th scope="col"></th>
+								<th scope="col">Hình Ảnh</th>
+								<th scope="col">Tên Sản Phẩm</th>
+								<th scope="col">Số Lượng</th>
+								<th scope="col">Giá</th>
+								<th scope="col">Tổng Tiền</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="sp in carts">
+								<td><input type="checkbox" ng-model="sp.selected"
+									ng-click="select(sp)"></td>
+								<td><img class="rounded" src="/img/{{sp.image}}"
+									width="100"></td>
+								<td>{{sp.name}}</td>
+								<td>
+									<div class="d-flex flex-row align-items-center qty">
+										<i class="fa fa-minus text-danger btn"
+											ng-click="reduceProduct(sp)"></i>
+										<h5 class="text-grey mt-1 mr-1 ml-1 btn">{{sp.quant}}</h5>
+										<i class="fa fa-plus text-success btn"
+											ng-click="increaseProduct(sp)"></i>
+									</div>
+								</td>
+								<td>
+									<h5 class="text-grey">{{sp.price | number : 0}} VND</h5>
+								</td>
+								<td>
+									<h5 class="text-grey">{{sp.price * sp.quant |
+										number : 0}} VND</h5>
+								</td>
+								<td><i class="fa fa-trash mb-1 text-danger btn"
+									ng-click="remove(sp)"></i></td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="7">Tổng tiền: {{total | number:0}} VNĐ</th>
+							</tr>
+						</tfoot>
+					</table>
 					<!--  <div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded"><input type="text"
-                            class="form-control border-0 gift-card" placeholder="Mã giảm giá"><button
-                            class="btn btn-outline-warning btn-sm ml-2" type="button">Áp Dụng</button></div> -->
+                    class="form-control border-0 gift-card" placeholder="Mã giảm giá"><button
+                    class="btn btn-outline-warning btn-sm ml-2" type="button">Áp Dụng</button></div> -->
 					<div
 						class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded">
-						<a href="checkout.html"
+						<a
+						ng-click="checkCartSelect()"
 							class="btn btn-warning btn-block btn-lg ml-2 pay-button"
 							type="button">Tiến hành thanh toán</a>
+						<a 
+							class="btn btn-info btn-block btn-lg ml-2 pay-button"
+							type="button" ng-click="clearCart()" style="margin-left: 20px">Xóa tất cả</a>
 					</div>
 				</div>
 			</div>
@@ -131,8 +149,8 @@ https://templatemo.com/tm-559-zay-shop
 
 
 	<!-- Start Footer -->
-   	<footer th:insert="~{/fragment/_footer}"></footer>
-    <!-- End Footer -->
+	<footer th:insert="~{/fragment/_footer}"></footer>
+	<!-- End Footer -->
 
 	<!-- Start Script -->
 	<script src="assets/js/jquery-1.11.0.min.js"></script>

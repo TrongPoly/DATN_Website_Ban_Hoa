@@ -13,14 +13,7 @@ public class IndexController {
 	public String contact () {
 		return "contact";
 	}
-	@GetMapping("/checkout")
-	public String checkout () {
-		return "checkout";
-	}
-	@GetMapping("/billChange")
-	public String billChange () {
-		return "billChange";
-	}
+
 	@GetMapping("/about")
 	public String about () {
 		return "about";

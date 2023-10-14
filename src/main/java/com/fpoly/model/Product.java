@@ -32,7 +32,11 @@ public class Product {
     @NotNull
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
-
+    
+    @NotNull
+    @Column(name="quantity",nullable = false)
+    private int quantity;
+    
     @NotNull
     @Column(name = "is_available", nullable = false)
     private Boolean isAvailable = false;
@@ -80,7 +84,15 @@ public class Product {
         this.price = price;
     }
 
-    public Boolean getIsAvailable() {
+    public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public Boolean getIsAvailable() {
         return isAvailable;
     }
 

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+
+import com.fpoly.model.Account;
 import com.fpoly.service.SessionService;
 
 @Service
@@ -20,14 +22,15 @@ public class SessionServiceImpl implements SessionService{
         sessionMap.put(key, value);
     }
 
-    @Override
-    public Object getSession(String key) {
-        return sessionMap.get(key);
-    }
 
     @Override
     public void removeSession(String key) {
         sessionMap.remove(key);
     }
+
+	@Override
+	public Account getSession(String key) {
+		   return (Account) sessionMap.get(key);
+	}
 
 }

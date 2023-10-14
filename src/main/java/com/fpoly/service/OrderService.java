@@ -11,4 +11,6 @@ public interface OrderService {
 	List<Order> findByCustomer(Customer customer);
 	
 	Order findById(Integer id);
+
+	void saveOrder(Order order);
 }

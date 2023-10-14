@@ -5,15 +5,17 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 		$scope.toasts = [];
 		// Thêm sản phẩm vào giỏ hàng
 		$scope.addToCart = function(item) {
-			let text ="Thêm sản phẩm thành công";
+			let text = "Thêm sản phẩm thành công";
 			let type = "success";
-			if(CartService.isItemInCart(item)==true){
+			if (CartService.isItemInCart(item) == true) {
 				type = "info";
-				text="Đã tăng thêm số lượng sản phẩm";
+				text = "Sản phẩm đã có trong giỏ hàng";
+			} else {
+				item.quant = 1;
+				item.selected = true;
+				CartService.addToCart(item)
 			}
-			item.quantity = parseInt(document.getElementById("product-quanity").value);
-			CartService.addToCart(item)
-			ToastService.createToast(type, text,$scope.toasts);
+			ToastService.createToast(type, text, $scope.toasts);
 		};
 
 		$scope.productDetails = function(idProduct) {

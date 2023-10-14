@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<title>Chuyển khoản thành công</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<style>
+body {
+	background-color: #f8f9fa;
+}
+
+.container {
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 50px 20px;
+	text-align: center;
+	background-color: #ffffff;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+	color: #007bff;
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+p {
+	font-size: 18px;
+	margin-bottom: 30px;
+}
+
+.btn-primary {
+	background-color: #007bff;
+	border-color: #007bff;
+	font-weight: bold;
+}
+
+.btn-primary:hover {
+	background-color: #0069d9;
+	border-color: #0062cc;
+}
+</style>
+</head>
+<body ng-app="myApp" ng-controller="paySuccessCtrl">
+	<div class="container">
+		<h1>Chuyển khoản thành công</h1>
+		<p>Cảm ơn bạn đã thực hiện chuyển khoản thành công.</p>
+		<a class="btn btn-primary" href="#" ng-click="backIndex()">Trở về
+			trang chủ</a>
+	</div>
+	<script src="../js/app/app.js"></script>
+
+	<script src="../js/service/checkoutService.js"></script>
+	<script src="../js/service/cartService.js"></script>
+	<script src="../js/controller/paySuccessController.js"></script>
+	
+</body>
+</html>
