@@ -21,7 +21,7 @@ public class AccountController {
 	@Autowired
 	ServletContext context;
 
-	@GetMapping("/login_form")
+	@GetMapping("/login")
 	public String formLogin() {
 		return "login";
 	}
@@ -42,12 +42,12 @@ public class AccountController {
 	@RequestMapping("/logoff/success")
 	public String doLogout(Model model) {
 		session.removeSession("user");
-		return "redirect:/auth/login_form";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/login/error")
 	public String loginError() {
-		return "redirect:/auth/login_form";
+		return "redirect:/auth/login";
 	}
 
 //	@RequestMapping("/login/blocked")
@@ -58,7 +58,7 @@ public class AccountController {
 
 	@RequestMapping("/access/denied")
 	public String denied() {
-		return "User/ErrorPage";
+		return "error-500";
 	}
 
 }

@@ -7,15 +7,22 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 		$scope.addToCart = function(item) {
 			let text = "Thêm sản phẩm thành công";
 			let type = "success";
-			if (CartService.isItemInCart(item) == true) {
-				type = "info";
-				text = "Sản phẩm đã có trong giỏ hàng";
-			} else {
-				item.quant = 1;
-				item.selected = true;
-				CartService.addToCart(item)
+			console.log(CartService.checkLogin());
+			if (CartService.checkLogin() == true) {
+				if (CartService.isItemInCart(item) == true) {
+					type = "info";
+					text = "Sản phẩm đã có trong giỏ hàng";
+				} else {
+					item.quant = 1;
+					item.selected = true;
+					CartService.addToCart(item)
+				}
+				ToastService.createToast(type, text, $scope.toasts);
+			}else{
+				type = "warning";
+				text= "Vui lòng đăng nhập";
+				ToastService.createToast(type, text, $scope.toasts);
 			}
-			ToastService.createToast(type, text, $scope.toasts);
 		};
 
 		$scope.productDetails = function(idProduct) {

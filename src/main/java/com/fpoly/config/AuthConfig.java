@@ -51,8 +51,8 @@ public class AuthConfig {
 		return http.csrf().disable().authorizeHttpRequests().requestMatchers("/admin/**").hasRole("Admin")
 				.and().authorizeHttpRequests().requestMatchers("/cart/**","/checkout/**").authenticated().and()
 				.authorizeHttpRequests().anyRequest().permitAll().and().exceptionHandling()
-				.accessDeniedPage("/auth/access/denied").and().formLogin().loginPage("/auth/login_form")
-				.loginProcessingUrl("/login").defaultSuccessUrl("/auth/login/success", true)
+				.accessDeniedPage("/auth/access/denied").and().formLogin().loginPage("/auth/login")
+				.loginProcessingUrl("/login").defaultSuccessUrl("/auth/login/success", false)
 				.and().logout().logoutUrl("/logoff").logoutSuccessUrl("/auth/logoff/success").and().build();
 	}
 	

@@ -63,7 +63,7 @@ https://templatemo.com/tm-559-zay-shop
 	<!-- Start Content -->
 	<div class="container py-5" ng-controller="indexCtrl">
 		<div class="row">
-			<div class="col-lg-3">
+			<div class="col-lg-2">
 				<h1 class="h2 pb-4">Lọc</h1>
 				<ul class="list-unstyled templatemo-accordion">
 					<li class="pb-3"><a
@@ -97,9 +97,9 @@ https://templatemo.com/tm-559-zay-shop
 				</ul>
 			</div>
 
-			<div class="col-lg-9">
+			<div class="col-lg-10">
 				<div class="row">
-					<div class="col-md-6">
+					<!-- <div class="col-md-6">
 						<ul class="list-inline shop-top-menu pb-3 pt-1">
 							<li class="list-inline-item"><a
 								class="h3 text-dark text-decoration-none mr-3" href="#">Tất
@@ -110,7 +110,7 @@ https://templatemo.com/tm-559-zay-shop
 							<li class="list-inline-item"><a
 								class="h3 text-dark text-decoration-none" href="#">Nữ</a></li>
 						</ul>
-					</div>
+					</div> -->
 					<div class="col-md-6 pb-4">
 						<div class="d-flex">
 							<select class="form-control">
@@ -126,11 +126,11 @@ https://templatemo.com/tm-559-zay-shop
 				<!-- Product Display Start -->
 				<div class="row" >
 					<!-- Product single display start -->
-					<div class="col-md-4" ng-repeat="product in listProduct">
+					<div class="col-md-3" ng-repeat="product in listProduct">
 						<div class="card mb-4 product-wap rounded-0">
 							<div class="card rounded-0">
 								<img class="card-img rounded-0 "
-									src="img/{{product.image}}" width="250px" height="350px"/>
+									src="img/{{product.image}}" width="220px" height="300px"/>
 								<div
 									class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
 									<ul class="list-unstyled">
@@ -141,7 +141,7 @@ https://templatemo.com/tm-559-zay-shop
 							</div>
 							<div class="card-body">
 								<a href="shop-single.html" class="h3 text-decoration-none">{{product.name}}</a>
-								<p class="text-center mb-0">
+								<p class="text-center mb-1">
 									{{product.price}} <span>VNĐ</span>
 								</p>
 							</div>

@@ -24,4 +24,8 @@ public class AdminController {
 	public String getProduct() {
 		return "admin/FormProduct";
 	}
+	@GetMapping("/login")
+	public String getLogin() {
+		return "login";
+	}
 }
