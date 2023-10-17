@@ -34,7 +34,7 @@ public class AccountController {
 	@GetMapping("/login/success")
 	public String doLogin() {
 		if (session.getSession("user").getRole().getRoleName().equals("Admin")) {
-			return "redirect:/admin";
+			return "redirect:/admin/product";
 		}
 		return "redirect:/";
 	}
@@ -58,7 +58,7 @@ public class AccountController {
 
 	@RequestMapping("/access/denied")
 	public String denied() {
-		return "error-500";
+		return "error_page/error-500";
 	}
 
 }
