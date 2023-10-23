@@ -11,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import com.fpoly.model.Account;
 import com.fpoly.service.AccountService;
@@ -40,21 +42,46 @@ public class AuthConfig {
 				Account userInfo = accountService.findByid(username);
 				String password = userInfo.getPassword();
 				String roles = userInfo.getRole().getRoleName();
+				Boolean active = userInfo.getActive();
 				sessionService.setSession("user", userInfo);
-				return User.withUsername(username).password(pe.encode(password)).roles(roles).build();
+				return User.withUsername(username).password(pe.encode(password)).roles(roles).accountExpired(!active)
+						.build();
 			}
 		};
 	}
+	@Bean
+	public AuthenticationFailureHandler customAuthenticationFailureHandler() {
+	    return new CustomAuthenticationFailureHandler();
+	}
+
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http.csrf().disable().authorizeHttpRequests().requestMatchers("/admin/**").hasRole("Admin")
-				.and().authorizeHttpRequests().requestMatchers("/cart/**","/checkout/**").authenticated().and()
-				.authorizeHttpRequests().anyRequest().permitAll().and().exceptionHandling()
-				.accessDeniedPage("/auth/access/denied").and().formLogin().loginPage("/auth/login")
-				.loginProcessingUrl("/login").defaultSuccessUrl("/auth/login/success", false)
-				.and().logout().logoutUrl("/logoff").logoutSuccessUrl("/auth/logoff/success").and().build();
+	    return http.csrf().disable()
+	            .authorizeHttpRequests()
+	                .requestMatchers("/admin/**").hasRole("Admin")
+	                .and()
+	                .authorizeHttpRequests()
+	                .requestMatchers("/cart/**", "/checkout/**").authenticated()
+	                .and()
+	                .authorizeHttpRequests()
+	                .anyRequest().permitAll()
+	                .and()
+	            .exceptionHandling()
+	                .accessDeniedPage("/auth/access/denied")
+	                .and()
+	            .formLogin()
+	                .loginPage("/auth/login")
+	                .loginProcessingUrl("/login")
+	                .defaultSuccessUrl("/auth/login/success", false)
+	                .failureHandler(customAuthenticationFailureHandler())
+	                .and()
+	            .logout()
+	                .logoutUrl("/logoff")
+	                .logoutSuccessUrl("/auth/logoff/success")
+	                .and()
+	            .build();
 	}
-	
+
 
 }

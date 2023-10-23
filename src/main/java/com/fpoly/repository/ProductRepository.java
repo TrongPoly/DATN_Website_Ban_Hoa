@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.fpoly.model.Category;
 import com.fpoly.model.Product;
-import java.math.BigDecimal;
 
 
 public interface ProductRepository extends JpaRepository<Product, Integer>{

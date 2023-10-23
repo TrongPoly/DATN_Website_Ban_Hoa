@@ -25,6 +25,10 @@ public class AccountController {
 	public String formLogin() {
 		return "login";
 	}
+	@GetMapping("/register")
+	public String formRegister() {
+		return "register";
+	}
 
 	@GetMapping("/register/form")
 	public String formRegis() {
@@ -36,7 +40,7 @@ public class AccountController {
 		if (session.getSession("user").getRole().getRoleName().equals("Admin")) {
 			return "redirect:/admin/product";
 		}
-		return "redirect:/";
+		return "redirect:/index";
 	}
 
 	@RequestMapping("/logoff/success")
@@ -50,11 +54,10 @@ public class AccountController {
 		return "redirect:/auth/login";
 	}
 
-//	@RequestMapping("/login/blocked")
-//	public String isBlocked() {
-//		context.setAttribute("msg", "Tài khoản đã bị khóa!");
-//		return "redirect:/auth/login/form";
-//	}
+	@RequestMapping("/blocked")
+	public String isBlocked() {
+		return "login";
+	}
 
 	@RequestMapping("/access/denied")
 	public String denied() {

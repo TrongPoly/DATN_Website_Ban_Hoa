@@ -2,205 +2,178 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Zay Shop - Product Detail Page</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zay Shop - Product Detail Page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+<link rel="shortcut icon" type="image/x-icon"
+	href="assets/img/favicon.ico">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/templatemo.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/templatemo.css">
+<link rel="stylesheet" href="assets/css/custom.css">
 
-    <!-- Load fonts style after rendering the layout styles -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+<!-- Load fonts style after rendering the layout styles -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+<link rel="stylesheet" href="assets/css/fontawesome.min.css">
 
-    <!-- Slick -->
-    <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
-  
+<!-- Slick -->
+<link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+
 </head>
 
 <body>
-    <!-- Start Top Nav -->
-    <nav th:insert="~{fragment/_nav.html::nav}"></nav>
-    <!-- Close Top Nav -->
-     <!-- Header -->
-    <nav th:insert="~{fragment/_header.html::header}"></nav>
-    <!-- Close Header -->
+	<!-- Start Top Nav -->
+	<nav th:insert="~{fragment/_nav.html::nav}"></nav>
+	<!-- Close Top Nav -->
+	<!-- Header -->
+	<nav th:insert="~{fragment/_header.html::header}"></nav>
+	<!-- Close Header -->
 
+	<!-- Open Content -->
+	<div class="container mt-5">
+		<div class="row flex-row-reverse">
+			<div class="col-md-8 order-md-1">
+				<h4 class="mb-3">Chỉnh sửa hoá đơn</h4>
+				<div class="d-flex justify-content-between mb-3">
+					<button class="btn btn-outline-warning">Hoàn Thành</button>
+					<button class="btn btn-outline-danger">Thoát</button>
+				</div>
+				<form class="needs-validation" novalidate>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="firstName">Họ và Tên</label> <input type="text"
+								class="form-control" id="firstName" placeholder="" value=""
+								required>
+							<div class="invalid-feedback">Valid first name is required.
+							</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="lastName">Số điện thoại</label> <input type="text"
+								class="form-control" id="lastName" placeholder="" value=""
+								required>
+							<div class="invalid-feedback">Valid last name is required.
+							</div>
+						</div>
+					</div>
 
-    <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-
-    <!-- Open Content -->
-    <div class="container mt-5">
-        <div class="row flex-row-reverse">
-
-            <div class="col-md-8 order-md-1">
-                <h4 class="mb-3">Chỉnh sửa hoá đơn</h4>
-                <div class="d-flex justify-content-between mb-3">
-                    <button class="btn btn-outline-warning">
-                        Hoàn Thành
-                    </button><button class="btn btn-outline-danger">
-                        Thoát
-                    </button>
-                </div>
-                <form class="needs-validation" novalidate>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="firstName">Họ và Tên</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="lastName">Số điện thoại</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
-                    </div>
+					<div class="mb-3">
+						<label for="email">Email <span class="text-muted">(Optional)</span></label>
+						<input type="email" class="form-control" id="email"
+							placeholder="you@example.com">
+						<div class="invalid-feedback">Please enter a valid email
+							address for shipping updates.</div>
+					</div>
 
 
 
-                    <div class="row">
-                        <div class="col-md-5 mb-3">
-                            <label for="country">Tỉnh/Thành Phố</label>
-                            <select class="custom-select d-block w-100" id="city" required>
-                                <option value="">Chọn...</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Vui lòng chọn đúng tỉnh/Thành Phố.
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="state">Quận/Huyện</label>
-                            <select class="custom-select d-block w-100" id="district" required>
-                                <option value="">Chọn...</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Vui lòng chọn đúng quận/huyện
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="state">Phường/Xã</label>
-                            <select class="custom-select d-block w-100" id="ward" required>
-                                <option value="">Chọn...</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Vui lòng chọn đúng Phường/Xã
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="address">Địa Chỉ</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-                        <div class="invalid-feedback">
-                            Please enter your shipping address.
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th></th>
-                                    <th scope="col">Đon giá(VNĐ)</th>
-                                    <th scope="col">Số lượng</th>
-                                    <th scope="col">Thuế(%)</th>
-                                    <th scope="col">Tổng tiền(VNĐ)</th>
-                                    <th scope="col">Trạng Thái</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row"><img class="rounded" src="/assets/img/bitit.jpg" width="70">
-                                    </th>
-                                    <td>Giày Chạy Bộ Nam Biti's Hunter Running HSM003800</td>
-                                    <td>
-                                        1.050.000
-                                    </td>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td>10%</td>
-                                    <td>1.155.000</td>
-                                    <td><b>Chờ xác nhận hoàn trả</b></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </form>
-            </div>
+					<div class="row">
+						<div class="col-md-5 mb-3">
+							<label for="country">Tỉnh/Thành Phố</label> <select
+								class="custom-select d-block w-100" id="city" required>
+								<option value="">Chọn...</option>
+							</select>
+							<div class="invalid-feedback">Vui lòng chọn đúng tỉnh/Thành
+								Phố.</div>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="state">Quận/Huyện</label> <select
+								class="custom-select d-block w-100" id="district" required>
+								<option value="">Chọn...</option>
+							</select>
+							<div class="invalid-feedback">Vui lòng chọn đúng quận/huyện
+							</div>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="state">Phường/Xã</label> <select
+								class="custom-select d-block w-100" id="ward" required>
+								<option value="">Chọn...</option>
+							</select>
+							<div class="invalid-feedback">Vui lòng chọn đúng Phường/Xã
+							</div>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="address">Địa Chỉ</label> <input type="text"
+							class="form-control" id="address" placeholder="1234 Main St"
+							required>
+						<div class="invalid-feedback">Please enter your shipping
+							address.</div>
+					</div>
+					<div class="mb-3">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th></th>
+									<th scope="col">Đon giá(VNĐ)</th>
+									<th scope="col">Số lượng</th>
+									<th scope="col">Thuế(%)</th>
+									<th scope="col">Tổng tiền(VNĐ)</th>
+									<th scope="col">Trạng Thái</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row"><img class="rounded"
+										src="/assets/img/bitit.jpg" width="70"></th>
+									<td>Giày Chạy Bộ Nam Biti's Hunter Running HSM003800</td>
+									<td>1.050.000</td>
+									<td>2</td>
+									<td>10%</td>
+									<td>1.155.000</td>
+									<td><b>Chờ xác nhận hoàn trả</b></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</form>
+			</div>
 
-            <div class="col-md-4 order-md-2 mb-4 mt-5">
-                <ul class="list-group mb-3 mt-5">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <h6 class="my-0 text-center my-1">Đổi Mật Khẩu</h6>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed text-danger">
-                        <h6 class="my-0 text-center my-1">&#8594; Đơn Hàng</h6>
-                    </li>
+			<div class="col-md-4 order-md-2 mb-4 mt-5">
+				<ul class="list-group mb-3 mt-5">
+					<li
+						class="list-group-item d-flex justify-content-between lh-condensed">
+						<h6 class="my-0 text-center my-1">Đổi Mật Khẩu</h6>
+					</li>
+					<li
+						class="list-group-item d-flex justify-content-between lh-condensed text-danger">
+						<h6 class="my-0 text-center my-1">&#8594; Đơn Hàng</h6>
+					</li>
 
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <h6 class="my-0 text-center my-1">Thông tin tài khoản</h6>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <h6 class="my-0 text-center my-1">Đăng Xuất</h6>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- Close Content -->
+					<li
+						class="list-group-item d-flex justify-content-between lh-condensed">
+						<h6 class="my-0 text-center my-1">Thông tin tài khoản</h6>
+					</li>
+					<li
+						class="list-group-item d-flex justify-content-between lh-condensed">
+						<h6 class="my-0 text-center my-1">Đăng Xuất</h6>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- Close Content -->
 
 
 	<!-- Start Footer -->
-   	<footer th:insert="~{/fragment/_footer}"></footer>
-    <!-- End Footer -->
+	<footer th:insert="~{/fragment/_footer}"></footer>
+	<!-- End Footer -->
 
-    <!-- Start Script -->
-    <script src="assets/js/jquery-1.11.0.min.js"></script>
-    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/templatemo.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <!-- End Script -->
+	<!-- Start Script -->
+	<script src="assets/js/jquery-1.11.0.min.js"></script>
+	<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/templatemo.js"></script>
+	<script src="assets/js/custom.js"></script>
+	<!-- End Script -->
 
-    <!-- Start Slider Script -->
-    <script src="assets/js/slick.min.js"></script>
-    <script>
+	<!-- Start Slider Script -->
+	<script src="assets/js/slick.min.js"></script>
+	<script>
         $('#carousel-related-product').slick({
             infinite: true,
             arrows: false,
@@ -232,9 +205,10 @@
             alert("OKe")
         }
     </script>
-    <!-- End Slider Script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <script>
+	<!-- End Slider Script -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+	<script>
         var citis = document.getElementById("city");
         var districts = document.getElementById("district");
         var wards = document.getElementById("ward");
@@ -280,24 +254,26 @@
 
         }
     </script>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Thông Báo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Bạn có muốn đặt hàng không???
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <a href="informationCart.html" class="btn btn-primary">Đặt thôi !!!</a>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Thông Báo</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">Bạn có muốn đặt hàng không???</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Đóng</button>
+					<a href="informationCart.html" class="btn btn-primary">Đặt thôi
+						!!!</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

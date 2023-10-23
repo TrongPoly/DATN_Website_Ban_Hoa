@@ -3,6 +3,15 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 		$scope.listProduct = [];
 		$scope.product = {};
 		$scope.toasts = [];
+
+		$scope.removeToast = function(toast) {
+			var index = $scope.toasts.indexOf(toast);
+			if (index !== -1) {
+				$scope.toasts.splice(index, 1);
+			}
+		};
+
+
 		// Thêm sản phẩm vào giỏ hàng
 		$scope.addToCart = function(item) {
 			let text = "Thêm sản phẩm thành công";
@@ -18,9 +27,9 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 					CartService.addToCart(item)
 				}
 				ToastService.createToast(type, text, $scope.toasts);
-			}else{
+			} else {
 				type = "warning";
-				text= "Vui lòng đăng nhập";
+				text = "Vui lòng đăng nhập";
 				ToastService.createToast(type, text, $scope.toasts);
 			}
 		};
@@ -29,14 +38,22 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 			ProductService.getOneProduct(idProduct)
 				.then((resp) => {
 					$scope.product = resp.data;
+					$scope.moreProduct(sessionStorage.getItem("idProduct"));
 					console.log(resp.data);
 				})
 				.catch((error) => {
 					console.log(error.status);
 				});
 		}
-		$scope.userId = 1;
-
-
+		$scope.moreProduct = function(idProduct) {
+			ProductService.getByCategory(idProduct)
+				.then((resp) => {
+					$scope.listProduct = resp.data;
+					console.log(resp.data);
+				})
+				.catch((error) => {
+					console.log(error.status);
+				});
+		}
 		$scope.productDetails(sessionStorage.getItem("idProduct"));
 	}]);

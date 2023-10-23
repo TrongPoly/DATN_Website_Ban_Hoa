@@ -1,7 +1,6 @@
 // Tạo một AngularJS service mới và đăng ký nó trong ứng dụng AngularJS của bạn
 app.service('CartService', function() {
 	var cart = [];
-	var user = {}
 	// Lấy giỏ hàng từ LocalStorage khi khởi động service
 
 	if (localStorage.getItem('cartItems-' + sessionStorage.getItem("email"))) {
@@ -73,6 +72,15 @@ app.service('CartService', function() {
 	//Giảm số lượng sản phẩm
 	this.reduce = function(item) {
 		item.quant -= 1;
+		saveCartToLocalStorage();
+	}
+
+	//Cập nhật số lượng còn lại của sản phẩm
+	this.resetQuantity = function(item, quantity) {
+		item.quantity = quantity;
+		if (item.quant > quantity) {
+			item.quant = quantity;
+		};
 		saveCartToLocalStorage();
 	}
 

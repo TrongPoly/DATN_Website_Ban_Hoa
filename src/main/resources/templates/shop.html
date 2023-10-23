@@ -61,7 +61,7 @@ https://templatemo.com/tm-559-zay-shop
 	</div>
 
 	<!-- Start Content -->
-	<div class="container py-5" ng-controller="indexCtrl">
+	<div class="container py-5" ng-controller="productCtrl">
 		<div class="row">
 			<div class="col-lg-2">
 				<h1 class="h2 pb-4">Lọc</h1>
@@ -124,32 +124,34 @@ https://templatemo.com/tm-559-zay-shop
 					</div>
 				</div>
 				<!-- Product Display Start -->
-				<div class="row" >
+				<div class="row">
 					<!-- Product single display start -->
 					<div class="col-md-3" ng-repeat="product in listProduct">
-						<div class="card mb-4 product-wap rounded-0">
-							<div class="card rounded-0">
-								<img class="card-img rounded-0 "
-									src="img/{{product.image}}" width="220px" height="300px"/>
+						<div class="card mb-4 product-wap">
+							<div class="card">
+								<img class="card-img-top" src="img/{{product.image}}"
+									alt="{{product.name}}"
+									style="height: 300px; object-fit: cover;">
 								<div
-									class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+									class="card-img-overlay product-overlay d-flex align-items-center justify-content-center">
 									<ul class="list-unstyled">
-										<li><a class="btn btn-success text-white mt-2"
-											href="#" ng-click="productDetails(product.id)" ><i class="fas fa-cart-plus"></i></a></li>
+										<li><a class="btn btn-success text-white mt-2" href="#"
+											ng-click="productDetails(product.id)"><i
+												class="fas fa-cart-plus"></i></a></li>
 									</ul>
 								</div>
 							</div>
 							<div class="card-body">
-								<a href="shop-single.html" class="h3 text-decoration-none">{{product.name}}</a>
+								<a href="shop-single.html"
+									class="h3 text-decoration-none d-block">{{product.name}}</a>
 								<p class="text-center mb-1">
-									{{product.price}} <span>VNĐ</span>
+									{{product.price | number:0}} <span>VNĐ</span>
 								</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 		<!-- End Content -->
 
@@ -160,18 +162,18 @@ https://templatemo.com/tm-559-zay-shop
 		<!-- Start Footer -->
 		<footer th:insert="~{/fragment/_footer}"></footer>
 		<!-- End Footer -->
-	
-	<!-- Start Script -->
-	<script src="assets/js/jquery-1.11.0.min.js"></script>
-	<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/templatemo.js"></script>
-	<script src="assets/js/custom.js"></script>
-	<!--AngurlarJS -->
-	<script src="js/app/app.js"></script>
-	<script src="js/service/productService.js"></script>
-	<script src="js/controller/indexController.js"></script>
 
-	<!-- End Script -->
+		<!-- Start Script -->
+		<script src="assets/js/jquery-1.11.0.min.js"></script>
+		<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/templatemo.js"></script>
+		<script src="assets/js/custom.js"></script>
+		<!--AngurlarJS -->
+		<script src="js/app/app.js"></script>
+		<script src="js/service/productService.js"></script>
+		<script src="js/controller/productController.js"></script>
+
+		<!-- End Script -->
 </body>
 </html>
