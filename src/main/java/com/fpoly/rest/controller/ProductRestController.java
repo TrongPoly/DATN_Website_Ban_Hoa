@@ -8,9 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fpoly.DTO.OrderDTO;
 import com.fpoly.model.Product;
 import com.fpoly.service.ProductService;
 
@@ -34,5 +37,28 @@ public class ProductRestController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(product);
+	}
+
+	@GetMapping("/category/{idProduct}")
+	public ResponseEntity<List<Product>> getProductByCategory(@PathVariable("idProduct") Integer idProduct) {
+		Product product = productService.findById(idProduct);
+
+		if (product == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		List<Product> listProduct = productService.findByCategory(product.getCategory());
+		return ResponseEntity.status(HttpStatus.OK).body(listProduct);
+	}
+	
+	@PutMapping("/update/after_order")
+	public ResponseEntity<?> updateAfterOrder(@RequestBody List<OrderDTO> orderDTOs){
+		for (OrderDTO orderDTO : orderDTOs) {
+			Product product = productService.findById(orderDTO.getId());
+			System.out.println(product.getQuantity());
+			product.setQuantity(product.getQuantity() - orderDTO.getQuant());
+			productService.saveProduct(product);
+			System.out.println(product.getQuantity());
+		}
+		return ResponseEntity.ok().build();
 	}
 }

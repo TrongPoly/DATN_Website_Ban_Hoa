@@ -26,12 +26,12 @@
 				<div class="flex-fill">
 					<ul
 						class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-						<li class="nav-item"><a class="nav-link" href="index.html">Trang
+						<li class="nav-item"><a class="nav-link" href="/">Trang
 								chủ</a></li>
-						<li class="nav-item"><a class="nav-link" href="shop.html">Sản
-								Phẩm</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="/logoff">Chính Sách</a></li>
+						<li class="nav-item"><a class="nav-link" href="/product">Sản phẩm</a></li>
+						<li class="nav-item"><a class="nav-link" href="/about">Về chúng tôi</a></li>
+						<li th:if="${session.user}!=null" class="nav-item"><a class="nav-link" href="/order">Đơn hàng</a></li>
+						<li th:if="${session.user}!=null" class="nav-item"><a class="nav-link" href="/logoff">Đăng xuất</a></li>
 					</ul>
 				</div>
 				<div class="navbar align-self-center d-flex">
@@ -45,20 +45,21 @@
 							</div>
 						</div>
 					</div>
-					<a class="nav-icon d-none d-lg-inline" href="#"
-						data-bs-toggle="modal" data-bs-target="#templatemo_search"> <i
-						class="fa fa-fw fa-search text-dark mr-2"></i>
-					</a> <a class="nav-icon position-relative text-decoration-none"
-						href="cart.html"> <i
-						class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i> <span
-						class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-					</a> <a class="nav-icon position-relative text-decoration-none"
-						href="#"> <i class="fa fa-fw fa-user text-dark mr-3"></i> <span
-						class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
+					<a class="nav-icon position-relative text-decoration-none"
+						href="/cart"> <i
+						class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+					</a>
+					<a th:unless="${session.user}!=null"
+						class="nav-icon position-relative text-decoration-none" href="/auth/login">
+						<i class="fa fa-fw fa-user text-dark mr-3"></i> 
+					</a>
+					 <a th:if="${session.user}!=null"
+						class="nav-icon position-relative text-decoration-none" href="#">
+						<i class="fa fa-fw fa-user text-dark mr-3"></i> Chào <span
+						th:text="${session.user.email}"></span>
 					</a>
 				</div>
 			</div>
-
 		</div>
 	</nav>
 </body>

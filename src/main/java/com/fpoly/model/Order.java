@@ -29,6 +29,10 @@ public class Order {
     @NotNull
     @Column(name = "status", nullable = false)
     private String status;
+    
+    @NotNull
+    @Column(name = "method_payment")
+    private int methodPayment;
 
     public Integer getId() {
         return id;
@@ -68,6 +72,14 @@ public class Order {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public int getMethodPayment() {
+		return methodPayment;
+	}
+
+	public void setMethodPayment(int methodPayment) {
+		this.methodPayment = methodPayment;
 	}
 
 }

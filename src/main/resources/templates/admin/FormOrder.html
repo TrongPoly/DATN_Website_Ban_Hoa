@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Form Order</title>
-  <!-- base:css -->
-  <link rel="stylesheet" href="../admin/vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="../admin/vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <link rel="stylesheet" href="../admin/vendors/select2/select2.min.css">
-  <link rel="stylesheet" href="../admin/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  
-  <link rel="stylesheet" href="../admin/css/vertical-layout-light/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="../admin/images/favicon.png"/>
-  
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Form Order</title>
+<!-- base:css -->
+<link rel="stylesheet" href="../_admin/vendors/typicons/typicons.css">
+<link rel="stylesheet"
+	href="../_admin/vendors/css/vendor.bundle.base.css">
+<!-- endinject -->
+<!-- plugin css for this page -->
+<link rel="stylesheet" href="../_admin/vendors/select2/select2.min.css">
+<link rel="stylesheet"
+	href="../_admin/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+<!-- End plugin css for this page -->
+<!-- inject:css -->
+
+<link rel="stylesheet"
+	href="../_admin/css/vertical-layout-light/style.css">
+<!-- endinject -->
+<link rel="shortcut icon" href="../_admin/images/favicon.png" />
+
 </head>
 <body>
   <div class="container-scroller">
@@ -212,502 +216,547 @@
                           <!-- <li class="nav-item">
                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#order2" role="tab" aria-controls="order2" aria-selected="false">Wait for confirmation</a>
                           </li> -->
-                          <li class="nav-item">
-                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#order2" role="tab" aria-controls="order2" aria-selected="false">Status</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#order3" role="tab" aria-controls="order3" aria-selected="false">Delivered</a>
-                          </li>
-                        </ul>
-                        <!--TAS_CONTENT-->
-                        <div class="tab-content" id="pills-tabContent">
-                          <!--Wait for confirmation-->
-                          <div class="tab-pane fade show active" id="order1" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <!--TABLE-->
-           
-                  <div class="form-group">
-                    <div class="input-group">
-                      <input type="text" class="form-control mt-5" placeholder="Recipient's username" aria-label="Recipient's username">
-                      <div class="input-group-append">
-                        <button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Id</th>
-                          <th>Name Customer</th>
-                          <th>Order date</th>
-                          <th>Pick up date</th>
-                          <th>Payment method</th>
-                          <th>Status</th>
-                          <th>Total payment</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>01</td>
-                          <td>Nguyễn Thị Ngọc Chăm</td>
-                          <td>10/10/2023</td>
-                          <td>12/10/2023</td>
-                          <td><label class="badge badge-success">VNB</label></td>
-                          <!-- <td><label class="badge badge-warning">Chưa thanh toán</label></td> -->
-                          <td> <div class="form-check">
-                            <label class="toggle-switch">
-                              <input type="checkbox" checked>
-                              <span class="toggle-slider round"></span>
-                            </label>                      
-                          </div></td>
-                          <td>60.000</td>
-                          <td>
-                            <button type="button" data-toggle="modal" data-target="#cart" class="btn btn-inverse-success btn-rounded btn-icon">
-                              <i class="typcn typcn-clipboard"></i>  
-                            </button>
-                            <button type="button" data-toggle="modal" data-target="#edit" class="btn btn-inverse-primary btn-rounded btn-icon">
-                              <i class=" typcn typcn-pen"></i>  
-                            </button>
-                            
-                          </td>
-                        </tr>
-                      
-                      </tbody>
-                    </table>
-                  </div>
-                  <nav aria-label="Page navigation example" >
-                    <ul class="pagination  justify-content-center">
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav> <!--END TABLE-->
-                </div>
-                          <!--END Wait for confirmation-->
-                          <!--Status-->
-                          <div class="tab-pane fade" id="order2" role="tabpanel" aria-labelledby="pills-profile-tab">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <input type="text" class="form-control mt-5" placeholder="Recipient's username" aria-label="Recipient's username">
-                                <div class="input-group-append">
-                                  <button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="table-responsive">
-                              <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th>Id</th>
-                                    <th>Name Customer</th>
-                                    <th>Order date</th>
-                                    <th>Pick up date</th>
-                                    <th>Payment method</th>
-                                    <th>Status</th>
-                                    <th>Total payment</th>
-                                    <th>Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>01</td>
-                                    <td>Nguyễn Thị Ngọc Chăm</td>
-                                    <td>10/10/2023</td>
-                                    <td>12/10/2023</td>
-                                    <td><label class="badge badge-success">VNB</label></td>
-                                    <!-- <td><label class="badge badge-warning">Chưa thanh toán</label></td> -->
-                                    <td> <div class="form-check">
-                                      <label class="toggle-switch">
-                                        <input type="checkbox" checked>
-                                        <span class="toggle-slider round"></span>
-                                      </label>                      
-                                    </div></td>
-                                    <td>60.000</td>
-                                    <td>
-                                      <button type="button" data-toggle="modal" data-target="#cart" class="btn btn-inverse-success btn-rounded btn-icon">
-                                        <i class="typcn typcn-clipboard"></i>  
-                                      </button>
-                                      <button type="button" data-toggle="modal" data-target="#editStatus" class="btn btn-inverse-primary btn-rounded btn-icon">
-                                        <i class=" typcn typcn-pen"></i>  
-                                      </button>
-                                      
-                                    </td>
-                                  </tr>
-                                
-                                </tbody>
-                              </table>
-                            </div>
-                            <nav aria-label="Page navigation example" >
-                              <ul class="pagination  justify-content-center">
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                  </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                  </a>
-                                </li>
-                              </ul>
-                            </nav>
-                          </div>
-                          <!--END Status-->
-                          <!--Delivered-->
-                          <div class="tab-pane fade" id="order3" role="tabpanel" aria-labelledby="pills-contact-tab">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <input type="text" class="form-control mt-5" placeholder="Recipient's username" aria-label="Recipient's username">
-                                <div class="input-group-append">
-                                  <button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="table-responsive">
-                              <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th>Id</th>
-                                    <th>Name Customer</th>
-                                    <th>Order date</th>
-                                    <th>Pick up date</th>
-                                    <th>Payment method</th>
-                                    <th>Status</th>
-                                    <th>Total payment</th>
-                                    <th>Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>01</td>
-                                    <td>Nguyễn Thị Ngọc Chăm</td>
-                                    <td>10/10/2023</td>
-                                    <td>12/10/2023</td>
-                                    <td><label class="badge badge-success">VNB</label></td>
-                                    <!-- <td><label class="badge badge-warning">Chưa thanh toán</label></td> -->
-                                    <td> <div class="form-check">
-                                      <label class="toggle-switch">
-                                        <input type="checkbox" checked>
-                                        <span class="toggle-slider round"></span>
-                                      </label>                      
-                                    </div></td>
-                                    <td>60.000</td>
-                                    <td>
-                                      <button type="button" data-toggle="modal" data-target="#cart" class="btn btn-inverse-success btn-rounded btn-icon">
-                                        <i class="typcn typcn-clipboard"></i>  
-                                      </button>
-                                      <button type="button" data-toggle="modal" data-target="#editDelivered" class="btn btn-inverse-primary btn-rounded btn-icon">
-                                        <i class=" typcn typcn-pen"></i>  
-                                      </button>
-                                      
-                                    </td>
-                                  </tr>
-                                
-                                </tbody>
-                              </table>
-                            </div>
-                            <nav aria-label="Page navigation example" >
-                              <ul class="pagination  justify-content-center">
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                  </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                  <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                  </a>
-                                </li>
-                              </ul>
-                            </nav>
-                          </div>
-                          <!--End Delivered-->
-                        </div>
-                         <!--END TAS_CONTENT-->
-              
-                </div>
-              </div> 
-            </div>
-    
-            
-          </div>
-        </div>
-        
-        <!-- content-wrapper ends -->
-        <!-- partial:../admin/partials/_footer.html -->
-        <footer class="footer">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="https://www.bootstrapdash.com/" class="text-muted" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-muted">Free <a href="https://www.bootstrapdash.com/" class="text-muted" target="_blank">Bootstrap dashboard</a> templates from Bootstrapdash.com</span>
-                    </div>
-                </div>    
-            </div>        
-        </footer>
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
+										<li class="nav-item"><a class="nav-link"
+											id="pills-contact-tab" data-toggle="pill" href="#order2"
+											role="tab" aria-controls="order2" aria-selected="false">Status</a>
+										</li>
+										<li class="nav-item"><a class="nav-link"
+											id="pills-contact-tab" data-toggle="pill" href="#order3"
+											role="tab" aria-controls="order3" aria-selected="false">Delivered</a>
+										</li>
+									</ul>
+									<!--TAS_CONTENT-->
+									<div class="tab-content" id="pills-tabContent">
+										<!--Wait for confirmation-->
+										<div class="tab-pane fade show active" id="order1"
+											role="tabpanel" aria-labelledby="pills-home-tab">
+											<!--TABLE-->
 
-<!-- Modal -->
-<div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Order details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Product</th>
-                <th></th>
-                <th>Price</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>01</td>
-                <td>(anh.jpg )</td>
-                <td>Hoa Hồng</td>
-                <td>2</td>
-                <td>30.000</td>
-               
-              </tr>
-            <tr class="table-secondary ">
-              <th colspan="4">Tổng:</th>
-              <th colspan="1">60.000 (VND)</th>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+											<div class="form-group">
+												<div class="input-group">
+													<input type="text" class="form-control mt-5"
+														placeholder="Recipient's username"
+														aria-label="Recipient's username">
+													<div class="input-group-append">
+														<button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
+													</div>
+												</div>
+											</div>
+											<div class="table-responsive">
+												<table class="table">
+													<thead>
+														<tr>
+															<th>Id</th>
+															<th>Name Customer</th>
+															<th>Order date</th>
+															<th>Pick up date</th>
+															<th>Payment method</th>
+															<th>Status</th>
+															<th>Total payment</th>
+															<th>Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>01</td>
+															<td>Nguyễn Thị Ngọc Chăm</td>
+															<td>10/10/2023</td>
+															<td>12/10/2023</td>
+															<td><label class="badge badge-success">VNB</label></td>
+															<!-- <td><label class="badge badge-warning">Chưa thanh toán</label></td> -->
+															<td>
+																<div class="form-check">
+																	<label class="toggle-switch"> <input
+																		type="checkbox" checked> <span
+																		class="toggle-slider round"></span>
+																	</label>
+																</div>
+															</td>
+															<td>60.000</td>
+															<td>
+																<button type="button" data-toggle="modal"
+																	data-target="#cart"
+																	class="btn btn-inverse-success btn-rounded btn-icon">
+																	<i class="typcn typcn-clipboard"></i>
+																</button>
+																<button type="button" data-toggle="modal"
+																	data-target="#edit"
+																	class="btn btn-inverse-primary btn-rounded btn-icon">
+																	<i class=" typcn typcn-pen"></i>
+																</button>
 
-      </div>
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         <!-- <button type="button" class="btn btn-primary"></button>  -->
-      </div>
-    </div>
-  </div>
-</div>
-<!--END MODAL-->
-<!--MODAL EDIT-->
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Wait for confirmation</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Product</th>
-                <th></th>
-                <th>Price</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>01</td>
-                <td>(anh.jpg )</td>
-                <td>Hoa Hồng</td>
-                <td>2</td>
-                <td>30.000</td>
-               
-              </tr>
-            <tr class="table-secondary ">
-              <th colspan="4">Tổng:</th>
-              <td colspan="1">60.000</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-     
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         <button type="button" class="btn btn-primary">Confirm</button> 
-      </div>
-    </div>
-  </div>
-</div>
-<!--END MODAL EDIt-->
+															</td>
+														</tr>
 
-<!--MODAL EDIT Status-->
-<div class="modal fade" id="editStatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Update status</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Product</th>
-                <th></th>
-                <th>Price</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>01</td>
-                <td>(anh.jpg )</td>
-                <td>Hoa Hồng</td>
-                <td>2</td>
-                <td>30.000</td>
-                                    
-              </tr>
-            <tr class="table-secondary ">
-              <th colspan="4">Tổng:</th>
-              <td colspan="1">60.000</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    
-      <div class="form-group ml-3">
-        <label for="id">Status</label>
-          <select class="form-control" id="Id">
-            <option>Unfinished</option>
-            <option>Finished</option>
-            
-          </select>
-        </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         <button type="button" class="btn btn-primary">Confirm</button> 
-      </div>
-    </div>
-  </div>
-</div>
-<!--END MODAL EDIt Status>-->
+													</tbody>
+												</table>
+											</div>
+											<nav aria-label="Page navigation example">
+												<ul class="pagination  justify-content-center">
+													<li class="page-item"><a class="page-link" href="#"
+														aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+													</a></li>
+													<li class="page-item"><a class="page-link" href="#">1</a></li>
+													<li class="page-item"><a class="page-link" href="#">2</a></li>
+													<li class="page-item"><a class="page-link" href="#">3</a></li>
+													<li class="page-item"><a class="page-link" href="#"
+														aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+													</a></li>
+												</ul>
+											</nav>
+											<!--END TABLE-->
+										</div>
+										<!--END Wait for confirmation-->
+										<!--Status-->
+										<div class="tab-pane fade" id="order2" role="tabpanel"
+											aria-labelledby="pills-profile-tab">
+											<div class="form-group">
+												<div class="input-group">
+													<input type="text" class="form-control mt-5"
+														placeholder="Recipient's username"
+														aria-label="Recipient's username">
+													<div class="input-group-append">
+														<button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
+													</div>
+												</div>
+											</div>
+											<div class="table-responsive">
+												<table class="table">
+													<thead>
+														<tr>
+															<th>Id</th>
+															<th>Name Customer</th>
+															<th>Order date</th>
+															<th>Pick up date</th>
+															<th>Payment method</th>
+															<th>Status</th>
+															<th>Total payment</th>
+															<th>Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>01</td>
+															<td>Nguyễn Thị Ngọc Chăm</td>
+															<td>10/10/2023</td>
+															<td>12/10/2023</td>
+															<td><label class="badge badge-success">VNB</label></td>
+															<!-- <td><label class="badge badge-warning">Chưa thanh toán</label></td> -->
+															<td>
+																<div class="form-check">
+																	<label class="toggle-switch"> <input
+																		type="checkbox" checked> <span
+																		class="toggle-slider round"></span>
+																	</label>
+																</div>
+															</td>
+															<td>60.000</td>
+															<td>
+																<button type="button" data-toggle="modal"
+																	data-target="#cart"
+																	class="btn btn-inverse-success btn-rounded btn-icon">
+																	<i class="typcn typcn-clipboard"></i>
+																</button>
+																<button type="button" data-toggle="modal"
+																	data-target="#editStatus"
+																	class="btn btn-inverse-primary btn-rounded btn-icon">
+																	<i class=" typcn typcn-pen"></i>
+																</button>
 
-<!-- Model editDelivered-->
-<div class="modal fade" id="editDelivered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Update delivered</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Product</th>
-                <th></th>
-                <th>Price</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>01</td>
-                <td>(anh.jpg )</td>
-                <td>Hoa Hồng</td>
-                <td>2</td>
-                <td>30.000</td>
-               
-              </tr>
-            <tr class="table-secondary ">
-              <th colspan="4">Tổng:</th>
-              <td colspan="1">60.000</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-     
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         <button type="button" class="btn btn-primary">Confirm</button> 
-      </div>
-    </div>
-  </div>
-</div>
-<!--END Modal Edit Delivered-->
+															</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+											<nav aria-label="Page navigation example">
+												<ul class="pagination  justify-content-center">
+													<li class="page-item"><a class="page-link" href="#"
+														aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+													</a></li>
+													<li class="page-item"><a class="page-link" href="#">1</a></li>
+													<li class="page-item"><a class="page-link" href="#">2</a></li>
+													<li class="page-item"><a class="page-link" href="#">3</a></li>
+													<li class="page-item"><a class="page-link" href="#"
+														aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+													</a></li>
+												</ul>
+											</nav>
+										</div>
+										<!--END Status-->
+										<!--Delivered-->
+										<div class="tab-pane fade" id="order3" role="tabpanel"
+											aria-labelledby="pills-contact-tab">
+											<div class="form-group">
+												<div class="input-group">
+													<input type="text" class="form-control mt-5"
+														placeholder="Recipient's username"
+														aria-label="Recipient's username">
+													<div class="input-group-append">
+														<button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
+													</div>
+												</div>
+											</div>
+											<div class="table-responsive">
+												<table class="table">
+													<thead>
+														<tr>
+															<th>Id</th>
+															<th>Name Customer</th>
+															<th>Order date</th>
+															<th>Pick up date</th>
+															<th>Payment method</th>
+															<th>Status</th>
+															<th>Total payment</th>
+															<th>Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>01</td>
+															<td>Nguyễn Thị Ngọc Chăm</td>
+															<td>10/10/2023</td>
+															<td>12/10/2023</td>
+															<td><label class="badge badge-success">VNB</label></td>
+															<!-- <td><label class="badge badge-warning">Chưa thanh toán</label></td> -->
+															<td>
+																<div class="form-check">
+																	<label class="toggle-switch"> <input
+																		type="checkbox" checked> <span
+																		class="toggle-slider round"></span>
+																	</label>
+																</div>
+															</td>
+															<td>60.000</td>
+															<td>
+																<button type="button" data-toggle="modal"
+																	data-target="#cart"
+																	class="btn btn-inverse-success btn-rounded btn-icon">
+																	<i class="typcn typcn-clipboard"></i>
+																</button>
+																<button type="button" data-toggle="modal"
+																	data-target="#editDelivered"
+																	class="btn btn-inverse-primary btn-rounded btn-icon">
+																	<i class=" typcn typcn-pen"></i>
+																</button>
+
+															</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+											<nav aria-label="Page navigation example">
+												<ul class="pagination  justify-content-center">
+													<li class="page-item"><a class="page-link" href="#"
+														aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+													</a></li>
+													<li class="page-item"><a class="page-link" href="#">1</a></li>
+													<li class="page-item"><a class="page-link" href="#">2</a></li>
+													<li class="page-item"><a class="page-link" href="#">3</a></li>
+													<li class="page-item"><a class="page-link" href="#"
+														aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+													</a></li>
+												</ul>
+											</nav>
+										</div>
+										<!--End Delivered-->
+									</div>
+									<!--END TAS_CONTENT-->
+
+								</div>
+							</div>
+						</div>
 
 
-      </div>
-    </div>
-  </div>
-</div>
+					</div>
+				</div>
+
+				<!-- content-wrapper ends -->
+				<!-- partial:../_admin/partials/_footer.html -->
+				<footer class="footer">
+					<div class="card">
+						<div class="card-body">
+							<div
+								class="d-sm-flex justify-content-center justify-content-sm-between">
+								<span
+									class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright
+									© 2020 <a href="https://www.bootstrapdash.com/"
+									class="text-muted" target="_blank">Bootstrapdash</a>. All
+									rights reserved.
+								</span> <span
+									class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-muted">Free
+									<a href="https://www.bootstrapdash.com/" class="text-muted"
+									target="_blank">Bootstrap dashboard</a> templates from
+									Bootstrapdash.com
+								</span>
+							</div>
+						</div>
+					</div>
+				</footer>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+
+			<!-- Modal -->
+			<div class="modal fade" id="cart" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Order
+								details</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Id</th>
+											<th>Product</th>
+											<th></th>
+											<th>Price</th>
+											<th>Quantity</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>01</td>
+											<td>(anh.jpg )</td>
+											<td>Hoa Hồng</td>
+											<td>2</td>
+											<td>30.000</td>
+
+										</tr>
+										<tr class="table-secondary ">
+											<th colspan="4">Tổng:</th>
+											<th colspan="1">60.000 (VND)</th>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<!-- <button type="button" class="btn btn-primary"></button>  -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--END MODAL-->
+			<!--MODAL EDIT-->
+			<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Wait for
+								confirmation</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Id</th>
+											<th>Product</th>
+											<th></th>
+											<th>Price</th>
+											<th>Quantity</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>01</td>
+											<td>(anh.jpg )</td>
+											<td>Hoa Hồng</td>
+											<td>2</td>
+											<td>30.000</td>
+
+										</tr>
+										<tr class="table-secondary ">
+											<th colspan="4">Tổng:</th>
+											<td colspan="1">60.000</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Confirm</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--END MODAL EDIt-->
+
+			<!--MODAL EDIT Status-->
+			<div class="modal fade" id="editStatus" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Update
+								status</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Id</th>
+											<th>Product</th>
+											<th></th>
+											<th>Price</th>
+											<th>Quantity</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>01</td>
+											<td>(anh.jpg )</td>
+											<td>Hoa Hồng</td>
+											<td>2</td>
+											<td>30.000</td>
+
+										</tr>
+										<tr class="table-secondary ">
+											<th colspan="4">Tổng:</th>
+											<td colspan="1">60.000</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="form-group ml-3">
+							<label for="id">Status</label> <select class="form-control"
+								id="Id">
+								<option>Unfinished</option>
+								<option>Finished</option>
+
+							</select>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Confirm</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--END MODAL EDIt Status>-->
+
+			<!-- Model editDelivered-->
+			<div class="modal fade" id="editDelivered" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Update
+								delivered</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Id</th>
+											<th>Product</th>
+											<th></th>
+											<th>Price</th>
+											<th>Quantity</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>01</td>
+											<td>(anh.jpg )</td>
+											<td>Hoa Hồng</td>
+											<td>2</td>
+											<td>30.000</td>
+
+										</tr>
+										<tr class="table-secondary ">
+											<th colspan="4">Tổng:</th>
+											<td colspan="1">60.000</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Confirm</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--END Modal Edit Delivered-->
+
+
+		</div>
+	</div>
+	</div>
+	</div>
 
 
 
-      
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
- 
-  <!-- container-scroller -->
-  <!-- base:js -->
-  <script src="../admin/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- inject:js -->
-  <script src="../admin/js/off-canvas.js"></script>
-  <script src="../admin/js/hoverable-collapse.js"></script>
-  <script src="../admin/js/template.js"></script>
-  <script src="../admin/js/settings.js"></script>
-  <script src="../admin/js/todolist.js"></script>
-  <!-- endinject -->
-  <!-- plugin js for this page -->
-  <script src="../admin/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-  <script src="../admin/vendors/select2/select2.min.js"></script>
-  <!-- End plugin js for this page -->
-  <!-- Custom js for this page-->
-  <script src="../admin/js/file-upload.js"></script>
-  <script src="../admin/js/typeahead.js"></script>
-  <script src="../admin/js/select2.js"></script>
-  <!-- End custom js for this page-->
-  <script src="../admin/js/tabs.js"></script>
+
+	</div>
+	<!-- page-body-wrapper ends -->
+	</div>
+
+	<!-- container-scroller -->
+	<!-- base:js -->
+	<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
+	<!-- endinject -->
+	<!-- inject:js -->
+	<script src="../_admin/js/off-canvas.js"></script>
+	<script src="../_admin/js/hoverable-collapse.js"></script>
+	<script src="../_admin/js/template.js"></script>
+	<script src="../_admin/js/settings.js"></script>
+	<script src="../_admin/js/todolist.js"></script>
+	<!-- endinject -->
+	<!-- plugin js for this page -->
+	<script src="../_admin/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+	<script src="../_admin/vendors/select2/select2.min.js"></script>
+	<!-- End plugin js for this page -->
+	<!-- Custom js for this page-->
+	<script src="../_admin/js/file-upload.js"></script>
+	<script src="../_admin/js/typeahead.js"></script>
+	<script src="../_admin/js/select2.js"></script>
+	<!-- End custom js for this page-->
+	<script src="../_admin/js/tabs.js"></script>
 </body>
 
 </html>

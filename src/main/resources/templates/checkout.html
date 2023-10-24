@@ -13,7 +13,9 @@
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/templatemo.css">
 <link rel="stylesheet" href="assets/css/custom.css">
-
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 <!-- Load fonts style after rendering the layout styles -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
@@ -35,46 +37,19 @@ https://templatemo.com/tm-559-zay-shop
 </head>
 
 <body ng-app="myApp" ng-controller="CheckoutCtrl">
-    <!-- Start Top Nav -->
-    <nav th:insert="~{fragment/_nav.html::nav}"></nav>
-    <!-- Close Top Nav -->
-     <!-- Header -->
-    <nav th:insert="~{fragment/_header.html::header}"></nav>
-    <!-- Close Header -->
-
-
-	<!-- Modal -->
-	<div class="modal fade bg-white" id="templatemo_search" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="w-100 pt-1 mb-5 text-right">
-				<button type="button" class="btn-close" data-bs-dismiss="modal"
-					aria-label="Close"></button>
-			</div>
-			<form action="" method="get"
-				class="modal-content modal-body border-0 p-0">
-				<div class="input-group mb-2">
-					<input type="text" class="form-control" id="inputModalSearch"
-						name="q" placeholder="Search ...">
-					<button type="submit"
-						class="input-group-text bg-success text-light">
-						<i class="fa fa-fw fa-search text-white"></i>
-					</button>
-				</div>
-			</form>
-		</div>
-	</div>
-
-
-
+	<!-- Start Top Nav -->
+	<nav th:insert="~{fragment/_nav.html::nav}"></nav>
+	<!-- Close Top Nav -->
+	<!-- Header -->
+	<nav th:insert="~{fragment/_header.html::header}"></nav>
+	<!-- Close Header -->
+	<!-- TOAST -->
+	<ul th:insert="~{/fragment/_toast}"></ul>
+	<!-- END TOAST -->
 	<!-- Open Content -->
-	<div class="container mt-5" >
+	<div class="container mt-5">
 		<div class="row">
 			<div class="col-md-6 order-md-2 mb-4">
-				<h4 class="d-flex justify-content-between align-items-center mb-3">
-					<span class="text-info">Giỏ Hàng</span> <span
-						class="badge badge-secondary badge-pill">3</span>
-				</h4>
 				<ul class="list-group mb-3">
 					<li ng-repeat="product in orders"
 						class="list-group-item d-flex justify-content-between lh-condensed">
@@ -90,7 +65,7 @@ https://templatemo.com/tm-559-zay-shop
 					</li>
 				</ul>
 
-			
+
 
 			</div>
 			<div class="col-md-6 order-md-1">
@@ -99,23 +74,22 @@ https://templatemo.com/tm-559-zay-shop
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="firstName">Họ và Tên</label> <input type="text"
-								class="form-control" id="firstName" placeholder="" value=""
-								required>
+								class="form-control" id="firstName" placeholder=""
+								disabled="disabled" ng-value="customer.fullName" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="lastName">Số điện thoại</label> <input type="text"
-								class="form-control" id="lastName" placeholder="" value=""
-								required>
+								class="form-control" id="lastName" placeholder=""
+								disabled="disabled" ng-value="customer.phoneNumber" required>
 						</div>
 					</div>
 
 					<div class="mb-3">
-						<label for="address">Ngày lấy hoa</label> <input type="datetime-local"
-							class="form-control" id="address" placeholder="1234 Main St"
-							required>
+						<label for="address">Ngày lấy hoa</label> <input
+							type="datetime-local" class="form-control" id="datePickUp">
 					</div>
 				</form>
-					<div class="card">
+				<div class="card">
 					<div
 						class="list-group-item d-flex justify-content-between lh-condensed p-3">
 						<div>
@@ -126,8 +100,7 @@ https://templatemo.com/tm-559-zay-shop
 						<span class="text-muted"><b style="color: chocolate;">{{totalOrder|number:0}}
 								VND</b> </span>
 					</div>
-					<div
-						class="list-group-item d-flex lh-condensed p-3 mt-3">
+					<div class="list-group-item d-flex lh-condensed p-3 mt-3">
 						<div class="form-check" style="margin-right: 20px">
 							<input class="form-check-input" type="radio"
 								name="flexRadioDefault" id="flexRadioDefault1"> <label
@@ -144,7 +117,7 @@ https://templatemo.com/tm-559-zay-shop
 
 
 				</div>
-				<button
+				<button ng-if="totalOrder>0"
 					class="btn btn-warning text-white btn-lg btn-block w-100 mt-3"
 					type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Đặt
 					hàng</button>
@@ -153,45 +126,49 @@ https://templatemo.com/tm-559-zay-shop
 	</div>
 	<!-- Close Content -->
 	<!-- Start Footer -->
-   	<footer th:insert="~{/fragment/_footer}" style="margin-top: 30px"></footer>
-    <!-- End Footer -->
+	<footer th:insert="~{/fragment/_footer}" style="margin-top: 30px"></footer>
+	<!-- End Footer -->
 
-    <!-- Start Script -->
-    <script src="assets/js/jquery-1.11.0.min.js"></script>
-    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/templatemo.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <!-- End Script -->
+	<!-- Start Script -->
+	<script src="assets/js/jquery-1.11.0.min.js"></script>
+	<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/templatemo.js"></script>
+	<script src="assets/js/custom.js"></script>
+	<!-- End Script -->
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 	<script src="/js/app/app.js"></script>
 	<script src="/js/service/checkoutService.js"></script>
 	<script src="/js/service/toastService.js"></script>
+	<script src="/js/service/customerService.js"></script>
 	<script src="/js/controller/checkoutController.js"></script>
 
-    <!-- Start Slider Script -->
-    <script src="assets/js/slick.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Thông Báo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Bạn có muốn đặt hàng không???
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <a class="btn btn-primary" ng-click="checkout(totalOrder)">Đặt thôi !!!</a>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Start Slider Script -->
+	<script src="assets/js/slick.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Thông Báo</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">Bạn có muốn đặt hàng không???</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Đóng</button>
+					<a class="btn btn-primary" ng-click="checkout(totalOrder)">Đặt
+						hàng</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

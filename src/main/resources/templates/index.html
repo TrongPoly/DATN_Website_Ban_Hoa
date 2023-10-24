@@ -1,52 +1,377 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
+<title>Zay Shop eCommerce HTML CSS Template</title>
 <meta charset="utf-8">
-<title>Toast Notification | CodingNepal</title>
-<link rel="stylesheet" href="/css/style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Font Awesome CDN link for icons -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+<link rel="shortcut icon" type="image/x-icon"
+	href="assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/templatemo.css">
+<link rel="stylesheet" href="assets/css/custom.css">
+
+<link rel="stylesheet" href="vendors/select2/select2.min.css">
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+	href="vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+<!-- Load fonts style after rendering the layout styles -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+<link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<!--
+    
+TemplateMo 559 Zay Shop
 
-<script src="/js/script.js"></script>
-<script src="/js/order.js"></script>
-<script src="/js/controller/cartController.js"></script>
-<script src="/js/app/app.js"></script>
-<script src="/js/service/cartService.js"></script>
-<script src="/js/service/thongBao.js"></script>
+https://templatemo.com/tm-559-zay-shop
+
+-->
 </head>
+
 <body ng-app="myApp">
-	<div ng-controller="checkoutCtrl">
-		<div>{{amount}} VNĐ</div>
-		<!-- <input id="so"> -->
-		<ul class="notifications">
-			<!-- Add ng-repeat directive to loop through toasts -->
-			<li ng-repeat="toast in toasts" class="toast {{toast.type}}">
-				<div class="column">
-					<i class="fa-solid {{toast.icon}}"></i> <span>{{toast.text}}</span>
-				</div> <i class="fa-solid fa-xmark" ng-click="removeToast(toast)"></i>
-			</li>
-		</ul>
-		<div class="buttons">
-			<button ng-click="checkout(amount)" class="btn" id="success">checkout</button>
-			<!-- <button class="btn" id="error">Error</button>
-      <button class="btn" id="warning">Warning</button>
-      <button class="btn" id="info">Info</button> -->
+	<!-- Start Top Nav -->
+	<nav th:insert="~{fragment/_nav.html::nav}"></nav>
+	<!-- Close Top Nav -->
+	<!-- Header -->
+	<nav th:insert="~{fragment/_header.html::header}"></nav>
+	<!-- Close Header -->
+	<!-- Start Banner Hero -->
+	<div id="template-mo-zay-hero-carousel" class="carousel slide"
+		data-bs-ride="carousel" ng-controller="indexCtrl">
+		<ol class="carousel-indicators">
+			<li data-bs-target="#template-mo-zay-hero-carousel"
+				data-bs-slide-to="0" class="active"></li>
+			<li data-bs-target="#template-mo-zay-hero-carousel"
+				data-bs-slide-to="1"></li>
+			<li data-bs-target="#template-mo-zay-hero-carousel"
+				data-bs-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<div class="container">
+					<div class="row p-5">
+						<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+							<img class="img-fluid" src="assets/img/hoa2.jpeg" alt="">
+						</div>
+						<div class="col-lg-6 mb-0 d-flex align-items-center">
+							<div class="text-align-left align-self-center">
+								<h1 class="h1 text-success">
+									<b>Daisy</b> Shop
+								</h1>
+								<h3 class="h2">Nở Hoa Tươi Mới, Truyền Đạt Yêu Thương -
+									Daisy Luôn Bên Bạn!</h3>
+								<p>Tại Daisy, chúng tôi tin rằng mỗi bông hoa mang theo một
+									câu chuyện riêng. Chúng tôi chăm sóc từng bông hoa với tình yêu
+									và lòng say mê, để khi bạn nhận được nó, bạn nhận được không
+									chỉ là một sản phẩm, mà là một câu chuyện về sự tươi mới, sự
+									đẹp đẽ và tình yêu thương. Hãy để Daisy là phần nhỏ góp công
+									sức của chúng tôi vào những khoảnh khắc đáng nhớ của bạn.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<div class="container">
+					<div class="row p-5">
+						<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+							<img class="img-fluid" src="assets/img/hoa3.jpeg" alt="">
+						</div>
+						<div class="col-lg-6 mb-0 d-flex align-items-center">
+							<div class="text-align-left">
+								<h1 class="h1">Hương Thơm Yêu Thương</h1>
+								<p>Bắt đầu từ một bông hoa nhỏ, chúng tôi đã xây dựng một
+									câu chuyện về chăm sóc khách hàng tại Daisy, nơi mà không chỉ
+									có hoa tươi đẹp mà còn là nơi lan tỏa hạnh phúc và yêu thương.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<div class="container">
+					<div class="row p-5">
+						<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+							<img class="img-fluid" src="assets/img/hoa4.jpeg" alt="">
+						</div>
+						<div class="col-lg-6 mb-0 d-flex align-items-center">
+							<div class="text-align-left">
+								<h1 class="h1">Daisy: Nơi Tình Yêu Nở Hoa</h1>
+								<p>Chúng tôi không chỉ bán hoa, chúng tôi chia sẻ tình yêu.
+									Mỗi lần chào đón một khách hàng mới, chúng tôi mở cánh cửa lòng
+									mình để chia sẻ niềm đam mê với vẻ đẹp của hoa và mong muốn lan
+									tỏa niềm vui đến mỗi ngóc ngách của cuộc sống.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+		<a class="carousel-control-prev text-decoration-none w-auto ps-3"
+			href="#template-mo-zay-hero-carousel" role="button"
+			data-bs-slide="prev"> <i class="fas fa-chevron-left"></i>
+		</a> <a class="carousel-control-next text-decoration-none w-auto pe-3"
+			href="#template-mo-zay-hero-carousel" role="button"
+			data-bs-slide="next"> <i class="fas fa-chevron-right"></i>
+		</a>
 	</div>
+	<!-- End Banner Hero -->
 
-	<div ng-controller="IndexController">
-		<h1>Trang chủ</h1>
-		<ul>
-			<li ng-repeat="product in products">{{ product.name }}
-				<button ng-click="addToCart()">Thêm vào giỏ hàng</button>
-			</li>
-		</ul>
-	</div>
 
+	<!-- Start Categories of The Month -->
+	<section class="container py-5">
+		<div class="row text-center pt-3">
+			<div class="col-lg-6 m-auto">
+				<h1 class="h2">
+					Tâm Hồn Mỗi Bông Hoa
+					</h2>
+					<p>Chọn Một Mẫu Hoa Tại Daisy, Chọn Một Câu Chuyện Riêng Cho
+						Trái Tim Bạn.</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 col-md-3 p-5 mt-md-3">
+				<a href="#"><img src="assets/img/LocBoHoa.jpg"
+					class="rounded-circle img-fluid border"></a>
+				<h5 class="text-center mt-3 mb-3">Hoa Bó</h5>
+				</a>
+			</div>
+			<div class="col-12 col-md-3 p-5 mt-3">
+				<a href="#"><img src="assets/img/GioHoa_Deban.jpg"
+					class="rounded-circle img-fluid border"></a>
+				<h2 class="h5 text-center mt-3 mb-3">Hoa để bàn, giỏ hoa</h2>
+				</a>
+			</div>
+			<div class="col-12 col-md-3 p-5 mt-3">
+				<a href="#"><img src="assets/img/Hoakhaitruong.jpg"
+					class="rounded-circle img-fluid border"></a>
+				<h2 class="h5 text-center mt-3 mb-3">Hoa khai trương</h2>
+				</a>
+			</div>
+			<div class="col-12 col-md-3 p-5 mt-3">
+				<a href="#"><img src="assets/img/hoakhac.jpg"
+					class="rounded-circle img-fluid border"></a>
+				<h2 class="h5 text-center mt-3 mb-3">Khác</h2>
+				</a>
+			</div>
+		</div>
+	</section>
+	<!-- End Categories of The Month -->
+
+
+	<!-- Start Featured Product -->
+	<section class="bg-light">
+		<div class="container py-5">
+			<div class="row text-center py-3">
+				<div class="col-lg-6 m-auto">
+					<h2 class="h2">
+						Sự Tinh Tế Trong Từng Cánh Hoa
+						</h2>
+						<p>Những Bó Hoa Daisy Chất Lượng Nhất Chỉ Có Tại Chúng Tôi!</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-md-4 mb-4">
+					<div class="card h-100">
+						<a href="shop-single.html"> <img
+							src="assets/img/Giohoachucmung.jpg" class="card-img-top"
+							alt="...">
+						</a>
+						<div class="card-body">
+							<ul class="list-unstyled d-flex justify-content-between">
+
+								<li class="text-muted text-right">650.000 đ</li>
+							</ul>
+							<a href="shop-single.html"
+								class="h2 text-decoration-none text-dark">Sắc Hồng Thanh
+								Lịch </a>
+							<p class="card-text">Biểu tượng của lòng chân thành và tình
+								yêu sâu đậm, là món quà ý nghĩa cho những dịp đặc biệt, đánh
+								thức cảm xúc và làm cho mỗi khoảnh khắc trở nên trân quý.</p>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-4 mb-4">
+					<div class="card h-100">
+						<a href="shop-single.html"> <img
+							src="assets/img/Hoaquekem.webp" class="card-img-top" alt="...">
+						</a>
+						<div class="card-body">
+							<ul class="list-unstyled d-flex justify-content-between">
+
+								<li class="text-muted text-right">900.000 đ</li>
+							</ul>
+							<a href="shop-single.html"
+								class="h2 text-decoration-none text-dark">Hương Hồng Ngọt
+								Ngào</a>
+							<p class="card-text">Bó hoa hồng que kem là sự hòa quyện tinh
+								tế giữa vẻ đẹp truyền thống của hoa hồng và hình dạng ngọt ngào
+								của que kem. Sự ngọt ngào và trang trọng là một món quà ý nghĩa
+								cho những dịp đặt biệt.</p>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-4 mb-4" style="height: 630px">
+					<div class="card h-100">
+						<a href="shop-single.html"> <img
+							src="assets/img/Huongduong.webp" class="card-img-top" alt="...">
+						</a>
+						<div class="card-body">
+							<ul class="list-unstyled d-flex justify-content-between">
+								<!-- <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                </li> -->
+								<li class="text-muted text-right">250.000 đ</li>
+							</ul>
+							<a href="shop-single.html"
+								class="h2 text-decoration-none text-dark">Bình Yên Dưới Ánh
+								Mặt Trời</a>
+							<p class="card-text">Bó hoa Hướng Dương không chỉ là một món
+								quà đẹp, mà còn là một biểu hiện của sự sống và ý nghĩa sâu sắc,
+								làm cho mọi dịp kỷ niệm trở nên đặc biệt và ý nghĩa.</p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<!-- End Featured Product -->
+
+
+	<!-- Start Footer -->
+	<footer class="bg-dark" id="tempaltemo_footer">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-4 pt-5">
+					<h2 class="h2 text-success border-bottom pb-3 border-light logo">DAISY
+						SHOP</h2>
+					<ul class="list-unstyled text-light footer-link-list">
+						<li><i class="fas fa-map-marker-alt fa-fw"></i> 123
+							Consectetur at ligula 10660</li>
+						<li><i class="fa fa-phone fa-fw"></i> <a
+							class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+						</li>
+						<li><i class="fa fa-envelope fa-fw"></i> <a
+							class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-md-4 pt-5">
+					<h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
+					<ul class="list-unstyled text-light footer-link-list">
+						<li><a class="text-decoration-none" href="#">Luxury</a></li>
+						<li><a class="text-decoration-none" href="#">Sport Wear</a></li>
+						<li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
+						<li><a class="text-decoration-none" href="#">Women's
+								Shoes</a></li>
+						<li><a class="text-decoration-none" href="#">Popular
+								Dress</a></li>
+						<li><a class="text-decoration-none" href="#">Gym
+								Accessories</a></li>
+						<li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-4 pt-5">
+					<h2 class="h2 text-light border-bottom pb-3 border-light">Further
+						Info</h2>
+					<ul class="list-unstyled text-light footer-link-list">
+						<li><a class="text-decoration-none" href="#">Home</a></li>
+						<li><a class="text-decoration-none" href="./about.html">About
+								Us</a></li>
+						<li><a class="text-decoration-none" href="#">Shop
+								Locations</a></li>
+						<li><a class="text-decoration-none" href="#">FAQs</a></li>
+						<li><a class="text-decoration-none" href="#">Contact</a></li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div class="row text-light mb-4">
+				<div class="col-12 mb-3">
+					<div class="w-100 my-3 border-top border-light"></div>
+				</div>
+				<div class="col-auto me-auto">
+					<ul class="list-inline text-left footer-icons">
+						<li
+							class="list-inline-item border border-light rounded-circle text-center">
+							<a class="text-light text-decoration-none" target="_blank"
+							href="http://facebook.com/"><i
+								class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+						</li>
+						<li
+							class="list-inline-item border border-light rounded-circle text-center">
+							<a class="text-light text-decoration-none" target="_blank"
+							href="https://www.instagram.com/"><i
+								class="fab fa-instagram fa-lg fa-fw"></i></a>
+						</li>
+						<li
+							class="list-inline-item border border-light rounded-circle text-center">
+							<a class="text-light text-decoration-none" target="_blank"
+							href="https://twitter.com/"><i
+								class="fab fa-twitter fa-lg fa-fw"></i></a>
+						</li>
+						<li
+							class="list-inline-item border border-light rounded-circle text-center">
+							<a class="text-light text-decoration-none" target="_blank"
+							href="https://www.linkedin.com/"><i
+								class="fab fa-linkedin fa-lg fa-fw"></i></a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-auto">
+					<label class="sr-only" for="subscribeEmail">Email address</label>
+					<div class="input-group mb-2">
+						<input type="text" class="form-control bg-dark border-light"
+							id="subscribeEmail" placeholder="Email address">
+						<div class="input-group-text btn-success text-light">Subscribe</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="w-100 bg-black py-3">
+			<div class="container">
+				<div class="row pt-2">
+					<div class="col-12">
+						<p class="text-left text-light">
+							Copyright &copy; 2021 Company Name | Designed by <a
+								rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</footer>
+	<!-- End Footer -->
+
+	<!-- Start Script -->
+	<script src="assets/js/jquery-1.11.0.min.js"></script>
+	<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/templatemo.js"></script>
+	<script src="assets/js/custom.js"></script>
+	<!-- End Script -->
+	
+	<!--AngurlarJS -->
+		<script src="js/app/app.js"></script>
+		<script src="js/service/productService.js"></script>
+		<script src="js/controller/indexController.js"></script>
 </body>
+
 </html>

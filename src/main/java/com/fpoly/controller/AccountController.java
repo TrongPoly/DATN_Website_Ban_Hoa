@@ -21,9 +21,13 @@ public class AccountController {
 	@Autowired
 	ServletContext context;
 
-	@GetMapping("/login_form")
+	@GetMapping("/login")
 	public String formLogin() {
 		return "login";
+	}
+	@GetMapping("/register")
+	public String formRegister() {
+		return "register";
 	}
 
 	@GetMapping("/register/form")
@@ -34,31 +38,30 @@ public class AccountController {
 	@GetMapping("/login/success")
 	public String doLogin() {
 		if (session.getSession("user").getRole().getRoleName().equals("Admin")) {
-			return "redirect:/admin";
+			return "redirect:/admin/product";
 		}
-		return "redirect:/";
+		return "redirect:/index";
 	}
 
 	@RequestMapping("/logoff/success")
 	public String doLogout(Model model) {
 		session.removeSession("user");
-		return "redirect:/auth/login_form";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/login/error")
 	public String loginError() {
-		return "redirect:/auth/login_form";
+		return "redirect:/auth/login";
 	}
 
-//	@RequestMapping("/login/blocked")
-//	public String isBlocked() {
-//		context.setAttribute("msg", "Tài khoản đã bị khóa!");
-//		return "redirect:/auth/login/form";
-//	}
+	@RequestMapping("/blocked")
+	public String isBlocked() {
+		return "login";
+	}
 
 	@RequestMapping("/access/denied")
 	public String denied() {
-		return "User/ErrorPage";
+		return "error_page/error-500";
 	}
 
 }

@@ -19,7 +19,4 @@ app.service('CheckoutService', function() {
 		}
 		return order;
 	}
-	
-	
-	
 });

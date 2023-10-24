@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <!-- Required meta tags -->
@@ -8,19 +8,27 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>PolluxUI Admin</title>
 <!-- base:css -->
-<link rel="stylesheet" href="../admin/vendors/typicons/typicons.css">
-<link rel="stylesheet" href="../admin/vendors/css/vendor.bundle.base.css">
+<link rel="stylesheet" href="../_admin/vendors/typicons/typicons.css">
+<link rel="stylesheet"
+	href="../_admin/vendors/css/vendor.bundle.base.css">
 <!-- endinject -->
 <!-- plugin css for this page -->
 <!-- End plugin css for this page -->
 <!-- inject:css -->
-<link rel="stylesheet" href="../admin/css/vertical-layout-light/style.css">
+<link rel="stylesheet"
+	href="../_admin/css/vertical-layout-light/style.css">
 <!-- endinject -->
-<link rel="shortcut icon" href="../admin/images/favicon.png" />
-
+<link rel="shortcut icon" href="../_admin/images/favicon.png" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
 <body ng-app="myApp" ng-controller="loginCtrl">
+	<ul th:insert="~{/fragment/_toast}"></ul>
+
 	<div class="container-scroller">
 		<div class="container-fluid page-body-wrapper full-page-wrapper">
 			<div class="content-wrapper d-flex align-items-center auth px-0">
@@ -28,7 +36,7 @@
 					<div class="col-lg-5 mx-auto">
 						<div class="auth-form-light text-left py-5 px-4 px-sm-5">
 							<div class="brand-logo">
-								<img src="../admin/images/logodaisy1.png" alt="logo">
+								<img src="../_admin/images/logodaisy1.png" alt="logo">
 							</div>
 							<h4>Hello, welcome to Daisy</h4>
 							<h6 class="font-weight-light">Sign in to continue.</h6>
@@ -55,7 +63,7 @@
 											signed in
 										</label>
 									</div>
-									<a href="#" class="auth-link text-black">Forgot password?</a>
+									<a href="#" ng-click="check()" class="auth-link text-black">Forgot password?</a>
 								</div>
 
 								<div class="text-center mt-4 font-weight-light">
@@ -73,15 +81,18 @@
 	</div>
 	<!-- container-scroller -->
 	<!-- base:js -->
-	<script src="../admin/vendors/js/vendor.bundle.base.js"></script>
+	<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
 	<!-- endinject -->
 	<!-- inject:js -->
-	<script src="../admin/js/off-canvas.js"></script>
-	<script src="../admin/js/hoverable-collapse.js"></script>
-	<script src="../admin/js/template.js"></script>
-	<script src="../admin/js/settings.js"></script>
-	<script src="../admin/js/todolist.js"></script>
+	<script src="../_admin/js/off-canvas.js"></script>
+	<script src="../_admin/js/hoverable-collapse.js"></script>
+	<script src="../_admin/js/template.js"></script>
+	<script src="../_admin/js/settings.js"></script>
+	<script src="../_admin/js/todolist.js"></script>
 	<!-- endinject -->
+	<script src="../js/app/app.js"></script>
+	<script src="../js/controller/loginController.js"></script>
+	<script src="../js/service/toastService.js"></script>
 </body>
 
 </html>
