@@ -2,111 +2,138 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>PolluxUI Admin</title>
-  <!-- base:css -->
-  <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css"/>
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  
-  <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
-  <!-- endinject -->
-  
-  <link rel="shortcut icon" href="../../images/favicon.png" />
- 
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>PolluxUI Admin</title>
+<!-- base:css -->
+<link rel="stylesheet" href="../_admin/vendors/typicons/typicons.css">
+<link rel="stylesheet"
+	href="../_admin/vendors/css/vendor.bundle.base.css">
+<link rel="stylesheet"
+	href="../_admin/vendors/mdi/css/materialdesignicons.min.css" />
+<!-- endinject -->
+<!-- plugin css for this page -->
+<!-- End plugin css for this page -->
+<!-- inject:css -->
+
+<link rel="stylesheet"
+	href="../_admin/css/vertical-layout-light/style.css">
+<!-- endinject -->
+
+<link rel="shortcut icon" href="../_admin/images/favicon.png" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+<link rel="stylesheet" href="../css/style.css">
+
 </head>
 
-<body>
-  <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center auth px-0">
-        <div class="row w-100 mx-9">
-          <div class="col-lg-5 mx-auto">
-              <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <div class="brand-logo">
-                <img src="../../images/logodaisy1.png" alt="logo">
-              </div>
-              <h4>New here?</h4>
-              <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-              <form class="pt-3">
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username">
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
-                </div>
-                <div class="form-group">
-                  <input type="tel" class="form-control form-control-lg" id="phone" placeholder="Phone">
-                </div>
-                <div class="form-group">
-                  <select class="form-control form-control-lg" id="exampleFormControlSelect2">
-                    <option>Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>other</option>
-                  </select>
-                </div>
-                <div class="input-group">
-                  <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
-                  <div class="input-group-append">
-                    <button class="btn btn-sm btn-primary" type="button" id="togglePassword"> <i class="mdi mdi-eye" aria-hidden="true"></i></button>
-                  </div>
-                </div>
-              
-              
-                <div class="mb-4">
-                  <div class="form-check">
-                    <label class="form-check-label text-muted">
-                      <input type="checkbox" class="form-check-input">
-                      I agree to all Terms & Conditions
-                    </label>
-                  </div>
-                </div>
-                <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN UP</a>
-                </div>
-                <div class="text-center mt-4 font-weight-light">
-                  Already have an account? <a href="login.html" class="text-primary">Login</a>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- content-wrapper ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <script>
-    document.getElementById("togglePassword").addEventListener("click", function() {
-        var passwordField = document.getElementById("exampleInputPassword1");
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-            document.getElementById("togglePassword").innerHTML = '<i class="mdi mdi-eye-off" aria-hidden="true"></i>';
-        } else {
-            passwordField.type = "password";
-            document.getElementById("togglePassword").innerHTML = '<i class="mdi mdi-eye" aria-hidden="true"></i>';
-        }
-    });
-    </script>
-    
-  <!-- container-scroller -->
-  <!-- base:js -->
-  <script src="../../vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- inject:js -->
-  <script src="../../js/off-canvas.js"></script>
-  <script src="../../js/hoverable-collapse.js"></script>
-  <script src="../../js/template.js"></script>
-  <script src="../../js/settings.js"></script>
-  <script src="../../js/todolist.js"></script>
-  <!-- endinject -->
+<body ng-app="myApp">
+	<div class="container-scroller" ng-controller="registerCtrl">
+		<ul th:insert="~{/fragment/_toast}"></ul>
+		<div class="container-fluid page-body-wrapper full-page-wrapper">
+			<div class="content-wrapper d-flex align-items-center auth px-0">
+				<div class="row w-100 mx-9">
+					<div class="col-lg-5 mx-auto">
+						<div class="auth-form-light text-left py-5 px-4 px-sm-5">
+							<div class="brand-logo">
+								<img src="../_admin/images/logodaisy1.png" alt="logo">
+							</div>
+							<h4>Tạo tài khoản mới</h4>
+							<h6 class="font-weight-light">Đăng ký rất dễ dàng. Chỉ mất
+								vài bước</h6>
+							<form class="pt-3">
+								<div class="form-group">
+									<input type="text" ng-model="customer.fullName"
+										class="form-control form-control-lg"
+										id="exampleInputUsername1" placeholder="Họ và tên">
+								</div>
+								<div class="form-group">
+									<input type="email" class="form-control form-control-lg"
+										id="exampleInputEmail1" ng-model="account.email"
+										placeholder="Email">
+								</div>
+								<div class="form-group">
+									<input type="tel" class="form-control form-control-lg"
+										id="phone" ng-model="customer.phoneNumber"
+										placeholder="Số điện thoại">
+								</div>
+								<div class="form-group">
+									<select class="form-control form-control-lg"
+										ng-model="customer.gender" id="exampleFormControlSelect2">
+										<option id = "gender" value=true>Male</option>
+										<option id="gender" value=false>Female</option>
+									</select>
+								</div>
+								<div class="input-group">
+									<input type="password" class="form-control form-control-lg"
+										ng-model="account.password" placeholder="Mật khẩu"
+										aria-label="Password">
+									<div class="input-group-append">
+										<button class="btn btn-sm btn-primary" type="button"
+											id="togglePassword">
+											<i class="mdi mdi-eye" aria-hidden="true"></i>
+										</button>
+									</div>
+								</div>
+
+								<div class="mt-3">
+									<button type="submit" ng-click="register()"
+										class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN
+										UP</button>
+								</div>
+								<div class="text-center mt-4 font-weight-light">
+									Already have an account? <a href="/auth/login"
+										class="text-primary">Login</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- content-wrapper ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<script>
+		document
+				.getElementById("togglePassword")
+				.addEventListener(
+						"click",
+						function() {
+							var passwordField = document
+									.getElementById("exampleInputPassword1");
+							if (passwordField.type === "password") {
+								passwordField.type = "text";
+								document.getElementById("togglePassword").innerHTML = '<i class="mdi mdi-eye-off" aria-hidden="true"></i>';
+							} else {
+								passwordField.type = "password";
+								document.getElementById("togglePassword").innerHTML = '<i class="mdi mdi-eye" aria-hidden="true"></i>';
+							}
+						});
+	</script>
+
+	<!-- container-scroller -->
+	<!-- base:js -->
+	<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
+	<!-- endinject -->
+	<!-- inject:js -->
+	<script src="../_admin/js/off-canvas.js"></script>
+	<script src="../_admin/js/hoverable-collapse.js"></script>
+	<script src="../_admin/js/template.js"></script>
+	<script src="../_admin/js/settings.js"></script>
+	<script src="../_admin/js/todolist.js"></script>
+	<!-- endinject -->
+	<script src="../js/app/app.js"></script>
+	<script src="../js/controller/registerController.js"></script>
+	<script src="../js/service/toastService.js"></script>
+
+	<!-- <script src="../js/service/registerService.js"></script> -->
 </body>
 
 </html>

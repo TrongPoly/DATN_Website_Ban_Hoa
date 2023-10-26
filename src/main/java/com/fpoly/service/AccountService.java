@@ -8,5 +8,7 @@ public interface AccountService {
 	Account findByid(String email);
 	
 	List<Account> findAll();
+
+	void saveAccount(Account account);
 	
 }

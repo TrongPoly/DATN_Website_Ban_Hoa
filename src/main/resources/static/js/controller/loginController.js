@@ -6,8 +6,15 @@ app.controller('loginCtrl',
 			ToastService.createToast("error", "Sai tài khoản hoặc mật khẩu", $scope.toasts);
 		}
 		if (location.href === "http://localhost:8080/auth/blocked") {
-			ToastService.createToast("error", "Tài khoản đã bị khóa", $scope.toasts);
+			ToastService.createToast("error", "Tài khoản hiện chưa được xác minh, Vui lòng xác minh tài khoản trong Email của bạn", $scope.toasts);
 		}
+		if (location.href === "http://localhost:8080/auth/success_verify") {
+			ToastService.createToast("success", "Xác minh tài khoản thành công", $scope.toasts);
+		}
+		if (location.href === "http://localhost:8080/auth/determined") {
+			ToastService.createToast("info", "Tài khoản đã được xác minh trước đó", $scope.toasts);
+		}
+		
 		/*$scope.productDetails = function(idProduct) {
 			ProductService.getOneProduct(idProduct)
 				.then((resp) => {
