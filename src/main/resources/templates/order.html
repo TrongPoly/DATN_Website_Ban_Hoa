@@ -70,7 +70,8 @@
 						<li class="nav-item" role="presentation">
 							<button ng-click="getOrder(5)" class="nav-link" id="contact-tab"
 								data-bs-toggle="tab" data-bs-target="#contact" type="button"
-								role="tab" aria-controls="contact" aria-selected="false">Yêu cầu hủy</button>
+								role="tab" aria-controls="contact" aria-selected="false">Yêu
+								cầu hủy</button>
 						</li>
 					</ul>
 				</div>
@@ -94,16 +95,16 @@
 											<td>{{order.orderDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 											<td>{{order.pickUpDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 											<td>
-											<!-- Huy don -->
-											<a ng-if="order.status==0" class="btn btn-danger text-white"
-												ng-click="requestCancelOrder(order.id)"><i class="fa fa-solid fa-window-close"></i></a>
-												
-											<a data-bs-toggle="modal"
-												data-bs-target="#orderDetailsModal"
+												<!-- Huy don --> <a ng-if="order.status==0"
+												class="btn btn-danger text-white"
+												ng-click="requestCancelOrder(order.id)"><i
+													class="fa fa-solid fa-window-close"></i></a> <a
+												data-bs-toggle="modal" data-bs-target="#orderDetailsModal"
 												class="btn btn-warning text-white"
 												ng-click="getOrderDetails(order.id) "> <i
 													class="fa fa-fw fa-search"></i>
-											</a></td>
+											</a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -115,11 +116,9 @@
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Chi tiết</h5>
-											<button type="button" class="close" data-dismiss="modal"
-												aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
+											<h5 class="modal-title" id="exampleModalLabel">Chi tiết
+												đơn hàng</h5>
+
 										</div>
 										<div class="modal-body">
 											<!-- <table class="table-striped col-12">

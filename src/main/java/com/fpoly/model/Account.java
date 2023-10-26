@@ -20,6 +20,7 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+    
     @NotNull
     @Column(name = "active", nullable = false)
     private Boolean active = false;
@@ -55,5 +56,20 @@ public class Account {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+	public Account() {
+		super();
+	}
+
+	public Account(@Size(max = 100) String email, @Size(max = 15) @NotNull String password, Role role,
+			@NotNull Boolean active) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.role = role;
+		this.active = active;
+	}
+
+	
 
 }

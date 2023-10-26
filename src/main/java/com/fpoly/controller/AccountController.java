@@ -21,6 +21,17 @@ public class AccountController {
 	@Autowired
 	ServletContext context;
 
+	//Xác minh tài khoản thành công
+	@GetMapping("/success_verify")
+	public String success_verify() {
+		return "login";
+	}
+	//Tài khoản đã được xác minh trước đó
+	@GetMapping("/determined")
+	public String determined() {
+		return "login";
+	}
+	
 	@GetMapping("/login")
 	public String formLogin() {
 		return "login";
@@ -63,5 +74,8 @@ public class AccountController {
 	public String denied() {
 		return "error_page/error-500";
 	}
-
+	@RequestMapping("/verify_email")
+	public String verifyEmail() {
+		return "verifyEmail";
+	}
 }
