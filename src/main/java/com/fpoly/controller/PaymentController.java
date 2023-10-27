@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PaymentController {
 	@GetMapping("/success")
 	public String paySuccess() {
-		return "paymentSuccess";
+		return "orderSuccess";
 	}
 }

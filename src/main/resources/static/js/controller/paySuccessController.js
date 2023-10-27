@@ -1,9 +1,16 @@
 app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartService',
 	function($scope, CheckoutService, $http, CartService) {
 		let check = true;
+		$scope.titleMsg = "Chuyển khoản thành công";
+		$scope.msg = "Cảm ơn bạn đã thực hiện chuyển khoản thành công.";
+
+		if (location.href == location.origin + "/order/success") {
+			$scope.titleMsg = "Đặt hàng thành công";
+			$scope.msg = "Cảm ơn bạn đã thực hiện đặt hàng.";
+		}
 		$scope.saveOrder = function() {
-			var url = window.location.protocol + "//" + window.location.hostname +
-				`:8080/api/order/save/` + sessionStorage.getItem("email") + "?pickUpDate=" +
+			var url = location.origin +
+				`/api/order/save/` + sessionStorage.getItem("email") + "?pickUpDate=" +
 				sessionStorage.getItem("pickUpDate");
 			$scope.productList = CheckoutService.getSelectedProduct();
 			$http
@@ -13,14 +20,14 @@ app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartSer
 				.catch((error) => {
 				});
 		}
-		$scope.updateProduct = function(products){
-			var url = window.location.protocol + "//" + window.location.hostname +
-				`:8080/api/product/update/after_order`;
-			$http.put(url,products)
-			.then((resp)=>{
-			}).catch((error)=>{
-				alert(error.status);
-			})
+		$scope.updateProduct = function(products) {
+			var url = location.origin +
+				`/api/product/update/after_order`;
+			$http.put(url, products)
+				.then((resp) => {
+				}).catch((error) => {
+					alert(error.status);
+				})
 		}
 
 		$scope.backIndex = function() {
@@ -36,7 +43,7 @@ app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartSer
 			for (var i = 0; i < productList.length; i++) {
 				CartService.removeFromCart(productList[i]);
 			}
-			location.href = window.location.protocol + "//" + window.location.hostname + ":8080/"
+			location.href = location.origin;
 		}
 		if (check == true) {
 			$scope.saveOrder();

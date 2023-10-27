@@ -6,24 +6,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+<link rel="apple-touch-icon" href="../assets/img/apple-icon.png">
 <link rel="shortcut icon" type="image/x-icon"
-	href="assets/img/favicon.ico">
+	href="../assets/img/favicon.ico">
 
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/templatemo.css">
-<link rel="stylesheet" href="assets/css/custom.css">
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/templatemo.css">
+<link rel="stylesheet" href="../assets/css/custom.css">
+<link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 <!-- Load fonts style after rendering the layout styles -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-<link rel="stylesheet" href="assets/css/fontawesome.min.css">
+<link rel="stylesheet" href="../assets/css/fontawesome.min.css">
 
 <!-- Slick -->
-<link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/slick.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/slick-theme.css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
@@ -54,7 +54,7 @@ https://templatemo.com/tm-559-zay-shop
 					<li ng-repeat="product in orders"
 						class="list-group-item d-flex justify-content-between lh-condensed">
 						<div class="d-flex">
-							<img class="" src="/img/{{product.image}}" width="70"
+							<img class="" src="../img/{{product.image}}" width="70"
 								style="margin-right: 15px">
 							<div>
 								<h6 class="my-0">{{product.name}}</h6>
@@ -102,13 +102,13 @@ https://templatemo.com/tm-559-zay-shop
 					</div>
 					<div class="list-group-item d-flex lh-condensed p-3 mt-3">
 						<div class="form-check" style="margin-right: 20px">
-							<input class="form-check-input" type="radio"
+							<input class="form-check-input" type="radio" value="Khi nhận hàng" ng-model="methodPayment"
 								name="flexRadioDefault" id="flexRadioDefault1"> <label
 								class="form-check-label" for="flexRadioDefault1"> Khi
 								nhận hàng </label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio"
+							<input class="form-check-input" type="radio" value="Chuyển khoản" ng-model="methodPayment"
 								name="flexRadioDefault" id="flexRadioDefault2" checked>
 							<label class="form-check-label" for="flexRadioDefault2">
 								Chuyển khoản </label>
@@ -130,23 +130,23 @@ https://templatemo.com/tm-559-zay-shop
 	<!-- End Footer -->
 
 	<!-- Start Script -->
-	<script src="assets/js/jquery-1.11.0.min.js"></script>
-	<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/templatemo.js"></script>
-	<script src="assets/js/custom.js"></script>
+	<script src="../assets/js/jquery-1.11.0.min.js"></script>
+	<script src="../assets/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<script src="../assets/js/templatemo.js"></script>
+	<script src="../assets/js/custom.js"></script>
 	<!-- End Script -->
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-	<script src="/js/app/app.js"></script>
-	<script src="/js/service/checkoutService.js"></script>
-	<script src="/js/service/toastService.js"></script>
-	<script src="/js/service/customerService.js"></script>
-	<script src="/js/controller/checkoutController.js"></script>
+	<script src="../js/app/app.js"></script>
+	<script src="../js/service/checkoutService.js"></script>
+	<script src="../js/service/toastService.js"></script>
+	<script src="../js/service/customerService.js"></script>
+	<script src="../js/controller/checkoutController.js"></script>
 
 	<!-- Start Slider Script -->
-	<script src="assets/js/slick.min.js"></script>
+	<script src="../assets/js/slick.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 	<!-- Modal -->
