@@ -11,4 +11,8 @@ public class OrderController {
 	public String getOrder() {
 		return "order";
 	}
+	@GetMapping("/success")
+	public String successOrder() {
+		return "orderSuccess";
+	}
 }

@@ -4,6 +4,12 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 		$scope.toasts = [];
 		$scope.totalOrder = 0;
 		$scope.customer = {};
+		$scope.methodPayment = "Chuyển khoản";
+
+		if (location.href == "http://localhost:8080/checkout/invalid") {
+			ToastService.createToast("warning", "Vui lòng chọn  ngày lấy hoa", $scope.toasts);
+		}
+
 		$scope.getCustomer = function() {
 			CustomerService.getCustomer()
 				.then((resp) => {
@@ -33,19 +39,28 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 
 		$scope.checkout = function(amount) {
 			let datePU = document.getElementById("datePickUp").value;
-			sessionStorage.removeItem("pickUpDate")
-			sessionStorage.setItem("pickUpDate", datePU);
-			var url = window.location.protocol + "//" + window.location.hostname + `:8080/api/payment/create_payment?amount=${amount}`;
-			$http
-				.get(url)
-				.then((resp) => {
-					location.href = resp.data.url;
-				})
-				.catch((error) => {
-					alert(error.status)
-					alert("Lỗi");
-				});
+			console.log(datePU);
+			if (datePU == "") {
+				location.href = "http://localhost:8080/checkout/invalid";
+			} else {
+				sessionStorage.removeItem("pickUpDate")
+				sessionStorage.setItem("pickUpDate", datePU);
+				if ($scope.methodPayment == "Chuyển khoản") {
 
+					var url = window.location.protocol + "//" + window.location.hostname + `:8080/api/payment/create_payment?amount=${amount}`;
+					$http
+						.get(url)
+						.then((resp) => {
+							location.href = resp.data.url;
+						})
+						.catch((error) => {
+							alert(error.status)
+							alert("Lỗi");
+						});
+				} else {
+					location.href = location.origin + "/order/success";
+				}
+			}
 		}
 		$scope.get();
 	}]);

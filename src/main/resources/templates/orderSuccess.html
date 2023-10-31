@@ -49,8 +49,8 @@ p {
 </head>
 <body ng-app="myApp" ng-controller="paySuccessCtrl">
 	<div class="container">
-		<h1>Chuyển khoản thành công</h1>
-		<p>Cảm ơn bạn đã thực hiện chuyển khoản thành công.</p>
+		<h1>{{titleMsg}}</h1>
+		<p>{{msg}}</p>
 		<a class="btn btn-primary" href="#" ng-click="backIndex()">Trở về
 			trang chủ</a>
 	</div>
@@ -59,6 +59,6 @@ p {
 	<script src="../js/service/checkoutService.js"></script>
 	<script src="../js/service/cartService.js"></script>
 	<script src="../js/controller/paySuccessController.js"></script>
-	
+
 </body>
 </html>
