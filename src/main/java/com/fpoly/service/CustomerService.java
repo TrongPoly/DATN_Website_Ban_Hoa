@@ -13,4 +13,6 @@ public interface CustomerService {
 	Customer findByEmail(Account email);
 	
 	void saveCustomer(Customer customer);
+	
+	Customer findByUser();
 }

@@ -9,9 +9,14 @@ import com.fpoly.model.Account;
 import com.fpoly.model.Customer;
 import com.fpoly.repository.CustomerRepository;
 import com.fpoly.service.CustomerService;
+import com.fpoly.service.SessionService;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+	
+	@Autowired
+	SessionService session;
+	
 	@Autowired
 	CustomerRepository customerRepository;
 
@@ -19,7 +24,13 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> findAllCustomer() {
 		return customerRepository.findAll();
 	}
-
+	
+	@Override
+	public Customer findByUser() {
+		return customerRepository.findAll().stream()
+				.filter(kh -> kh.getEmail().getEmail().equals(session.getSession("user").getEmail())).findFirst().get();
+	}
+	
 	@Override
 	public Customer findById(Integer idCustomer) {
 		return customerRepository.findById(idCustomer).orElse(null);

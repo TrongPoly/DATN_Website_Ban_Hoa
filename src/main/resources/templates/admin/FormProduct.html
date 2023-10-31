@@ -17,9 +17,11 @@
   <link rel="stylesheet" href="../_admin/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../_admin/images/favicon.png"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  
 
 </head>
-<body>
+<body ng-app="AdminSpApp" ng-controller="AdminSpCtrl">
   <div class="container-scroller">
     <!-- partial:../admin/partials/_navbar.html -->
     <nav th:replace="~{fragment/_adminHeader.html::adminHeader}"></nav>
@@ -204,27 +206,30 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Form Product</h4>
-                  <form class="forms-sample">
+                  <form class="forms-sample" enctype="multipart/form-data">
                     <div class="form-group">
-                      <label for="id">ID Product</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="ID Product">
+                      <label for="id" style="display: none;">ID Product</label>
+                      <input ng-model="form.id" style="display: none;" type="text" class="form-control" id="exampleInputName1" placeholder="ID Product">
                     </div>
                     <div class="form-group">
                       <label for="id">Category</label>
-                        <select class="form-control" id="Id">
-                          <option>Hoa hồng</option>
-                          <option>Hoa lan</option>
+                        <select class="form-control" id="Id" ng-model="form.category.id">
+                          <option ng-repeat="item in cats" ng-value="{{item.id}}">{{item.name}}</option>
+                          
                         </select>
                       </div>
                     <div class="form-group">
                       <label for="exampleInputName1">Name</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                      <input ng-model="form.name" type="text" class="form-control" id="exampleInputName1" placeholder="Name">
                     </div>
                     <div class="form-group">
                       <label>Image</label>
-                      <input sty type="file" name="img[]" class="file-upload-default">
+                      <input sty  type="file" name="file" class="file-upload-default"
+                     
+                     onchange="angular.element(this).scope().imageChanged(this.files)" >
                       <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                        <input  type="text" class="form-control file-upload-info" disabled placeholder="Upload Image"
+                         onchange="angular.element(this).scope().imageChanged(this.files)">
                         <span class="input-group-append">
                           <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                         </span>
@@ -232,20 +237,21 @@
                     </div>
                     <div class="form-group">
                       <label for="quantity">Quantity</label>
-                      <input type="number" class="form-control" id="Price" placeholder="quantity">
+                      <input ng-model="form.quantity" type="number" class="form-control" id="Quantity" placeholder="quantity">
                     </div>
                     <div class="form-group">
                       <label for="Price">Price</label>
-                      <input type="number" class="form-control" id="Price" placeholder="Price (VND)">
+                      <input ng-model="form.price" type="number" class="form-control" id="Price" placeholder="Price (VND)">
                     </div>
                     <div class="form-group">
                       <label for="exampleSelectGender"> Status</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option>Products available</option>
-                          <option>Out of stock</option>
+                        <select class="form-control" id="exampleSelectGender" ng-model="form.isAvailable">
+                          <option ng-repeat="item in sps" ng-value="{{item.isAvailable}}">{{item.isAvailable}}</option>
+                          
                         </select>
                       </div>
                     <button type="button" class="btn btn-primary">Create</button>
+                    <button type="button" class="btn btn-primary">Update</button>
                     <button type="button" class="btn btn-secondary">Edit</button> 
                   </form>
                 </div>
@@ -260,9 +266,9 @@
                 <div class="card-body">
                   <div class="form-group">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username">
+                      <input ng-model="searchKeyword" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username">
                       <div class="input-group-append">
-                        <button class="btn btn-sm btn-primary" type="button">Search</button>
+                        <button ng-click="searchProductByName()" class="btn btn-sm btn-primary" type="button">Search</button>
                       </div>
                     </div>
                   </div>
@@ -281,21 +287,21 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>01</td>
-                          <td>Hoa Hồng</td>
-                          <td>Hoa hồng bó nhỏ</td>
-                          <td>100</td>
-                          <td>200.000</td>
+                        <tr ng-repeat="sp in pager.sps">
+                          <td>{{sp.id}}</td>
+                          <td>{{sp.category.id}}</td>
+                          <td>{{sp.name}}</td>
+                          <td>{{sp.quantity}}</td>
+                          <td>{{sp.price | number: 0}} VNĐ</td>
                           <td> <div class="form-check">
                             <label class="toggle-switch">
-                              <input type="checkbox" checked>
+                              <input type="checkbox" checked >
                               <span class="toggle-slider round"></span>
                             </label>                      
                           </div></td>
-                          <td>anh.jpg</td>
+                          <td>{{sp.image}}</td>
                           <td>
-                            <button type="button" class="btn btn-inverse-primary btn-rounded btn-icon">
+                            <button ng-click="edit(sp.id)" type="button" class="btn btn-inverse-primary btn-rounded btn-icon">
                               <i class=" typcn typcn-pen"></i>
                             </button></td>
                         </tr>
@@ -305,16 +311,25 @@
                   </div>
                   <nav aria-label="Page navigation example" >
                     <ul class="pagination  justify-content-center">
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
+                      <li class="page-item" ng-click="pager.first()">
+                        <a class="page-link"  aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
                         </a>
                       </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
+                       <li class="page-item" ng-click="pager.prev()">
+                        <a class="page-link"  aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link"  >{{pager.page + 1}} of {{pager.count}}</a></li>
+                     
+                      <li class="page-item" ng-click="pager.next()">
+                        <a class="page-link"  aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item" ng-click="pager.last()">
+                        <a class="page-link"  aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
                         </a>
                       </li>
@@ -369,6 +384,7 @@
   <script src="../_admin/js/typeahead.js"></script>
   <script src="../_admin/js/select2.js"></script>
   <!-- End custom js for this page-->
+  <script src="/js/management/product.js"></script>
 </body>
 
 </html>

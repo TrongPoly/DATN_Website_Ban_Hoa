@@ -45,7 +45,7 @@ public class AccountController {
 	public String formRegis() {
 		return "User/register";
 	}
-
+	
 	@GetMapping("/login/success")
 	public String doLogin() {
 		if (session.getSession("user").getRole().getRoleName().equals("Admin")) {

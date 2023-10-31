@@ -1,12 +1,14 @@
 package com.fpoly.serviceImpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fpoly.model.Category;
 import com.fpoly.model.Product;
+
 import com.fpoly.repository.ProductRepository;
 import com.fpoly.service.ProductService;
 
@@ -33,6 +35,15 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void saveProduct(Product product) {
 		productRepository.save(product);
+	}
+	@Override
+	public List<Product> findAllByCategory(String CategoryName) {
+		return productRepository.findAll().stream().filter(sv -> sv.getCategory().getName().equals(CategoryName))
+				.collect(Collectors.toList());
+	}
+	@Override
+	public List<Product> searchByName(String keyword) {
+		return productRepository.findByNameContaining(keyword);
 	}
 
 }

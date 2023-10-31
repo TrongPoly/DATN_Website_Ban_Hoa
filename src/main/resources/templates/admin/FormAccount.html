@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <!-- Required meta tags -->
+    <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Form Account</title>
-<!-- base:css -->
-  <link rel="stylesheet" href="	../admin/vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="../admin/vendors/css/vendor.bundle.base.css">
+  <title>Form Category</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="	../_admin/vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="../_admin/vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- plugin css for this page -->
-  <link rel="stylesheet" href="../admin/vendors/select2/select2.min.css">
-  <link rel="stylesheet" href="../admin/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+  <link rel="stylesheet" href="../_admin/vendors/select2/select2.min.css">
+  <link rel="stylesheet" href="../_admin/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../admin/css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="../_admin/css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../admin/images/favicon.png"/>
+  <link rel="shortcut icon" href="../_admin/images/favicon.png"/>
 
 </head>
-<body>
+<body ng-app="AdminTaiKhoanApp" ng-controller="AdminTaiKhoanCtrl">
   <div class="container-scroller">
     <!-- partial:../admin/partials/_navbar.html -->
     <nav th:replace="~{fragment/_adminHeader.html::adminHeader}"></nav>
@@ -274,22 +274,14 @@
                         <tr>
                           <th>ID</th>
                           <th>Email</th>
-                          <th>Phone</th>
-                          <th>Fullname</th>
-                          <th>Gender</th>
-                          <th>Role</th>
-                          <th>Active</th>
-                          <th>Action</th>
+						  <th>Role</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>USE01</td>
-                          <td>Chamntnpc03156@gmail.com</td>
-                          <td>0789516590</td>
-                          <td>Nguyễn Thị Ngọc Chăm</td>
-                          <td>Nữ</td>
-                          <td>User</td>
+                        <tr ng-repeat=" acc in pager.items">
+                          <td>{{acc.email}}</td>
+                          <td>{{acc.password}}</td>
+                          <td>{{acc.role}}</td>
                           <td> <label class="toggle-switch">
                             <input type="checkbox" checked>
                             <span class="toggle-slider round"></span>
@@ -348,25 +340,26 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-    <!-- container-scroller -->
+  <!-- container-scroller -->
   <!-- base:js -->
-  <script src="../admin/vendors/js/vendor.bundle.base.js"></script>
+  <script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- inject:js -->
-  <script src="../admin/js/off-canvas.js"></script>
-  <script src="../admin/js/hoverable-collapse.js"></script>
-  <script src="../admin/js/template.js"></script>
-  <script src="../admin/js/settings.js"></script>
-  <script src="../admin/js/todolist.js"></script>
+  <script src="../_admin/js/off-canvas.js"></script>
+  <script src="../_admin/js/hoverable-collapse.js"></script>
+  <script src="../_admin/js/template.js"></script>
+  <script src="../_admin/js/settings.js"></script>
+  <script src="../_admin/js/todolist.js"></script>
   <!-- endinject -->
   <!-- plugin js for this page -->
-  <script src="../admin/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-  <script src="../admin/vendors/select2/select2.min.js"></script>
+  <script src="../_admin/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+  <script src="../_admin/vendors/select2/select2.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
-  <script src="../admin/js/file-upload.js"></script>
-  <script src="../admin/js/typeahead.js"></script>
-  <script src="../admin/js/select2.js"></script>
+  <script src="../_admin/js/file-upload.js"></script>
+  <script src="../_admin/js/typeahead.js"></script>
+  <script src="../_admin/js/select2.js"></script>
+  <script th:src="@{/js/management/account.js}"></script>
   <!-- End custom js for this page-->
 </body>
 

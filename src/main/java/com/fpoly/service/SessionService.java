@@ -8,4 +8,5 @@ public interface SessionService {
 	Account getSession(String key);
 
 	void removeSession(String key);
+
 }
