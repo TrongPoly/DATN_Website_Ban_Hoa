@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/checkout")
 public class CheckoutController {
-	@GetMapping("")
+	@GetMapping("/index")
 	public String checkout() {
+		return "checkout";
+	}
+	@GetMapping("/invalid")
+	public String invalidCheckout() {
 		return "checkout";
 	}
 }
