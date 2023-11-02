@@ -95,7 +95,6 @@ public class PaymentRestController {
 //	        String vnp_SecureHash = Config.Sha256(Config.secretKey);
 		queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
 		String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
-		System.out.println(paymentUrl);
 		PaymentDTO paymentDTO = new PaymentDTO();
 		paymentDTO.setMessage("Success");
 		paymentDTO.setURL(paymentUrl);

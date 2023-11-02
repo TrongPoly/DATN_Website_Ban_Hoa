@@ -43,7 +43,7 @@ public class AuthConfig {
 				String password = userInfo.getPassword();
 				String roles = userInfo.getRole().getRoleName();
 				Boolean active = userInfo.getActive();
-				sessionService.setSession("user", userInfo);
+				sessionService.setSession("user", userInfo, 300);
 				return User.withUsername(username).password(pe.encode(password)).roles(roles).accountExpired(!active)
 						.build();
 			}
@@ -73,7 +73,7 @@ public class AuthConfig {
 	            .formLogin()
 	                .loginPage("/auth/login")
 	                .loginProcessingUrl("/login")
-	                .defaultSuccessUrl("/auth/login/success", false)
+	                .defaultSuccessUrl("/auth/login/success", true)
 	                .failureHandler(customAuthenticationFailureHandler())
 	                .and()
 	            .logout()

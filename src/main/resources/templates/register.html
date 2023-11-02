@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>PolluxUI Admin</title>
+<title>Daisy register</title>
 <!-- base:css -->
 <link rel="stylesheet" href="../_admin/vendors/typicons/typicons.css">
 <link rel="stylesheet"
@@ -66,14 +66,13 @@
 								<div class="form-group">
 									<select class="form-control form-control-lg"
 										ng-model="customer.gender" id="exampleFormControlSelect2">
-										<option id = "gender" value=true>Male</option>
-										<option id="gender" value=false>Female</option>
+										<option id = "gender" value=true>Nam</option>
+										<option id="gender" value=false>Nữ</option>
 									</select>
 								</div>
 								<div class="input-group">
 									<input type="password" class="form-control form-control-lg"
-										ng-model="account.password" placeholder="Mật khẩu"
-										aria-label="Password">
+										ng-model="account.password" placeholder="Mật khẩu">
 									<div class="input-group-append">
 										<button class="btn btn-sm btn-primary" type="button"
 											id="togglePassword">
@@ -88,8 +87,8 @@
 										UP</button>
 								</div>
 								<div class="text-center mt-4 font-weight-light">
-									Already have an account? <a href="/auth/login"
-										class="text-primary">Login</a>
+									Bạn đã có tài khoản? <a href="/auth/login"
+										class="text-primary">Đăng nhập</a>
 								</div>
 							</form>
 						</div>
@@ -100,23 +99,7 @@
 		</div>
 		<!-- page-body-wrapper ends -->
 	</div>
-	<script>
-		document
-				.getElementById("togglePassword")
-				.addEventListener(
-						"click",
-						function() {
-							var passwordField = document
-									.getElementById("exampleInputPassword1");
-							if (passwordField.type === "password") {
-								passwordField.type = "text";
-								document.getElementById("togglePassword").innerHTML = '<i class="mdi mdi-eye-off" aria-hidden="true"></i>';
-							} else {
-								passwordField.type = "password";
-								document.getElementById("togglePassword").innerHTML = '<i class="mdi mdi-eye" aria-hidden="true"></i>';
-							}
-						});
-	</script>
+
 
 	<!-- container-scroller -->
 	<!-- base:js -->

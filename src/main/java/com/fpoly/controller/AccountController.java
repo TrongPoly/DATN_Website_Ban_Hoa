@@ -41,11 +41,6 @@ public class AccountController {
 		return "register";
 	}
 
-	@GetMapping("/register/form")
-	public String formRegis() {
-		return "User/register";
-	}
-
 	@GetMapping("/login/success")
 	public String doLogin() {
 		if (session.getSession("user").getRole().getRoleName().equals("Admin")) {
@@ -77,5 +72,18 @@ public class AccountController {
 	@RequestMapping("/verify_email")
 	public String verifyEmail() {
 		return "verifyEmail";
+	}
+	@RequestMapping("/confirm_otp")
+	public String confirmOtp() {
+		return "confirm_otp";
+	}
+	@RequestMapping("/changePassword")
+	public String changePassword() {
+		return "changePassword";
+	}
+
+	@RequestMapping("/success_change_pw")
+	public String successChangePassword() {
+		return "login";
 	}
 }

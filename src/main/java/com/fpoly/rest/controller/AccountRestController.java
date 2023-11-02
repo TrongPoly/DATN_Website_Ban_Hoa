@@ -1,8 +1,6 @@
 package com.fpoly.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,10 +67,65 @@ public class AccountRestController {
 		try {
 			String url = "http://localhost:8080/api/account/verify/" + email;
 			mailService.activeAccountEmail(email, customer.getFullName(), url);
-			System.out.println(email);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/auth/verify")
+	public ResponseEntity<String> requestVerifyEmail(@RequestParam("email") String email) {
+		try {
+			String url = "http://localhost:8080/api/account/verify/" + email;
+			mailService.activeAccountEmail(email, null, url);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/auth/fogotPassword/{email}")
+	public ResponseEntity<String> fogotPw(@PathVariable("email") String email) {
+		if (accountService.findByid(email) == null) {
+			return ResponseEntity.notFound().build();
+		}
+		int randomNumber = (int) (Math.random() * 9000) + 1000;
+		String otp = String.valueOf(randomNumber);
+		sessionService.setSession("otp", otp, 2);
+		sessionService.setSession("email", email, 10);
+		try {
+			mailService.sendOTP(email, sessionService.getStringSession("otp"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/auth/confirm_otp")
+	public ResponseEntity<String> confirmOtp(@RequestParam("otp") String otp) {
+		if (otp.equals(sessionService.getStringSession("otp"))) {
+			sessionService.setSession("checkConfirmOTP", "1", 10);
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.badRequest().build();
+	}
+
+	@GetMapping("/auth/changePassword")
+	public ResponseEntity<String> changePassword(@RequestParam("newPw") String newPassword) {
+		if (sessionService.getStringSession("checkConfirmOTP") == null) {
+			return ResponseEntity.badRequest().build();
+		}
+		try {
+			String email = sessionService.getStringSession("email");
+			Account account = accountService.findByid(email);
+			account.setPassword(newPassword);
+			accountService.saveAccount(account);
+			sessionService.removeSession("checkConfirmOTP");
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok().build();
 	}
