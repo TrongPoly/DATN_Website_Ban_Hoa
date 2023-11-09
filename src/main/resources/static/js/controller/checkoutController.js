@@ -41,7 +41,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 			let datePU = document.getElementById("datePickUp").value;
 			console.log(datePU);
 			if (datePU == "") {
-				location.href = location.origin+ "checkout/invalid";
+				location.href = location.origin+ "/checkout/invalid";
 			} else {
 				sessionStorage.removeItem("pickUpDate")
 				sessionStorage.setItem("pickUpDate", datePU);
