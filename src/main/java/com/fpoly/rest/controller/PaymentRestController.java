@@ -100,6 +100,5 @@ public class PaymentRestController {
 		paymentDTO.setURL(paymentUrl);
 		paymentDTO.setStatus("ok");
 		return ResponseEntity.status(HttpStatus.OK).body(paymentDTO);
-
 	}
 }
