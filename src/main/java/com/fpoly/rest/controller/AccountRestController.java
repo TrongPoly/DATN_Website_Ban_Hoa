@@ -76,6 +76,9 @@ public class AccountRestController {
 
 	@GetMapping("/auth/verify")
 	public ResponseEntity<String> requestVerifyEmail(@RequestParam("email") String email) {
+		if (accountService.findByid(email) == null) {
+			return ResponseEntity.notFound().build();
+		}
 		try {
 			String url = "http://localhost:8080/api/account/verify/" + email;
 			mailService.activeAccountEmail(email, null, url);

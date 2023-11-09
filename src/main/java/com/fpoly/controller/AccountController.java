@@ -1,6 +1,7 @@
 package com.fpoly.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fpoly.service.CustomerService;
 import com.fpoly.service.SessionService;
+import com.fpoly.service.UserInfoService;
 
 import jakarta.servlet.ServletContext;
 
@@ -43,9 +45,6 @@ public class AccountController {
 
 	@GetMapping("/login/success")
 	public String doLogin() {
-		if (session.getSession("user").getRole().getRoleName().equals("Admin")) {
-			return "redirect:/admin/product";
-		}
 		return "redirect:/index";
 	}
 
@@ -85,5 +84,13 @@ public class AccountController {
 	@RequestMapping("/success_change_pw")
 	public String successChangePassword() {
 		return "login";
+	}
+	@Autowired
+	UserInfoService userInfoService;
+	
+	@RequestMapping("/oauth2/login/success")
+	public String success(OAuth2AuthenticationToken oauth2) {
+		userInfoService.loginFormOAuth2(oauth2);
+		return "forward:/auth/login/success";
 	}
 }

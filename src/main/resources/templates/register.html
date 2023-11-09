@@ -35,6 +35,8 @@
 
 <body ng-app="myApp">
 	<div class="container-scroller" ng-controller="registerCtrl">
+		<div ng-show="isLoading" class="circle-loader"
+			style="z-index: 9999; position: fixed; top: 100px; left: 600px; background: rgba(255, 255, 255, 0.7); display: flex;"></div>
 		<ul th:insert="~{/fragment/_toast}"></ul>
 		<div class="container-fluid page-body-wrapper full-page-wrapper">
 			<div class="content-wrapper d-flex align-items-center auth px-0">
@@ -65,20 +67,15 @@
 								</div>
 								<div class="form-group">
 									<select class="form-control form-control-lg"
-										ng-model="customer.gender" id="exampleFormControlSelect2">
-										<option id = "gender" value=true>Nam</option>
+										ng-model="customer.gender" id="exampleFormControlSelect">
+										<option id="gender" value=true>Nam</option>
 										<option id="gender" value=false>Nữ</option>
 									</select>
 								</div>
 								<div class="input-group">
 									<input type="password" class="form-control form-control-lg"
 										ng-model="account.password" placeholder="Mật khẩu">
-									<div class="input-group-append">
-										<button class="btn btn-sm btn-primary" type="button"
-											id="togglePassword">
-											<i class="mdi mdi-eye" aria-hidden="true"></i>
-										</button>
-									</div>
+
 								</div>
 
 								<div class="mt-3">
@@ -87,8 +84,8 @@
 										UP</button>
 								</div>
 								<div class="text-center mt-4 font-weight-light">
-									Bạn đã có tài khoản? <a href="/auth/login"
-										class="text-primary">Đăng nhập</a>
+									Bạn đã có tài khoản? <a href="/auth/login" class="text-primary">Đăng
+										nhập</a>
 								</div>
 							</form>
 						</div>

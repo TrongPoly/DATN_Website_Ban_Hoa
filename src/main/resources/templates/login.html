@@ -79,6 +79,8 @@
 		</div>
 	</div>
 	<div class="container-scroller">
+		<div ng-show="isLoading" class="circle-loader"
+			style="z-index: 9999; position: fixed; top: 100px; left: 600px; background: rgba(255, 255, 255, 0.7); display: flex;"></div>
 		<div class="container-fluid page-body-wrapper full-page-wrapper">
 			<div class="content-wrapper d-flex align-items-center auth px-0">
 				<div class="row w-100 mx-9">
@@ -87,8 +89,8 @@
 							<div class="brand-logo">
 								<img src="../_admin/images/logodaisy1.png" alt="logo">
 							</div>
-							<h4>Hello, welcome to Daisy</h4>
-							<h6 class="font-weight-light">Sign in to continue.</h6>
+							<h4>Chào mừng đến với Shop hoa Daisy</h4>
+							<h6 class="font-weight-light">Đăng nhập để tiếp tục</h6>
 							<form class="pt-3" action="/login" method="post">
 								<div class="form-group">
 									<input type="email" name="username"
@@ -119,6 +121,13 @@
 									Bạn chưa có tài khoản? <a href="/auth/register"
 										class="text-primary">Tạo tài khoản</a>
 								</div>
+								<div class="text-center mt-4 font-weight-light">
+									Hoặc <br> <a href="/oauth2/authorization/google"
+										style="font-size: 50px; margin-right: 10px"> <i
+										class="fab fa-google-plus"></i>
+									</a>
+								</div>
+
 							</form>
 						</div>
 					</div>

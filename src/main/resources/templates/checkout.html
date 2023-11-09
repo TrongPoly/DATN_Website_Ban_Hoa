@@ -22,8 +22,10 @@
 <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
 
 <!-- Slick -->
-<link rel="stylesheet" type="text/css" href="../assets/css/slick.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/css/slick-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="../assets/css/slick.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../assets/css/slick-theme.css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
@@ -74,13 +76,14 @@ https://templatemo.com/tm-559-zay-shop
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="firstName">Họ và Tên</label> <input type="text"
-								class="form-control" id="firstName" placeholder=""
-								disabled="disabled" ng-value="customer.fullName" required>
+								class="form-control" id="fullName" placeholder=""
+								ng-disabled="isDisabled" ng-value="customer.fullName" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="lastName">Số điện thoại</label> <input type="text"
-								class="form-control" id="lastName" placeholder=""
-								disabled="disabled" ng-value="customer.phoneNumber" required>
+								class="form-control" id="phoneNumber" placeholder=""
+								ng-disabled="isDisabled" ng-value="customer.phoneNumber"
+								required>
 						</div>
 					</div>
 
@@ -102,21 +105,29 @@ https://templatemo.com/tm-559-zay-shop
 					</div>
 					<div class="list-group-item d-flex lh-condensed p-3 mt-3">
 						<div class="form-check" style="margin-right: 20px">
-							<input class="form-check-input" type="radio" value="Khi nhận hàng" ng-model="methodPayment"
+							<input class="form-check-input" type="radio"
+								value="Khi nhận hàng" ng-model="methodPayment"
 								name="flexRadioDefault" id="flexRadioDefault1"> <label
 								class="form-check-label" for="flexRadioDefault1"> Khi
 								nhận hàng </label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" value="Chuyển khoản" ng-model="methodPayment"
-								name="flexRadioDefault" id="flexRadioDefault2" checked>
-							<label class="form-check-label" for="flexRadioDefault2">
-								Chuyển khoản </label>
+							<input class="form-check-input" type="radio" value="Chuyển khoản"
+								ng-model="methodPayment" name="flexRadioDefault"
+								id="flexRadioDefault2" checked> <label
+								class="form-check-label" for="flexRadioDefault2"> Chuyển
+								khoản </label>
 						</div>
 					</div>
 
 
 				</div>
+				<button ng-show="isDisabled" ng-click="toggleDisabled()"
+					class="w-100 btn btn-info text-white btn-lg mt-3" type="submit">Chỉnh
+					sửa thông tin</button>
+				<button ng-hide="isDisabled" ng-click="toggleDisabled()"
+					class="w-100 btn btn-success text-white btn-lg mt-3" type="submit">Hoàn
+					tất</button>
 				<button ng-if="totalOrder>0"
 					class="btn btn-warning text-white btn-lg btn-block w-100 mt-3"
 					type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Đặt

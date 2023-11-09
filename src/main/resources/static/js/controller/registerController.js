@@ -3,6 +3,7 @@ app.controller('registerCtrl', ['$scope', 'ToastService', '$http',
 		$scope.account = {};
 		$scope.customer = {};
 		$scope.toasts = [];
+		$scope.isLoading = false;
 		var origin = location.origin;
 
 		$scope.register = function() {
@@ -13,6 +14,7 @@ app.controller('registerCtrl', ['$scope', 'ToastService', '$http',
 				ToastService.createToast("warning", "Vui lòng điền đầy đủ thông tin!", $scope.toasts)
 				return;
 			}
+			$scope.isLoading = true;
 			var url = origin + "/api";
 			let email = $scope.account.email;
 			let password = $scope.account.password;
@@ -24,7 +26,7 @@ app.controller('registerCtrl', ['$scope', 'ToastService', '$http',
 				})
 				.catch((error) => {
 					ToastService.createToast("warning", "Email đã được sử dụng!", $scope.toasts)
-					console.log(error.status);
+					$scope.isLoading = false;
 				});
 		}
 	}]);

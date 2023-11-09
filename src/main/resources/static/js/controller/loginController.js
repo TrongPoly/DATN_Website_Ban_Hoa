@@ -3,6 +3,7 @@ app.controller('loginCtrl',
 		$scope.toasts = [];
 		$scope.newPassword = "";
 		$scope.confirmPassword = "";
+		$scope.isLoading = false;
 		var origin = location.origin;
 		if (location.href === origin + "/auth/login?error") {
 			ToastService.createToast("error", "Sai tài khoản hoặc mật khẩu", $scope.toasts);
@@ -26,6 +27,7 @@ app.controller('loginCtrl',
 				ToastService.createToast("warning", "Vui lòng nhập email", $scope.toasts);
 				return;
 			}
+			$scope.isLoading = true;
 			var url = origin + `/api/auth/fogotPassword/${email}`
 			$http.get(url)
 				.then((resp) => {
@@ -33,6 +35,7 @@ app.controller('loginCtrl',
 				})
 				.catch((error) => {
 					ToastService.createToast("error", "Email không tồn tại", $scope.toasts);
+					$scope.isLoading = false;
 				});
 		}
 		$scope.confirmOtp = function() {
@@ -72,12 +75,18 @@ app.controller('loginCtrl',
 		$scope.verifyAccount = function() {
 			let email = document.getElementById("emailVerify").value;
 			var url = origin + `/api/auth/verify?email=${email}`
+			if (email == "") {
+				ToastService.createToast("warning", "Vui lòng nhập email", $scope.toasts);
+				return;
+			}
+			$scope.isLoading = true;
 			$http.get(url)
 				.then((resp) => {
-					location.href = "http://localhost:8080/auth/verify_email";
+					ToastService.createToast("success", "Đã gửi yêu cầu xác minh", $scope.toasts);
 				})
 				.catch((error) => {
-					ToastService.createToast("error", "Yêu cầu đã hết hạn, vui lòng tạo yêu cầu mới", $scope.toasts);
+					ToastService.createToast("error", "Email không tồn tại", $scope.toasts);
+					$scope.isLoading = false;
 				});
 		}
 	});

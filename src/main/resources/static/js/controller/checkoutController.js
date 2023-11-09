@@ -5,7 +5,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 		$scope.totalOrder = 0;
 		$scope.customer = {};
 		$scope.methodPayment = "Chuyển khoản";
-
+		$scope.isDisabled = true;
 		if (location.href == "http://localhost:8080/checkout/invalid") {
 			ToastService.createToast("warning", "Vui lòng chọn  ngày lấy hoa", $scope.toasts);
 		}
@@ -62,5 +62,17 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 				}
 			}
 		}
+
+		$scope.toggleDisabled = function() {
+			$scope.isDisabled = !$scope.isDisabled;
+			let fullName = document.getElementById("fullName").value;
+			let phoneNumber= document.getElementById("phoneNumber").value;
+			$scope.customer.fullName = fullName;
+			$scope.customer.phoneNumber = phoneNumber;			
+			CustomerService.updateCustomer($scope.customer);
+			console.log($scope.isDisabled);
+			console.log($scope.customer);
+		}
+		console.log($scope.isDisabled);
 		$scope.get();
 	}]);
