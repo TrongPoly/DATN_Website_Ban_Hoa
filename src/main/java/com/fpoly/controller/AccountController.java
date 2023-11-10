@@ -1,13 +1,19 @@
 package com.fpoly.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fpoly.model.Account;
+import com.fpoly.model.Customer;
+import com.fpoly.service.AccountService;
 import com.fpoly.service.CustomerService;
+import com.fpoly.service.RoleService;
 import com.fpoly.service.SessionService;
+//import com.fpoly.service.UserInfoService;
 
 import jakarta.servlet.ServletContext;
 
@@ -17,40 +23,41 @@ public class AccountController {
 	@Autowired
 	SessionService session;
 	@Autowired
-	CustomerService customer;
-	@Autowired
 	ServletContext context;
+	@Autowired
+	AccountService accountService;
+	@Autowired
+	SessionService sessionService;
+	@Autowired
+	RoleService roleService;
+	@Autowired
+	CustomerService customerService;
+	
 
-	//Xác minh tài khoản thành công
+	// Xác minh tài khoản thành công
 	@GetMapping("/success_verify")
 	public String success_verify() {
 		return "login";
 	}
-	//Tài khoản đã được xác minh trước đó
+
+	// Tài khoản đã được xác minh trước đó
 	@GetMapping("/determined")
 	public String determined() {
 		return "login";
 	}
-	
+
 	@GetMapping("/login")
 	public String formLogin() {
 		return "login";
 	}
+
 	@GetMapping("/register")
 	public String formRegister() {
 		return "register";
 	}
 
-	@GetMapping("/register/form")
-	public String formRegis() {
-		return "User/register";
-	}
-	
 	@GetMapping("/login/success")
 	public String doLogin() {
-		if (session.getSession("user").getRole().getRoleName().equals("Admin")) {
-			return "redirect:/admin/product";
-		}
 		return "redirect:/index";
 	}
 
@@ -74,8 +81,42 @@ public class AccountController {
 	public String denied() {
 		return "error_page/error-500";
 	}
+
 	@RequestMapping("/verify_email")
 	public String verifyEmail() {
 		return "verifyEmail";
+	}
+
+	@RequestMapping("/confirm_otp")
+	public String confirmOtp() {
+		return "confirm_otp";
+	}
+
+	@RequestMapping("/changePassword")
+	public String changePassword() {
+		return "changePassword";
+	}
+
+	@RequestMapping("/success_change_pw")
+	public String successChangePassword() {
+		return "login";
+	}
+
+	@RequestMapping("/oauth2/login/success")
+	public String success(OAuth2AuthenticationToken oauth2) {
+		String email = oauth2.getPrincipal().getAttribute("email");
+		Account account = accountService.findByid(email);
+		if (account != null) {
+			sessionService.setSession("user", account, 300);
+		} else {
+			String password = Long.toHexString(System.currentTimeMillis());
+			Account account2 = new Account(email, password, roleService.findById(2), true);
+			accountService.saveAccount(account2);
+			String name = oauth2.getPrincipal().getAttribute("name");
+			Customer customer = new Customer(name, account2, "0123456789", true);
+			customerService.saveCustomer(customer);
+			sessionService.setSession("user", account2, 300);
+		}
+		return "forward:/auth/login/success";
 	}
 }

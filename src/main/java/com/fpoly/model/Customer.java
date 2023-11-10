@@ -31,7 +31,23 @@ public class Customer {
     @Column(name = "gender", nullable = false)
     private Boolean gender = false;
 
-    public Integer getId() {
+    
+    
+    public Customer() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Customer(@Size(max = 255) @NotNull String fullName, @NotNull Account email,
+			@Size(max = 255) @NotNull String phoneNumber, @NotNull Boolean gender) {
+		super();
+		this.fullName = fullName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.gender = gender;
+	}
+
+	public Integer getId() {
         return id;
     }
 

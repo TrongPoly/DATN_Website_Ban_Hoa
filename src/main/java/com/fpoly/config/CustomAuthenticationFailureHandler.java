@@ -17,10 +17,10 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		if (exception instanceof AccountExpiredException) {
-            response.sendRedirect("/auth/blocked");
-        } else {
-            response.sendRedirect("/auth/login?error");
-        }
+			response.sendRedirect("/auth/blocked");
+		} else {
+			response.sendRedirect("/auth/login?error");
+		}
 	}
 
 

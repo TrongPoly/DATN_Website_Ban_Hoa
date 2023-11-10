@@ -43,7 +43,7 @@ public class AuthConfig {
 				String password = userInfo.getPassword();
 				String roles = userInfo.getRole().getRoleName();
 				Boolean active = userInfo.getActive();
-				sessionService.setSession("user", userInfo);
+				sessionService.setSession("user", userInfo, 300);
 				return User.withUsername(username).password(pe.encode(password)).roles(roles).accountExpired(!active)
 						.build();
 			}
@@ -54,10 +54,9 @@ public class AuthConfig {
 	    return new CustomAuthenticationFailureHandler();
 	}
 
-
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	    return http.csrf().disable()
+	     http.csrf().disable()
 	            .authorizeHttpRequests()
 	                .requestMatchers("/admin/**").hasRole("Admin")
 	                .and()
@@ -73,14 +72,19 @@ public class AuthConfig {
 	            .formLogin()
 	                .loginPage("/auth/login")
 	                .loginProcessingUrl("/login")
-	                .defaultSuccessUrl("/auth/login/success", false)
+	                .defaultSuccessUrl("/auth/login/success", true)
 	                .failureHandler(customAuthenticationFailureHandler())
 	                .and()
 	            .logout()
 	                .logoutUrl("/logoff")
 	                .logoutSuccessUrl("/auth/logoff/success")
 	                .and()
-	            .build();
+	                .oauth2Login()
+					.loginPage("/auth/login/form")
+					.defaultSuccessUrl("/auth/oauth2/login/success", true)
+					.failureUrl("/auth/login/error")
+					.authorizationEndpoint().baseUri("/oauth2/authorization");
+	     return http.build();
 	}
 
 

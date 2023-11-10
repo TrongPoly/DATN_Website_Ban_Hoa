@@ -3,12 +3,15 @@ package com.fpoly.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/payment")
 public class PaymentController {
-	@GetMapping("/success")
-	public String paySuccess() {
+	@GetMapping("payment_status")
+	public String paySuccess(@RequestParam("vnp_TransactionStatus") String status) {
+		if (status != "00") {
+			return "redirect:/index";
+		}
 		return "orderSuccess";
 	}
 }

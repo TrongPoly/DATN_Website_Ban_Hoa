@@ -6,30 +6,81 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>PolluxUI Admin</title>
+<title>Daisy login</title>
 <!-- base:css -->
 <link rel="stylesheet" href="../_admin/vendors/typicons/typicons.css">
 <link rel="stylesheet"
 	href="../_admin/vendors/css/vendor.bundle.base.css">
-<!-- endinject -->
-<!-- plugin css for this page -->
-<!-- End plugin css for this page -->
-<!-- inject:css -->
+<!-- boostrap -->
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+
 <link rel="stylesheet"
 	href="../_admin/css/vertical-layout-light/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="../_admin/images/favicon.png" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-	<link rel="stylesheet" href="../css/style.css">
-	<link rel="stylesheet"
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
 <body ng-app="myApp" ng-controller="loginCtrl">
 	<ul th:insert="~{/fragment/_toast}"></ul>
-
+	<!-- Modal fogot password -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Quên mật khẩu</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="email" id="emailFogotPw" class="form-control"
+						placeholder="Nhập email đăng nhập">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Trở lại</button>
+					<button type="button" ng-click="fogotPassword()"
+						class="btn btn-primary">Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal verify email -->
+	<div class="modal fade" id="verifyModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xác minh tài
+						khoản</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="email" id="emailVerify" class="form-control"
+						placeholder="Nhập email">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Trở lại</button>
+					<button type="button" ng-click="verifyAccount()"
+						class="btn btn-primary">Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container-scroller">
+		<div ng-show="isLoading" class="circle-loader"
+			style="z-index: 9999; position: fixed; top: 100px; left: 600px; background: rgba(255, 255, 255, 0.7); display: flex;"></div>
 		<div class="container-fluid page-body-wrapper full-page-wrapper">
 			<div class="content-wrapper d-flex align-items-center auth px-0">
 				<div class="row w-100 mx-9">
@@ -38,8 +89,8 @@
 							<div class="brand-logo">
 								<img src="../_admin/images/logodaisy1.png" alt="logo">
 							</div>
-							<h4>Hello, welcome to Daisy</h4>
-							<h6 class="font-weight-light">Sign in to continue.</h6>
+							<h4>Chào mừng đến với Shop hoa Daisy</h4>
+							<h6 class="font-weight-light">Đăng nhập để tiếp tục</h6>
 							<form class="pt-3" action="/login" method="post">
 								<div class="form-group">
 									<input type="email" name="username"
@@ -58,18 +109,29 @@
 								<div
 									class="my-2 d-flex justify-content-between align-items-center">
 									<div class="form-check">
-										<label class="form-check-label text-muted"> <input
-											type="checkbox" class="form-check-input"> Keep me
-											signed in
-										</label>
+										<label class="form-check-label text-muted"><a href="#"
+											class="auth-link text-black" data-toggle="modal"
+											data-target="#verifyModal">Xác minh tài khoản?</a> </label>
 									</div>
-									<a href="#" ng-click="check()" class="auth-link text-black">Forgot password?</a>
+									<a href="#" class="auth-link text-black" data-toggle="modal"
+										data-target="#exampleModal">Quên mật khẩu?</a>
 								</div>
 
 								<div class="text-center mt-4 font-weight-light">
-									Don't have an account? <a href="/register/form"
-										class="text-primary">Create</a>
+									Bạn chưa có tài khoản? <a href="/auth/register"
+										class="text-primary">Tạo tài khoản</a>
 								</div>
+								<div class="text-center mt-4 font-weight-light">
+									Hoặc <br> <a href="/oauth2/authorization/google"
+										style="font-size: 50px; margin-right: 10px"> <i
+										class="fab fa-google-plus"></i>
+									</a>
+									 <a href="/oauth2/authorization/facebook"
+										style="font-size: 50px; margin-right: 10px"> <i
+										class="fab fa-facebook"></i>
+									</a>
+								</div>
+
 							</form>
 						</div>
 					</div>

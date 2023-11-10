@@ -4,13 +4,18 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 		$scope.toasts = [];
 		$scope.total = 0;
 		$scope.user = {};
+
+		if (location.href == location.origin + "/cart/refresh") {
+			ToastService.createToast("info", "Số lượng sản phẩm vừa được cập nhật!", $scope.toasts)
+		}
+
 		$scope.get = function() {
 			$scope.carts = CartService.getCart();
 			for (let i = 0; i < $scope.carts.length; i++) {
 				ProductService.getOneProduct($scope.carts[i].id)
 					.then((resp) => {
 						CartService.resetQuantity($scope.carts[i], resp.data.quantity);
-						if(resp.data.quantity==0){
+						if (resp.data.quantity == 0) {
 							$scope.remove($scope.carts[i]);
 						}
 					})
@@ -26,8 +31,7 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 				try {
 					const resp = await ProductService.getOneProduct($scope.carts[i].id);
 					if ($scope.carts[i].selected === true && $scope.carts[i].quant > resp.data.quantity) {
-						alert("Số lượng sản phẩm còn lại không đủ! Trang sẽ tải lại để cập nhật?");
-						location.reload();
+						location.href = location.origin + "/cart/refresh";
 					}
 				} catch (error) {
 					console.log(error.status);

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +24,11 @@ public class CustomerRestController {
 	@GetMapping("/{email}")
 	public ResponseEntity<Customer> getOne(@PathVariable("email") String email) {
 		Customer customer = customerService.findByEmail(accountService.findByid(email));
+		return ResponseEntity.ok(customer);
+	}
+	@PostMapping("/update")
+	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
+		customerService.saveCustomer(customer);
 		return ResponseEntity.ok(customer);
 	}
 }
