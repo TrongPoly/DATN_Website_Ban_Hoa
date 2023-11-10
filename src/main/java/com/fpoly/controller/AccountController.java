@@ -115,7 +115,7 @@ public class AccountController {
 			String name = oauth2.getPrincipal().getAttribute("name");
 			Customer customer = new Customer(name, account2, "0123456789", true);
 			customerService.saveCustomer(customer);
-			sessionService.setSession("user", account, 300);
+			sessionService.setSession("user", account2, 300);
 		}
 		return "forward:/auth/login/success";
 	}
