@@ -15,4 +15,6 @@ public interface CustomerService {
 	void saveCustomer(Customer customer);
 	
 	Customer findByUser();
+	
+	List<Customer> searchByName(String keyword);
 }

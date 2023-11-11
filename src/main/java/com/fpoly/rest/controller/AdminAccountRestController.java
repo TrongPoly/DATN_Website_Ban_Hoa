@@ -28,6 +28,5 @@ public class AdminAccountRestController {
 	public ResponseEntity<List<Account>> getAll(Model model){
 		return ResponseEntity.ok(accRep.findAll());
 	}
-	
 
 }

@@ -46,5 +46,10 @@ public class CustomerServiceImpl implements CustomerService {
 	public void saveCustomer(Customer customer) {
 		customerRepository.save(customer);
 	}
+	
+	@Override
+	public List<Customer> searchByName(String keyword){
+		return customerRepository.findByFullNameContaining(keyword);
+	}
 
 }
