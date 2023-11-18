@@ -11,7 +11,6 @@ app.service('CheckoutService', function() {
 	};
 	// Lấy sản phẩm có selected = true trong cart
 	this.getSelectedProduct = function(){
-		console.log(cart);
 		for(var i = 0; i<cart.length; i++){
 			if(cart[i].selected===true){
 				order.push(cart[i]);

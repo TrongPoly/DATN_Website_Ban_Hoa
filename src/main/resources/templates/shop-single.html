@@ -44,29 +44,27 @@ https://templatemo.com/tm-559-zay-shop
 	<nav th:insert="~{fragment/_header.html::header}"></nav>
 	<!-- Close Header -->
 
-
-	<!-- Modal -->
-	<div class="modal fade bg-white" id="templatemo_search" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="w-100 pt-1 mb-5 text-right">
-				<button type="button" class="btn-close" data-bs-dismiss="modal"
-					aria-label="Close"></button>
-			</div>
-			<form action="" method="get"
-				class="modal-content modal-body border-0 p-0">
-				<div class="input-group mb-2">
-					<input type="text" class="form-control" id="inputModalSearch"
-						name="q" placeholder="Search ...">
-					<button type="submit"
-						class="input-group-text bg-success text-light">
-						<i class="fa fa-fw fa-search text-white"></i>
-					</button>
+	<!-- Buy now -->
+	<div class="modal fade" id="buyNow" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Đặt hàng ngay</h5>
 				</div>
-			</form>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Chọn số lượng sản phẩm</label> <input ng-model="quant" type="number"
+							class="form-control" min="1" max="{{product.quantity}}">
+							<label class="text-primary">Số lượng còn lại: {{product.quantity}}</lable>
+					</div>
+					<br>
+					<button class="btn btn-info" ng-click="buyNow(product)">Xác
+						nhận</button>
+				</div>
+			</div>
 		</div>
 	</div>
-
 
 
 	<!-- Open Content -->
@@ -104,10 +102,10 @@ https://templatemo.com/tm-559-zay-shop
 								<div class="row">
 									<div class="col-auto">
 										<ul class="list-inline pb-3">
-											<li class="list-inline-item">Số lượng còn lại : 
-											</li>
+											<li class="list-inline-item">Số lượng còn lại :</li>
 											<li class="list-inline-item"><span
-												class="btn btn-success btn-size">{{product.quantity >=1 ? product.quantity : 'Tạm hết hàng'}}</span></li>
+												class="btn btn-success btn-size">{{product.quantity
+													>=1 ? product.quantity : 'Tạm hết hàng'}}</span></li>
 
 										</ul>
 									</div>
@@ -127,8 +125,8 @@ https://templatemo.com/tm-559-zay-shop
 								</div>
 								<div ng-if="product.quantity>=1" class="row pb-3">
 									<div class="col d-grid">
-										<button type="submit" class="btn btn-success btn-lg"
-											name="submit" value="buy">Mua</button>
+										<a class="btn btn-success btn-lg" data-bs-toggle="modal"
+											data-bs-target="#buyNow">Mua</a>
 									</div>
 									<div class="col d-grid">
 										<a ng-click="addToCart(product)"
@@ -153,7 +151,8 @@ https://templatemo.com/tm-559-zay-shop
 			<div class="row">
 				<div ng-repeat="p in listProduct"
 					class="col-md-3 panel panel-default">
-					<img alt="not found" src="/img/{{p.image}}" ng-click="productDetails(p.id)" width="150px">
+					<img alt="not found" src="/img/{{p.image}}"
+						ng-click="productDetails(p.id)" width="150px">
 					<h4>{{p.name}}</h4>
 					<h5>{{p.price}}</h5>
 				</div>

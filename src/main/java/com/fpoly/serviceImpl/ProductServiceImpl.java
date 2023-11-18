@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fpoly.model.Category;
+import com.fpoly.model.OrderDetail;
 import com.fpoly.model.Product;
 import com.fpoly.repository.ProductRepository;
 import com.fpoly.service.ProductService;
@@ -33,6 +34,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void saveProduct(Product product) {
 		productRepository.save(product);
+	}
+
+	@Override
+	public Product findByOrderDetails(OrderDetail ordDtail) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

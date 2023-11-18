@@ -118,3 +118,13 @@
 .notifications .toast.show {
   opacity: 1;
 }
+
+ /* CSS để tăng kích thước modal */
+    .modal-dialog {
+        max-width: 800px; /* Đặt kích thước tối đa */
+        margin: 1.75rem auto;
+    }
+
+    .modal-content {
+        width: 100%; /* Chiếm toàn bộ chiều rộng của modal-dialog */
+    }

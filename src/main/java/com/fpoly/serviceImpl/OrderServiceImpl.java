@@ -3,10 +3,12 @@ package com.fpoly.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.fpoly.model.Customer;
 import com.fpoly.model.Order;
+import com.fpoly.model.OrderStatus;
 import com.fpoly.repository.OrderRepository;
 import com.fpoly.service.OrderService;
 @Service
@@ -32,6 +34,12 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public void saveOrder(Order order) {
 		orderRepository.save(order);
+	}
+
+
+	@Override
+	public List<Order> findByStatus(OrderStatus status) {
+		return orderRepository.findByStatus(status,Sort.by(Sort.Order.desc("id")));
 	}
 
 }

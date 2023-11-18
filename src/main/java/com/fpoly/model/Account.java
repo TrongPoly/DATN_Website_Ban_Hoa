@@ -25,7 +25,18 @@ public class Account {
     @Column(name = "active", nullable = false)
     private Boolean active = false;
 
-    public String getEmail() {
+    @Column(name = "locked", nullable = false)
+    private Boolean locked;
+
+    public Boolean getLocked() {
+		return locked;
+	}
+
+	public void setLocked(Boolean locked) {
+		this.locked = locked;
+	}
+
+	public String getEmail() {
         return email;
     }
 

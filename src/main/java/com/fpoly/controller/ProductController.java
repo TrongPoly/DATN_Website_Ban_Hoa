@@ -11,4 +11,8 @@ public class ProductController {
 	public String productDetails() {
 		return "shop-single";
 	}
+	@GetMapping("/refresh")
+	public String productrefresh() {
+		return "shop-single";
+	}
 }

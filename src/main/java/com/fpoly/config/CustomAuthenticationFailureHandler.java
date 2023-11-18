@@ -4,6 +4,7 @@ import java.io.IOException;
 
 
 import org.springframework.security.authentication.AccountExpiredException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
@@ -11,17 +12,17 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler{
+public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
-	@Override
-	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException exception) throws IOException, ServletException {
-		if (exception instanceof AccountExpiredException) {
-			response.sendRedirect("/auth/blocked");
-		} else {
-			response.sendRedirect("/auth/login?error");
-		}
-	}
-
-
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+            AuthenticationException exception) throws IOException, ServletException {
+        if (exception instanceof AccountExpiredException) {
+            response.sendRedirect("/auth/blocked");
+        } else if (exception instanceof LockedException) {
+            response.sendRedirect("/auth/locked");
+        } else {
+            response.sendRedirect("/auth/login?error");
+        }
+    }
 }

@@ -2,7 +2,6 @@ package com.fpoly.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
 
@@ -25,10 +24,10 @@ public class Order {
     @Column(name = "pick_up_date")
     private Instant pickUpDate;
 
-    @Size(max = 255)
-    @NotNull
-    @Column(name = "status", nullable = false)
-    private String status;
+    @ManyToOne
+    @JoinColumn(name = "status")
+    private OrderStatus status;
+
     
     @NotNull
     @Column(name = "method_payment")
@@ -58,14 +57,6 @@ public class Order {
         this.pickUpDate = pickUpDate;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -80,6 +71,14 @@ public class Order {
 
 	public void setMethodPayment(int methodPayment) {
 		this.methodPayment = methodPayment;
+	}
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
 	}
 
 }

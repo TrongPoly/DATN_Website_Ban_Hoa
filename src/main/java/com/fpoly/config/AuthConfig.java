@@ -43,49 +43,31 @@ public class AuthConfig {
 				String password = userInfo.getPassword();
 				String roles = userInfo.getRole().getRoleName();
 				Boolean active = userInfo.getActive();
+				Boolean locked = userInfo.getLocked();
 				sessionService.setSession("user", userInfo, 300);
 				return User.withUsername(username).password(pe.encode(password)).roles(roles).accountExpired(!active)
-						.build();
+						.accountLocked(locked).build();
 			}
 		};
 	}
+
 	@Bean
 	public AuthenticationFailureHandler customAuthenticationFailureHandler() {
-	    return new CustomAuthenticationFailureHandler();
+		return new CustomAuthenticationFailureHandler();
 	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	     http.csrf().disable()
-	            .authorizeHttpRequests()
-	                .requestMatchers("/admin/**").hasRole("Admin")
-	                .and()
-	                .authorizeHttpRequests()
-	                .requestMatchers("/cart/**", "/checkout/**").authenticated()
-	                .and()
-	                .authorizeHttpRequests()
-	                .anyRequest().permitAll()
-	                .and()
-	            .exceptionHandling()
-	                .accessDeniedPage("/auth/access/denied")
-	                .and()
-	            .formLogin()
-	                .loginPage("/auth/login")
-	                .loginProcessingUrl("/login")
-	                .defaultSuccessUrl("/auth/login/success", true)
-	                .failureHandler(customAuthenticationFailureHandler())
-	                .and()
-	            .logout()
-	                .logoutUrl("/logoff")
-	                .logoutSuccessUrl("/auth/logoff/success")
-	                .and()
-	                .oauth2Login()
-					.loginPage("/auth/login/form")
-					.defaultSuccessUrl("/auth/oauth2/login/success", true)
-					.failureUrl("/auth/login/error")
-					.authorizationEndpoint().baseUri("/oauth2/authorization");
-	     return http.build();
+		http.csrf().disable().authorizeHttpRequests().requestMatchers("/admin/**").hasRole("Admin").and()
+				.authorizeHttpRequests().requestMatchers("/cart/**", "/checkout/**").authenticated().and()
+				.authorizeHttpRequests().anyRequest().permitAll().and().exceptionHandling()
+				.accessDeniedPage("/auth/access/denied").and().formLogin().loginPage("/auth/login")
+				.loginProcessingUrl("/login").defaultSuccessUrl("/auth/login/success", true)
+				.failureHandler(customAuthenticationFailureHandler()).and().logout().logoutUrl("/logoff")
+				.logoutSuccessUrl("/auth/logoff/success").and().oauth2Login().loginPage("/auth/login/form")
+				.defaultSuccessUrl("/auth/oauth2/login/success", true).failureUrl("/auth/login/error")
+				.authorizationEndpoint().baseUri("/oauth2/authorization");
+		return http.build();
 	}
-
 
 }

@@ -10,7 +10,8 @@ app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartSer
 		}
 		$scope.saveOrder = function() {
 			var url = location.origin +
-				`/api/order/save/` + sessionStorage.getItem("email") + "?pickUpDate=" +
+				`/api/order/save/` + sessionStorage.getItem("email") + "?methodPayment=" +
+				sessionStorage.getItem("methodPayment") + "&pickUpDate=" +
 				sessionStorage.getItem("pickUpDate");
 			$scope.productList = CheckoutService.getSelectedProduct();
 			$http

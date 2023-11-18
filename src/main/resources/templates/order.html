@@ -5,20 +5,24 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<link rel="apple-touch-icon" href="assets/img/apple-icon.png" />
+<link rel="apple-touch-icon" href="../assets/img/apple-icon.png" />
 <link rel="shortcut icon" type="image/x-icon"
-	href="assets/img/favicon.ico" />
-
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-<link rel="stylesheet" href="assets/css/templatemo.css" />
-<link rel="stylesheet" href="assets/css/custom.css" />
+	href="../assets/img/favicon.ico" />
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../assets/css/templatemo.css" />
+<link rel="stylesheet" href="../assets/css/custom.css" />
 
 <!-- Load fonts style after rendering the layout styles -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap" />
-<link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+<link rel="stylesheet" href="../assets/css/fontawesome.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<!-- Toast css -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
 </head>
 
 <body ng-app="myApp">
@@ -30,9 +34,12 @@
 	<nav th:insert="~{fragment/_header.html::header}"></nav>
 	<!-- Close Header -->
 
+
+
 	<!-- Start Content -->
 	<div class="container py-5" ng-controller="orderCtrl">
-
+		<!-- Toast -->
+		<ul th:insert="~{fragment/_toast}"></ul>
 		<div class="row">
 			<div class="col-md-10 col-sm-10 offset-1">
 				<div>
@@ -41,37 +48,32 @@
 							<button ng-click="getOrder(0)" class="nav-link active"
 								id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
 								type="button" role="tab" aria-controls="home"
-								aria-selected="true">Chờ xử lý</button>
+								aria-selected="true">Chờ xử lý
+								({{orderCounts.pending}})</button>
 						</li>
 						<li class="nav-item" role="presentation">
 							<button ng-click="getOrder(1)" class="nav-link" id="profile-tab"
 								data-bs-toggle="tab" data-bs-target="#profile" type="button"
 								role="tab" aria-controls="profile" aria-selected="false">Đã
-								xác nhận</button>
+								xác nhận ({{orderCounts.confirmed}})</button>
 						</li>
 						<li class="nav-item" role="presentation">
 							<button ng-click="getOrder(2)" class="nav-link" id="contact-tab"
 								data-bs-toggle="tab" data-bs-target="#contact" type="button"
 								role="tab" aria-controls="contact" aria-selected="false">Sẵn
-								sàng để lấy</button>
+								sàng để lấy ({{orderCounts.readyForPickup}})</button>
 						</li>
 						<li class="nav-item" role="presentation">
 							<button ng-click="getOrder(3)" class="nav-link" id="contact-tab"
 								data-bs-toggle="tab" data-bs-target="#contact" type="button"
 								role="tab" aria-controls="contact" aria-selected="false">Đã
-								nhận hàng</button>
+								nhận hàng ({{orderCounts.received}})</button>
 						</li>
 						<li class="nav-item" role="presentation">
 							<button ng-click="getOrder(4)" class="nav-link" id="contact-tab"
 								data-bs-toggle="tab" data-bs-target="#contact" type="button"
 								role="tab" aria-controls="contact" aria-selected="false">Đã
-								hủy</button>
-						</li>
-						<li class="nav-item" role="presentation">
-							<button ng-click="getOrder(5)" class="nav-link" id="contact-tab"
-								data-bs-toggle="tab" data-bs-target="#contact" type="button"
-								role="tab" aria-controls="contact" aria-selected="false">Yêu
-								cầu hủy</button>
+								hủy ({{orderCounts.canceled}})</button>
 						</li>
 					</ul>
 				</div>
@@ -86,6 +88,7 @@
 											<th>Mã đơn hàng</th>
 											<th>Ngày đặt hàng</th>
 											<th>Ngày lấy</th>
+											<th>Hình thức thanh toán</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -94,10 +97,19 @@
 											<td>{{order.id}}</td>
 											<td>{{order.orderDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 											<td>{{order.pickUpDate | date: "dd/MM/yyyy, HH:mm"}}</td>
+											<td><label ng-show="order.methodPayment==0"
+												title="Chuyển khoản" ng-mouseover="showTooltip()"
+												class="badge bg-success">CK</label> <label
+												title="Thanh toán khi nhận hàng"
+												ng-mouseover="showTooltip()"
+												ng-show="order.methodPayment==1" class="badge bg-info">COD</label>
+											</td>
 											<td>
-												<!-- Huy don --> <a ng-if="order.status==0"
-												class="btn btn-danger text-white"
-												ng-click="requestCancelOrder(order.id)"><i
+												<!-- Huy don --> <a ng-click="getOrderDetails(order.id)"
+												data-bs-toggle="modal" data-bs-target="#noteStatus"
+												ng-if="order.status.statusId==0" title="Hủy đơn"
+												ng-mouseover="showTooltip()"
+												class="btn btn-danger text-white"><i
 													class="fa fa-solid fa-window-close"></i></a> <a
 												data-bs-toggle="modal" data-bs-target="#orderDetailsModal"
 												class="btn btn-warning text-white"
@@ -120,30 +132,17 @@
 												đơn hàng</h5>
 										</div>
 										<div class="modal-body">
-											<!-- <table class="table-striped col-12">
-														<tr ng:repeat="atv in activity">
-															<td>{{atv.ngayCapNhat | date: "dd/MM/yyyy, HH:mm"}}</td>
-															<td><span ng-if="atv.trangThai==1"><i
-																	class='bx bx-notepad'></i> Chờ xử lý</span> <span
-																ng-if="atv.trangThai==2"><i class='bx bxs-truck'></i>
-																	Đang vận chuyển</span> <span ng-if="atv.trangThai==3"><i
-																	class='bx bxs-check-circle'></i> Giao hàng thành công</span> <span
-																ng-if="atv.trangThai==4"> <i
-																	class='bx bxs-calendar-x'></i>Đã hủy đơn
-															</span> <span ng-if="atv.trangThai==5"> <i
-																	class='bx bxs-calendar-x'></i>Yêu cầu hủy đơn
-															</span> <span ng-if="atv.trangThai==6"> <i
-																	class='bx bxs-calendar-x'></i>Từ chối yêu cầu
-															</span> <span ng-if="atv.trangThai==7"> <i
-																	class='bx bx-message-alt-check'></i>Xác nhận đã nhận
-																	hàng
-															</span></td>
-														</tr>
-
-													</table> -->
-											<table class="table table-bordered table-default">
+											<table class="table table-striped col-12">
+												<tr ng:repeat="stt in listStatus">
+													<td>{{stt.changeDate | date: "dd/MM/yyyy, HH:mm"}}</td>
+													<td>{{stt.status.statusName}}</td>
+													<td><span ng-show="stt.note">Ghi chú:
+															{{stt.note}}</span></td>
+												</tr>
+											</table>
+											<table class="table">
 												<tr>
-													<th>Tên sản phẩm</th>
+													<th colspan="2">Sản phẩm</th>
 													<th>Số lượng</th>
 													<th>Đơn giá</th>
 													<th>Thành tiền</th>
@@ -151,6 +150,9 @@
 												<tbody>
 													<tr ng:repeat="item in listOrderDetails">
 														<td>{{item.product.name}}</td>
+														<td><img alt="no picture"
+															src="../img/{{item.product.image}}" width="70px"
+															height="70px"></td>
 														<td>{{item.quantity}}</td>
 														<td>{{item.product.price |number : 0}}</td>
 														<td>{{item.quantity*item.product.price|number :0}}</td>
@@ -168,6 +170,27 @@
 									</div>
 								</div>
 							</div>
+							<!-- Note status -->
+							<div class="modal fade" id="noteStatus" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Hủy đơn</h5>
+										</div>
+										<div class="modal-body">
+											<div class="form-group">
+												<label>Lý do hủy đơn</label>
+												<textarea ng-model="note" class="form-control" rows="10"
+													cols="20"></textarea>
+											</div>
+											<br>
+											<button class="btn btn-info" type="button"
+												ng-click="cancelOrder(idOrderForCancel) ">Xác nhận</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -181,15 +204,16 @@
 	<!-- End Footer -->
 
 	<!-- Start Script -->
-	<script src="assets/js/jquery-1.11.0.min.js"></script>
-	<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/templatemo.js"></script>
-	<script src="assets/js/custom.js"></script>
+	<script src="../assets/js/jquery-1.11.0.min.js"></script>
+	<script src="../assets/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<script src="../assets/js/templatemo.js"></script>
+	<script src="../assets/js/custom.js"></script>
 	<!--AngurlarJS -->
-	<script src="js/app/app.js"></script>
-	<script src="js/service/orderService.js"></script>
-	<script src="js/controller/orderController.js"></script>
+	<script src="../js/app/app.js"></script>
+	<script src="../js/service/orderService.js"></script>
+	<script src="../js/service/toastService.js"></script>
+	<script src="../js/controller/orderController.js"></script>
 
 	<!-- End Script -->
 </body>

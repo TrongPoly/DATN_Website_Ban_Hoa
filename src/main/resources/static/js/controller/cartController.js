@@ -11,6 +11,9 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 
 		$scope.get = function() {
 			$scope.carts = CartService.getCart();
+			//Bỏ select
+			CartService.resetCart();
+			//Reset số lượng
 			for (let i = 0; i < $scope.carts.length; i++) {
 				ProductService.getOneProduct($scope.carts[i].id)
 					.then((resp) => {

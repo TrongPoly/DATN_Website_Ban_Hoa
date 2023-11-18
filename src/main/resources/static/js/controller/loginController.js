@@ -8,8 +8,11 @@ app.controller('loginCtrl',
 		if (location.href === origin + "/auth/login?error") {
 			ToastService.createToast("error", "Sai tài khoản hoặc mật khẩu", $scope.toasts);
 		}
+		if (location.href === origin + "/auth/locked") {
+			ToastService.createToast("error", "Tài khoản đã bị khóa", $scope.toasts);
+		}
 		if (location.href === origin + "/auth/blocked") {
-			ToastService.createToast("error", "Tài khoản hiện chưa được xác minh", $scope.toasts);
+			ToastService.createToast("info", "Tài khoản chưa được xác minh", $scope.toasts);
 		}
 		if (location.href === origin + "/auth/success_verify") {
 			ToastService.createToast("success", "Xác minh tài khoản thành công", $scope.toasts);
