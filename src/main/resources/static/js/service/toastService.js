@@ -25,6 +25,7 @@ app.service('ToastService', ['$timeout', function($timeout) {
 	};
 
 	this.createToast = function(id, text, toasts) {
+		removeAllToasts(toasts);
 		var toast = angular.copy(toastDetails[id]);
 		toast.text = text;
 		toasts.push(toast);
@@ -38,5 +39,11 @@ app.service('ToastService', ['$timeout', function($timeout) {
 		if (index !== -1) {
 			toasts.splice(index, 1);
 		}
+	}
+	function removeAllToasts(toasts) {
+		for (var i = 0; i < toasts.length; i++) {
+			$timeout.cancel(toasts[i].timeoutId);
+		}
+		toasts.length = 0; // Clear the array
 	}
 }]);

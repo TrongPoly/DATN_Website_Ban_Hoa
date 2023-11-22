@@ -22,721 +22,293 @@
 	href="../_admin/css/vertical-layout-light/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="../_admin/images/favicon.png" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<link rel="stylesheet" href="../assets/css/fontawesome.min.css" />
+
+<!-- Toast css -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 
 </head>
-<body>
-  <div class="container-scroller">
-    <!-- partial:../admin/partials/_navbar.html -->
-    <nav th:replace="~{fragment/_adminHeader.html::adminHeader}"></nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-      <!-- partial:../admin/partials/_settings-panel.html -->
-      <div class="theme-setting-wrapper">
-        <div id="settings-trigger"><i class="typcn typcn-cog-outline"></i></div>
-        <div id="theme-settings" class="settings-panel">
-          <i class="settings-close typcn typcn-times"></i>
-          <p class="settings-heading">SIDEBAR SKINS</p>
-          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
-          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
-          <p class="settings-heading mt-2">HEADER SKINS</p>
-          <div class="color-tiles mx-0 px-4">
-            <div class="tiles success"></div>
-            <div class="tiles warning"></div>
-            <div class="tiles danger"></div>
-            <div class="tiles info"></div>
-            <div class="tiles dark"></div>
-            <div class="tiles default"></div>
-          </div>
-        </div>
-      </div>
-      <div id="right-sidebar" class="settings-panel">
-        <i class="settings-close typcn typcn-times"></i>
-        <ul class="nav nav-tabs" id="setting-panel" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
-            <div class="add-items d-flex px-3 mb-0">
-              <form class="form w-100">
-                <div class="form-group d-flex">
-                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
-                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
-                </div>
-              </form>
-            </div>
-            <div class="list-wrapper px-3">
-              <ul class="d-flex flex-column-reverse todo-list">
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Team review meeting at 3.00 PM
-                    </label>
-                  </div>
-                  <i class="remove typcn typcn-delete-outline"></i>
-                </li>
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Prepare for presentation
-                    </label>
-                  </div>
-                  <i class="remove typcn typcn-delete-outline"></i>
-                </li>
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Resolve all the low priority tickets due today
-                    </label>
-                  </div>
-                  <i class="remove typcn typcn-delete-outline"></i>
-                </li>
-                <li class="completed">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox" checked>
-                      Schedule meeting for next week
-                    </label>
-                  </div>
-                  <i class="remove typcn typcn-delete-outline"></i>
-                </li>
-                <li class="completed">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox" checked>
-                      Project review
-                    </label>
-                  </div>
-                  <i class="remove typcn typcn-delete-outline"></i>
-                </li>
-              </ul>
-            </div>
-            <div class="events py-4 border-bottom px-3">
-              <div class="wrapper d-flex mb-2">
-                <i class="typcn typcn-media-record-outline text-primary mr-2"></i>
-                <span>Feb 11 2018</span>
-              </div>
-              <p class="mb-0 font-weight-thin text-gray">Creating component page</p>
-              <p class="text-gray mb-0">build a js based app</p>
-            </div>
-            <div class="events pt-4 px-3">
-              <div class="wrapper d-flex mb-2">
-                <i class="typcn typcn-media-record-outline text-primary mr-2"></i>
-                <span>Feb 7 2018</span>
-              </div>
-              <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
-              <p class="text-gray mb-0 ">Call Sarah Graves</p>
-            </div>
-          </div>
-          <!-- To do section tab ends -->
-          <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
-            <div class="d-flex align-items-center justify-content-between border-bottom">
-              <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See All</small>
-            </div>
-            <ul class="chat-list">
-              <li class="list active">
-                <div class="profile"><img src="../admin/images/faces/face1.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Thomas Douglas</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">19 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../admin/images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
-                <div class="info">
-                  <div class="wrapper d-flex">
-                    <p>Catherine</p>
-                  </div>
-                  <p>Away</p>
-                </div>
-                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
-                <small class="text-muted my-auto">23 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../admin/images/faces/face3.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Daniel Russell</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">14 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../admin/images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
-                <div class="info">
-                  <p>James Richardson</p>
-                  <p>Away</p>
-                </div>
-                <small class="text-muted my-auto">2 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../admin/images/faces/face5.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Madeline Kennedy</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">5 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="../admin/images/faces/face6.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Sarah Graves</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">47 min</small>
-              </li>
-            </ul>
-          </div>
-          <!-- chat tab ends -->
-        </div>
-      </div>
-      <!-- partial -->
-      <nav th:replace="~{fragment/_adminAside.html::adminAside}"></nav>
-      <!-- partial:../admin/partials/_sidebar.html -->
-      <!-- partial -->
-      <div class="main-panel">        
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Form Order</h4>
-                        <ul class="nav nav-tabs" id="pills-tab" role="tablist">
-                          <li class="nav-item">
-                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#order1" role="tab" aria-controls="order1" aria-selected="true">Wait for confirmation</a>
-                          </li>
-                          <!-- <li class="nav-item">
-                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#order2" role="tab" aria-controls="order2" aria-selected="false">Wait for confirmation</a>
-                          </li> -->
-										<li class="nav-item"><a class="nav-link"
-											id="pills-contact-tab" data-toggle="pill" href="#order2"
-											role="tab" aria-controls="order2" aria-selected="false">Status</a>
-										</li>
-										<li class="nav-item"><a class="nav-link"
-											id="pills-contact-tab" data-toggle="pill" href="#order3"
-											role="tab" aria-controls="order3" aria-selected="false">Delivered</a>
-										</li>
-									</ul>
-									<!--TAS_CONTENT-->
-									<div class="tab-content" id="pills-tabContent">
-										<!--Wait for confirmation-->
-										<div class="tab-pane fade show active" id="order1"
-											role="tabpanel" aria-labelledby="pills-home-tab">
-											<!--TABLE-->
+<body ng-app="myApp" ng-controller="adminOrder">
+	<div class="container-scroller">
+		<nav th:replace="~{fragment/_adminHeader.html::adminHeader}"></nav>
+		<!-- partial -->
+		<div th:replace="~{fragment/_adminPartial.html::partial}"></div>
+		<!-- partial -->
+		<nav th:replace="~{fragment/_adminAside.html::adminAside}"></nav>
+		<!-- partial:../_admin/partials/_sidebar.html -->
 
-											<div class="form-group">
-												<div class="input-group">
-													<input type="text" class="form-control mt-5"
-														placeholder="Recipient's username"
-														aria-label="Recipient's username">
-													<div class="input-group-append">
-														<button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
-													</div>
+		<!-- Toast -->
+		<ul th:insert="~{fragment/_toast}"></ul>
+
+		<div class="main-panel">
+			<div class="content-wrapper">
+				<div class="row">
+					<div class="col-12 grid-margin stretch-card">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-title">Quản lý đơn hàng</h4>
+								<ul class="nav nav-tabs" id="pills-tab" role="tablist">
+									<li class="nav-item"><a class="nav-link active"
+										ng-click="getOrder(0)" id="pills-home-tab" data-toggle="pill"
+										href="#" role="tab" aria-controls="order1"
+										aria-selected="true">Chờ xử lý ({{orderCounts.pending}})</a></li>
+									<li class="nav-item"><a class="nav-link"
+										ng-click="getOrder(1)" id="pills-contact-tab"
+										data-toggle="pill" href="#" role="tab" aria-controls="order2"
+										aria-selected="false">Đã xác nhận
+											({{orderCounts.confirmed}})</a></li>
+									<li class="nav-item"><a class="nav-link"
+										ng-click="getOrder(2)" id="pills-contact-tab"
+										data-toggle="pill" href="#" role="tab" aria-controls="order3"
+										aria-selected="false">Sẵn sàng để lấy
+											({{orderCounts.readyForPickup}})</a></li>
+									<li class="nav-item"><a class="nav-link"
+										ng-click="getOrder(3)" id="pills-contact-tab"
+										data-toggle="pill" href="#" role="tab" aria-controls="order3"
+										aria-selected="false">Đã nhận hàng
+											({{orderCounts.received}})</a></li>
+									<li class="nav-item"><a class="nav-link"
+										ng-click="getOrder(4)" id="pills-contact-tab"
+										data-toggle="pill" href="#" role="tab" aria-controls="order3"
+										aria-selected="false">Đã hủy ({{orderCounts.canceled}})</a></li>
+								</ul>
+
+								<!--TAS_CONTENT-->
+								<div class="tab-content" id="pills-tabContent">
+									<!--Wait for confirmation-->
+									<div class="tab-pane fade show active"
+										aria-labelledby="pills-home-tab">
+										<!--TABLE-->
+
+										<div class="form-group">
+											<div class="input-group">
+												<input type="text" class="form-control mt-5"
+													placeholder="Recipient's username"
+													aria-label="Recipient's username">
+												<div class="input-group-append">
+													<button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
 												</div>
 											</div>
-											<div class="table-responsive">
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Id</th>
-															<th>Name Customer</th>
-															<th>Order date</th>
-															<th>Pick up date</th>
-															<th>Payment method</th>
-															<th>Status</th>
-															<th>Total payment</th>
-															<th>Action</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>01</td>
-															<td>Nguyễn Thị Ngọc Chăm</td>
-															<td>10/10/2023</td>
-															<td>12/10/2023</td>
-															<td><label class="badge badge-success">VNB</label></td>
-															<!-- <td><label class="badge badge-warning">Chưa thanh toán</label></td> -->
-															<td>
-																<div class="form-check">
-																	<label class="toggle-switch"> <input
-																		type="checkbox" checked> <span
-																		class="toggle-slider round"></span>
-																	</label>
-																</div>
-															</td>
-															<td>60.000</td>
-															<td>
-																<button type="button" data-toggle="modal"
-																	data-target="#cart"
-																	class="btn btn-inverse-success btn-rounded btn-icon">
-																	<i class="typcn typcn-clipboard"></i>
-																</button>
-																<button type="button" data-toggle="modal"
-																	data-target="#edit"
-																	class="btn btn-inverse-primary btn-rounded btn-icon">
-																	<i class=" typcn typcn-pen"></i>
-																</button>
-
-															</td>
-														</tr>
-
-													</tbody>
-												</table>
-											</div>
-											<nav aria-label="Page navigation example">
-												<ul class="pagination  justify-content-center">
-													<li class="page-item"><a class="page-link" href="#"
-														aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-													</a></li>
-													<li class="page-item"><a class="page-link" href="#">1</a></li>
-													<li class="page-item"><a class="page-link" href="#">2</a></li>
-													<li class="page-item"><a class="page-link" href="#">3</a></li>
-													<li class="page-item"><a class="page-link" href="#"
-														aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-													</a></li>
-												</ul>
-											</nav>
-											<!--END TABLE-->
 										</div>
-										<!--END Wait for confirmation-->
-										<!--Status-->
-										<div class="tab-pane fade" id="order2" role="tabpanel"
-											aria-labelledby="pills-profile-tab">
-											<div class="form-group">
-												<div class="input-group">
-													<input type="text" class="form-control mt-5"
-														placeholder="Recipient's username"
-														aria-label="Recipient's username">
-													<div class="input-group-append">
-														<button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
-													</div>
-												</div>
-											</div>
-											<div class="table-responsive">
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Id</th>
-															<th>Name Customer</th>
-															<th>Order date</th>
-															<th>Pick up date</th>
-															<th>Payment method</th>
-															<th>Status</th>
-															<th>Total payment</th>
-															<th>Action</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>01</td>
-															<td>Nguyễn Thị Ngọc Chăm</td>
-															<td>10/10/2023</td>
-															<td>12/10/2023</td>
-															<td><label class="badge badge-success">VNB</label></td>
-															<!-- <td><label class="badge badge-warning">Chưa thanh toán</label></td> -->
-															<td>
-																<div class="form-check">
-																	<label class="toggle-switch"> <input
-																		type="checkbox" checked> <span
-																		class="toggle-slider round"></span>
-																	</label>
-																</div>
-															</td>
-															<td>60.000</td>
-															<td>
-																<button type="button" data-toggle="modal"
-																	data-target="#cart"
-																	class="btn btn-inverse-success btn-rounded btn-icon">
-																	<i class="typcn typcn-clipboard"></i>
-																</button>
-																<button type="button" data-toggle="modal"
-																	data-target="#editStatus"
-																	class="btn btn-inverse-primary btn-rounded btn-icon">
-																	<i class=" typcn typcn-pen"></i>
-																</button>
+										<div class="table-responsive">
+											<table class="table table-sm">
+												<thead>
+													<tr>
+														<th>Mã đơn hàng</th>
+														<th>Khách hàng</th>
+														<th>Số điện thoại</th>
+														<th>Ngày đặt</th>
+														<th>Ngày lấy</th>
+														<th>Hình thức thanh toán</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="order in listOrder">
+														<td>{{order.id}}</td>
+														<td>{{order.customer.fullName}}</td>
+														<td>{{order.customer.phoneNumber}}</td>
+														<td>{{order.orderDate | date: "dd/MM/yyyy, HH:mm"}}</td>
+														<td>{{order.pickUpDate | date: "dd/MM/yyyy, HH:mm"}}</td>
+														<td ng-show="order.methodPayment==0"><label
+															class="badge badge-success">CK</label></td>
+														<td ng-show="order.methodPayment==1"><label
+															class="badge badge-info">COD</label></td>
+														<td>
+															<button title="Chi tiết đơn hàng"
+																ng-mouseover="showTooltip()"
+																ng-click="getOrderDetails(order.id)" type="button"
+																data-toggle="modal" data-target="#cart"
+																class="btn btn-inverse-info btn-rounded btn-icon">
+																<i class="fa fa-clipboard-list"></i>
+															</button> <!-- Xác nhận đơn hàng -->
+															<button ng-click="confirmOrder(order.id)"
+																ng-show="order.status.statusId==0"
+																title="Xác nhận đơn hàng" ng-mouseover="showTooltip()"
+																type="button"
+																class="btn btn-inverse-success btn-rounded btn-icon">
+																<i class="fa fa-check-circle"></i>
+															</button> <!-- Hoàn tất chuẩn bị -->
+															<button ng-click="preparedOrder(order.id)"
+																ng-show="order.status.statusId==1"
+																title="Chuẩn bị hoàn tất" ng-mouseover="showTooltip()"
+																type="button"
+																class="btn btn-inverse-success btn-rounded btn-icon">
+																<i class="fa fa-check-circle"></i>
+															</button> <!-- Hoàn tất đơn hàng -->
+															<button ng-click="finishOrder(order.id)"
+																ng-show="order.status.statusId==2" title="Đã nhận hàng"
+																ng-mouseover="showTooltip()" type="button"
+																class="btn btn-inverse-success btn-rounded btn-icon">
+																<i class="fa fa-check-circle"></i>
+															</button> <!-- Hủy đơn-->
+															<button data-toggle="modal" data-target="#noteStatus"
+																ng-click="getOrderDetails(order.id)"
+																ng-show="order.status.statusId!=3&&order.status.statusId!=4"
+																title="Hủy đơn hàng" ng-mouseover="showTooltip()"
+																type="button"
+																class="btn btn-inverse-danger btn-rounded btn-icon">
+																<i class="fa fa-times-circle"></i>
+															</button>
 
-															</td>
-														</tr>
+														</td>
+													</tr>
 
-													</tbody>
-												</table>
-											</div>
-											<nav aria-label="Page navigation example">
-												<ul class="pagination  justify-content-center">
-													<li class="page-item"><a class="page-link" href="#"
-														aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-													</a></li>
-													<li class="page-item"><a class="page-link" href="#">1</a></li>
-													<li class="page-item"><a class="page-link" href="#">2</a></li>
-													<li class="page-item"><a class="page-link" href="#">3</a></li>
-													<li class="page-item"><a class="page-link" href="#"
-														aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-													</a></li>
-												</ul>
-											</nav>
+												</tbody>
+											</table>
 										</div>
-										<!--END Status-->
-										<!--Delivered-->
-										<div class="tab-pane fade" id="order3" role="tabpanel"
-											aria-labelledby="pills-contact-tab">
-											<div class="form-group">
-												<div class="input-group">
-													<input type="text" class="form-control mt-5"
-														placeholder="Recipient's username"
-														aria-label="Recipient's username">
-													<div class="input-group-append">
-														<button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
-													</div>
-												</div>
-											</div>
-											<div class="table-responsive">
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Id</th>
-															<th>Name Customer</th>
-															<th>Order date</th>
-															<th>Pick up date</th>
-															<th>Payment method</th>
-															<th>Status</th>
-															<th>Total payment</th>
-															<th>Action</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>01</td>
-															<td>Nguyễn Thị Ngọc Chăm</td>
-															<td>10/10/2023</td>
-															<td>12/10/2023</td>
-															<td><label class="badge badge-success">VNB</label></td>
-															<!-- <td><label class="badge badge-warning">Chưa thanh toán</label></td> -->
-															<td>
-																<div class="form-check">
-																	<label class="toggle-switch"> <input
-																		type="checkbox" checked> <span
-																		class="toggle-slider round"></span>
-																	</label>
-																</div>
-															</td>
-															<td>60.000</td>
-															<td>
-																<button type="button" data-toggle="modal"
-																	data-target="#cart"
-																	class="btn btn-inverse-success btn-rounded btn-icon">
-																	<i class="typcn typcn-clipboard"></i>
-																</button>
-																<button type="button" data-toggle="modal"
-																	data-target="#editDelivered"
-																	class="btn btn-inverse-primary btn-rounded btn-icon">
-																	<i class=" typcn typcn-pen"></i>
-																</button>
-
-															</td>
-														</tr>
-
-													</tbody>
-												</table>
-											</div>
-											<nav aria-label="Page navigation example">
-												<ul class="pagination  justify-content-center">
-													<li class="page-item"><a class="page-link" href="#"
-														aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-													</a></li>
-													<li class="page-item"><a class="page-link" href="#">1</a></li>
-													<li class="page-item"><a class="page-link" href="#">2</a></li>
-													<li class="page-item"><a class="page-link" href="#">3</a></li>
-													<li class="page-item"><a class="page-link" href="#"
-														aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-													</a></li>
-												</ul>
-											</nav>
-										</div>
-										<!--End Delivered-->
+										<nav aria-label="Page navigation example">
+											<ul class="pagination  justify-content-center">
+												<li class="page-item"><a class="page-link" href="#"
+													aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+												</a></li>
+												<li class="page-item"><a class="page-link" href="#">1</a></li>
+												<li class="page-item"><a class="page-link" href="#">2</a></li>
+												<li class="page-item"><a class="page-link" href="#">3</a></li>
+												<li class="page-item"><a class="page-link" href="#"
+													aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+												</a></li>
+											</ul>
+										</nav>
 									</div>
-									<!--END TAS_CONTENT-->
-
 								</div>
 							</div>
 						</div>
-
-
-					</div>
-				</div>
-
-				<!-- content-wrapper ends -->
-				<!-- partial:../_admin/partials/_footer.html -->
-				<footer class="footer">
-					<div class="card">
-						<div class="card-body">
-							<div
-								class="d-sm-flex justify-content-center justify-content-sm-between">
-								<span
-									class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright
-									© 2020 <a href="https://www.bootstrapdash.com/"
-									class="text-muted" target="_blank">Bootstrapdash</a>. All
-									rights reserved.
-								</span> <span
-									class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-muted">Free
-									<a href="https://www.bootstrapdash.com/" class="text-muted"
-									target="_blank">Bootstrap dashboard</a> templates from
-									Bootstrapdash.com
-								</span>
-							</div>
-						</div>
-					</div>
-				</footer>
-				<!-- partial -->
-			</div>
-			<!-- main-panel ends -->
-
-			<!-- Modal -->
-			<div class="modal fade" id="cart" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Order
-								details</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>Id</th>
-											<th>Product</th>
-											<th></th>
-											<th>Price</th>
-											<th>Quantity</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>01</td>
-											<td>(anh.jpg )</td>
-											<td>Hoa Hồng</td>
-											<td>2</td>
-											<td>30.000</td>
-
-										</tr>
-										<tr class="table-secondary ">
-											<th colspan="4">Tổng:</th>
-											<th colspan="1">60.000 (VND)</th>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<!-- <button type="button" class="btn btn-primary"></button>  -->
-						</div>
 					</div>
 				</div>
 			</div>
-			<!--END MODAL-->
-			<!--MODAL EDIT-->
-			<div class="modal fade" id="edit" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Wait for
-								confirmation</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
+		</div>
+		<!-- main-panel ends -->
 
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>Id</th>
-											<th>Product</th>
-											<th></th>
-											<th>Price</th>
-											<th>Quantity</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>01</td>
-											<td>(anh.jpg )</td>
-											<td>Hoa Hồng</td>
-											<td>2</td>
-											<td>30.000</td>
+		<!-- Modal -->
+		<div class="modal fade" id="cart" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-xl  w-50 modal-dialog-centered"
+				role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Chi tiết</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<table class="table-striped col-12">
+							<tr ng:repeat="stt in listStatus">
+								<td>{{stt.changeDate | date: "dd/MM/yyyy, HH:mm"}}</td>
+								<td>{{stt.status.statusName}}</td>
+								<td ng-show="stt.note">Ghi chú: {{stt.note}}</td>
+							</tr>
+						</table>
+						<table class="table">
+							<tr>
+								<th>Tên sản phẩm</th>
+								<th>Hình ảnh</th>
+								<th>Số lượng</th>
+								<th>Đơn giá</th>
+								<th>Thành tiền</th>
+							</tr>
+							<tbody>
+								<tr ng:repeat="item in listOrderDetails">
+									<td>{{item.product.name}}</td>
+									<td><img alt="no picture"
+										src="../img/{{item.product.image}}"></td>
+									<td>{{item.quantity}}</td>
+									<td>{{item.product.price |number : 0}}</td>
+									<td>{{item.quantity*item.product.price|number :0}}</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="6">Tổng tiền:
+										<h4>{{total() | number : 0}} VNĐ</h4>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
 
-										</tr>
-										<tr class="table-secondary ">
-											<th colspan="4">Tổng:</th>
-											<td colspan="1">60.000</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<!-- <button type="button" class="btn btn-primary"></button>  -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--END MODAL-->
+		<!--MODAL EDIT-->
+		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Wait for
+							confirmation</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
 
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Confirm</button>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>Product</th>
+										<th></th>
+										<th>Price</th>
+										<th>Quantity</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>01</td>
+										<td>(anh.jpg )</td>
+										<td>Hoa Hồng</td>
+										<td>2</td>
+										<td>30.000</td>
+
+									</tr>
+									<tr class="table-secondary ">
+										<th colspan="4">Tổng:</th>
+										<td colspan="1">10.000</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!--END MODAL EDIt-->
-
-			<!--MODAL EDIT Status-->
-			<div class="modal fade" id="editStatus" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Update
-								status</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+		</div>
+		<div class="modal fade" id="noteStatus" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Hủy đơn</h5>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Lý do hủy đơn</label>
+							<textarea ng-model="note" class="form-control" rows="10"
+								cols="20"></textarea>
 						</div>
-						<div class="modal-body">
-
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>Id</th>
-											<th>Product</th>
-											<th></th>
-											<th>Price</th>
-											<th>Quantity</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>01</td>
-											<td>(anh.jpg )</td>
-											<td>Hoa Hồng</td>
-											<td>2</td>
-											<td>30.000</td>
-
-										</tr>
-										<tr class="table-secondary ">
-											<th colspan="4">Tổng:</th>
-											<td colspan="1">60.000</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-
-						<div class="form-group ml-3">
-							<label for="id">Status</label> <select class="form-control"
-								id="Id">
-								<option>Unfinished</option>
-								<option>Finished</option>
-
-							</select>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Confirm</button>
-						</div>
+						<br>
+						<button class="btn btn-info" type="button"
+							ng-click="cancelOrder(idOrderForCancel) ">Xác nhận</button>
 					</div>
 				</div>
 			</div>
-			<!--END MODAL EDIt Status>-->
-
-			<!-- Model editDelivered-->
-			<div class="modal fade" id="editDelivered" tabindex="-1"
-				role="dialog" aria-labelledby="exampleModalCenterTitle"
-				aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Update
-								delivered</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>Id</th>
-											<th>Product</th>
-											<th></th>
-											<th>Price</th>
-											<th>Quantity</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>01</td>
-											<td>(anh.jpg )</td>
-											<td>Hoa Hồng</td>
-											<td>2</td>
-											<td>30.000</td>
-
-										</tr>
-										<tr class="table-secondary ">
-											<th colspan="4">Tổng:</th>
-											<td colspan="1">60.000</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Confirm</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--END Modal Edit Delivered-->
-
-
 		</div>
 	</div>
-	</div>
-	</div>
-
-
-
-
-	</div>
-	<!-- page-body-wrapper ends -->
-	</div>
-
-	<!-- container-scroller -->
+h	<!-- container-scroller -->
 	<!-- base:js -->
 	<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
 	<!-- endinject -->
@@ -757,6 +329,12 @@
 	<script src="../_admin/js/select2.js"></script>
 	<!-- End custom js for this page-->
 	<script src="../_admin/js/tabs.js"></script>
+	<!--AngurlarJS -->
+	<script src="../js/app/app.js"></script>
+	<script src="../js/service/orderService.js"></script>
+	<script src="../js/controller/_adminOrder.js"></script>
+	<script src="../js/service/toastService.js"></script>
+
 </body>
 
 </html>

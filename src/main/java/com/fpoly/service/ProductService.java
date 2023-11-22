@@ -3,6 +3,7 @@ package com.fpoly.service;
 import java.util.List;
 
 import com.fpoly.model.Category;
+import com.fpoly.model.OrderDetail;
 import com.fpoly.model.Product;
 
 
@@ -18,4 +19,6 @@ public interface ProductService {
 	List<Product> findAllByCategory(String CategoryName);
 
 	List<Product> searchByName(String keyword);
+
+	Product findByOrderDetails(OrderDetail ordDtail);
 }

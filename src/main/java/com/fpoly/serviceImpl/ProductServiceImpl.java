@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fpoly.model.Category;
+import com.fpoly.model.OrderDetail;
 import com.fpoly.model.Product;
 
 import com.fpoly.repository.ProductRepository;
@@ -44,6 +45,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> searchByName(String keyword) {
 		return productRepository.findByNameContaining(keyword);
+	}
+
+	@Override
+	public Product findByOrderDetails(OrderDetail ordDtail) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

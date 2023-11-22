@@ -128,7 +128,7 @@ https://templatemo.com/tm-559-zay-shop
 				<button ng-hide="isDisabled" ng-click="toggleDisabled()"
 					class="w-100 btn btn-success text-white btn-lg mt-3" type="submit">Hoàn
 					tất</button>
-				<button ng-if="totalOrder>0"
+				<button ng-show="isDisabled" ng-if="totalOrder>0"
 					class="btn btn-warning text-white btn-lg btn-block w-100 mt-3"
 					type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Đặt
 					hàng</button>

@@ -41,8 +41,9 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 			let datePU = document.getElementById("datePickUp").value;
 			console.log(datePU);
 			if (datePU == "") {
-				location.href = location.origin+ "/checkout/invalid";
+				location.href = location.origin + "/checkout/invalid";
 			} else {
+				sessionStorage.setItem("methodPayment", 0);
 				sessionStorage.removeItem("pickUpDate")
 				sessionStorage.setItem("pickUpDate", datePU);
 				if ($scope.methodPayment == "Chuyển khoản") {
@@ -58,6 +59,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 							alert("Lỗi");
 						});
 				} else {
+					sessionStorage.setItem("methodPayment", 1);
 					location.href = location.origin + "/order/success";
 				}
 			}
@@ -65,14 +67,15 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 
 		$scope.toggleDisabled = function() {
 			$scope.isDisabled = !$scope.isDisabled;
-			let fullName = document.getElementById("fullName").value;
-			let phoneNumber = document.getElementById("phoneNumber").value;
+			let fullName = document.getElementById("fullName").value.trim();
+			let phoneNumber = document.getElementById("phoneNumber").value.trim();
+			if (fullName == "" || phoneNumber == "") {
+				$scope.isDisabled=false;
+				ToastService.createToast("error", "Không để trống thông tin", $scope.toasts);
+			}
 			$scope.customer.fullName = fullName;
 			$scope.customer.phoneNumber = phoneNumber;
 			CustomerService.updateCustomer($scope.customer);
-			console.log($scope.isDisabled);
-			console.log($scope.customer);
 		}
-		console.log($scope.isDisabled);
 		$scope.get();
 	}]);

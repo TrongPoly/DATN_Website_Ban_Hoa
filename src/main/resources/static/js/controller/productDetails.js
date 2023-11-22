@@ -3,6 +3,11 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 		$scope.listProduct = [];
 		$scope.product = {};
 		$scope.toasts = [];
+		$scope.quant = 1;
+
+		if (location.href == location.origin + "/product/refresh") {
+			ToastService.createToast("info", "Số lượng sản phẩm đã thay đổi", $scope.toasts);
+		}
 
 		$scope.removeToast = function(toast) {
 			var index = $scope.toasts.indexOf(toast);
@@ -16,30 +21,44 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 		$scope.addToCart = function(item) {
 			let text = "Thêm sản phẩm thành công";
 			let type = "success";
-			console.log(CartService.checkLogin());
 			if (CartService.checkLogin() == true) {
 				if (CartService.isItemInCart(item) == true) {
 					type = "info";
 					text = "Sản phẩm đã có trong giỏ hàng";
 				} else {
 					item.quant = 1;
-					item.selected = true;
+					item.selected = false;
 					CartService.addToCart(item)
 				}
 				ToastService.createToast(type, text, $scope.toasts);
 			} else {
-				type = "warning";
-				text = "Vui lòng đăng nhập";
-				ToastService.createToast(type, text, $scope.toasts);
+				location.href = location.origin + "/auth/login";
 			}
 		};
+		// Mua ngay
+		$scope.buyNow = async function(item) {
+			if (CartService.checkLogin() == true) {
+				item.quant = $scope.quant;
+				item.selected = true;
+				const resp = await ProductService.getOneProduct(item.id);
+				if (item.quant > resp.data.quantity) {
+					location.href = location.origin + "/product/refresh";
+				} else {
+					CartService.addToCart(item)
+					location.href = location.origin + "/checkout/index"
+				}
+			} else {
+				location.href = location.origin + "/auth/login";
+			}
+		};
+
+
 
 		$scope.productDetails = function(idProduct) {
 			ProductService.getOneProduct(idProduct)
 				.then((resp) => {
 					$scope.product = resp.data;
 					$scope.moreProduct(sessionStorage.getItem("idProduct"));
-					console.log(resp.data);
 				})
 				.catch((error) => {
 					console.log(error.status);
@@ -55,5 +74,8 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 					console.log(error.status);
 				});
 		}
+
+
+		CartService.resetCart();
 		$scope.productDetails(sessionStorage.getItem("idProduct"));
 	}]);

@@ -72,6 +72,11 @@ public class AccountController {
 		return "redirect:/auth/login";
 	}
 
+	@GetMapping("/locked")
+	public String accountLocked() {
+		return "login";
+	}
+	
 	@RequestMapping("/blocked")
 	public String isBlocked() {
 		return "login";

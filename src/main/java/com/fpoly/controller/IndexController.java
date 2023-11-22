@@ -3,7 +3,6 @@ package com.fpoly.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fpoly.service.SessionService;
 
@@ -14,6 +13,11 @@ public class IndexController {
 	
 	@GetMapping("/index")
 	public String index() {
+		if(session.getSession("user").getRole().getId()==1) {
+			System.out.println("ALO");
+			return "redirect:/admin/order";
+		}
+		System.out.println("OLA");
 		return "index";
 	}
 
@@ -29,6 +33,6 @@ public class IndexController {
 
 	@GetMapping("/about")
 	public String about() {
-		return "face";
+		return "about";
 	}
 }

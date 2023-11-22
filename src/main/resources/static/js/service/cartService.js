@@ -27,6 +27,16 @@ app.service('CartService', function() {
 	this.addToCart = function(item) {
 		var itemCopy = angular.copy(item);
 		delete itemCopy.$$hashKey;
+		// Check if item.id already exists in cart
+		for (var i = 0; i < cart.length; i++) {
+			if (cart[i].id === itemCopy.id) {
+				// Item already exists, update quantity and exit the function
+				cart[i].quant = itemCopy.quant;
+				cart[i].selected = true;
+				saveCartToLocalStorage();
+				return;
+			}
+		}
 		cart.push(itemCopy);
 		saveCartToLocalStorage();
 	};
@@ -84,6 +94,13 @@ app.service('CartService', function() {
 		saveCartToLocalStorage();
 	}
 
+	this.resetCart = function() {
+		cart.forEach(function(item) {
+			item.selected = false;
+		});
+		saveCartToLocalStorage();
+	}
+
 	// Lưu giỏ hàng vào LocalStorage
 	function saveCartToLocalStorage() {
 		localStorage.setItem('cartItems-' + sessionStorage.getItem("email"), JSON.stringify(cart));
@@ -103,7 +120,4 @@ app.service('CartService', function() {
 		}
 		return total;
 	}
-	console.log(this.getCart());
-
-
 });
