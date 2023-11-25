@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.fpoly.model.Customer;
+import com.fpoly.model.Account;
 import com.fpoly.model.Order;
 import com.fpoly.model.OrderStatus;
 import com.fpoly.repository.OrderRepository;
@@ -22,8 +22,8 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<Order> findByCustomer(Customer customer) {
-		return orderRepository.findByCustomer(customer);
+	public List<Order> findByCustomer(Account email) {
+		return orderRepository.findByEmail(email);
 	}
 
 	@Override

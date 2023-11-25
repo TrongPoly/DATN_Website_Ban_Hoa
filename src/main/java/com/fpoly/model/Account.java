@@ -16,6 +16,10 @@ public class Account {
     @NotNull
     @Column(name = "password", nullable = false, length = 15)
     private String password;
+    
+    @NotNull
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
@@ -68,18 +72,29 @@ public class Account {
         this.active = active;
     }
 
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
 	public Account() {
 		super();
 	}
 
-	public Account(@Size(max = 100) String email, @Size(max = 15) @NotNull String password, Role role,
-			@NotNull Boolean active) {
+	public Account(@Size(max = 100) String email, @Size(max = 15) @NotNull String password, @NotNull String fullName,
+			Role role, @NotNull Boolean active, Boolean locked) {
 		super();
 		this.email = email;
 		this.password = password;
+		this.fullName = fullName;
 		this.role = role;
 		this.active = active;
+		this.locked = locked;
 	}
+
 
 	
 

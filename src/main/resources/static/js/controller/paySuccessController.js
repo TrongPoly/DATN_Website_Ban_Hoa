@@ -9,10 +9,16 @@ app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartSer
 			$scope.msg = "Cảm ơn bạn đã thực hiện đặt hàng.";
 		}
 		$scope.saveOrder = function() {
+			let methodPayment = sessionStorage.getItem("methodPayment");
+			let pickUpdate = sessionStorage.getItem("pickUpDate");
+			let email = sessionStorage.getItem("email");
+			let fullName = sessionStorage.getItem("fullName");
+			let phoneNumber = sessionStorage.getItem("phoneNumber");
+
 			var url = location.origin +
-				`/api/order/save/` + sessionStorage.getItem("email") + "?methodPayment=" +
-				sessionStorage.getItem("methodPayment") + "&pickUpDate=" +
-				sessionStorage.getItem("pickUpDate");
+				`/api/order/save/` + email + "?methodPayment=" +
+				methodPayment + "&pickUpDate=" + pickUpdate + "&fullName=" + fullName + "&phoneNumber=" + phoneNumber;
+
 			$scope.productList = CheckoutService.getSelectedProduct();
 			$http
 				.post(url, $scope.productList)

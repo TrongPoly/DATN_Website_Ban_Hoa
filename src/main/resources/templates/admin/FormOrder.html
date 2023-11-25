@@ -99,8 +99,8 @@
 												<thead>
 													<tr>
 														<th>Mã đơn hàng</th>
-														<th>Khách hàng</th>
-														<th>Số điện thoại</th>
+														<th colspan="2">Người nhận</th>
+														<th>Lời nhắn</th>
 														<th>Ngày đặt</th>
 														<th>Ngày lấy</th>
 														<th>Hình thức thanh toán</th>
@@ -109,8 +109,9 @@
 												<tbody>
 													<tr ng-repeat="order in listOrder">
 														<td>{{order.id}}</td>
-														<td>{{order.customer.fullName}}</td>
-														<td>{{order.customer.phoneNumber}}</td>
+														<td>{{order.fullName}}</td>
+														<td>{{order.phoneNumber}}</td>
+														<td>{{order.note}}</td>
 														<td>{{order.orderDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 														<td>{{order.pickUpDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 														<td ng-show="order.methodPayment==0"><label
@@ -186,7 +187,7 @@
 		<!-- Modal -->
 		<div class="modal fade" id="cart" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-xl  w-50 modal-dialog-centered"
+			<div class="modal-dialog modal-xl  w-100 modal-dialog-centered"
 				role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -198,9 +199,14 @@
 					</div>
 					<div class="modal-body">
 						<table class="table-striped col-12">
+							<tr>
+							<th colspan="2" ></th>
+							<th>Người thực hiện tác vụ</th>
+							</tr>
 							<tr ng:repeat="stt in listStatus">
 								<td>{{stt.changeDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 								<td>{{stt.status.statusName}}</td>
+								<td>{{stt.email.email}}</td>
 								<td ng-show="stt.note">Ghi chú: {{stt.note}}</td>
 							</tr>
 						</table>

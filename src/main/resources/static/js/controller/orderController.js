@@ -67,7 +67,8 @@ app.controller('orderCtrl', ["$scope", "OrderService", "ToastService",
 			canceled: 0
 		};
 		$scope.countOrder = function() {
-			OrderService.getAllOrder()
+			let email = sessionStorage.getItem("email");
+			OrderService.getAllOrderByEmail(email)
 				.then((resp) => {
 					$scope.allOrder = resp.data;
 					$scope.orderCounts = {

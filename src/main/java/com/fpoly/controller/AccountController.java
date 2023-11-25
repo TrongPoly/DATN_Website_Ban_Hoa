@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fpoly.model.Account;
-import com.fpoly.model.Customer;
 import com.fpoly.service.AccountService;
-import com.fpoly.service.CustomerService;
 import com.fpoly.service.RoleService;
 import com.fpoly.service.SessionService;
 //import com.fpoly.service.UserInfoService;
@@ -30,9 +28,6 @@ public class AccountController {
 	SessionService sessionService;
 	@Autowired
 	RoleService roleService;
-	@Autowired
-	CustomerService customerService;
-	
 
 	// Xác minh tài khoản thành công
 	@GetMapping("/success_verify")
@@ -76,7 +71,7 @@ public class AccountController {
 	public String accountLocked() {
 		return "login";
 	}
-	
+
 	@RequestMapping("/blocked")
 	public String isBlocked() {
 		return "login";
@@ -115,11 +110,9 @@ public class AccountController {
 			sessionService.setSession("user", account, 300);
 		} else {
 			String password = Long.toHexString(System.currentTimeMillis());
-			Account account2 = new Account(email, password, roleService.findById(2), true);
-			accountService.saveAccount(account2);
 			String name = oauth2.getPrincipal().getAttribute("name");
-			Customer customer = new Customer(name, account2, "0123456789", true);
-			customerService.saveCustomer(customer);
+			Account account2 = new Account(email, password, name, roleService.findById(2), true, false);
+			accountService.saveAccount(account2);
 			sessionService.setSession("user", account2, 300);
 		}
 		return "forward:/auth/login/success";
