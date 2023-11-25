@@ -6,7 +6,7 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 		$scope.quant = 1;
 
 		if (location.href == location.origin + "/product/refresh") {
-			ToastService.createToast("info", "Số lượng sản phẩm đã thay đổi", $scope.toasts);
+			ToastService.createToast("info", "Số lượng sản phẩm không đủ", $scope.toasts);
 		}
 
 		$scope.removeToast = function(toast) {
@@ -40,6 +40,7 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 			if (CartService.checkLogin() == true) {
 				item.quant = $scope.quant;
 				item.selected = true;
+				
 				const resp = await ProductService.getOneProduct(item.id);
 				if (item.quant > resp.data.quantity) {
 					location.href = location.origin + "/product/refresh";

@@ -21,14 +21,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fpoly.DTO.OrderDTO;
-import com.fpoly.model.Customer;
+import com.fpoly.model.Account;
 import com.fpoly.model.Order;
 import com.fpoly.model.OrderDetail;
 import com.fpoly.model.OrderStatus;
 import com.fpoly.model.OrderStatusHistory;
 import com.fpoly.model.Product;
 import com.fpoly.service.AccountService;
-import com.fpoly.service.CustomerService;
 import com.fpoly.service.OrderDetailsService;
 import com.fpoly.service.OrderService;
 import com.fpoly.service.OrderStatusHistoryService;
@@ -43,8 +42,6 @@ public class OrderRestController {
 	@Autowired
 	OrderService orderService;
 	@Autowired
-	CustomerService customerService;
-	@Autowired
 	ProductService productService;
 	@Autowired
 	AccountService accountService;
@@ -58,17 +55,25 @@ public class OrderRestController {
 		List<Order> listOrders = orderService.findAllOrder();
 		return ResponseEntity.ok(listOrders);
 	}
+	@GetMapping("/order/get_all/{email}")
+	public ResponseEntity<List<Order>> getAllByEmail(@PathVariable("email") String email) {
+		List<Order> listOrders = orderService.findByCustomer(accountService.findByid(email));
+		return ResponseEntity.ok(listOrders);
+	}
 
 	@PostMapping("/order/save/{email}")
 	public ResponseEntity<List<OrderDetail>> saveOrder(@RequestBody List<OrderDTO> orderDTO,
 			@PathVariable("email") String emailCustomer, @RequestParam("pickUpDate") String pickUpDate,
-			@RequestParam("methodPayment") Integer methodPayment) {
+			@RequestParam("methodPayment") Integer methodPayment, @RequestParam("fullName") String fullName,
+			@RequestParam("phoneNumber") String phoneNumber) {
 		Order order = new Order();
-		Customer customer = customerService.findByEmail(accountService.findByid(emailCustomer));
 
-		order.setCustomer(customer);
+		Account account = accountService.findByid(emailCustomer);
+		order.setEmail(account);
+		order.setFullName(fullName);
+		order.setPhoneNumber(phoneNumber);
+		order.setNote("AAA");
 		Instant od = Instant.now();
-
 		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime localDateTime = LocalDateTime.parse(pickUpDate, inputFormatter);
 		Instant pu = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
@@ -86,6 +91,7 @@ public class OrderRestController {
 		OrderStatusHistory orderStatusHistory = new OrderStatusHistory();
 		orderStatusHistory.setOrder(order);
 		orderStatusHistory.setChangeDate(od);
+		orderStatusHistory.setEmail(account);
 		orderStatusHistory.setStatus(orderStatus);
 		orderStatusHistoryService.saveOrderStatusHistory(orderStatusHistory);
 
@@ -105,8 +111,9 @@ public class OrderRestController {
 	@GetMapping("/order/{emailUser}")
 	public ResponseEntity<List<Order>> getOrder(@PathVariable("emailUser") String email,
 			@RequestParam("status") int status) {
-		Customer customer = customerService.findByEmail(accountService.findByid(email));
-		List<Order> listOrder = orderService.findByCustomer(customer);
+//		Customer customer = customerService.findByEmail(accountService.findByid(email));
+		Account account = accountService.findByid(email);
+		List<Order> listOrder = orderService.findByCustomer(account);
 		return ResponseEntity.ok(listOrder.stream().filter(od -> od.getStatus().getStatusId() == status)
 				.sorted(Comparator.comparing(Order::getId).reversed()).toList());
 	}
@@ -119,7 +126,7 @@ public class OrderRestController {
 
 	@PutMapping("/order/update_status/{idOrder}")
 	public ResponseEntity<Order> requestCancel(@PathVariable("idOrder") Integer idOrder,
-			@RequestParam("statusId") Integer statusId,@RequestParam("note") Optional<String> note) {
+			@RequestParam("statusId") Integer statusId, @RequestParam("note") Optional<String> note, @RequestParam("email") String email) {
 		Order order = orderService.findById(idOrder);
 		OrderStatus orderStatus = orderStatusService.findById(statusId);
 		order.setStatus(orderStatus);
@@ -131,9 +138,10 @@ public class OrderRestController {
 		orderStatusHistory.setNote(note.orElse(""));
 		Instant changeDate = Instant.now();
 		orderStatusHistory.setChangeDate(changeDate);
+		orderStatusHistory.setEmail(accountService.findByid(email));
 		orderStatusHistoryService.saveOrderStatusHistory(orderStatusHistory);
 
-		//status= 4 (Hủy đơn)
+		// status= 4 (Hủy đơn)
 		if (statusId == 4) {
 			// reset số lượng sản phẩm
 			List<OrderDetail> orderDetail = orderDetailsService.findByOrder(order);

@@ -41,7 +41,7 @@
 		<!-- Toast -->
 		<ul th:insert="~{fragment/_toast}"></ul>
 		<div class="row">
-			<div class="col-md-10 col-sm-10 offset-1">
+			<div class="col-12">
 				<div>
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item" role="presentation">
@@ -86,6 +86,8 @@
 									<thead>
 										<tr>
 											<th>Mã đơn hàng</th>
+											<th colspan="2">Người nhận</th>
+											<th>Lời nhắn</th>
 											<th>Ngày đặt hàng</th>
 											<th>Ngày lấy</th>
 											<th>Hình thức thanh toán</th>
@@ -95,6 +97,9 @@
 									<tbody>
 										<tr ng-repeat="order in listOrder">
 											<td>{{order.id}}</td>
+											<td>{{order.fullName}}</td>
+											<td>{{order.phoneNumber}}</td>
+											<td>{{order.note}}</td>
 											<td>{{order.orderDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 											<td>{{order.pickUpDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 											<td><label ng-show="order.methodPayment==0"

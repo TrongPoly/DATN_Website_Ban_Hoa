@@ -1,24 +1,14 @@
-app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$http", "CustomerService",
-	function($scope, ToastService, CheckoutService, $http, CustomerService) {
+app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$http", 
+	function($scope, ToastService, CheckoutService, $http) {
 		$scope.orders = [];
 		$scope.toasts = [];
 		$scope.totalOrder = 0;
-		$scope.customer = {};
 		$scope.methodPayment = "Chuyển khoản";
-		$scope.isDisabled = true;
 		if (location.href == "http://localhost:8080/checkout/invalid") {
-			ToastService.createToast("warning", "Vui lòng chọn  ngày lấy hoa", $scope.toasts);
+			ToastService.createToast("warning", "Vui lòng điền đầy đủ thông tin", $scope.toasts);
 		}
 
-		$scope.getCustomer = function() {
-			CustomerService.getCustomer()
-				.then((resp) => {
-					$scope.customer = resp.data;
-				})
-				.catch((error) => {
-					console.log(error.status);
-				});
-		}
+		
 
 		$scope.get = function() {
 			$scope.orders = CheckoutService.getSelectedProduct();
@@ -26,7 +16,6 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 			if ($scope.totalOrder == 0) {
 				ToastService.createToast("error", "Không có sản phẩm nào", $scope.toasts);
 			}
-			$scope.getCustomer();
 		}
 		$scope.getOrderTotal = function() {
 			for (let i = 0; i < $scope.orders.length; i++) {
@@ -39,43 +28,48 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 
 		$scope.checkout = function(amount) {
 			let datePU = document.getElementById("datePickUp").value;
-			console.log(datePU);
-			if (datePU == "") {
+			let fullName = document.getElementById("fullName").value.trim();
+			let phoneNumber = document.getElementById("phoneNumber").value.trim();
+
+			if (datePU == "" || fullName == "" || phoneNumber == "") {
 				location.href = location.origin + "/checkout/invalid";
 			} else {
-				sessionStorage.setItem("methodPayment", 0);
-				sessionStorage.removeItem("pickUpDate")
-				sessionStorage.setItem("pickUpDate", datePU);
-				if ($scope.methodPayment == "Chuyển khoản") {
+				let pickupDate = new Date(datePU);
 
-					var url = location.origin + `/api/payment/create_payment?amount=${amount}`;
-					$http
-						.get(url)
-						.then((resp) => {
-							location.href = resp.data.url;
-						})
-						.catch((error) => {
-							alert(error.status)
-							alert("Lỗi");
-						});
+				// Lấy thời gian hiện tại
+				let currentDate = new Date();
+
+				// So sánh ngày lấy hoa với thời gian hiện tại
+				if (pickupDate < currentDate) {
+					ToastService.createToast("error", "Ngày lấy hoa không hợp lệ", $scope.toasts);
 				} else {
-					sessionStorage.setItem("methodPayment", 1);
-					location.href = location.origin + "/order/success";
+
+					sessionStorage.setItem("methodPayment", 0);
+					sessionStorage.removeItem("pickUpDate")
+					sessionStorage.setItem("pickUpDate", datePU);
+					sessionStorage.setItem("fullName", fullName);
+					sessionStorage.setItem("phoneNumber", phoneNumber);
+					if ($scope.methodPayment == "Chuyển khoản") {
+
+						var url = location.origin + `/api/payment/create_payment?amount=${amount}`;
+						$http
+							.get(url)
+							.then((resp) => {
+								location.href = resp.data.url;
+							})
+							.catch((error) => {
+								alert(error.status)
+								alert("Lỗi");
+							});
+					} else {
+						sessionStorage.setItem("methodPayment", 1);
+						location.href = location.origin + "/order/success";
+					}
 				}
 			}
 		}
 
-		$scope.toggleDisabled = function() {
-			$scope.isDisabled = !$scope.isDisabled;
-			let fullName = document.getElementById("fullName").value.trim();
-			let phoneNumber = document.getElementById("phoneNumber").value.trim();
-			if (fullName == "" || phoneNumber == "") {
-				$scope.isDisabled=false;
-				ToastService.createToast("error", "Không để trống thông tin", $scope.toasts);
-			}
-			$scope.customer.fullName = fullName;
-			$scope.customer.phoneNumber = phoneNumber;
-			CustomerService.updateCustomer($scope.customer);
-		}
+	
+	
 		$scope.get();
 	}]);

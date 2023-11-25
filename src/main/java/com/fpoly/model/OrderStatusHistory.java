@@ -24,6 +24,10 @@ public class OrderStatusHistory {
     private Order order;
 
     @ManyToOne
+    @JoinColumn(name = "email", nullable = false)
+    private Account email;
+
+    @ManyToOne
     @JoinColumn(name = "status_id", nullable = false)
     private OrderStatus status;
 
@@ -71,6 +75,14 @@ public class OrderStatusHistory {
 
 	public void setChangeDate(Instant changeDate) {
 		this.changeDate = changeDate;
+	}
+
+	public Account getEmail() {
+		return email;
+	}
+
+	public void setEmail(Account email) {
+		this.email = email;
 	}
 
 }
