@@ -40,19 +40,36 @@ public class AdminCustomerRestController {
 	public ResponseEntity<List<Customer>> getAll(Model model) {
 		return ResponseEntity.ok(customerService.findAllCustomer());
 	}
+	
+	@PostMapping("/customer")
+	public Customer post(@RequestBody Customer kh) { 
+		customerService.saveCustomer(kh);		
+		return kh;
+	}
+	
+	@GetMapping("/customer/{id}")
+	public ResponseEntity<Customer> getOne(@PathVariable("id") Integer id) {
+		
+		if(!daokh.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(daokh.findById(id).get());
+	}
 		
 	@PutMapping("/customer/chan/{id}")
 	public  ResponseEntity<Customer> chan(@PathVariable("id") Integer id) {
 		Account account = accountService.findByid(daokh.findById(id).get().getEmail().getEmail());
-		account.setActive(false);
+		account.setLocked(true);
 		accountService.saveAccount(account);
 		return ResponseEntity.ok().build();
 	}
 	
+
+	
 	@PutMapping("/customer/boChan/{id}")
 	public  ResponseEntity<Customer> boChan(@PathVariable("id") Integer id) {
 		Account account = accountService.findByid(daokh.findById(id).get().getEmail().getEmail());
-		account.setActive(true);
+		account.setLocked(false);
 		accountService.saveAccount(account);
 		return ResponseEntity.ok().build();
 	}

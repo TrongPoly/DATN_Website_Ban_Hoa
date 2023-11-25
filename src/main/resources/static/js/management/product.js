@@ -4,12 +4,12 @@ app.controller("AdminSpCtrl", function($scope, $http) {
 	$scope.form = {};
 	$scope.sps = [];
 	$scope.cats = [];
-	
+
 	$scope.reset = function() {
 		$scope.form = { trangThai: true };
 		$scope.key = null;
 	}
-	
+
 	$scope.load_all_category = function() {
 		var url = `${host}/category`;
 		$http.get(url).then(resp => {
@@ -19,7 +19,7 @@ app.controller("AdminSpCtrl", function($scope, $http) {
 			console.log("Error", error);
 		});
 	}
-	
+
 	$scope.load_all = function() {
 		var url = `${host}/product`;
 		$http.get(url).then(resp => {
@@ -29,8 +29,8 @@ app.controller("AdminSpCtrl", function($scope, $http) {
 			console.log("Error", error);
 		});
 	}
-	
-		$scope.edit = function(id) {
+
+	$scope.edit = function(id) {
 		var url = `${host}/product/${id}`;
 		$http.get(url).then(resp => {
 			$scope.form = resp.data;
@@ -40,7 +40,146 @@ app.controller("AdminSpCtrl", function($scope, $http) {
 			console.log("Error", error);
 		})
 	}
-	
+
+	$scope.create = function() {
+
+
+
+		//Không chọn thương hiệu
+		if (!$scope.form.category || !$scope.form.category.id) {
+			alert("vui lòng chọn loại sản phẩm")
+			/*	$scope.errorMessage = "Vui lòng chọn thương hiệu!";
+				$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+
+		//Lỗi bỏ trống tên sản phẩm 
+		if (!$scope.form.name) {
+			alert("Vui lòng nhập tên sản phẩm!!")
+			/*$scope.errorMessage = "Vui lòng nhập tên sản phẩm!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+		//Lỗi trùng tên sản phẩm
+		let existingProduct = $scope.sps.find(sp => sp.name === $scope.form.name);
+		if (existingProduct) {
+			alert("tên sản phẩm đã tồn tại!!")
+			/*$scope.errorMessage = "Tên sản phẩm đã tồn tại!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+
+		//Lỗi bỏ trống đơn giá
+		if (!$scope.form.quantity) {
+			alert("Vui lòng nhập số lượng!!")
+			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+
+		//Lỗi bỏ trống đơn giá
+		if (!$scope.form.price) {
+			alert("Vui lòng nhập đơn giá!!")
+			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+
+
+		var item = angular.copy($scope.form);
+		var url = `${host}/product`;
+		$http.post(url, item).then(resp => {
+
+			$scope.sps.push(item);
+
+			$scope.reset();
+			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
+			alert("Thêm mới thành công");
+			console.log("Success", resp);
+
+
+			location.reload();
+		}).catch((error) => {
+			alert("thêm thất bại!")
+			console.log("Error", error);
+		});
+	}
+
+	$scope.update = function() {
+
+		//Không chọn thương hiệu
+		if (!$scope.form.category || !$scope.form.category.id) {
+			alert("vui lòng chọn loại sản phẩm")
+			/*	$scope.errorMessage = "Vui lòng chọn thương hiệu!";
+				$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+
+		//Lỗi bỏ trống tên sản phẩm 
+		if (!$scope.form.name) {
+			alert("Vui lòng nhập tên sản phẩm!!")
+			/*$scope.errorMessage = "Vui lòng nhập tên sản phẩm!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+
+
+		//Lỗi bỏ trống đơn giá
+		if (!$scope.form.quantity) {
+			alert("Vui lòng nhập số lượng!!")
+			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+
+		//Lỗi bỏ trống đơn giá
+		if (!$scope.form.price) {
+			alert("Vui lòng nhập đơn giá!!")
+			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+
+
+		var item = angular.copy($scope.form);
+		var cat = angular.copy($scope.form.category.id);
+		var url = `${host}/product/${$scope.form.id}?category=${cat}`;
+
+		$http
+			.put(url, item).then(resp => {
+				var index = $scope.sps.findIndex(item =>
+					item.id == $scope.form.id);
+
+				alert("cập nhật thành công!")
+				$scope.sps[index] = resp.data;
+
+				console.log("Succes", resp);
+			}).catch((error) => {
+				alert("cập nhật thất bại!")
+				console.log("Error", error)
+			});
+
+
+	}
+
+	$scope.delete = function(id) {
+		var url = `${host}/product/${id}`;
+		if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
+			$http.delete(url).then(resp => {
+				var index = $scope.sps.findIndex(item => item.id == id);
+
+				$scope.sps.splice(index, 1);
+				alert("xóa thành công")
+				$scope.reset();
+				console.log("Succes", resp);
+			}).catch((error) => {
+				alert("xóa không thành công")
+				console.log("Error", error)
+			});
+		}
+	}
+
+
 	// Tìm kiếm sản phẩm 
 	$scope.searchProductByName = function() {
 		if ($scope.searchKeyword && $scope.searchKeyword.trim() !== "") {
@@ -54,17 +193,17 @@ app.controller("AdminSpCtrl", function($scope, $http) {
 			});
 		} else {
 			// Nếu không có từ khóa tìm kiếm, hiển thị tất cả sản phảm
-			
+
 			$scope.load_all();
 		}
 	};
-	
+
 	//upload image
 	$scope.imageChanged = function(files) {
 		var data = new FormData();
 
 		data.append('file', files[0]);
-		$http.post('/rest/upload/images', data, {
+		$http.post('/rest/upload/img', data, {
 			transformRequest: angular.identity,
 			headers: { 'Content-Type': undefined }
 		}).then(resp => {
@@ -74,8 +213,8 @@ app.controller("AdminSpCtrl", function($scope, $http) {
 			console.log("Error", error);
 		})
 	}
-	
-	
+
+
 	$scope.pager = {
 		page: 0,
 		size: 5,
@@ -111,4 +250,4 @@ app.controller("AdminSpCtrl", function($scope, $http) {
 	$scope.load_all();
 	$scope.load_all_category();
 	$scope.reset();
-	})
+})

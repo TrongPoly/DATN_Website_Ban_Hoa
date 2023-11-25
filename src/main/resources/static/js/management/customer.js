@@ -3,8 +3,9 @@ const app = angular.module("AdminKhApp", []);
 app.controller("AdminKhCtrl", function($scope, $http) {
 	$scope.form = {};
 	$scope.items = [];
+	$scope.roles = [];
+	$scope.accounts = [];
 	
-
 
 	$scope.reset = function() {
 		$scope.form = { active: true };
@@ -21,6 +22,27 @@ app.controller("AdminKhCtrl", function($scope, $http) {
 			console.log("Error", error);
 		});
 	}
+	
+	$scope.load_all_role = function() {
+		var url = `${host}/role`;
+		$http.get(url).then(resp => {
+			$scope.roles = resp.data;
+			console.log("Succes", resp);
+		}).catch((error) => {
+			console.log("Error", error);
+		});
+	}
+	
+	$scope.load_all_account = function() {
+		var url = `${host}/account`;
+		$http.get(url).then(resp => {
+			$scope.accounts = resp.data;
+			console.log("Succes", resp);
+		}).catch((error) => {
+			console.log("Error", error);
+		});
+	}
+	
 	
 	$scope.chan = function(customerId) {
 		var url = `${host}/customer/chan/${customerId}`;
@@ -64,6 +86,36 @@ app.controller("AdminKhCtrl", function($scope, $http) {
 			$scope.load_all();
 		}
 	};
+	
+	$scope.create = function() {
+		var item = angular.copy($scope.form);
+		var url = `${host}/customer`;
+		$http.post(url, item).then(resp => {
+
+			$scope.items.push(item);
+
+			$scope.reset();
+			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
+			alert("Thêm mới thành công");
+			console.log("Success", resp);
+
+
+			location.reload();
+		}).catch((error) => {
+			alert("thêm thất bại!")
+			console.log("Error", error);
+		});
+	}
+	
+	$scope.edit = function(id) {
+		var url = `${host}/customer/${id}`;
+		$http.get(url).then(resp => {
+			$scope.form = resp.data;
+			console.log("Success", resp);
+		}).catch((error) => {
+			console.log("Error", error);
+		})
+	}
 
 	$scope.pager = {
 		page: 0,
@@ -98,5 +150,7 @@ app.controller("AdminKhCtrl", function($scope, $http) {
 	}
 
 	$scope.load_all();
-	
+	$scope.load_all_account();
+	$scope.load_all_role();
+	$scope.reset();
 })

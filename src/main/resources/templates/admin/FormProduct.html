@@ -225,11 +225,12 @@
                     <div class="form-group">
                       <label>Image</label>
                       <input sty  type="file" name="file" class="file-upload-default"
-                     
-                     onchange="angular.element(this).scope().imageChanged(this.files)" >
+                   	   ng-model="form.image"  
+                       onchange="angular.element(this).scope().imageChanged(this.files)">
                       <div class="input-group col-xs-12">
                         <input  type="text" class="form-control file-upload-info" disabled placeholder="Upload Image"
-                         onchange="angular.element(this).scope().imageChanged(this.files)">
+                        ng-model="form.image"
+                        onchange="angular.element(this).scope().imageChanged(this.files)">
                         <span class="input-group-append">
                           <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                         </span>
@@ -244,15 +245,16 @@
                       <input ng-model="form.price" type="number" class="form-control" id="Price" placeholder="Price (VND)">
                     </div>
                     <div class="form-group">
-                      <label for="exampleSelectGender"> Status</label>
-                        <select class="form-control" id="exampleSelectGender" ng-model="form.isAvailable">
-                          <option ng-repeat="item in sps" ng-value="{{item.isAvailable}}">{{item.isAvailable}}</option>
-                          
+                      <label for="exampleSelectGender"> Status</label> <br>
+                        <input ng-model="form.isAvailable" type="radio" ng-value="true"
+						name="option1" id="radio_con_hang"> Còn Bán<label></label>
+						<input ng-model="form.isAvailable" type="radio" ng-value="false"
+						name="option1" id="radio_het_hang"> Ngừng Kinh Doanh <label></label>
                         </select>
                       </div>
-                    <button type="button" class="btn btn-primary">Create</button>
-                    <button type="button" class="btn btn-primary">Update</button>
-                    <button type="button" class="btn btn-secondary">Edit</button> 
+                    <button ng-click="create()" type="button" class="btn btn-primary">Create</button>
+                    
+                    <button ng-click="update()" type="button" class="btn btn-secondary">Edit</button> 
                   </form>
                 </div>
                 
@@ -295,7 +297,8 @@
                           <td>{{sp.price | number: 0}} VNĐ</td>
                           <td> <div class="form-check">
                             <label class="toggle-switch">
-                              <input type="checkbox" checked >
+                              <input type="checkbox" ng-checked = "sp.isAvailable"
+                              >
                               <span class="toggle-slider round"></span>
                             </label>                      
                           </div></td>

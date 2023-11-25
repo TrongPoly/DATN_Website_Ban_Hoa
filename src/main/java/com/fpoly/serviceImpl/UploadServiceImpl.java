@@ -19,20 +19,22 @@ public class UploadServiceImpl implements UploadService{
 	ServletContext app;
 	
 	public File save(MultipartFile file,String folder) {
-		try {
-			// Tạo đối tượng File từ đường dẫn và tên tệp
-			File directory = new File(folder);
-			// Tạo thư mục mới nếu thư mục không tồn tại
+		
+			
+			File dir = new File(app.getRealPath("/assets/" + folder));
+			
+			if(!dir.exists()) {
+				dir.mkdirs();
+			}
 			
 			String filename = file.getOriginalFilename();
-			File savedFile = new File(directory.getAbsolutePath() + File.separator + filename);
+			File savedFile = new File(dir.getAbsolutePath() + File.separator + filename);
 
 			// Lưu tệp vào thư mục
-			FileOutputStream os = new FileOutputStream(savedFile);
-			os.write(file.getBytes());
-			os.close();
-
-			// Trả về đối tượng File đã lưu
+			
+			try {	
+			file.transferTo(savedFile);	
+			System.out.println(savedFile.getAbsolutePath());
 			return savedFile;
 		} catch (IOException e) {
 			throw new RuntimeException("Lỗi lưu tệp", e); // Ném lỗi nếu xảy ra lỗi khi lưu tệp

@@ -63,10 +63,14 @@ public class AdminProductRestController {
 	}
 	
 	@PostMapping("/product")
-	public Product post(@RequestBody Product pr, @PathParam("folder") MultipartFile folder) {
-		PrAd.saveProduct(pr);
+	public  ResponseEntity<Product> post(@RequestBody Product pr, @PathParam("folder") MultipartFile folder,@PathVariable("id") Integer id) {
+		if (!prRep.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
 		
-		return pr;
+		
+		PrAd.saveProduct(pr);	
+		return ResponseEntity.ok(pr);
 	}
 	
 //	@PutMapping("/product/{id}")

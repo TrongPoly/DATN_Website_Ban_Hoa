@@ -21,10 +21,11 @@
 	href="../_admin/css/vertical-layout-light/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="../_admin/images/favicon.png" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-	
+
 
 </head>
 <body ng-app="AdminKhApp" ng-controller="AdminKhCtrl">
@@ -233,61 +234,65 @@
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="row">
-						<!--             <div class="col-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Form Account</h4>
-                  <form class="forms-sample">
-                    <div class="form-group">
-                      <label for="id">Customer id</label>
-                      <input type="text" class="form-control" id="id" placeholder="Customer">
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Email</label>
-                      <input type="email" class="form-control" id="email" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                      <label for="phone">Phone</label>
-                      <input type="tel" class="form-control" id="phone" placeholder="phone">
-                    </div>
-                    <div class="form-group">
-                      <label for="name">Fullname</label>
-                      <input type="test" class="form-control" id="name" placeholder="Fullname">
-                    </div>
-                    <div class="form-group">
-                      <label for="id">Gender</label>
-                        <select class="form-control" id="Id">
-                          <option>Nam</option>
-                          <option>Nữ</option>
-                          <option>Khác</option>
-                        </select>
-                      </div>
-                    <div class="form-group">
-                      <label for="Password">Password</label>
-                      <input type="password" class="form-control" id="password" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                      <label for="role">Role</label>
-                        <select class="form-control" id="Id">
-                          <option>../admin</option>
-                          <option>User</option>
-                        </select>
-                      </div>
-                    <div class="form-check">
-                      <label class="mb-3 mr-5">Active</label>
-                      <label class="toggle-switch">
-                        <input type="checkbox" checked>
-                        <span class="toggle-slider round"></span>
-                      </label>                      
-                    </div>
-                    <button type="button" class="btn btn-primary">Create</button>
-                    <button type="button" class="btn btn-secondary">Edit</button> 
-                  </form>
-                </div>
-                
-              </div>
-              
-            </div> -->
+						<div class="col-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Form Account</h4>
+									<form class="forms-sample">
+										<div class="form-group">
+											<input ng-model="form.id" type="text" class="form-control"
+												id="id" placeholder="Customer" style="display: none;">
+										</div>
+										<div class="form-group">
+											<label for="name">Fullname</label> <input
+												ng-model="form.fullName" type="text" class="form-control"
+												id="name" placeholder="Fullname">
+										</div>
+										<div class="form-group">
+											<label for="email">Email</label> <input type="email"
+												class="form-control" id="email" placeholder="Email"
+												ng-model="form.email.email">
+										</div>
+										<div class="form-group">
+											<label for="phone">Phone</label> <input type="text"
+												class="form-control" id="phone" placeholder="phone"
+												ng-model="form.phoneNumber">
+										</div>
+
+										<div class="form-group">
+											<label for="id">Gender</label><br> <input
+												ng-model="form.gender" type="radio" ng-value="true"
+												name="option1" id="radio_Nam"> Nam<label></label> <input
+												ng-model="form.gender" type="radio" ng-value="false"
+												name="option1" id="radio_nu"> Nữ <label></label>
+										</div>
+										<div class="form-group">
+											<label for="Password">Password</label> <input type="password"
+												class="form-control" id="password" placeholder="Password"
+												ng-model="form.phoneNumber">
+										</div>
+										<div class="form-group">
+											<label>Role</label> 	
+											<select class="form-control"
+												id="Id" ng-model="form.email.role.id">
+												<option ng-repeat="role in roles" ng-value="{{role.id}}">{{role.roleName}}</option>
+
+											</select>
+										</div>
+										<div class="form-check">
+											<label class="mb-3 mr-5">Active</label> <label
+												class="toggle-switch"> <input type="checkbox"
+												checked> <span class="toggle-slider round"></span>
+											</label>
+										</div>
+										<button type="button" class="btn btn-primary" ng-click="create()">Create</button>
+										<button type="button" class="btn btn-secondary">Edit</button>
+									</form>
+								</div>
+
+							</div>
+
+						</div>
 
 						<!--TABLE-->
 						<div class="col-12 grid-margin stretch-card">
@@ -313,6 +318,9 @@
 													<th>Email</th>
 													<th>PhoneNumber</th>
 													<th>Gender</th>
+													<th>Blocked</th>
+													<th>Role</th>
+													<th>Active</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -322,13 +330,29 @@
 													<td>{{item.email.email}}</td>
 													<td>{{item.phoneNumber}}</td>
 													<td>{{item.gender?'Nam':'Nữ'}}</td>
-													<td>{{item.email.active? 'Đã kích hoạt' : 'Ngừng kích
-														hoạt'}}</td>
-													<td><a ng:if="item.email.active == true"
+													<td>{{item.email.locked? 'Đã Chặn' : 'Ngừng Chặn'}}</td>
+													<td>{{item.email.role.roleName}}</td>
+													<td>
+														<div class="form-check">
+															<label class="toggle-switch"> <input
+																type="checkbox"> <span
+																class="toggle-slider round"></span>
+															</label>
+														</div>
+													</td>
+													<td><a ng:if="item.email.locked == false"
 														ng-click="chan(item.id)" class="btn btn-warning"><i
-															class="fa fa-lock-open"></i></a> <a ng-click="boChan(item.id)"
-														ng:if="item.email.active == false" class="btn btn-warning"><i
+															class="fa fa-lock-open"></i></a> <a
+														ng-click="boChan(item.id)"
+														ng:if="item.email.locked == true" class="btn btn-warning"><i
 															class='fa fa-lock'></i></a></td>
+													<td>
+														<button ng-click="edit(item.id)" type="button"
+															class="btn btn-inverse-primary btn-rounded btn-icon">
+															<i class=" typcn typcn-pen"></i>
+														</button>
+													</td>
+													
 												</tr>
 											</tbody>
 										</table>
