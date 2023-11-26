@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fpoly.model.Customer;
-
-import com.fpoly.service.CustomerService;
+import com.fpoly.model.Account;
+import com.fpoly.service.AccountService;
 import com.fpoly.service.SessionService;
 
 
@@ -20,34 +19,35 @@ import com.fpoly.service.SessionService;
 @RestController
 @RequestMapping("/rest")
 public class ProfileRestController {
-	@Autowired
-	CustomerService customerService;
 
 	@Autowired
 	SessionService session;
+	
+	@Autowired 
+	AccountService accountService;
 
 
 	@GetMapping("/profile/getUser")
-	public Customer findUser() {
-		return customerService.findByUser();
+	public Account findUser() {
+		return accountService.findByUser();
 	}
 
 	@GetMapping("/profile/{id}")
-	public Customer getOne(@PathVariable("id") Integer id) {
-		return customerService.findById(id);
+	public Account getOne(@PathVariable("id") String id) {
+		return accountService.findByid(id);
 	}
 	
 	@PostMapping("/profile")
-	public Customer post(@RequestBody Customer kh) {
-		customerService.saveCustomer(kh);
-		return kh;
+	public Account post(@RequestBody Account ac) {
+		accountService.saveAccount(ac);
+		return ac;
 	}
 
 	@PutMapping("/profile/{id}")
-	public ResponseEntity<Customer> put(@PathVariable("id") Integer id, @RequestBody Customer kh) {
-		Customer khachHang = customerService.findById(id);
-		if (khachHang != null)
-			customerService.saveCustomer(kh);
-		return ResponseEntity.ok(kh);
+	public ResponseEntity<Account> put(@PathVariable("id") String id, @RequestBody Account ac) {
+		Account account = accountService.findByid(id);
+		if (account != null)
+			accountService.saveAccount(ac);
+		return ResponseEntity.ok(ac);
 	}
 }

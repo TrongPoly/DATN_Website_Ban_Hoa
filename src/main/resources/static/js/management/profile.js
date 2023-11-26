@@ -40,18 +40,6 @@ app.controller("AdminPfCtrl", function($scope, $http) {
 
 			return;
 		}
-		//Lỗi bỏ trống số điện thoại 
-		if (!$scope.khachHang.phoneNumber) {
-			alert("Vui lòng nhập tên khách hàng!!")
-			$scope.errorMessage = "Vui lòng nhập tên sản phẩm!!";
-			$('#errorModal').modal('show'); // Show the modal
-			return;
-		}
-		//Lỗi sai cú pháp số điện thoại 
-		if (isNaN($scope.khachHang.phoneNumber) || $scope.khachHang.phoneNumber.length != 10) {
-			alert("Số điện thoại không hợp lệ!");
-			return;
-		}
 
 		var item = angular.copy($scope.khachHang);
 		var url = `${host}/profile/${$scope.khachHang.id}`;

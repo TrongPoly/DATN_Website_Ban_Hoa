@@ -8,11 +8,16 @@ import org.springframework.stereotype.Service;
 import com.fpoly.model.Account;
 import com.fpoly.repository.AccountRepository;
 import com.fpoly.service.AccountService;
+import com.fpoly.service.SessionService;
 @Service
 public class AccountServiceImpl implements AccountService{
 
 	@Autowired
 	AccountRepository accountRepository;
+	
+	@Autowired
+	SessionService session;
+	
 	@Override
 	public Account findByid(String email) {
 		return accountRepository.findById(email).orElse(null);
@@ -24,6 +29,15 @@ public class AccountServiceImpl implements AccountService{
 	@Override
 	public void saveAccount(Account account) {
 		accountRepository.save(account);
+	}
+	@Override
+	public Account findByUser() {
+		return accountRepository.findAll().stream()
+				.filter(acc -> acc.getEmail().equals(session.getSession("user").getEmail())).findFirst().get();
+	}
+	@Override
+	public List<Account> searchByName(String keyword){
+		return accountRepository.findByFullNameContaining(keyword);
 	}
 
 }

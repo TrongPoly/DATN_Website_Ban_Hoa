@@ -54,21 +54,6 @@ https://templatemo.com/tm-559-zay-shop
 									ng-model="khachHang.fullName" type="text"
 									class="form-control" name="username">
 								</div>
-								<label class="col-form-label  label-align"
-									style="padding-left: 15px;" for="full-name">Phone </label>
-								<div class="col-md-12 form-group">
-									<input ng-if="editProfile==0" ng-model="khachHang.phoneNumber"
-									ng-type="number" name="phone" class="form-control"
-									readonly="true"> <input ng-if="editProfile==1"
-									ng-model="khachHang.phoneNumber" ng-type="number" name="phone"
-									class="form-control">
-								</div>
-								<label class="col-form-label  label-align"
-									style="padding-left: 15px;" for="full-name">Email </label>
-								<div class="col-md-12 form-group">
-									<input ng-model="khachHang.email.email" type="text"
-										name="Email" class="form-control" readonly="true">
-								</div>
 							</form>
 
 							<button ng-if="editProfile==1" ng-click="update()"

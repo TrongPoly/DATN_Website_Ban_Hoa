@@ -19,6 +19,7 @@
 <!-- inject:css -->
 <link rel="stylesheet"
 	href="../_admin/css/vertical-layout-light/style.css">
+<link rel="stylesheet" href="../css/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="../_admin/images/favicon.png" />
 <link rel="stylesheet"
@@ -28,7 +29,7 @@
 
 
 </head>
-<body ng-app="AdminKhApp" ng-controller="AdminKhCtrl">
+<body ng-app="AdminAccApp" ng-controller="AdminAccCtrl">
 	<div class="container-scroller">
 		<!-- partial:../admin/partials/_navbar.html -->
 		<nav th:replace="~{fragment/_adminHeader.html::adminHeader}"></nav>
@@ -240,8 +241,9 @@
 									<h4 class="card-title">Form Account</h4>
 									<form class="forms-sample">
 										<div class="form-group">
-											<input ng-model="form.id" type="text" class="form-control"
-												id="id" placeholder="Customer" style="display: none;">
+											<label for="email">Email</label> <input type="email"
+												class="form-control" id="email" placeholder="Email"
+												ng-model="form.email">
 										</div>
 										<div class="form-group">
 											<label for="name">Fullname</label> <input
@@ -249,44 +251,33 @@
 												id="name" placeholder="Fullname">
 										</div>
 										<div class="form-group">
-											<label for="email">Email</label> <input type="email"
-												class="form-control" id="email" placeholder="Email"
-												ng-model="form.email.email">
-										</div>
-										<div class="form-group">
-											<label for="phone">Phone</label> <input type="text"
-												class="form-control" id="phone" placeholder="phone"
-												ng-model="form.phoneNumber">
-										</div>
-
-										<div class="form-group">
-											<label for="id">Gender</label><br> <input
-												ng-model="form.gender" type="radio" ng-value="true"
-												name="option1" id="radio_Nam"> Nam<label></label> <input
-												ng-model="form.gender" type="radio" ng-value="false"
-												name="option1" id="radio_nu"> Nữ <label></label>
-										</div>
-										<div class="form-group">
 											<label for="Password">Password</label> <input type="password"
 												class="form-control" id="password" placeholder="Password"
-												ng-model="form.phoneNumber">
+												ng-model="form.password">
 										</div>
 										<div class="form-group">
-											<label>Role</label> 	
-											<select class="form-control"
-												id="Id" ng-model="form.email.role.id">
+											<label>Role</label> <select class="form-control" id="Id"
+												ng-model="form.role.id">
 												<option ng-repeat="role in roles" ng-value="{{role.id}}">{{role.roleName}}</option>
 
 											</select>
 										</div>
-										<div class="form-check">
-											<label class="mb-3 mr-5">Active</label> <label
-												class="toggle-switch"> <input type="checkbox"
-												checked> <span class="toggle-slider round"></span>
-											</label>
+										<div class="form-group">
+											<label for="exampleSelectGender"> Status</label> <br> <input
+												ng-model="form.active" type="radio" ng-value="true"
+												name="option1" id="radio_con_hang"> Active<label></label>
+											<input ng-model="form.isAvailable" type="radio"
+												ng-value="false" name="option1" id="radio_het_hang">
+											Inactive <label></label> </select>
 										</div>
-										<button type="button" class="btn btn-primary" ng-click="create()">Create</button>
-										<button type="button" class="btn btn-secondary">Edit</button>
+										<div class="form-group" style="display: none;">
+											<input ng-model="form.locked" type="radio" ng-value="true"
+												name="option1" id="locked">
+										</div>
+										<button type="button" class="btn btn-primary"
+											ng-click="create()" ng-show="!editMode">Create</button>
+										<button type="button" class="btn btn-secondary"
+											ng-show="editMode" ng-click="update()">Edit</button>
 									</form>
 								</div>
 
@@ -313,46 +304,43 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th>Id</th>
-													<th>Fullname</th>
 													<th>Email</th>
-													<th>PhoneNumber</th>
-													<th>Gender</th>
-													<th>Blocked</th>
+													<th>Password</th>
+													<th>Fullname</th>
 													<th>Role</th>
+													<th>Blocked</th>
 													<th>Active</th>
+													<th th:insert="~{/fragment/_toast}"></th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr ng-repeat="item in pager.items">
-													<td>{{item.id}}</td>
+													<td>{{item.email}}</td>
+													<td>{{item.password}}</td>
 													<td>{{item.fullName}}</td>
-													<td>{{item.email.email}}</td>
-													<td>{{item.phoneNumber}}</td>
-													<td>{{item.gender?'Nam':'Nữ'}}</td>
-													<td>{{item.email.locked? 'Đã Chặn' : 'Ngừng Chặn'}}</td>
-													<td>{{item.email.role.roleName}}</td>
+													<td>{{item.role.roleName}}</td>
+													<td>{{item.locked? 'Đã Chặn' : 'Ngừng Chặn'}}</td>
 													<td>
 														<div class="form-check">
 															<label class="toggle-switch"> <input
-																type="checkbox"> <span
-																class="toggle-slider round"></span>
+																type="checkbox" ng-checked="item.locked"
+																ng-click="!item.locked ? chan(item.email) : boChan(item.email)">
+																<span class="toggle-slider round"></span>
 															</label>
 														</div>
 													</td>
-													<td><a ng:if="item.email.locked == false"
-														ng-click="chan(item.id)" class="btn btn-warning"><i
+													<td><a ng:if="item.locked == false"
+														ng-click="chan(item.email)" class="btn btn-warning"><i
 															class="fa fa-lock-open"></i></a> <a
-														ng-click="boChan(item.id)"
-														ng:if="item.email.locked == true" class="btn btn-warning"><i
-															class='fa fa-lock'></i></a></td>
+														ng-click="boChan(item.email)" ng:if="item.locked == true"
+														class="btn btn-warning"><i class='fa fa-lock'></i></a></td>
 													<td>
-														<button ng-click="edit(item.id)" type="button"
+														<button ng-click="edit(item.email)" type="button"
 															class="btn btn-inverse-primary btn-rounded btn-icon">
 															<i class=" typcn typcn-pen"></i>
 														</button>
 													</td>
-													
+
 												</tr>
 											</tbody>
 										</table>
@@ -428,7 +416,8 @@
 	<script src="../_admin/js/file-upload.js"></script>
 	<script src="../_admin/js/typeahead.js"></script>
 	<script src="../_admin/js/select2.js"></script>
-	<script th:src="@{/js/management/customer.js}"></script>
+	<script th:src="@{/js/management/account.js}"></script>
+	<script src="../js/service/toastService.js"></script>
 	<!-- End custom js for this page-->
 </body>
 
