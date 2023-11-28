@@ -47,7 +47,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 				}, 500);
 			})
 			.catch((error) => {
-				alert("Lỗi");
+				ToastService.createToast("error", "Lỗi", $scope.toasts);
 			});
 	}
 	$scope.boChan = function(accId) {
@@ -61,7 +61,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 				}, 500);
 			})
 			.catch((error) => {
-				alert("Lỗi");
+				ToastService.createToast("error", "Lỗi", $scope.toasts);
 			});
 	}
 
@@ -74,7 +74,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 			}).then(resp => {
 				$scope.items = resp.data;
 			}).catch(error => {
-				alert("lỗi tìm kiếm tên khách hàng")
+				ToastService.createToast("error", "lỗi tìm kiếm tên khách hàng", $scope.toasts);
 				console.log("Error", error);
 			});
 		} else {
@@ -114,12 +114,12 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 			$scope.reset();
 			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
 			ToastService.createToast("success", "Thêm mới thành công!", $scope.toasts);
+			setTimeout(function() {
+					location.reload();
+				}, 1000);
 			console.log("Success", resp);
-
-
-			location.reload();
 		}).catch((error) => {
-			alert("thêm thất bại!")
+			ToastService.createToast("error", "thêm thất bại!", $scope.toasts);
 			console.log("Error", error);
 		});
 	}
@@ -155,6 +155,9 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 				ToastService.createToast("success", "cập nhật thành công!", $scope.toasts);
 				$scope.items[index] = resp.data;
 				$scope.reset();
+				setTimeout(function() {
+					location.reload();
+				}, 1000);
 				console.log("Succes", resp);
 			}).catch((error) => {
 				ToastService.createToast("error", "cập nhật thất bại!", $scope.toasts);

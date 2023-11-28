@@ -289,10 +289,12 @@
 											Ngừng Kinh Doanh <label></label> </select>
 										</div>
 										<button ng-click="create()" type="button"
-											class="btn btn-primary">Create</button>
+											class="btn btn-primary" ng-show="!editMode">Create</button>
 
 										<button ng-click="update()" type="button"
-											class="btn btn-secondary">Edit</button>
+											class="btn btn-secondary" ng-show="editMode">Edit</button>
+										<button type="button" class="btn btn-secondary"
+											ng-click="reset()" ng-show="!editMode">Reset</button>
 									</form>
 								</div>
 
