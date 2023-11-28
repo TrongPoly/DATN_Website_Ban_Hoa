@@ -14,18 +14,15 @@ app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartSer
 			let email = sessionStorage.getItem("email");
 			let fullName = sessionStorage.getItem("fullName");
 			let phoneNumber = sessionStorage.getItem("phoneNumber");
+			let note = sessionStorage.getItem("note");
 
 			var url = location.origin +
 				`/api/order/save/` + email + "?methodPayment=" +
-				methodPayment + "&pickUpDate=" + pickUpdate + "&fullName=" + fullName + "&phoneNumber=" + phoneNumber;
+				methodPayment + "&pickUpDate=" + pickUpdate + "&fullName=" + fullName + "&phoneNumber=" + phoneNumber + "&note=" + note;
 
 			$scope.productList = CheckoutService.getSelectedProduct();
 			$http
 				.post(url, $scope.productList)
-				.then((resp) => {
-				})
-				.catch((error) => {
-				});
 		}
 		$scope.updateProduct = function(products) {
 			var url = location.origin +

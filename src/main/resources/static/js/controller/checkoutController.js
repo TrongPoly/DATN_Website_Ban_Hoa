@@ -30,6 +30,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 			let datePU = document.getElementById("datePickUp").value;
 			let fullName = document.getElementById("fullName").value.trim();
 			let phoneNumber = document.getElementById("phoneNumber").value.trim();
+			let note = document.getElementById("orderNote").value.trim();
 
 			if (datePU == "" || fullName == "" || phoneNumber == "") {
 				location.href = location.origin + "/checkout/invalid";
@@ -49,6 +50,8 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 					sessionStorage.setItem("pickUpDate", datePU);
 					sessionStorage.setItem("fullName", fullName);
 					sessionStorage.setItem("phoneNumber", phoneNumber);
+					sessionStorage.setItem("phoneNumber", phoneNumber);
+					sessionStorage.setItem("note",note);
 					if ($scope.methodPayment == "Chuyển khoản") {
 
 						var url = location.origin + `/api/payment/create_payment?amount=${amount}`;
