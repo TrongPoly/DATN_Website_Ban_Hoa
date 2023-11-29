@@ -65,14 +65,14 @@ public class OrderRestController {
 	public ResponseEntity<List<OrderDetail>> saveOrder(@RequestBody List<OrderDTO> orderDTO,
 			@PathVariable("email") String emailCustomer, @RequestParam("pickUpDate") String pickUpDate,
 			@RequestParam("methodPayment") Integer methodPayment, @RequestParam("fullName") String fullName,
-			@RequestParam("phoneNumber") String phoneNumber) {
+			@RequestParam("phoneNumber") String phoneNumber,@RequestParam("note") String note) {
 		Order order = new Order();
 
 		Account account = accountService.findByid(emailCustomer);
 		order.setEmail(account);
 		order.setFullName(fullName);
 		order.setPhoneNumber(phoneNumber);
-		order.setNote("AAA");
+		order.setNote(note);
 		Instant od = Instant.now();
 		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime localDateTime = LocalDateTime.parse(pickUpDate, inputFormatter);
