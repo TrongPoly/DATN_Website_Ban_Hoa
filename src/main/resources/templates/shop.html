@@ -79,12 +79,10 @@ https://templatemo.com/tm-559-zay-shop
 					</div> -->
 					<div class="col-md-6 pb-4">
 						<div class="d-flex">
-							<select class="form-control">
-								<option>Theo tên sản phẩm &#8593;</option>
-								<option>Theo tên sản phẩm &#8595;</option>
-								<option>Theo giá sản phẩm &#8593;</option>
-								<option>Theo giá sản phẩm &#8595;</option>
-								<option>Mặc định</option>
+							<select ng-model="ascending" ng-change="productFilter()" class="form-control">
+								<option ng-value="true">Theo giá sản phẩm: thấp đến cao</option>
+								<option ng-value="false">Theo giá sản phẩm: cao xuống thấp</option>
+								<option ng-value="''">Mặc định</option>
 							</select>
 						</div>
 					</div>

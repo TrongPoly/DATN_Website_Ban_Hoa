@@ -14,13 +14,13 @@ app.service('ProductService', function($http) {
 	// Gọi phương thức init() trong constructor
 	this.init();
 
-	this.getAllProduct = function() {
-		return $http.get('http://localhost:8080/api/product');
+	this.getAllProduct = function(ascending) {
+		return $http.get(location.origin+ '/api/product?ascending='+ascending);
 	};
 	this.getOneProduct = function(idProduct) {
-		return $http.get(`http://localhost:8080/api/product/${idProduct}`);
+		return $http.get(location.origin+`/api/product/${idProduct}`);
 	};
 	this.getByCategory = function(idProduct) {
-		return $http.get(`http://localhost:8080/api/product/category/${idProduct}`)
+		return $http.get(location.origin+`/api/product/category/${idProduct}`)
 	}
 });

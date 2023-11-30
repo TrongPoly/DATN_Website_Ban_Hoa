@@ -1,9 +1,10 @@
 app.controller('productCtrl', function($scope, ProductService) {
 	$scope.listProduct = [];
 	$scope.product = {};
+	$scope.ascending ="";
 	$scope.getAllProduct = function() {
-
-		ProductService.getAllProduct()
+		
+		ProductService.getAllProduct($scope.ascending)
 			.then((resp) => {
 				$scope.listProduct = resp.data;
 			})
@@ -14,7 +15,11 @@ app.controller('productCtrl', function($scope, ProductService) {
 
 	$scope.productDetails = function(idProduct) {
 		sessionStorage.setItem("idProduct",idProduct);	
-		location.href = "http://localhost:8080/product/details";
+		location.href = location.origin+"/product/details";
+	}
+	
+	$scope.productFilter = function(){
+		$scope.getAllProduct();
 	}
 	$scope.getAllProduct();
 });

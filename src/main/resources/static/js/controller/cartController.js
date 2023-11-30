@@ -83,7 +83,7 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 			if (check === false) {
 				ToastService.createToast("error", "Chưa chọn sản phẩm nào", $scope.toasts)
 			} else {
-				location.href = "http://localhost:8080/checkout/index";
+				location.href = location.origin + "/checkout/index";
 			}
 
 		}

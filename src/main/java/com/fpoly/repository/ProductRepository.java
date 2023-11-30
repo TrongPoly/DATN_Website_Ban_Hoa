@@ -11,4 +11,5 @@ import com.fpoly.model.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer>{
 	List<Product> findByCategory(Category category);
 
+	
 }

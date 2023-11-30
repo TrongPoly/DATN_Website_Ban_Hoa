@@ -14,10 +14,8 @@ public class IndexController {
 	@GetMapping("/index")
 	public String index() {
 		if(session.getSession("user").getRole().getId()==1) {
-			System.out.println("ALO");
 			return "redirect:/admin/order";
 		}
-		System.out.println("OLA");
 		return "index";
 	}
 

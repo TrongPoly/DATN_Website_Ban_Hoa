@@ -83,7 +83,6 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService",
 								break;
 						}
 					});
-					console.log($scope.orderCounts);
 				})
 		}
 		//Hủy đơn, status =4
@@ -91,7 +90,6 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService",
 			if ($scope.note == undefined) {
 				ToastService.createToast("warning", "Vui lòng nhập lý do", $scope.toasts);
 			} else {
-				alert($scope.note);
 				if (confirm("Xác nhận hủy đơn?")) {
 					OrderService.updateOrder(idOrder, 4, $scope.note)
 						.then((resp) => {

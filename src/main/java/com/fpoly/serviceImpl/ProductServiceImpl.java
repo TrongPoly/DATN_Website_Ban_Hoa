@@ -3,8 +3,10 @@ package com.fpoly.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 import com.fpoly.model.Category;
 import com.fpoly.model.OrderDetail;
 import com.fpoly.model.Product;
@@ -17,8 +19,13 @@ public class ProductServiceImpl implements ProductService {
 	ProductRepository productRepository;
 	
 	@Override
-	public List<Product> findAllSP() {
-		return productRepository.findAll();
+	public List<Product> findAllSP(Boolean ascending) {
+		if(ascending==null) {
+			return productRepository.findAll();
+		}
+		String property = "price"; 
+        Sort.Order order = ascending ? Sort.Order.asc(property) : Sort.Order.desc(property);
+        return productRepository.findAll(Sort.by(order));
 	}
 
 	@Override

@@ -21,7 +21,7 @@ app.controller('registerCtrl', ['$scope', 'ToastService', '$http',
 			$http
 				.post(url + "/account/register?email=" + email + "&password=" + password+"&fullName="+fullName)
 				.then((resp) => {
-					location.href = "http://localhost:8080/auth/verify_email";
+					location.href = location.origin+"/auth/verify_email";
 				})
 				.catch((error) => {
 					ToastService.createToast("warning", "Email đã được sử dụng!", $scope.toasts)

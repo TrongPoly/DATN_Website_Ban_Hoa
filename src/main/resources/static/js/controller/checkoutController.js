@@ -4,7 +4,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 		$scope.toasts = [];
 		$scope.totalOrder = 0;
 		$scope.methodPayment = "Chuyển khoản";
-		if (location.href == "http://localhost:8080/checkout/invalid") {
+		if (location.href == location.origin+"/checkout/invalid") {
 			ToastService.createToast("warning", "Vui lòng điền đầy đủ thông tin", $scope.toasts);
 		}
 
@@ -61,8 +61,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 								location.href = resp.data.url;
 							})
 							.catch((error) => {
-								alert(error.status)
-								alert("Lỗi");
+								console.log(error.status)
 							});
 					} else {
 						sessionStorage.setItem("methodPayment", 1);

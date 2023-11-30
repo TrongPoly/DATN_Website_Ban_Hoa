@@ -30,11 +30,16 @@ app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartSer
 			$http.put(url, products)
 				.then((resp) => {
 				}).catch((error) => {
-					alert(error.status);
+					console.log(error.status);
 				})
 		}
 
 		$scope.backIndex = function() {
+			location.href = location.origin;
+		}
+		
+		//Xóa sản phẩm đã mua khỏi giỏ hàng, update số lượng sản phẩm còn lại sau khi mua
+		$scope.updateCartAndProduct = function(){
 			var productList1 = CartService.getCart();
 			var productList = [];
 			for (var i = 0; i < productList1.length; i++) {
@@ -47,10 +52,12 @@ app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartSer
 			for (var i = 0; i < productList.length; i++) {
 				CartService.removeFromCart(productList[i]);
 			}
-			location.href = location.origin;
 		}
+		
+		//if dùng để đảm bảo đoạn mã trong if chỉ thực hiện 1 lần
 		if (check == true) {
 			$scope.saveOrder();
+			$scope.updateCartAndProduct();
 			check = false;
 		}
 	}]);
