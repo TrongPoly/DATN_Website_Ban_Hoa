@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -7,7 +7,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Form Account</title>
 <!-- base:css -->
-<link rel="stylesheet" href="../_admin/vendors/typicons/typicons.css">
+<link rel="stylesheet" href="	../_admin/vendors/typicons/typicons.css">
 <link rel="stylesheet"
 	href="../_admin/vendors/css/vendor.bundle.base.css">
 <!-- endinject -->
@@ -15,17 +15,25 @@
 <link rel="stylesheet" href="../_admin/vendors/select2/select2.min.css">
 <link rel="stylesheet"
 	href="../_admin/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 <!-- End plugin css for this page -->
 <!-- inject:css -->
 <link rel="stylesheet"
 	href="../_admin/css/vertical-layout-light/style.css">
+<link rel="stylesheet" href="../css/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="../_admin/images/favicon.png" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
 
 </head>
-<body>
+<body ng-app="AdminAccApp" ng-controller="AdminAccCtrl">
 	<div class="container-scroller">
-		<!-- partial:../_admin/partials/_navbar.html -->
+		<!-- partial:../admin/partials/_navbar.html -->
 		<nav th:replace="~{fragment/_adminHeader.html::adminHeader}"></nav>
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
@@ -155,7 +163,7 @@
 						<ul class="chat-list">
 							<li class="list active">
 								<div class="profile">
-									<img src="../_admin/images/faces/face1.jpg" alt="image"><span
+									<img src="../admin/images/faces/face1.jpg" alt="image"><span
 										class="online"></span>
 								</div>
 								<div class="info">
@@ -165,7 +173,7 @@
 							</li>
 							<li class="list">
 								<div class="profile">
-									<img src="../_admin/images/faces/face2.jpg" alt="image"><span
+									<img src="../admin/images/faces/face2.jpg" alt="image"><span
 										class="offline"></span>
 								</div>
 								<div class="info">
@@ -179,7 +187,7 @@
 							</li>
 							<li class="list">
 								<div class="profile">
-									<img src="../_admin/images/faces/face3.jpg" alt="image"><span
+									<img src="../admin/images/faces/face3.jpg" alt="image"><span
 										class="online"></span>
 								</div>
 								<div class="info">
@@ -189,7 +197,7 @@
 							</li>
 							<li class="list">
 								<div class="profile">
-									<img src="../_admin/images/faces/face4.jpg" alt="image"><span
+									<img src="../admin/images/faces/face4.jpg" alt="image"><span
 										class="offline"></span>
 								</div>
 								<div class="info">
@@ -199,7 +207,7 @@
 							</li>
 							<li class="list">
 								<div class="profile">
-									<img src="../_admin/images/faces/face5.jpg" alt="image"><span
+									<img src="../admin/images/faces/face5.jpg" alt="image"><span
 										class="online"></span>
 								</div>
 								<div class="info">
@@ -209,7 +217,7 @@
 							</li>
 							<li class="list">
 								<div class="profile">
-									<img src="../_admin/images/faces/face6.jpg" alt="image"><span
+									<img src="../admin/images/faces/face6.jpg" alt="image"><span
 										class="online"></span>
 								</div>
 								<div class="info">
@@ -235,48 +243,40 @@
 									<h4 class="card-title">Form Account</h4>
 									<form class="forms-sample">
 										<div class="form-group">
-											<label for="id">Customer id</label> <input type="text"
-												class="form-control" id="id" placeholder="Customer">
+											<label for="email">Email</label> <input ng-show="!editMode"
+												type="email" class="form-control" id="email"
+												placeholder="Email" ng-model="form.email"> <input
+												type="email" class="form-control" id="email"
+												placeholder="Email" ng-model="form.email" ng-show="editMode"
+												readonly="true">
 										</div>
 										<div class="form-group">
-											<label for="email">Email</label> <input type="email"
-												class="form-control" id="email" placeholder="Email">
+											<label for="name">Fullname</label> <input
+												ng-model="form.fullName" type="text" class="form-control"
+												id="name" placeholder="Fullname">
 										</div>
 										<div class="form-group">
-											<label for="phone">Phone</label> <input type="tel"
-												class="form-control" id="phone" placeholder="phone">
+											<label for="Password" ng-show="!editMode">Password</label> <input type="password"
+												class="form-control" id="password" placeholder="Password"
+												ng-model="form.password" ng-show="!editMode">
 										</div>
 										<div class="form-group">
-											<label for="name">Fullname</label> <input type="text"
-												class="form-control" id="name" placeholder="Fullname">
-										</div>
-										<div class="form-group">
-											<label for="id">Gender</label> <select class="form-control"
-												id="Id">
-												<option>Nam</option>
-												<option>Nữ</option>
-												<option>Khác</option>
+											<label>Role</label> <select class="form-control" id="Id"
+												ng-model="form.role.id">
+												<option ng-repeat="role in roles" ng-value="{{role.id}}">{{role.roleName}}</option>
+
 											</select>
 										</div>
-										<div class="form-group">
-											<label for="Password">Password</label> <input type="password"
-												class="form-control" id="password" placeholder="Password">
+										<div class="form-group" style="display: none;">
+											<input ng-model="form.locked" type="radio" ng-value="true"
+												name="option1" id="locked">
 										</div>
-										<div class="form-group">
-											<label for="role">Role</label> <select class="form-control"
-												id="Id">
-												<option>../_admin</option>
-												<option>User</option>
-											</select>
-										</div>
-										<div class="form-check">
-											<label class="mb-3 mr-5">Active</label> <label
-												class="toggle-switch"> <input type="checkbox"
-												checked> <span class="toggle-slider round"></span>
-											</label>
-										</div>
-										<button type="button" class="btn btn-primary">Create</button>
-										<button type="button" class="btn btn-secondary">Edit</button>
+										<button type="button" class="btn btn-primary"
+											ng-click="create()" ng-show="!editMode">Create</button>
+										<button type="button" class="btn btn-secondary"
+											ng-show="editMode" ng-click="update()">Edit</button>
+										<button type="button" class="btn btn-secondary"
+											ng-click="reset()" ng-show="!editMode">Reset</button>
 									</form>
 								</div>
 
@@ -290,11 +290,12 @@
 								<div class="card-body">
 									<div class="form-group">
 										<div class="input-group">
-											<input type="text" class="form-control"
-												placeholder="Recipient's username"
+											<input ng-model="searchKeyword" type="text"
+												class="form-control" placeholder="Recipient's username"
 												aria-label="Recipient's username">
 											<div class="input-group-append">
-												<button class="btn btn-sm btn-primary" type="button">Search</button>
+												<button ng-click="searchCustomerByName()"
+													class="btn btn-sm btn-primary" type="button">Search</button>
 											</div>
 										</div>
 									</div>
@@ -302,48 +303,46 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th>ID</th>
 													<th>Email</th>
-													<th>Phone</th>
 													<th>Fullname</th>
-													<th>Gender</th>
 													<th>Role</th>
-													<th>Active</th>
-													<th>Action</th>
+													<th>Blocked</th>
+													<th th:insert="~{/fragment/_toast}"></th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>USE01</td>
-													<td>Chamntnpc03156@gmail.com</td>
-													<td>0789516590</td>
-													<td>Nguyễn Thị Ngọc Chăm</td>
-													<td>Nữ</td>
-													<td>User</td>
-													<td><label class="toggle-switch"> <input
-															type="checkbox" checked> <span
-															class="toggle-slider round"></span>
-													</label></td>
+												<tr ng-repeat="item in pager.items">
+													<td>{{item.email}}</td>
+													<td>{{item.fullName}}</td>
+													<td>{{item.role.roleName}}</td>
+													<td>{{item.locked? 'Đã Chặn' : 'Ngừng Chặn'}}</td>
+													<td><a ng:if="item.locked == false"
+														ng-click="chan(item.email)" class="btn btn-warning"><i
+															class="fa fa-lock-open"></i></a> <a
+														ng-click="boChan(item.email)" ng:if="item.locked == true"
+														class="btn btn-warning"><i class='fa fa-lock'></i></a></td>
 													<td>
-														<button type="button"
+														<button ng-click="edit(item.email)" type="button"
 															class="btn btn-inverse-primary btn-rounded btn-icon">
 															<i class=" typcn typcn-pen"></i>
 														</button>
 													</td>
+
 												</tr>
 											</tbody>
 										</table>
 									</div>
 									<nav aria-label="Page navigation example">
 										<ul class="pagination  justify-content-center">
-											<li class="page-item"><a class="page-link" href="#"
-												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											<li class="page-item"><a class="page-link"
+												ng-click="pager.prev()" aria-label="Previous"> <span
+													aria-hidden="true">&laquo;</span>
 											</a></li>
-											<li class="page-item"><a class="page-link" href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item"><a class="page-link" href="#"
-												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											<li class="page-item"><a class="page-link" href="#">{{pager.page
+													+ 1}} of {{pager.count}}</a></li>
+											<li class="page-item"><a class="page-link"
+												ng-click="pager.next()" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
 											</a></li>
 										</ul>
 									</nav>
@@ -404,6 +403,8 @@
 	<script src="../_admin/js/file-upload.js"></script>
 	<script src="../_admin/js/typeahead.js"></script>
 	<script src="../_admin/js/select2.js"></script>
+	<script th:src="@{/js/management/account.js}"></script>
+	<script src="../js/service/toastService.js"></script>
 	<!-- End custom js for this page-->
 </body>
 

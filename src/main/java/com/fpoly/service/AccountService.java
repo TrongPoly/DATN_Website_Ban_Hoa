@@ -10,5 +10,9 @@ public interface AccountService {
 	List<Account> findAll();
 
 	void saveAccount(Account account);
+
+	Account findByUser();
+
+	List<Account> searchByName(String keyword);
 	
 }
