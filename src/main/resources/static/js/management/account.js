@@ -86,6 +86,14 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 	$scope.create = function() {
 		var item = angular.copy($scope.form);
 		var url = `${host}/account`;
+		//lỗi email đã tồn tại
+		let existingEmail = $scope.items.find(item => item.email === $scope.form.email);
+		if (existingEmail) {
+			ToastService.createToast("warning", "email đã tồn tại!!", $scope.toasts);
+			/*$scope.errorMessage = "Tên sản phẩm đã tồn tại!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
 		//lỗi bỏ trống email
 		if (!$scope.form.email) {
 			ToastService.createToast("warning", "Không để trống email", $scope.toasts);

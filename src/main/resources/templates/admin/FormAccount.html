@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="../_admin/vendors/select2/select2.min.css">
 <link rel="stylesheet"
 	href="../_admin/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 <!-- End plugin css for this page -->
 <!-- inject:css -->
 <link rel="stylesheet"
@@ -254,9 +256,9 @@
 												id="name" placeholder="Fullname">
 										</div>
 										<div class="form-group">
-											<label for="Password">Password</label> <input type="password"
+											<label for="Password" ng-show="!editMode">Password</label> <input type="password"
 												class="form-control" id="password" placeholder="Password"
-												ng-model="form.password">
+												ng-model="form.password" ng-show="!editMode">
 										</div>
 										<div class="form-group">
 											<label>Role</label> <select class="form-control" id="Id"
@@ -302,7 +304,6 @@
 											<thead>
 												<tr>
 													<th>Email</th>
-													<th>Password</th>
 													<th>Fullname</th>
 													<th>Role</th>
 													<th>Blocked</th>
@@ -312,7 +313,6 @@
 											<tbody>
 												<tr ng-repeat="item in pager.items">
 													<td>{{item.email}}</td>
-													<td>{{item.password}}</td>
 													<td>{{item.fullName}}</td>
 													<td>{{item.role.roleName}}</td>
 													<td>{{item.locked? 'Đã Chặn' : 'Ngừng Chặn'}}</td>

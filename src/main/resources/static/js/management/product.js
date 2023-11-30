@@ -45,9 +45,13 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 	}
 
 	$scope.create = function() {
-
-
-
+		//Không chọn thương hiệu
+		if (!$scope.form.category || !$scope.form.category.id) {
+			ToastService.createToast("warning", "vui lòng chọn loại sản phẩm", $scope.toasts);
+			/*	$scope.errorMessage = "Vui lòng chọn thương hiệu!";
+				$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
 		//Không chọn thương hiệu
 		if (!$scope.form.category || !$scope.form.category.id) {
 			ToastService.createToast("warning", "vui lòng chọn loại sản phẩm", $scope.toasts);
@@ -83,6 +87,21 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 		//Lỗi bỏ trống đơn giá
 		if (!$scope.form.price) {
 			ToastService.createToast("warning", "Vui lòng nhập đơn giá!!", $scope.toasts);
+			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+		//lỗi đơn giá không được nhỏ hơn 1000
+		if ($scope.form.price < 1000) {
+			ToastService.createToast("warning", "Vui lòng nhập đơn giá lớn hơn 1000!!", $scope.toasts);
+			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+
+		//Lỗi nhập đơn giá không hợp lệ
+		if (!$scope.form.quantity < 0) {
+			ToastService.createToast("warning", "Đơn giá không hợp lệ!!", $scope.toasts);
 			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
 			$('#errorModal').modal('show'); // Show the modal*/
 			return;
@@ -142,6 +161,21 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 			$('#errorModal').modal('show'); // Show the modal*/
 			return;
 		}
+		//lỗi đơn giá không được nhỏ hơn 1000
+		if ($scope.form.price < 1000) {
+			ToastService.createToast("warning", "Vui lòng nhập đơn giá lớn hơn 1000!!", $scope.toasts);
+			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+
+		//Lỗi nhập đơn giá không hợp lệ
+		if (!$scope.form.quantity < 0) {
+			ToastService.createToast("warning", "Đơn giá không hợp lệ!!", $scope.toasts);
+			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
+			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
 
 
 		var item = angular.copy($scope.form);
@@ -181,6 +215,35 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 				console.log("Error", error)
 			});
 		}
+	}
+
+	$scope.kinhDoanh = function(kdId) {
+		var url = `${host}/account/kinhDoanh/${kdId}`;
+		$http
+			.put(url)
+			.then((resp) => {
+				ToastService.createToast("info", "Còn kinh doanh!", $scope.toasts);
+				setTimeout(function() {
+					location.reload();
+				}, 500);
+			})
+			.catch((error) => {
+				ToastService.createToast("error", "Lỗi", $scope.toasts);
+			});
+	}
+	$scope.ngungKinhDoanh = function(kdId) {
+		var url = `${host}/account/ngungKinhDoanh/${kdId}`;
+		$http
+			.put(url)
+			.then((resp) => {
+				ToastService.createToast("info", "Ngừng kinh doanh!!", $scope.toasts);
+				setTimeout(function() {
+					location.reload();
+				}, 500);
+			})
+			.catch((error) => {
+				ToastService.createToast("error", "Lỗi", $scope.toasts);
+			});
 	}
 
 

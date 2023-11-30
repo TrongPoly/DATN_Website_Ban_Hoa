@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="../_admin/vendors/select2/select2.min.css">
 <link rel="stylesheet"
 	href="../_admin/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 <link rel="stylesheet" href="../css/style.css">
 <!-- End plugin css for this page -->
 <!-- inject:css -->
@@ -280,7 +282,7 @@
 												type="number" class="form-control" id="Price"
 												placeholder="Price (VND)">
 										</div>
-										<div class="form-group">
+										<div class="form-group" style="display: none;">
 											<label for="exampleSelectGender"> Status</label> <br> <input
 												ng-model="form.isAvailable" type="radio" ng-value="true"
 												name="option1" id="radio_con_hang"> Còn Bán<label></label>
@@ -332,8 +334,8 @@
 												</tr>
 											</thead>
 											<tbody>
+												<tr th:insert="~{/fragment/_toast}"></tr>
 												<tr ng-repeat="sp in pager.sps">
-													<th th:insert="~{/fragment/_toast}"></th>
 													<td>{{sp.id}}</td>
 													<td>{{sp.category.id}}</td>
 													<td>{{sp.name}}</td>
@@ -342,8 +344,9 @@
 													<td>
 														<div class="form-check">
 															<label class="toggle-switch"> <input
-																type="checkbox" ng-checked="sp.isAvailable"> <span
-																class="toggle-slider round"></span>
+																type="checkbox" ng-checked="sp.isAvailable"
+																ng-click="!sp.isAvailable ? kinhDoanh(sp.id) : ngungKinhDoanh(sp.id)">
+																<span class="toggle-slider round"></span>
 															</label>
 														</div>
 													</td>

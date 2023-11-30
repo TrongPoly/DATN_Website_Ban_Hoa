@@ -111,6 +111,22 @@ public class AdminProductRestController {
 	public List<Product> searchProductByName(@RequestParam("keyword") String keyword){
 		return PrAd.searchByName(keyword);
 	}
+	
+	@PutMapping("/account/kinhDoanh/{id}")
+	public ResponseEntity<Product> chan(@PathVariable("id") Integer id) {
+		Product product = PrAd.findById(prRep.findById(id).get().getId());
+		product.setIsAvailable(true);
+		PrAd.saveProduct(product);
+		return ResponseEntity.ok().build();
+	}
+
+	@PutMapping("/account/ngungKinhDoanh/{id}")
+	public ResponseEntity<Product> boChan(@PathVariable("id") Integer id) {
+		Product product = PrAd.findById(prRep.findById(id).get().getId());
+		product.setIsAvailable(false);
+		PrAd.saveProduct(product);
+		return ResponseEntity.ok().build();
+	}
 }
 
 

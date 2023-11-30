@@ -38,9 +38,9 @@ public class AdminAccountRestController {
 	}
 
 	@PostMapping("/account")
-	public Account post(@RequestBody Account ac) {
+	public ResponseEntity<Account> post(@RequestBody Account ac) {
 		accountService.saveAccount(ac);
-		return ac;
+		return ResponseEntity.ok(ac);
 	}
 
 	@GetMapping("/account/{id}")
