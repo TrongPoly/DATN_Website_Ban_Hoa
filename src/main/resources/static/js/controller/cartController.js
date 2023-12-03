@@ -24,6 +24,7 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 					})
 					.catch((error) => {
 						console.log(error.status);
+						console.log(error.message);
 					});
 			}
 			$scope.totalCart();
@@ -33,9 +34,10 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 			for (let i = 0; i < $scope.carts.length; i++) {
 				try {
 					const resp = await ProductService.getOneProduct($scope.carts[i].id);
+					console.log(resp.data.isAvailable);
 					if ($scope.carts[i].selected === true && $scope.carts[i].quant > resp.data.quantity) {
 						location.href = location.origin + "/cart/refresh";
-					} else if ($scope.carts[i].selected === true&&!resp.data.isAvailable) { 
+					} else if ($scope.carts[i].selected === true && resp.data.isAvailable==false) { 
 						//Sản phẩm tạm ngừng kinh doanh
 						location.href = location.origin + "/cart/refresh";
 					}

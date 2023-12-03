@@ -1,5 +1,7 @@
 package com.fpoly.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -24,6 +26,9 @@ public class OrderDetail {
 	@NotNull
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
+	@NotNull
+	@Column(name = "price", nullable = false)
+	private BigDecimal price;
 
 	public Integer getId() {
 		return id;
@@ -55,6 +60,14 @@ public class OrderDetail {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 }

@@ -107,6 +107,7 @@ public class OrderRestController {
 			orderDetail.setOrder(order);
 			Product product = productService.findById(orderDTO.get(i).getId());
 			orderDetail.setProduct(product);
+			orderDetail.setPrice(product.getPrice());
 			orderDetail.setQuantity(orderDTO.get(i).getQuant());
 			orderDetails.add(orderDetail);
 		}

@@ -36,9 +36,6 @@ public class ProductRestController {
 	@GetMapping("/{idProduct}")
 	public ResponseEntity<Product> getOneProduct(@PathVariable("idProduct") Integer idProduct) {
 		Product product = productService.findById(idProduct);
-		if (product == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
 		return ResponseEntity.status(HttpStatus.OK).body(product);
 	}
 

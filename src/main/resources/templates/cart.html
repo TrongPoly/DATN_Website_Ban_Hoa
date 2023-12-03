@@ -69,8 +69,8 @@ https://templatemo.com/tm-559-zay-shop
 								<th scope="col">Hình Ảnh</th>
 								<th scope="col">Tên Sản Phẩm</th>
 								<th scope="col">Số Lượng</th>
-								<th scope="col">Giá</th>
-								<th scope="col">Tổng Tiền</th>
+								<th scope="col">Giá (VNĐ)</th>
+								<th scope="col">Tổng Tiền (VNĐ)</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
@@ -97,11 +97,11 @@ https://templatemo.com/tm-559-zay-shop
 									</h6>
 								</td>
 								<td>
-									<h5 class="text-grey">{{sp.price | number : 0}} VND</h5>
+									<h5 class="text-grey">{{sp.price | number : 0}} </h5>
 								</td>
 								<td>
 									<h5 class="text-grey">{{sp.price * sp.quant | number : 0}}
-										VND</h5>
+										</h5>
 								</td>
 								<td><i class="fa fa-trash mb-1 text-danger btn"
 									ng-click="remove(sp)"></i></td>

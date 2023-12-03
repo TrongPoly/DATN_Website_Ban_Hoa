@@ -19,7 +19,7 @@ app.controller('orderCtrl', ["$scope", "OrderService", "ToastService",
 		$scope.total = function() {
 			let sum = 0;
 			for (let i = 0; i < $scope.listOrderDetails.length; i++) {
-				sum += $scope.listOrderDetails[i].product.price * $scope.listOrderDetails[i].quantity;
+				sum += $scope.listOrderDetails[i].price * $scope.listOrderDetails[i].quantity;
 			}
 			return sum;
 		}
