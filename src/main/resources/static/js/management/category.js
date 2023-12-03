@@ -1,4 +1,4 @@
-let host = "http://localhost:8080/rest";
+let host = location.origin+"/rest";
 const app = angular.module("AdminCatApp", []);
 app.controller("AdminCatCtrl", function($scope, $http, ToastService) {
 	$scope.form = {};
@@ -34,7 +34,7 @@ app.controller("AdminCatCtrl", function($scope, $http, ToastService) {
 	}
 
 	$scope.create = function() {
-		
+
 		//lỗi email đã tồn tại
 		let existingName = $scope.cats.find(cat => cat.name === $scope.form.name);
 		if (existingName) {
@@ -59,9 +59,8 @@ app.controller("AdminCatCtrl", function($scope, $http, ToastService) {
 			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
 			ToastService.createToast("success", "Thêm mới thành công!", $scope.toasts);
 			console.log("Success", resp);
-			setTimeout(function() {
-				location.reload();
-			}, 1000);
+			$scope.load_all();
+			$scope.reset();
 		}).catch((error) => {
 			ToastService.createToast("error", "thêm thất bại!", $scope.toasts);
 			console.log("Error", error);
@@ -84,9 +83,8 @@ app.controller("AdminCatCtrl", function($scope, $http, ToastService) {
 				ToastService.createToast("success", "cập nhật thành công!", $scope.toasts);
 				$scope.cats[index] = resp.data;
 				$scope.reset();
-				setTimeout(function() {
-					location.reload();
-				}, 1000);
+				$scope.load_all();
+				$scope.reset();
 				console.log("Succes", resp);
 			}).catch((error) => {
 				ToastService.createToast("error", "cập nhật thất bại!", $scope.toasts);

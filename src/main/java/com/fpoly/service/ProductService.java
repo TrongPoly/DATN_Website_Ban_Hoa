@@ -8,7 +8,7 @@ import com.fpoly.model.Product;
 
 
 public interface ProductService {
-	List<Product> findAllSP(Boolean ascending);
+	List<Product> findAllSP(Boolean ascending, Integer idCategory);
 	
 	Product findById(Integer idProduct);
 

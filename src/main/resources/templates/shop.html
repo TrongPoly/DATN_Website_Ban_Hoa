@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Zay Shop - Product Listing Page</title>
+<title>Daisy Shop - Products</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<link rel="apple-touch-icon" href="assets/img/apple-icon.png" />
-<link rel="shortcut icon" type="image/x-icon"
-	href="assets/img/favicon.ico" />
+<link rel="apple-touch-icon" href="../assets/img/apple-icon.png" />
+<link rel="shortcut icon" href="../_admin/images/favicon.png" />
 
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-<link rel="stylesheet" href="assets/css/templatemo.css" />
-<link rel="stylesheet" href="assets/css/custom.css" />
+
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../assets/css/templatemo.css" />
+<link rel="stylesheet" href="../assets/css/custom.css" />
 
 <!-- Load fonts style after rendering the layout styles -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap" />
-<link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+<link rel="stylesheet" href="../assets/css/fontawesome.min.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
@@ -65,24 +65,23 @@ https://templatemo.com/tm-559-zay-shop
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="row">
-					<!-- <div class="col-md-6">
-						<ul class="list-inline shop-top-menu pb-3 pt-1">
-							<li class="list-inline-item"><a
-								class="h3 text-dark text-decoration-none mr-3" href="#">Tất
-									cả</a></li>
-							<li class="list-inline-item"><a
-								class="h3 text-dark text-decoration-none mr-3" href="#">Nam</a>
-							</li>
-							<li class="list-inline-item"><a
-								class="h3 text-dark text-decoration-none" href="#">Nữ</a></li>
-						</ul>
-					</div> -->
 					<div class="col-md-6 pb-4">
 						<div class="d-flex">
-							<select ng-model="ascending" ng-change="productFilter()" class="form-control">
+							<select ng-model="ascending" ng-change="productFilter()"
+								class="form-control">
 								<option ng-value="true">Theo giá sản phẩm: thấp đến cao</option>
-								<option ng-value="false">Theo giá sản phẩm: cao xuống thấp</option>
-								<option ng-value="''">Mặc định</option>
+								<option ng-value="false">Theo giá sản phẩm: cao xuống
+									thấp</option>
+								<option ng-value="''">Sắp xếp: Mặc định</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6 pb-4">
+						<div class="d-flex">
+							<select ng-change="productFilter()" ng-model="idCategory"
+								class="form-control">
+								<option value="0">Tất cả loại</option>
+								<option ng-repeat="item in categorys" ng-value="item.id">{{item.name}}</option>
 							</select>
 						</div>
 					</div>
@@ -90,23 +89,25 @@ https://templatemo.com/tm-559-zay-shop
 				<!-- Product Display Start -->
 				<div class="row">
 					<!-- Product single display start -->
-					<div class="col-md-3" ng-repeat="product in listProduct">
+					<div class="col-md-3" ng-repeat="product in pager.listProduct">
 						<div class="card mb-4 product-wap">
 							<div class="card">
-								<img class="card-img-top" src="img/{{product.image}}"
-									alt="{{product.name}}"
+								<img ng-hide="product.isAvailable"
+									class="position-absolute w-50" alt="Không có hình"
+									src="../img/het_hang.webp"> <img class="card-img-top"
+									src="../img/{{product.image}}" alt="Không có hình"
 									style="height: 300px; object-fit: cover;">
 								<div
 									class="card-img-overlay product-overlay d-flex align-items-center justify-content-center">
 									<ul class="list-unstyled">
 										<li><a class="btn btn-success text-white mt-2" href="#"
 											ng-click="productDetails(product.id)"><i
-												class="fas fa-cart-plus"></i></a></li>
+												class="fas fa-search"></i></a></li>
 									</ul>
 								</div>
 							</div>
 							<div class="card-body">
-								<a href="shop-single.html"
+								<a href="" ng-click="productDetails(product.id)"
 									class="h3 text-decoration-none d-block">{{product.name}}</a>
 								<p class="text-center mb-1">
 									{{product.price | number:0}} <span>VNĐ</span>
@@ -114,28 +115,50 @@ https://templatemo.com/tm-559-zay-shop
 							</div>
 						</div>
 					</div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination  justify-content-center">
+							<li class="page-item" ng-click="pager.first()"><a
+								class="page-link" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span>
+							</a></li>
+							<li class="page-item" ng-click="pager.prev()"><a
+								class="page-link" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span>
+							</a></li>
+							<li class="page-item"><a class="page-link">{{pager.page
+									+ 1}} of {{pager.count}}</a></li>
+
+							<li class="page-item" ng-click="pager.next()"><a
+								class="page-link" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							<li class="page-item" ng-click="pager.last()"><a
+								class="page-link" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</div>
 		<!-- End Content -->
 
-	
+	</div>
+	<!-- Start Footer -->
+	<footer th:insert="~{/fragment/_footer}"></footer>
+	<!-- End Footer -->
 
-		<!-- Start Footer -->
-		<footer th:insert="~{/fragment/_footer}"></footer>
-		<!-- End Footer -->
+	<!-- Start Script -->
+	<script src="../assets/js/jquery-1.11.0.min.js"></script>
+	<script src="../assets/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<script src="../assets/js/templatemo.js"></script>
+	<script src="../assets/js/custom.js"></script>
+	<!--AngurlarJS -->
+	<script src="../js/app/app.js"></script>
+	<script src="../js/service/productService.js"></script>
+	<script src="../js/controller/productController.js"></script>
 
-		<!-- Start Script -->
-		<script src="assets/js/jquery-1.11.0.min.js"></script>
-		<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-		<script src="assets/js/bootstrap.bundle.min.js"></script>
-		<script src="assets/js/templatemo.js"></script>
-		<script src="assets/js/custom.js"></script>
-		<!--AngurlarJS -->
-		<script src="js/app/app.js"></script>
-		<script src="js/service/productService.js"></script>
-		<script src="js/controller/productController.js"></script>
-
-		<!-- End Script -->
+	<!-- End Script -->
 </body>
 </html>

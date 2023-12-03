@@ -14,8 +14,8 @@ app.service('ProductService', function($http) {
 	// Gọi phương thức init() trong constructor
 	this.init();
 
-	this.getAllProduct = function(ascending) {
-		return $http.get(location.origin+ '/api/product?ascending='+ascending);
+	this.getAllProduct = function(ascending,idCategory) {
+		return $http.get(location.origin+ '/api/product?ascending='+ascending+'&idCategory='+idCategory);
 	};
 	this.getOneProduct = function(idProduct) {
 		return $http.get(location.origin+`/api/product/${idProduct}`);
@@ -23,4 +23,5 @@ app.service('ProductService', function($http) {
 	this.getByCategory = function(idProduct) {
 		return $http.get(location.origin+`/api/product/category/${idProduct}`)
 	}
+
 });

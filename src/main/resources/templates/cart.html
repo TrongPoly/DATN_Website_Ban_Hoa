@@ -2,18 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Zay Shop - Product Detail Page</title>
+<title>Daisy Shop - Cart</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-<link rel="shortcut icon" type="image/x-icon"
-	href="../assets/img/favicon.ico">
+<link rel="shortcut icon" href="_admin/images/favicon.png" />
+
 
 <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="../assets/css/templatemo.css">
 <link rel="stylesheet" href="../assets/css/custom.css">
-
+n
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
@@ -25,8 +25,10 @@
 <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
 
 <!-- Slick -->
-<link rel="stylesheet" type="text/css" href="../assets/css/slick.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/css/slick-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="../assets/css/slick.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../assets/css/slick-theme.css">
 
 
 <!-- ANGULAR -->
@@ -73,10 +75,12 @@ https://templatemo.com/tm-559-zay-shop
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="sp in carts">
-								<td><input ng-unless="sq.quantity<1" type="checkbox"
-									ng-model="sp.selected" ng-click="select(sp)">
-									<h4 ng-if="sq.quantity<1">Tạm hết hàng</h4></td>
+							<tr ng-repeat="sp in carts"
+								ng-class="{ 'text-decoration-line-through': !sp.isAvailable }">
+								<td><input ng-hide="!sp.isAvailable" class="btn btn-success" type="checkbox"
+									ng-model="sp.selected" ng-click="select(sp)"> <span
+									ng-show="!sp.isAvailable"><i
+										class="fa fa-cancel mb-1 text-danger"></i></span></td>
 								<td><img class="rounded" src="../img/{{sp.image}}"
 									width="100"></td>
 								<td>{{sp.name}}</td>
@@ -116,7 +120,7 @@ https://templatemo.com/tm-559-zay-shop
 						class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded">
 						<a ng-click="checkCartSelect()"
 							class="btn btn-warning btn-block btn-lg ml-2 pay-button"
-							type="button">Tiến hành thanh toán</a> <a
+							type="button">Tiến hành đặt hàng</a> <a
 							class="btn btn-info btn-block btn-lg ml-2 pay-button"
 							type="button" ng-click="clearCart()" style="margin-left: 20px">Xóa
 							tất cả</a>

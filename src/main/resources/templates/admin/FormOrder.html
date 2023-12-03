@@ -83,18 +83,7 @@
 									<div class="tab-pane fade show active"
 										aria-labelledby="pills-home-tab">
 										<!--TABLE-->
-
-										<div class="form-group">
-											<div class="input-group">
-												<input type="text" class="form-control mt-5"
-													placeholder="Recipient's username"
-													aria-label="Recipient's username">
-												<div class="input-group-append">
-													<button class="btn btn-sm btn-primary mt-5" type="button">Search</button>
-												</div>
-											</div>
-										</div>
-										<div class="table-responsive">
+										<div class="table-responsive mt-5">
 											<table class="table table-sm">
 												<thead>
 													<tr>
@@ -107,7 +96,7 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr ng-repeat="order in listOrder">
+													<tr ng-repeat="order in pager.listOrder">
 														<td>{{order.id}}</td>
 														<td>{{order.fullName}}</td>
 														<td>{{order.phoneNumber}}</td>
@@ -163,14 +152,24 @@
 										</div>
 										<nav aria-label="Page navigation example">
 											<ul class="pagination  justify-content-center">
-												<li class="page-item"><a class="page-link" href="#"
-													aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+												<li class="page-item" ng-click="pager.first()"><a
+													class="page-link" aria-label="Previous"> <span
+														aria-hidden="true">&laquo;</span>
 												</a></li>
-												<li class="page-item"><a class="page-link" href="#">1</a></li>
-												<li class="page-item"><a class="page-link" href="#">2</a></li>
-												<li class="page-item"><a class="page-link" href="#">3</a></li>
-												<li class="page-item"><a class="page-link" href="#"
-													aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+												<li class="page-item" ng-click="pager.prev()"><a
+													class="page-link" aria-label="Previous"> <span
+														aria-hidden="true">&laquo;</span>
+												</a></li>
+												<li class="page-item"><a class="page-link">{{pager.page
+														+ 1}} of {{pager.count}}</a></li>
+
+												<li class="page-item" ng-click="pager.next()"><a
+													class="page-link" aria-label="Next"> <span
+														aria-hidden="true">&raquo;</span>
+												</a></li>
+												<li class="page-item" ng-click="pager.last()"><a
+													class="page-link" aria-label="Next"> <span
+														aria-hidden="true">&raquo;</span>
 												</a></li>
 											</ul>
 										</nav>
@@ -200,8 +199,8 @@
 					<div class="modal-body">
 						<table class="table-striped col-12">
 							<tr>
-							<th colspan="2" ></th>
-							<th>Người thực hiện tác vụ</th>
+								<th colspan="2"></th>
+								<th>Người thực hiện tác vụ</th>
 							</tr>
 							<tr ng:repeat="stt in listStatus">
 								<td>{{stt.changeDate | date: "dd/MM/yyyy, HH:mm"}}</td>
@@ -314,7 +313,8 @@
 			</div>
 		</div>
 	</div>
-h	<!-- container-scroller -->
+	h
+	<!-- container-scroller -->
 	<!-- base:js -->
 	<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
 	<!-- endinject -->

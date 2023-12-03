@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 import com.fpoly.model.Category;
 import com.fpoly.model.OrderDetail;
 import com.fpoly.model.Product;
-
+import com.fpoly.repository.CategoryRepository;
 import com.fpoly.repository.ProductRepository;
 import com.fpoly.service.ProductService;
 
@@ -19,15 +18,25 @@ import com.fpoly.service.ProductService;
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductRepository productRepository;
-	
+	@Autowired
+	CategoryRepository categoryRepository;
+
 	@Override
-	public List<Product> findAllSP(Boolean ascending) {
-		if(ascending==null) {
-			return productRepository.findAll();
+	public List<Product> findAllSP(Boolean ascending, Integer idCategory) {
+		System.out.println(idCategory);
+		if (ascending != null) {
+			String property = "price";
+			Sort.Order order = ascending ? Sort.Order.asc(property) : Sort.Order.desc(property);
+			if (idCategory > 0) {
+				Category category = categoryRepository.findById(idCategory).orElse(null);
+				return productRepository.findByCategory(category, Sort.by(order));
+			}
+			return productRepository.findAll(Sort.by(order));
+		}else if(idCategory>0) {
+			Category category = categoryRepository.findById(idCategory).orElse(null);
+			return productRepository.findByCategory(category);
 		}
-		String property = "price"; 
-        Sort.Order order = ascending ? Sort.Order.asc(property) : Sort.Order.desc(property);
-        return productRepository.findAll(Sort.by(order));
+		return productRepository.findAll();
 	}
 
 	@Override
@@ -44,11 +53,13 @@ public class ProductServiceImpl implements ProductService {
 	public void saveProduct(Product product) {
 		productRepository.save(product);
 	}
+
 	@Override
 	public List<Product> findAllByCategory(String CategoryName) {
 		return productRepository.findAll().stream().filter(sv -> sv.getCategory().getName().equals(CategoryName))
 				.collect(Collectors.toList());
 	}
+
 	@Override
 	public List<Product> searchByName(String keyword) {
 		return productRepository.findByNameContaining(keyword);

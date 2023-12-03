@@ -6,7 +6,7 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 		$scope.user = {};
 
 		if (location.href == location.origin + "/cart/refresh") {
-			ToastService.createToast("info", "Số lượng sản phẩm vừa được cập nhật!", $scope.toasts)
+			ToastService.createToast("info", "Sản phẩm vừa được cập nhật!", $scope.toasts)
 		}
 
 		$scope.get = function() {
@@ -17,7 +17,7 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 			for (let i = 0; i < $scope.carts.length; i++) {
 				ProductService.getOneProduct($scope.carts[i].id)
 					.then((resp) => {
-						CartService.resetQuantity($scope.carts[i], resp.data.quantity);
+						CartService.resetQuantity($scope.carts[i], resp.data.quantity, resp.data.isAvailable);
 						if (resp.data.quantity == 0) {
 							$scope.remove($scope.carts[i]);
 						}
@@ -34,6 +34,9 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 				try {
 					const resp = await ProductService.getOneProduct($scope.carts[i].id);
 					if ($scope.carts[i].selected === true && $scope.carts[i].quant > resp.data.quantity) {
+						location.href = location.origin + "/cart/refresh";
+					} else if ($scope.carts[i].selected === true&&!resp.data.isAvailable) { 
+						//Sản phẩm tạm ngừng kinh doanh
 						location.href = location.origin + "/cart/refresh";
 					}
 				} catch (error) {

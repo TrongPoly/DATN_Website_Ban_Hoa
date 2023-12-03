@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Zay Shop - Product Listing Page</title>
+<title>Daisy Shop - Order</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="apple-touch-icon" href="../assets/img/apple-icon.png" />
-<link rel="shortcut icon" type="image/x-icon"
-	href="../assets/img/favicon.ico" />
+<link rel="shortcut icon" href="../_admin/images/favicon.png" />
+
 <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="../assets/css/templatemo.css" />
 <link rel="stylesheet" href="../assets/css/custom.css" />
@@ -95,7 +95,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr ng-repeat="order in listOrder">
+										<tr ng-repeat="order in pager.listOrder">
 											<td>{{order.id}}</td>
 											<td>{{order.fullName}}</td>
 											<td>{{order.phoneNumber}}</td>
@@ -125,6 +125,29 @@
 										</tr>
 									</tbody>
 								</table>
+								<nav aria-label="Page navigation example">
+									<ul class="pagination  justify-content-center">
+										<li class="page-item" ng-click="pager.first()"><a
+											class="page-link" aria-label="Previous"> <span
+												aria-hidden="true">&laquo;</span>
+										</a></li>
+										<li class="page-item" ng-click="pager.prev()"><a
+											class="page-link" aria-label="Previous"> <span
+												aria-hidden="true">&laquo;</span>
+										</a></li>
+										<li class="page-item"><a class="page-link">{{pager.page
+												+ 1}} of {{pager.count}}</a></li>
+
+										<li class="page-item" ng-click="pager.next()"><a
+											class="page-link" aria-label="Next"> <span
+												aria-hidden="true">&raquo;</span>
+										</a></li>
+										<li class="page-item" ng-click="pager.last()"><a
+											class="page-link" aria-label="Next"> <span
+												aria-hidden="true">&raquo;</span>
+										</a></li>
+									</ul>
+								</nav>
 							</div>
 
 							<!-- Modal -->

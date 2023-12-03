@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fpoly.model.Account;
 import com.fpoly.model.Category;
 import com.fpoly.repository.CategoryRepository;
 import com.fpoly.service.CategoryService;

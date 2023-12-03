@@ -148,6 +148,7 @@ public class OrderRestController {
 			for (OrderDetail ordDtail : orderDetail) {
 				Product product = productService.findById(ordDtail.getProduct().getId());
 				product.setQuantity(product.getQuantity() + ordDtail.getQuantity());
+				product.setIsAvailable(true);
 				productService.saveProduct(product);
 			}
 		}

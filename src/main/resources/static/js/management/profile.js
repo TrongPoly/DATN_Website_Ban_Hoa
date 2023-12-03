@@ -1,4 +1,4 @@
-let host = "http://localhost:8080/rest";
+let host = location.origin+"/rest";
 const app = angular.module("AdminPfApp", []);
 app.controller("AdminPfCtrl", function($scope, $http) {
 	$scope.form = {};

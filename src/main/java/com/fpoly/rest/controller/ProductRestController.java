@@ -27,8 +27,9 @@ public class ProductRestController {
 	ProductService productService;
 
 	@GetMapping("")
-	public ResponseEntity<List<Product>> getProduct(@RequestParam("ascending") Optional<Boolean> ascending) {
-		List<Product> listProducts = productService.findAllSP(ascending.orElse(null));
+	public ResponseEntity<List<Product>> getProduct(@RequestParam("ascending") Optional<Boolean> ascending,
+			@RequestParam("idCategory") Optional<Integer> idCategory) {
+		List<Product> listProducts = productService.findAllSP(ascending.orElse(null),idCategory.orElse(null));
 		return ResponseEntity.status(HttpStatus.OK).body(listProducts);
 	}
 
@@ -51,15 +52,16 @@ public class ProductRestController {
 		List<Product> listProduct = productService.findByCategory(product.getCategory());
 		return ResponseEntity.status(HttpStatus.OK).body(listProduct);
 	}
-	
+
 	@PutMapping("/update/after_order")
-	public ResponseEntity<?> updateAfterOrder(@RequestBody List<OrderDTO> orderDTOs){
+	public ResponseEntity<?> updateAfterOrder(@RequestBody List<OrderDTO> orderDTOs) {
 		for (OrderDTO orderDTO : orderDTOs) {
 			Product product = productService.findById(orderDTO.getId());
-			System.out.println(product.getQuantity());
 			product.setQuantity(product.getQuantity() - orderDTO.getQuant());
+			if (product.getQuantity() == 0) {
+				product.setIsAvailable(false);
+			}
 			productService.saveProduct(product);
-			System.out.println(product.getQuantity());
 		}
 		return ResponseEntity.ok().build();
 	}

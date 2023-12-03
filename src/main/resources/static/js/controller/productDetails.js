@@ -69,7 +69,6 @@ app.controller('productDetailsCtrl', ['$scope', 'ProductService', 'CartService',
 			ProductService.getByCategory(idProduct)
 				.then((resp) => {
 					$scope.listProduct = resp.data;
-					console.log(resp.data);
 				})
 				.catch((error) => {
 					console.log(error.status);

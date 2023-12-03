@@ -154,6 +154,38 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService",
 					});
 			}
 		}
+		$scope.pager = {
+		page: 0,
+		size: 8,
+
+		get listOrder() {
+			var start = this.page * this.size;
+			return $scope.listOrder.slice(start, start + this.size);
+		},
+
+		get count() {
+			return Math.ceil(1.0 * $scope.listOrder.length / this.size);
+		},
+		first() {
+			this.page = 0;
+		},
+		prev() {
+			this.page--;
+			if (this.page < 0) {
+				this.last();
+			}
+		},
+		next() {
+			this.page++;
+			if (this.page >= this.count) {
+				this.first();
+			}
+		},
+		last() {
+			this.page = this.count - 1;
+		}
+
+	};
 		//điếm số đơn
 		$scope.countOrder();;
 		//Load đơn hàng

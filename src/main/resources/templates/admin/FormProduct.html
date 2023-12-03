@@ -238,7 +238,7 @@
 						<div class="col-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">Form Product</h4>
+									<h4 class="card-title">Quản lý sản phẩm</h4>
 									<form class="forms-sample" enctype="multipart/form-data">
 										<div class="form-group">
 											<label for="id" style="display: none;">ID Product</label> <input
@@ -247,19 +247,19 @@
 												placeholder="ID Product">
 										</div>
 										<div class="form-group">
-											<label for="id">Category</label> <select class="form-control"
-												id="Id" ng-model="form.category.id">
+											<label for="id">Loại sản phẩm</label> <select
+												class="form-control" id="Id" ng-model="form.category.id">
 												<option ng-repeat="item in cats" ng-value="{{item.id}}">{{item.name}}</option>
 
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="exampleInputName1">Name</label> <input
+											<label for="exampleInputName1">Tên sản phẩm</label> <input
 												ng-model="form.name" type="text" class="form-control"
 												id="exampleInputName1" placeholder="Name">
 										</div>
 										<div class="form-group">
-											<label>Image</label> <input sty type="file" name="file"
+											<label>Hình ảnh</label> <input sty type="file" name="file"
 												class="file-upload-default" ng-model="form.image"
 												onchange="angular.element(this).scope().imageChanged(this.files)">
 											<div class="input-group col-xs-12">
@@ -268,17 +268,17 @@
 													onchange="angular.element(this).scope().imageChanged(this.files)">
 												<span class="input-group-append">
 													<button class="file-upload-browse btn btn-primary"
-														type="button">Upload</button>
+														type="button">Tải lên</button>
 												</span>
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="quantity">Quantity</label> <input
+											<label for="quantity">Số lượng</label> <input
 												ng-model="form.quantity" type="number" class="form-control"
-												id="Quantity" placeholder="quantity">
+												id="Quantity" placeholder="Quantity">
 										</div>
 										<div class="form-group">
-											<label for="Price">Price</label> <input ng-model="form.price"
+											<label for="Price">Giá</label> <input ng-model="form.price"
 												type="number" class="form-control" id="Price"
 												placeholder="Price (VND)">
 										</div>
@@ -310,34 +310,32 @@
 								<div class="card-body">
 									<div class="form-group">
 										<div class="input-group">
-											<input ng-model="searchKeyword" type="text"
-												class="form-control" placeholder="Recipient's username"
+											<input ng-keyup="searchProductByName()"
+												ng-model="searchKeyword" type="text" class="form-control"
+												placeholder="Nhập tên sản phẩm"
 												aria-label="Recipient's username">
-											<div class="input-group-append">
-												<button ng-click="searchProductByName()"
-													class="btn btn-sm btn-primary" type="button">Search</button>
-											</div>
+											<div class="input-group-append"></div>
 										</div>
 									</div>
 									<div class="table-responsive">
 										<table class="table">
 											<thead>
 												<tr>
-													<th>Id Product</th>
-													<th>Category</th>
-													<th>Name</th>
-													<th>Quantity</th>
-													<th>Price</th>
-													<th>Status</th>
-													<th>Image</th>
-													<th>Action</th>
+													<th>Mã sản phẩm</th>
+													<th>Loại</th>
+													<th>Tên</th>
+													<th>Số lượng</th>
+													<th>Giá</th>
+													<th>Còn bán</th>
+													<th>Hình ảnh</th>
+													<th>Cập nhật</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr th:insert="~{/fragment/_toast}"></tr>
 												<tr ng-repeat="sp in pager.sps">
 													<td>{{sp.id}}</td>
-													<td>{{sp.category.id}}</td>
+													<td>{{sp.category.name}}</td>
 													<td>{{sp.name}}</td>
 													<td>{{sp.quantity}}</td>
 													<td>{{sp.price | number: 0}} VNĐ</td>
@@ -350,7 +348,8 @@
 															</label>
 														</div>
 													</td>
-													<td>{{sp.image}}</td>
+													<td><img class="w-50 h-50" alt="no picture"
+														src="../img/{{sp.image}}"></td>
 													<td>
 														<button ng-click="edit(sp.id)" type="button"
 															class="btn btn-inverse-primary btn-rounded btn-icon">

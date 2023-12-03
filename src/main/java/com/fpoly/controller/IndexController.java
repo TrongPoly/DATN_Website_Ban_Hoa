@@ -24,11 +24,6 @@ public class IndexController {
 		return "face";
 	}
 
-	@GetMapping("/product")
-	public String product() {
-		return "shop";
-	}
-
 	@GetMapping("/about")
 	public String about() {
 		return "about";

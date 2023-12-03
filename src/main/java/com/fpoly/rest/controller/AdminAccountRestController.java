@@ -39,6 +39,7 @@ public class AdminAccountRestController {
 
 	@PostMapping("/account")
 	public ResponseEntity<Account> post(@RequestBody Account ac) {
+		ac.setLocked(false);
 		accountService.saveAccount(ac);
 		return ResponseEntity.ok(ac);
 	}

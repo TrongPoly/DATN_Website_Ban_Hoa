@@ -1,4 +1,4 @@
-let host = "http://localhost:8080/rest";
+let host = location.origin+"/rest";
 const app = angular.module("AdminSpApp", []);
 app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 	$scope.form = {};
@@ -37,7 +37,6 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 		$scope.editMode = true;
 		$http.get(url).then(resp => {
 			$scope.form = resp.data;
-
 			console.log("Success", resp);
 		}).catch((error) => {
 			console.log("Error", error);
@@ -118,9 +117,9 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
 			ToastService.createToast("success", "Thêm mới thành công!", $scope.toasts);
 			console.log("Success", resp);
-			setTimeout(function() {
-				location.reload();
-			}, 1000);
+			$scope.load_all();
+	$scope.load_all_category();
+	$scope.reset();
 		}).catch((error) => {
 			ToastService.createToast("error", "thêm thất bại!", $scope.toasts);
 			console.log("Error", error);
@@ -188,9 +187,9 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 					item.id == $scope.form.id);
 				ToastService.createToast("success", "cập nhật thành công!", $scope.toasts);
 				$scope.sps[index] = resp.data;
-				setTimeout(function() {
-					location.reload();
-				}, 1000);
+				$scope.load_all();
+	$scope.load_all_category();
+	$scope.reset();
 				console.log("Succes", resp);
 			}).catch((error) => {
 				ToastService.createToast("error", "cập nhật thất bại!", $scope.toasts);
@@ -223,9 +222,9 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 			.put(url)
 			.then((resp) => {
 				ToastService.createToast("info", "Còn kinh doanh!", $scope.toasts);
-				setTimeout(function() {
-					location.reload();
-				}, 500);
+				$scope.load_all();
+	$scope.load_all_category();
+	$scope.reset();
 			})
 			.catch((error) => {
 				ToastService.createToast("error", "Lỗi", $scope.toasts);
@@ -237,9 +236,9 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 			.put(url)
 			.then((resp) => {
 				ToastService.createToast("info", "Ngừng kinh doanh!!", $scope.toasts);
-				setTimeout(function() {
-					location.reload();
-				}, 500);
+				$scope.load_all();
+	$scope.load_all_category();
+	$scope.reset();
 			})
 			.catch((error) => {
 				ToastService.createToast("error", "Lỗi", $scope.toasts);

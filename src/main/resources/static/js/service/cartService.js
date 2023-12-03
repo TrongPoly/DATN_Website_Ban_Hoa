@@ -86,8 +86,9 @@ app.service('CartService', function() {
 	}
 
 	//Cập nhật số lượng còn lại của sản phẩm
-	this.resetQuantity = function(item, quantity) {
+	this.resetQuantity = function(item, quantity, isAvailable) {
 		item.quantity = quantity;
+		item.isAvailable = isAvailable;
 		if (item.quant > quantity) {
 			item.quant = quantity;
 		};
