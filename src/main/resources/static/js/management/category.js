@@ -85,6 +85,7 @@ app.controller("AdminCatCtrl", function($scope, $http, ToastService) {
 				$scope.reset();
 				$scope.load_all();
 				$scope.reset();
+				$scope.editMode = false;
 				console.log("Succes", resp);
 			}).catch((error) => {
 				ToastService.createToast("error", "cập nhật thất bại!", $scope.toasts);

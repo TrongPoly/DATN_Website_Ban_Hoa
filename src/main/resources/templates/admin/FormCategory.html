@@ -239,7 +239,7 @@
 						<div class="col-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">Form Category</h4>
+									<h4 class="card-title">Quản lý loại sản phẩm</h4>
 									<form class="forms-sample">
 										<div class="form-group">
 											<label for="id" ng-show="!editMode" style="display: none;">ID Category</label> <input
@@ -248,8 +248,8 @@
 												ng-model="form.id">
 										</div>
 										<div class="form-group">
-											<label for="name">Name</label> <input type="text"
-												class="form-control" id="Price" placeholder="Name"
+											<label for="name">Tên loại sản phẩm</label> <input type="text"
+												class="form-control" id="Price" placeholder="Category Name"
 												ng-model="form.name">
 										</div>
 										<button type="button" class="btn btn-primary"
@@ -271,12 +271,10 @@
 								<div class="card-body">
 									<div class="form-group">
 										<div class="input-group">
-											<input type="text" ng-model="searchKeyword"
-												class="form-control" placeholder="Recipient's username"
+											<input type="text" ng-model="searchKeyword" ng-keyup="searchCategoryByName()"
+												class="form-control" placeholder="Nhập tên loại sản phẩm"
 												aria-label="Recipient's username">
 											<div class="input-group-append">
-												<button class="btn btn-sm btn-primary" type="button"
-													ng-click="searchCategoryByName()">Search</button>
 											</div>
 										</div>
 									</div>
@@ -284,8 +282,8 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th>ID</th>
-													<th>Name</th>
+													<th>Mã loại</th>
+													<th>Tên loại</th>
 													<th th:insert="~{/fragment/_toast}"></th>
 												</tr>
 											</thead>
@@ -327,29 +325,6 @@
 
 					</div>
 				</div>
-				<!-- content-wrapper ends -->
-				<!-- partial:../_admin/partials/_footer.html -->
-				<footer class="footer">
-					<div class="card">
-						<div class="card-body">
-							<div
-								class="d-sm-flex justify-content-center justify-content-sm-between">
-								<span
-									class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright
-									© 2020 <a href="https://www.bootstrapdash.com/"
-									class="text-muted" target="_blank">Bootstrapdash</a>. All
-									rights reserved.
-								</span> <span
-									class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-muted">Free
-									<a href="https://www.bootstrapdash.com/" class="text-muted"
-									target="_blank">Bootstrap dashboard</a> templates from
-									Bootstrapdash.com
-								</span>
-							</div>
-						</div>
-					</div>
-				</footer>
-				<!-- partial -->
 			</div>
 			<!-- main-panel ends -->
 		</div>

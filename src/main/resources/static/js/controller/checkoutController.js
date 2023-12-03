@@ -33,7 +33,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 			let note = document.getElementById("orderNote").value.trim();
 
 			if (datePU == "" || fullName == "" || phoneNumber == "") {
-				location.href = location.origin + "/checkout/invalid";
+				ToastService.createToast("warning", "Vui lòng điền đầy đủ thông tin", $scope.toasts);
 			} else {
 				let pickupDate = new Date(datePU);
 

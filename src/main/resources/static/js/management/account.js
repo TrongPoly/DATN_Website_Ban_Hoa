@@ -1,4 +1,4 @@
-let host = location.origin+"/rest";
+let host = location.origin + "/rest";
 const app = angular.module("AdminAccApp", []);
 app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 	$scope.form = {};
@@ -123,8 +123,8 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
 			ToastService.createToast("success", "Thêm mới thành công!", $scope.toasts);
 			$scope.load_all();
-				$scope.load_all_role();
-				$scope.reset();
+			$scope.load_all_role();
+			$scope.reset();
 			console.log("Success", resp);
 		}).catch((error) => {
 			ToastService.createToast("error", "thêm thất bại!", $scope.toasts);
@@ -161,6 +161,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 				var index = $scope.items.findIndex(item =>
 					item.email == $scope.form.email);
 				ToastService.createToast("success", "cập nhật thành công!", $scope.toasts);
+				$scope.editMode = false;
 				$scope.items[index] = resp.data;
 				$scope.load_all();
 				$scope.load_all_role();

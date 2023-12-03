@@ -18,6 +18,9 @@ app.service('OrderService', function($http) {
 	this.getOrder = function(status) {
 		return $http.get(url+"/"+sessionStorage.getItem("email")+"?status="+status);
 	}
+	this.getOrderById = function(idOrder){
+		return $http.get(url+"/id?idOrder="+idOrder);
+	}
 	this.getOrderDetails = function(idOrder){
 		return $http.get(url+"/details/"+idOrder);
 	}

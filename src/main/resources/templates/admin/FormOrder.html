@@ -134,19 +134,24 @@
 																ng-mouseover="showTooltip()" type="button"
 																class="btn btn-inverse-success btn-rounded btn-icon">
 																<i class="fa fa-check-circle"></i>
+															</button>
+															<button data-toggle="modal" data-target="#in"
+																ng-click="getOrderById(order.id)"
+																ng-show="order.status.statusId==3" title="In đơn hàng"
+																ng-mouseover="showTooltip()" type="button"
+																class="btn btn-inverse-primary btn-rounded btn-icon">
+																<i class="fa fa-print"></i>
 															</button> <!-- Hủy đơn-->
 															<button data-toggle="modal" data-target="#noteStatus"
 																ng-click="getOrderDetails(order.id)"
-																ng-show="order.status.statusId!=3&&order.status.statusId!=4"
+																ng-show="order.status.statusId!=2&&order.status.statusId!=3"
 																title="Hủy đơn hàng" ng-mouseover="showTooltip()"
 																type="button"
 																class="btn btn-inverse-danger btn-rounded btn-icon">
 																<i class="fa fa-times-circle"></i>
 															</button>
-
 														</td>
 													</tr>
-
 												</tbody>
 											</table>
 										</div>
@@ -198,6 +203,7 @@
 					</div>
 					<div class="modal-body">
 						<table class="table-striped col-12">
+
 							<tr>
 								<th colspan="2"></th>
 								<th>Người thực hiện tác vụ</th>
@@ -246,101 +252,628 @@
 			</div>
 		</div>
 		<!--END MODAL-->
-		<!--MODAL EDIT-->
-		<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+		<!-- Modal -->
+		<div class="modal fade" id="in" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-dialog modal-xl  w-100 modal-dialog-centered"
+				role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Wait for
-							confirmation</h5>
+						<h5 class="modal-title" id="exampleModalLongTitle">In hóa đơn</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" id="Bill_Print">
 
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Id</th>
-										<th>Product</th>
-										<th></th>
-										<th>Price</th>
-										<th>Quantity</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>01</td>
-										<td>(anh.jpg )</td>
-										<td>Hoa Hồng</td>
-										<td>2</td>
-										<td>30.000</td>
+						<table role="none" width="100%" cellpadding="0" cellspacing="0"
+							border="0">
+							<tr>
+								<td width="50%">&nbsp;</td>
+								<td align="center">
 
-									</tr>
-									<tr class="table-secondary ">
-										<th colspan="4">Tổng:</th>
-										<td colspan="1">10.000</td>
-									</tr>
-								</tbody>
-							</table>
+									<table id="JR_PAGE_ANCHOR_0_1" role="none" class="jrPage"
+										data-jr-height="842" cellpadding="0" cellspacing="0"
+										border="0"
+										style="empty-cells: show; width: 595px; border-collapse: collapse; background-color: white;">
+										<style type="text/css">
+#JR_PAGE_ANCHOR_0_1 th {
+	font-weight: normal;
+}
+
+#JR_PAGE_ANCHOR_0_1 ul {
+	list-style-type: disc;
+	padding-inline-start: 40px;
+	margin: 0px;
+}
+
+#JR_PAGE_ANCHOR_0_1 ol {
+	list-style-type: decimal;
+	padding-inline-start: 40px;
+	margin: 0px;
+}
+</style>
+										<tr role="none" valign="top" style="height: 0">
+											<td style="width: 20px"></td>
+											<td style="width: 41px"></td>
+											<td style="width: 1px"></td>
+											<td style="width: 139px"></td>
+											<td style="width: 1px"></td>
+											<td style="width: 95px"></td>
+											<td style="width: 24px"></td>
+											<td style="width: 1px"></td>
+											<td style="width: 59px"></td>
+											<td style="width: 1px"></td>
+											<td style="width: 1px"></td>
+											<td style="width: 148px"></td>
+											<td style="width: 1px"></td>
+											<td style="width: 43px"></td>
+											<td style="width: 20px"></td>
+										</tr>
+										<tr valign="top" style="height: 20px">
+											<td colspan="15"></td>
+										</tr>
+										<tr valign="top" style="height: 50px">
+											<td></td>
+											<td colspan="13"
+												style="text-indent: 0px; vertical-align: middle; text-align: center;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 27px; line-height: 1.3193359; font-weight: bold;">SHOP
+													HOA DAISY</span>
+											</td>
+											<td></td>
+										</tr>
+										<tr valign="top" style="height: 20px">
+											<td></td>
+											<td colspan="13"
+												style="text-indent: 0px; vertical-align: middle; text-align: center;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">0789516590</span>
+											</td>
+											<td></td>
+										</tr>
+										<tr valign="top" style="height: 20px">
+											<td></td>
+											<td colspan="13"
+												style="text-indent: 0px; vertical-align: middle; text-align: center;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359;">
+													P.An Khánh, Q. Ninh Kiều, TP. Cần Thơ</span>
+											</td>
+											<td></td>
+										</tr>
+										<tr valign="top" style="height: 15px">
+											<td colspan="15"></td>
+										</tr>
+										<tr valign="top" style="height: 107px">
+											<td></td>
+											<td colspan="13">
+												<div style="width: 100%; height: 100%; position: relative;">
+													<div
+														style="position: absolute; overflow: hidden; width: 100%; height: 100%;">
+														<table cellpadding="0" cellspacing="0" border="0"
+															style="empty-cells: show; width: 100%; border-collapse: collapse;">
+															<tr role="none" valign="top" style="height: 0">
+																<td style="width: 555px"></td>
+															</tr>
+															<tr valign="top" style="height: 64px">
+																<td>
+																	<div
+																		style="width: 100%; height: 100%; position: relative;">
+																		<div
+																			style="position: absolute; overflow: hidden; width: 100%; height: 100%;">
+																			<table cellpadding="0" cellspacing="0" border="0"
+																				style="empty-cells: show; width: 100%; border-collapse: collapse;">
+																				<tr role="none" valign="top" style="height: 0">
+																					<td style="width: 555px"></td>
+																				</tr>
+																				<tr valign="top" style="height: 44px">
+																					<td
+																						style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: center;">
+																						<span
+																						style="font-family: SVN-Segoe UI; color: #000000; font-size: 18px; line-height: 1.3193359; font-weight: bold;">HOÁ
+																							ĐƠN</span>
+																					</td>
+																				</tr>
+																			</table>
+																		</div>
+																		<div
+																			style="position: relative; width: 100%; height: 100%; pointer-events: none;">
+																			<table cellpadding="0" cellspacing="0" border="0"
+																				style="empty-cells: show; width: 100%; border-collapse: collapse;">
+																				<tr role="none" valign="top" style="height: 0">
+																					<td style="width: 555px"></td>
+																				</tr>
+																				<tr valign="top" style="height: 30px">
+																					<td></td>
+																				</tr>
+																				<tr valign="top" style="height: 34px">
+																					<td>
+																						<div
+																							style="width: 100%; height: 100%; position: relative;">
+																							<div
+																								style="position: absolute; overflow: hidden; width: 100%; height: 100%;">
+																								<table cellpadding="0" cellspacing="0"
+																									border="0"
+																									style="empty-cells: show; width: 100%; border-collapse: collapse;">
+																									<tr role="none" valign="top" style="height: 0">
+																										<td style="width: 555px"></td>
+																									</tr>
+																									<tr valign="top" style="height: 20px">
+																										<td
+																											style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: center;">
+																											<span
+																											style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">============================================================================================</span>
+																										</td>
+																									</tr>
+																								</table>
+																							</div>
+																							<div
+																								style="position: relative; width: 100%; height: 100%; pointer-events: none;">
+																								<table cellpadding="0" cellspacing="0"
+																									border="0"
+																									style="empty-cells: show; width: 100%; border-collapse: collapse;">
+																									<tr role="none" valign="top" style="height: 0">
+																										<td style="width: 555px"></td>
+																									</tr>
+																									<tr valign="top" style="height: 10px">
+																										<td></td>
+																									</tr>
+																									<tr valign="top" style="height: 24px">
+																										<td
+																											style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: center;">
+																											<span id="hvn"
+																											style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359;"></span>
+																										</td>
+																									</tr>
+																								</table>
+																							</div>
+																						</div>
+																					</td>
+																				</tr>
+																			</table>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</div>
+													<div
+														style="position: relative; width: 100%; height: 100%; pointer-events: none;">
+														<table cellpadding="0" cellspacing="0" border="0"
+															style="empty-cells: show; width: 100%; border-collapse: collapse;">
+															<tr role="none" valign="top" style="height: 0">
+																<td style="width: 40px"></td>
+																<td style="width: 470px"></td>
+																<td style="width: 1px"></td>
+																<td style="width: 1px"></td>
+																<td style="width: 43px"></td>
+															</tr>
+															<tr valign="top" style="height: 54px">
+																<td colspan="5"></td>
+															</tr>
+															<tr valign="top" style="height: 19px"
+																ng:repeat="item in listOrderDetails">
+																<td style="pointer-events: auto;"></td>
+																<td
+																	style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: left;">
+																	<span
+																	style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">
+																</span>
+																</td>
+																<td style="pointer-events: auto;"></td>
+																<td style="pointer-events: auto;"></td>
+																<td style="pointer-events: auto;"></td>
+															</tr>
+															<tr valign="top" style="height: 17px">
+																<td style="pointer-events: auto;"></td>
+																<td
+																	style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: left;">
+																	<span
+																	style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">Tên
+																		khách hàng: {{oneOrder.fullName}} </span>
+																</td>
+																<td style="pointer-events: auto;"></td>
+																<td style="pointer-events: auto;"></td>
+																<td style="pointer-events: auto;"></td>
+															</tr>
+															<tr valign="top" style="height: 17px">
+																<td style="pointer-events: auto;"></td>
+																<td
+																	style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: left;">
+																	<span
+																	style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">SĐT:
+																		{{oneOrder.phoneNumber}} </span>
+																</td>
+																<td style="pointer-events: auto;"></td>
+																<td style="pointer-events: auto;"></td>
+																<td style="pointer-events: auto;"></td>
+															</tr>
+															<tr valign="top" style="height: 17px">
+																<td style="pointer-events: auto;"></td>
+																<td
+																	style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: left;">
+																	<span
+																	style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">Ngày
+																		đặt: {{oneOrder.orderDate | date: "dd/MM/yyyy"}} </span>
+																</td>
+																<td style="pointer-events: auto;"></td>
+																<td style="pointer-events: auto;"></td>
+																<td style="pointer-events: auto;"></td>
+															</tr>
+
+														</table>
+													</div>
+												</div>
+											</td>
+											<td></td>
+										</tr>
+										<tr valign="top" style="height: 3px">
+											<td colspan="15"></td>
+										</tr>
+										<tr valign="top" style="height: 16px">
+											<td></td>
+											<td></td>
+											<td colspan="2"
+												style="text-indent: 0px; vertical-align: middle; text-align: center;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">Tên
+													sản phẩm</span>
+											</td>
+											<td colspan="3"
+												style="text-indent: 0px; vertical-align: middle; text-align: center;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">Giá
+													bán</span>
+											</td>
+											<td colspan="2"
+												style="text-indent: 0px; vertical-align: middle; text-align: center;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">Số
+													lượng</span>
+											</td>
+											<td></td>
+											<td colspan="2"
+												style="text-indent: 0px; vertical-align: middle; text-align: center;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">Thành
+													tiền</span>
+											</td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<tr valign="top" style="height: 10px">
+											<td colspan="15"></td>
+										</tr>
+										<tr ng:repeat="item in listOrderDetails" valign="top"
+											style="height: 28px">
+											<td colspan="3"></td>
+											<td colspan="2"
+												style="border: 1px solid #000000; text-indent: 0px; vertical-align: middle; text-align: left;">
+												<div style="padding-left: 6px;">
+													<span
+														style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1; *line-height: normal;">{{item.product.name}}</span>
+												</div>
+											</td>
+											<td colspan="3"
+												style="border: 1px solid #000000; text-indent: 0px; vertical-align: middle; text-align: center;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359;">{{item.product.price
+													|number : 0}}</span>
+											</td>
+											<td colspan="2"
+												style="border: 1px solid #000000; text-indent: 0px; vertical-align: middle; text-align: center;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359;">{{item.quantity}}</span>
+											</td>
+											<td></td>
+											<td colspan="2"
+												style="border: 1px solid #000000; text-indent: 0px; vertical-align: middle; text-align: center;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359;">{{item.quantity*item.product.price|number
+													:0}}</span>
+											</td>
+											<td colspan="2"></td>
+										</tr>
+
+
+										<tr valign="top" style="height: 7px">
+											<td colspan="15"></td>
+										</tr>
+										<tr valign="top" style="height: 16px">
+											<td colspan="3"></td>
+											<td colspan="3"
+												style="text-indent: 0px; vertical-align: middle; text-align: left;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">Tiền
+													hàng :</span>
+											</td>
+											<td colspan="7"
+												style="text-indent: 0px; vertical-align: middle; text-align: right;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359;">{{total()
+													| number : 0}} VNĐ</span>
+											</td>
+											<td colspan="2"></td>
+										</tr>
+										<tr valign="top" style="height: 16px">
+											<td colspan="3"></td>
+											<td colspan="3"
+												style="text-indent: 0px; vertical-align: middle; text-align: left;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">Giảm
+													giá :</span>
+											</td>
+											<td colspan="7"
+												style="text-indent: 0px; vertical-align: middle; text-align: right;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359;">0</span>
+											</td>
+											<td colspan="2"></td>
+										</tr>
+										<tr valign="top" style="height: 16px">
+											<td colspan="3"></td>
+											<td colspan="3"
+												style="text-indent: 0px; vertical-align: middle; text-align: left;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">Tổng
+													Hoá Đơn :</span>
+											</td>
+											<td colspan="7"
+												style="text-indent: 0px; vertical-align: middle; text-align: right;">
+												<span
+												style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359;">{{total()
+													| number : 0}} VNĐ</span>
+											</td>
+											<td colspan="2"></td>
+										</tr>
+										<tr valign="top" style="height: 10px">
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<tr valign="top" style="height: 70px">
+											<td></td>
+											<td colspan="13">
+												<div style="width: 100%; height: 100%; position: relative;">
+													<div
+														style="position: absolute; overflow: hidden; width: 100%; height: 100%;">
+														<table cellpadding="0" cellspacing="0" border="0"
+															style="empty-cells: show; width: 100%; border-collapse: collapse;">
+															<tr role="none" valign="top" style="height: 0">
+																<td style="width: 555px"></td>
+															</tr>
+															<tr valign="top" style="height: 24px">
+																<td
+																	style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: center;">
+																	<span
+																	style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">============================================================================================</span>
+																</td>
+															</tr>
+														</table>
+													</div>
+													<div
+														style="position: relative; width: 100%; height: 100%; pointer-events: none;">
+														<table cellpadding="0" cellspacing="0" border="0"
+															style="empty-cells: show; width: 100%; border-collapse: collapse;">
+															<tr role="none" valign="top" style="height: 0">
+																<td style="width: 555px"></td>
+															</tr>
+															<tr valign="top" style="height: 17px">
+																<td></td>
+															</tr>
+															<tr valign="top" style="height: 53px">
+																<td>
+																	<div
+																		style="width: 100%; height: 100%; position: relative;">
+																		<div
+																			style="position: absolute; overflow: hidden; width: 100%; height: 100%;">
+																			<table cellpadding="0" cellspacing="0" border="0"
+																				style="empty-cells: show; width: 100%; border-collapse: collapse;">
+																				<tr role="none" valign="top" style="height: 0">
+																					<td style="width: 555px"></td>
+																				</tr>
+																				<tr valign="top" style="height: 47px">
+																					<td
+																						style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: center;">
+																						<span
+																						style="font-family: SVN-Segoe UI; color: #000000; font-size: 18px; line-height: 1.3193359; font-weight: bold;">XIN
+																							CẢM ƠN VÀ HẸN GẶP LẠI !!!</span>
+																					</td>
+																				</tr>
+																			</table>
+																		</div>
+																		<div
+																			style="position: relative; width: 100%; height: 100%; pointer-events: none;">
+																			<table cellpadding="0" cellspacing="0" border="0"
+																				style="empty-cells: show; width: 100%; border-collapse: collapse;">
+																				<tr role="none" valign="top" style="height: 0">
+																					<td style="width: 555px"></td>
+																				</tr>
+																				<tr valign="top" style="height: 40px">
+																					<td></td>
+																				</tr>
+																				<tr valign="top" style="height: 13px">
+																					<td
+																						style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: center;">
+																						<span
+																						style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">============================================================================================</span>
+																					</td>
+																				</tr>
+																			</table>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</div>
+												</div>
+											</td>
+											<td></td>
+										</tr>
+
+										<tr valign="top" style="height: 362px">
+											<td colspan="15"></td>
+									</table>
+
+								</td>
+								<td width="50%">&nbsp;</td>
+							</tr>
+						</table>
+
+
+
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<button class="btn btn-primary" onclick="generatePDF()">IN</button>
+
+						<!-- <button type="button" class="btn btn-primary"></button>  -->
+					</div>
+				</div>
+			</div>
+			<!--END MODAL-->
+			<!--MODAL EDIT-->
+			<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Wait for
+								confirmation</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Id</th>
+											<th>Product</th>
+											<th></th>
+											<th>Price</th>
+											<th>Quantity</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>01</td>
+											<td>(anh.jpg )</td>
+											<td>Hoa Hồng</td>
+											<td>2</td>
+											<td>30.000</td>
+
+										</tr>
+										<tr class="table-secondary ">
+											<th colspan="4">Tổng:</th>
+											<td colspan="1">10.000</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="noteStatus" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Hủy đơn</h5>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label>Lý do hủy đơn</label>
+								<textarea ng-model="note" class="form-control" rows="10"
+									cols="20"></textarea>
+							</div>
+							<br>
+							<button class="btn btn-info" type="button"
+								ng-click="cancelOrder(idOrderForCancel) ">Xác nhận</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="noteStatus" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Hủy đơn</h5>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label>Lý do hủy đơn</label>
-							<textarea ng-model="note" class="form-control" rows="10"
-								cols="20"></textarea>
-						</div>
-						<br>
-						<button class="btn btn-info" type="button"
-							ng-click="cancelOrder(idOrderForCancel) ">Xác nhận</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	h
-	<!-- container-scroller -->
-	<!-- base:js -->
-	<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
-	<!-- endinject -->
-	<!-- inject:js -->
-	<script src="../_admin/js/off-canvas.js"></script>
-	<script src="../_admin/js/hoverable-collapse.js"></script>
-	<script src="../_admin/js/template.js"></script>
-	<script src="../_admin/js/settings.js"></script>
-	<script src="../_admin/js/todolist.js"></script>
-	<!-- endinject -->
-	<!-- plugin js for this page -->
-	<script src="../_admin/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-	<script src="../_admin/vendors/select2/select2.min.js"></script>
-	<!-- End plugin js for this page -->
-	<!-- Custom js for this page-->
-	<script src="../_admin/js/file-upload.js"></script>
-	<script src="../_admin/js/typeahead.js"></script>
-	<script src="../_admin/js/select2.js"></script>
-	<!-- End custom js for this page-->
-	<script src="../_admin/js/tabs.js"></script>
-	<!--AngurlarJS -->
-	<script src="../js/app/app.js"></script>
-	<script src="../js/service/orderService.js"></script>
-	<script src="../js/controller/_adminOrder.js"></script>
-	<script src="../js/service/toastService.js"></script>
+		<script>
+			function generatePDF() {
+				const element = document.getElementById("Bill_Print");
+				// Tạo một đối tượng Date để lấy thời gian hiện tại
+				const currentTime = new Date();
 
+				// Format thời gian thành một chuỗi
+				const options = {
+					timeZone : 'Asia/Ho_Chi_Minh'
+				};
+				const timestamp = currentTime.toLocaleString('en-US', options)
+						.replace(/[:.]/g, "-").replace("T", "_").slice(0, -5);
+
+				// Đặt tên file PDF với thời gian hiện tại
+				const fileName = `${timestamp}.pdf`;
+
+				// Sử dụng thư viện html2pdf để tạo và tải file PDF
+				html2pdf().from(element).save("HD-DaisyShop - " + fileName);
+			}
+		</script>
+		<script>
+			var today = new Date();
+			var date = today.getDate() + '-' + (today.getMonth() + 1) + '-'
+					+ today.getFullYear();
+			var time = today.getHours() + ":" + today.getMinutes() + ":"
+					+ today.getSeconds();
+			var dateTime = date + ' ' + time;
+
+			document.getElementById("hvn").innerHTML = dateTime;
+		</script>
+		<!-- container-scroller -->
+		<!-- base:js -->
+		<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
+		<!-- endinject -->
+		<!-- inject:js -->
+		<script src="../_admin/js/off-canvas.js"></script>
+		<script src="../_admin/js/hoverable-collapse.js"></script>
+		<script src="../_admin/js/template.js"></script>
+		<script src="../_admin/js/settings.js"></script>
+		<script src="../_admin/js/todolist.js"></script>
+		<!-- endinject -->
+		<!-- plugin js for this page -->
+		<script src="../_admin/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+		<script src="../_admin/vendors/select2/select2.min.js"></script>
+		<!-- End plugin js for this page -->
+		<!-- Custom js for this page-->
+		<script src="../_admin/js/file-upload.js"></script>
+		<script src="../_admin/js/typeahead.js"></script>
+		<script src="../_admin/js/select2.js"></script>
+		<!-- End custom js for this page-->
+		<script src="../_admin/js/tabs.js"></script>
+		<!--AngurlarJS -->
+		<script src="../js/app/app.js"></script>
+		<script src="../js/service/orderService.js"></script>
+		<script src="../js/controller/_adminOrder.js"></script>
+		<script src="../js/service/toastService.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 
 </html>

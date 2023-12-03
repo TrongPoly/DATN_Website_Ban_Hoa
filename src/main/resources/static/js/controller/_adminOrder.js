@@ -4,6 +4,7 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService",
 		$scope.listOrderDetails = [];
 		$scope.allOrder = [];
 		$scope.toasts = [];
+		$scope.oneOrder = {}
 		$scope.getOrder = function(status) {
 			if (status === undefined) {
 				status = 0;
@@ -16,6 +17,15 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService",
 					console.log(error.status);
 				});
 		}
+		
+		$scope.getOrderById = function(idOrder){
+			OrderService.getOrderById(idOrder)
+			.then((resp)=>{
+				$scope.oneOrder = resp.data;
+				$scope.getOrderDetails(idOrder);
+			})
+		}
+		
 		$scope.getOrderDetails = function(idOrder) {
 			OrderService.getOrderDetails(idOrder)
 				.then((resp) => {

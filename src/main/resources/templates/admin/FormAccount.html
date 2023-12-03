@@ -240,7 +240,7 @@
 						<div class="col-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">Form Account</h4>
+									<h4 class="card-title">Quản lý tài khoản</h4>
 									<form class="forms-sample">
 										<div class="form-group">
 											<label for="email">Email</label> <input ng-show="!editMode"
@@ -251,17 +251,17 @@
 												readonly="true">
 										</div>
 										<div class="form-group">
-											<label for="name">Fullname</label> <input
+											<label for="name">Họ và tên</label> <input
 												ng-model="form.fullName" type="text" class="form-control"
 												id="name" placeholder="Fullname">
 										</div>
 										<div class="form-group">
-											<label for="Password" ng-show="!editMode">Password</label> <input type="password"
+											<label for="Password" ng-show="!editMode">Mật khẩu</label> <input type="password"
 												class="form-control" id="password" placeholder="Password"
 												ng-model="form.password" ng-show="!editMode">
 										</div>
 										<div class="form-group">
-											<label>Role</label> <select class="form-control" id="Id"
+											<label>Phân quyền</label> <select class="form-control" id="Id"
 												ng-model="form.role.id">
 												<option ng-repeat="role in roles" ng-value="{{role.id}}">{{role.roleName}}</option>
 
@@ -290,12 +290,10 @@
 								<div class="card-body">
 									<div class="form-group">
 										<div class="input-group">
-											<input ng-model="searchKeyword" type="text"
-												class="form-control" placeholder="Recipient's username"
+											<input ng-model="searchKeyword" type="text" ng-keyup="searchCustomerByName()"
+												class="form-control" placeholder="Nhập họ và tên"
 												aria-label="Recipient's username">
 											<div class="input-group-append">
-												<button ng-click="searchCustomerByName()"
-													class="btn btn-sm btn-primary" type="button">Search</button>
 											</div>
 										</div>
 									</div>
@@ -304,9 +302,9 @@
 											<thead>
 												<tr>
 													<th>Email</th>
-													<th>Fullname</th>
-													<th>Role</th>
-													<th>Blocked</th>
+													<th>Họ và tên</th>
+													<th>Quyền</th>
+													<th>Chặn tài khoản</th>
 													<th th:insert="~{/fragment/_toast}"></th>
 												</tr>
 											</thead>
@@ -315,7 +313,6 @@
 													<td>{{item.email}}</td>
 													<td>{{item.fullName}}</td>
 													<td>{{item.role.roleName}}</td>
-													<td>{{item.locked? 'Đã Chặn' : 'Ngừng Chặn'}}</td>
 													<td><a ng:if="item.locked == false"
 														ng-click="chan(item.email)" class="btn btn-warning"><i
 															class="fa fa-lock-open"></i></a> <a
@@ -358,26 +355,7 @@
 				</div>
 				<!-- content-wrapper ends -->
 				<!-- partial:partials/_footer.html -->
-				<footer class="footer">
-					<div class="card">
-						<div class="card-body">
-							<div
-								class="d-sm-flex justify-content-center justify-content-sm-between">
-								<span
-									class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright
-									© 2020 <a href="https://www.bootstrapdash.com/"
-									class="text-muted" target="_blank">Bootstrapdash</a>. All
-									rights reserved.
-								</span> <span
-									class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-muted">Free
-									<a href="https://www.bootstrapdash.com/" class="text-muted"
-									target="_blank">Bootstrap dashboard</a> templates from
-									Bootstrapdash.com
-								</span>
-							</div>
-						</div>
-					</div>
-				</footer>
+				
 				<!-- partial -->
 			</div>
 			<!-- main-panel ends -->

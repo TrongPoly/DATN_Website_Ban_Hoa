@@ -55,6 +55,12 @@ public class OrderRestController {
 		List<Order> listOrders = orderService.findAllOrder();
 		return ResponseEntity.ok(listOrders);
 	}
+	@GetMapping("/order/id")
+	public ResponseEntity<Order> getOneOrder(@RequestParam("idOrder") int idOrder){
+		Order order = orderService.findById(idOrder);
+		return ResponseEntity.ok(order);
+	}
+	
 	@GetMapping("/order/get_all/{email}")
 	public ResponseEntity<List<Order>> getAllByEmail(@PathVariable("email") String email) {
 		List<Order> listOrders = orderService.findByCustomer(accountService.findByid(email));
