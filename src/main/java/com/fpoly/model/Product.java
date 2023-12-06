@@ -108,4 +108,22 @@ public class Product {
         this.description = description;
     }
 
+	public Product(@NotNull Category category, @Size(max = 255) @NotNull String name,
+			@Size(max = 255) @NotNull String image, @NotNull BigDecimal price, @NotNull int quantity,
+			@NotNull Boolean isAvailable, String description) {
+		super();
+		this.category = category;
+		this.name = name;
+		this.image = image;
+		this.price = price;
+		this.quantity = quantity;
+		this.isAvailable = isAvailable;
+		this.description = description;
+	}
+
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }

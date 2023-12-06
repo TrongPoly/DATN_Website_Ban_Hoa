@@ -1,6 +1,9 @@
 package com.fpoly.rest.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +25,11 @@ import com.fpoly.repository.CategoryRepository;
 import com.fpoly.repository.ProductRepository;
 import com.fpoly.service.ProductService;
 
-import jakarta.websocket.server.PathParam;
+import jakarta.servlet.annotation.MultipartConfig;
+
 
 @RestController
-
+@MultipartConfig
 @RequestMapping("/rest")
 public class AdminProductRestController {
 	@Autowired
@@ -34,45 +38,34 @@ public class AdminProductRestController {
 	ProductRepository prRep;
 	@Autowired
 	CategoryRepository catRep;
-	
+
 	@GetMapping("/product")
 	public ResponseEntity<List<Product>> getProduct() {
-		List<Product> listProducts = PrAd.findAllSP(true,0);
+		List<Product> listProducts = PrAd.findAllSP(true, 0);
 		return ResponseEntity.status(HttpStatus.OK).body(listProducts);
 	}
-	
+
 	@GetMapping("/product/{id}")
-	public ResponseEntity<Product> getOne(@PathVariable("id") Integer id){
+	public ResponseEntity<Product> getOne(@PathVariable("id") Integer id) {
 		if (!prRep.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(prRep.findById(id).get());
 	}
-	
+
 	@PostMapping("/product")
-	public  ResponseEntity<Product> post(@RequestBody Product pr, @PathParam("folder") MultipartFile folder,@PathVariable("id") Integer id) {
-		if (!prRep.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		
-		PrAd.saveProduct(pr);	
+	public ResponseEntity<Product> post(@RequestBody Product pr) {
+		pr.setIsAvailable(true);
+		PrAd.saveProduct(pr);
 		return ResponseEntity.ok(pr);
 	}
-	
 
 	@PutMapping("/product/{id}")
-	public  ResponseEntity<Product> put(@RequestBody Product pr, @PathVariable("id") Integer id) {
-
-		if (!prRep.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		
+	public ResponseEntity<Product> put(@RequestBody Product pr, @PathVariable("id") Integer id) {
 		PrAd.saveProduct(pr);
-		
 		return ResponseEntity.ok(pr);
 	}
+
 	@DeleteMapping("/product/{id}")
 	public ResponseEntity<Void> DeleteId(@PathVariable("id") Integer id) {
 
@@ -84,11 +77,12 @@ public class AdminProductRestController {
 		return ResponseEntity.ok().build();
 
 	}
+
 	@GetMapping("/product/search")
-	public List<Product> searchProductByName(@RequestParam("keyword") String keyword){
+	public List<Product> searchProductByName(@RequestParam("keyword") String keyword) {
 		return PrAd.searchByName(keyword);
 	}
-	
+
 	@PutMapping("/account/kinhDoanh/{id}")
 	public ResponseEntity<Product> chan(@PathVariable("id") Integer id) {
 		Product product = PrAd.findById(prRep.findById(id).get().getId());
@@ -105,10 +99,3 @@ public class AdminProductRestController {
 		return ResponseEntity.ok().build();
 	}
 }
-
-
-
-
-
-
-
