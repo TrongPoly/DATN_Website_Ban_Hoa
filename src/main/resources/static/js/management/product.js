@@ -267,7 +267,6 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 	//upload image
 	$scope.imageChanged = function(files) {
 		var data = new FormData();
-
 		data.append('file', files[0]);
 		$http.post('/rest/upload/img', data, {
 			transformRequest: angular.identity,

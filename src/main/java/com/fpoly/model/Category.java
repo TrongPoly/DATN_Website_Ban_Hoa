@@ -16,6 +16,11 @@ public class Category {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
+    
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "image", nullable = false)
+    private String image;
 
     public Integer getId() {
         return id;
@@ -31,6 +36,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }

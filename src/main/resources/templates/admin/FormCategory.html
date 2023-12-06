@@ -233,6 +233,7 @@
 			<!-- partial:../admin/partials/_sidebar.html -->
 			<nav th:replace="~{fragment/_adminAside.html::adminAside}"></nav>
 			<!-- partial -->
+			
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="row">
@@ -240,8 +241,9 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Quản lý loại sản phẩm</h4>
-									<form class="forms-sample">
-										<div class="form-group">
+									<form class="forms-sample"> 
+                               	
+                                <div class="form-group">
 											<label for="id" ng-show="!editMode" style="display: none;">ID Category</label> <input
 												ng-show="!editMode" type="text" class="form-control"
 												id="exampleInputName1" style="display: none;" placeholder="Category"
@@ -252,12 +254,28 @@
 												class="form-control" id="Price" placeholder="Category Name"
 												ng-model="form.name">
 										</div>
+										<div class="form-group">
+											<label>Hình ảnh</label> <input sty type="file" name="file"
+												class="file-upload-default" ng-model="form.image"
+												onchange="angular.element(this).scope().imageChanged(this.files)">
+											<div class="input-group col-xs-12">
+												<input type="text" class="form-control file-upload-info"
+													disabled placeholder="Upload Image" ng-model="form.image"
+													onchange="angular.element(this).scope().imageChanged(this.files)">
+												<span class="input-group-append">
+													<button class="file-upload-browse btn btn-primary"
+														type="button">Tải lên</button>
+												</span>
+											</div>
+										</div>
 										<button type="button" class="btn btn-primary"
 											ng-click="create()" ng-show="!editMode">Create</button>
-										<button type="button" class="btn btn-secondary"
+										<button type="button" class="btn btn-secSondary"
 											ng-show="editMode" ng-click="update()">Edit</button>
 										<button type="button" class="btn btn-secondary"
 											ng-click="reset()" ng-show="!editMode">Reset</button>
+											
+											
 									</form>
 								</div>
 
@@ -283,7 +301,8 @@
 											<thead>
 												<tr>
 													<th>Mã loại</th>
-													<th>Tên loại</th>
+													<th>Tên loại</th>	
+													<th> Ảnh</th>
 													<th th:insert="~{/fragment/_toast}"></th>
 												</tr>
 											</thead>
@@ -291,6 +310,9 @@
 												<tr ng-repeat="cat in pager.cats">
 													<td>{{cat.id}}</td>
 													<td>{{cat.name}}</td>
+													<td><img style="width: 70px; height: 70px" alt="no picture"
+														src="../img/{{cat.image}}"></td>
+													<td>
 													<td>
 														<button ng-click="edit(cat.id)" type="button"
 															class="btn btn-inverse-primary btn-rounded btn-icon">
@@ -327,9 +349,7 @@
 				</div>
 			</div>
 			<!-- main-panel ends -->
-		</div>
-		<!-- page-body-wrapper ends -->
-	</div>
+	
 	<!-- container-scroller -->
 	<!-- base:js -->
 	<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>

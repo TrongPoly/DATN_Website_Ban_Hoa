@@ -127,6 +127,19 @@ app.controller("AdminCatCtrl", function($scope, $http, ToastService) {
 			$scope.load_all();
 		}
 	};
+$scope.imageChanged = function(files) {
+		var data = new FormData();
+		data.append('file', files[0]);
+		$http.post('/rest/upload/img', data, {
+			transformRequest: angular.identity,
+			headers: { 'Content-Type': undefined }
+		}).then(resp => {
+			$scope.form.image = resp.data.name
+		}).catch(error => {
+			ToastService.createToast("error", "lỗi upload hình ảnh", $scope.toasts);
+			console.log("Error", error);
+		})
+	}
 
 	$scope.pager = {
 		page: 0,
