@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>PolluxUI Admin</title>
-  <link rel="stylesheet" href="	../_admin/vendors/typicons/typicons.css">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>PolluxUI Admin</title>
+<link rel="stylesheet" href="	../_admin/vendors/typicons/typicons.css">
 <link rel="stylesheet"
 	href="../_admin/vendors/css/vendor.bundle.base.css">
 <!-- endinject -->
@@ -26,21 +27,13 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-  <!-- base:css -->
-  <link rel="stylesheet" href="../_admin/vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="../_admin/vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="../_admin/css/vertical-layout-light/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="../_admin/images/favicon.png" />
-  <script src="path/to/angular.js"></script>
+
+
 </head>
-<body ng-app="AdminAccApp" ng-controller="AdminAccCtrl>
-  <div class="container-scroller">
-  
+<body ng-app="reportApp" ng-controller="dashboard-ctrl">
+
+	<div class="container-scroller">
+
 		<!-- partial:../admin/partials/_navbar.html -->
 		<nav th:replace="~{fragment/_adminHeader.html::adminHeader}"></nav>
 		<!-- partial -->
@@ -242,111 +235,75 @@
 			<!-- partial:partials/_sidebar.html -->
 			<nav th:replace="~{fragment/_adminAside.html::adminAside}"></nav>
 			<!-- partial -->
-      <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
+			<!-- partial -->
+			<div class="main-panel">
+				<div class="content-wrapper">
 
-          <div class="row">
-            <div class="col-xl-12 grid-margin stretch-card flex-column">
-              <h5 class="mb-2 text-titlecase mb-4">Income statistics</h5>
-              <div class="row h-100">
-                <div class="col-md-12 stretch-card">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-start flex-wrap">
-                        <div>
-                        <li class="page-item"><a class="page-link" href="#">{{pager.page
-													+ 1}} of {{pager.count}}</a></li>
-                          <p class="mb-3">Monthly Increase</p>
-                          <h3>{{total.totalCustomer}}</h3>
-                        </div>
-                        <div id="income-chart-legend" class="d-flex flex-wrap mt-1 mt-md-0"></div>
-                      </div>
-                      <canvas id="income-chart" data-total="{{total.totalCustomer}}"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="row">
+						<div class="col-xl-12 grid-margin stretch-card flex-column">
+							<h5 class="mb-2 text-titlecase mb-4">Income statistics</h5>
+							<div class="row h-100">
+								<div class="col-md-12 stretch-card">
+									<div class="card">
+										<div class="card-body">
+											<div
+												class="d-flex justify-content-between align-items-start flex-wrap">
+												<div>
+													<p class="mb-3">Doanh thu tháng {{month}}</p>
+													<select ng-model="month" ng-change="getDoanhThu()"
+														class="form-control">
+														<option ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]"
+															ng-value="i" ng-selected="i === month">{{i}}</option>
+													</select>
 
-         
-            
-          <div class="row">
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
-                    <div>
-                      <p class="mb-2 text-md-center text-lg-left">Total Expenses</p>
-                      <h1 class="mb-0">8742</h1>
-                    </div>
-                    <i class="typcn typcn-briefcase icon-xl text-secondary"></i>
-                  </div>
-                  <canvas id="expense-chart" height="80"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
-                    <div>
-                      <p class="mb-2 text-md-center text-lg-left">Total Budget</p>
-                      
-                      <h1 class="mb-0">47,840</h1>
-                    </div>
-                    <i class="typcn typcn-chart-pie icon-xl text-secondary"></i>
-                  </div>
-                  <canvas id="budget-chart" height="80"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
-                    <div>
-                      <p class="mb-2 text-md-center text-lg-left">Total Balance</p>
-                      <h1 class="mb-0">{{ balance }}</h1>
-                    </div>
-                    <i class="typcn typcn-clipboard icon-xl text-secondary"></i>
-                  </div>
-                  <canvas id="balance-chart" height="80"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
+													<h3>{{tota | number:0}} VNĐ</h3>
 
-        </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-      
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
+												</div>
+												<div id="income-chart-legend"
+													class="d-flex flex-wrap mt-1 mt-md-0"></div>
+											</div>
+											<canvas id="income-chart" data-total="total"></canvas>
 
-  <!-- base:js -->
-  <script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <script src="../_admin/vendors/chart.js/Chart.min.js"></script>
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="../_admin/js/off-canvas.js"></script>
-  <script src="../_admin/js/hoverable-collapse.js"></script>
-  <script src="../_admin/js/template.js"></script>
-  <script src="../_admin/js/settings.js"></script>
-  <script src="../_admin/js/todolist.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="../_admin/js/dashboard.js"></script>
-  <!-- End custom js for this page-->
-  <script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				<!-- content-wrapper ends -->
+				<!-- partial:partials/_footer.html -->
+
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+
+	<!-- container-scroller -->
+
+	<!-- base:js -->
+	<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
+	<!-- endinject -->
+	<!-- Plugin js for this page-->
+	<script src="../_admin/vendors/chart.js/Chart.min.js"></script>
+	<!-- End plugin js for this page-->
+	<!-- inject:js -->
+	<script src="../_admin/js/off-canvas.js"></script>
+	<script src="../_admin/js/hoverable-collapse.js"></script>
+	<script src="../_admin/js/template.js"></script>
+	<script src="../_admin/js/settings.js"></script>
+	<script src="../_admin/js/todolist.js"></script>
+	<!-- endinject -->
+	<!-- Custom js for this page-->
+	<script src="../_admin/js/dashboard.js"></script>
+	<!-- End custom js for this page-->
+	<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
 	<!-- endinject -->
 	<!-- inject:js -->
 	<script src="../_admin/js/off-canvas.js"></script>
@@ -363,8 +320,12 @@
 	<script src="../_admin/js/file-upload.js"></script>
 	<script src="../_admin/js/typeahead.js"></script>
 	<script src="../_admin/js/select2.js"></script>
-	<script th:src="@{/js/management/account.js}"></script>
+	<script src="../js/controller/dashboard-ctrl.js"></script>
 	<script src="../js/service/toastService.js"></script>
+	<!-- Thêm thư viện Chart.js -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
 </body>
 
 </html>

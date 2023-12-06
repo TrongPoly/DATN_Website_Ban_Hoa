@@ -11,14 +11,11 @@ import com.fpoly.repository.*;
 @Service
 public class ReportServiceImpl implements ReportService {
 
-    private final ReportCostRepo reportCostRepo;
+	@Autowired
+	ReportCostRepo reportCostRepo;
 
-    @Autowired
-    public ReportServiceImpl(ReportCostRepo reportCostRepository) {
-        this.reportCostRepo = reportCostRepository;
-    }
-
-    @Override
-    public List<ReportCost> generateReport(int month) {
-        return reportCostRepo.spReportCost(month);
-    }}
+	@Override
+	public List<ReportCost> generateReport(int month) {
+		return reportCostRepo.reportCost(month);
+	}
+}
