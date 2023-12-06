@@ -1,15 +1,40 @@
-app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$http", 
-	function($scope, ToastService, CheckoutService, $http) {
+app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$http", "ProductService", "CartService",
+	function($scope, ToastService, CheckoutService, $http, ProductService, CartServive) {
 		$scope.orders = [];
 		$scope.toasts = [];
 		$scope.totalOrder = 0;
 		$scope.methodPayment = "Chuyển khoản";
-		if (location.href == location.origin+"/checkout/invalid") {
+		if (location.href == location.origin + "/checkout/invalid") {
 			ToastService.createToast("warning", "Vui lòng điền đầy đủ thông tin", $scope.toasts);
 		}
 
-		
 
+		$http
+			.get(location.origin+"/rest/profile/"+sessionStorage.getItem("email"))
+			.then((resp) => {
+				$scope.account = resp.data;
+			})
+			.catch((error) => {
+				console.log(error.status)
+			});
+
+		$scope.checkQuantProduct = async function() {
+			$scope.carts = CartServive.getCart();
+			for (let i = 0; i < $scope.carts.length; i++) {
+				try {
+					const resp = await ProductService.getOneProduct($scope.carts[i].id);
+					console.log(resp.data.isAvailable);
+					if ($scope.carts[i].selected === true && $scope.carts[i].quant > resp.data.quantity) {
+						location.href = location.origin + "/cart/refresh";
+					} else if ($scope.carts[i].selected === true && resp.data.isAvailable == false) {
+						//Sản phẩm tạm ngừng kinh doanh
+						location.href = location.origin + "/cart/refresh";
+					}
+				} catch (error) {
+					console.log(error.status);
+				}
+			}
+		}
 		$scope.get = function() {
 			$scope.orders = CheckoutService.getSelectedProduct();
 			$scope.getOrderTotal();
@@ -25,14 +50,22 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 			return $scope.totalOrder;
 		}
 
-
+		$scope.preventSpace = function(event) {
+			if (event.keyCode === 32) { // 32 là mã ký tự cho phím space
+				event.preventDefault(); // Ngăn chặn sự kiện mặc định của phím space
+			}
+		}
 		$scope.checkout = function(amount) {
+			$scope.checkQuantProduct();
+
 			let datePU = document.getElementById("datePickUp").value;
-			let fullName = document.getElementById("fullName").value.trim();
-			let phoneNumber = document.getElementById("phoneNumber").value.trim();
+			let billing_fullName = document.getElementById("billing_fullName").value.trim();
+			let billing_phoneNumber = document.getElementById("billing_phoneNumber").value.trim();
+			let shipping_fullName = document.getElementById("shipping_fullName").value.trim();
+			let shipping_phoneNumber = document.getElementById("shipping_phoneNumber").value.trim();
 			let note = document.getElementById("orderNote").value.trim();
 
-			if (datePU == "" || fullName == "" || phoneNumber == "") {
+			if (datePU == "" || billing_fullName == "" || billing_phoneNumber == "" || shipping_fullName == "" || shipping_phoneNumber == "") {
 				ToastService.createToast("warning", "Vui lòng điền đầy đủ thông tin", $scope.toasts);
 			} else {
 				let pickupDate = new Date(datePU);
@@ -44,16 +77,16 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 				if (pickupDate < currentDate) {
 					ToastService.createToast("error", "Ngày lấy hoa không hợp lệ", $scope.toasts);
 				} else {
-
 					sessionStorage.setItem("methodPayment", 0);
 					sessionStorage.removeItem("pickUpDate")
 					sessionStorage.setItem("pickUpDate", datePU);
-					sessionStorage.setItem("fullName", fullName);
-					sessionStorage.setItem("phoneNumber", phoneNumber);
-					sessionStorage.setItem("phoneNumber", phoneNumber);
-					sessionStorage.setItem("note",note);
-					if ($scope.methodPayment == "Chuyển khoản") {
+					sessionStorage.setItem("billing_fullName", billing_fullName);
+					sessionStorage.setItem("billing_phoneNumber", billing_phoneNumber);
+					sessionStorage.setItem("shipping_fullName", shipping_fullName);
+					sessionStorage.setItem("shipping_phoneNumber", shipping_phoneNumber);
+					sessionStorage.setItem("note", note);
 
+					if ($scope.methodPayment == "Chuyển khoản") {
 						var url = location.origin + `/api/payment/create_payment?amount=${amount}`;
 						$http
 							.get(url)
@@ -71,7 +104,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 			}
 		}
 
-	
-	
+
+
 		$scope.get();
 	}]);

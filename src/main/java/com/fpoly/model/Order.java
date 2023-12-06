@@ -14,12 +14,19 @@ public class Order {
 	private Integer id;
 
 	@NotNull
-	@Column(name = "full_name", nullable = false)
-	private String fullName;
+	@Column(name = "billing_full_name", nullable = false)
+	private String billingFullName;
 	
 	@NotNull
-	@Column(name = "phone_number", nullable = false)
-	private String phoneNumber;
+	@Column(name = "billing_phone_number", nullable = false)
+	private String billingPhoneNumber;
+	@NotNull
+	@Column(name = "shipping_full_name", nullable = false)
+	private String shippingFullName;
+	
+	@NotNull
+	@Column(name = "shipping_phone_number", nullable = false)
+	private String shippingPhoneNumber;
 
 	@ManyToOne
 	@JoinColumn(name = "email", nullable = false)
@@ -67,21 +74,38 @@ public class Order {
 		this.pickUpDate = pickUpDate;
 	}
 
-	public String getFullName() {
-		return fullName;
+	
+
+	public String getBillingFullName() {
+		return billingFullName;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setBillingFullName(String billingFullName) {
+		this.billingFullName = billingFullName;
 	}
 
-
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getBillingPhoneNumber() {
+		return billingPhoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setBillingPhoneNumber(String billingPhoneNumber) {
+		this.billingPhoneNumber = billingPhoneNumber;
+	}
+
+	public String getShippingFullName() {
+		return shippingFullName;
+	}
+
+	public void setShippingFullName(String shippingFullName) {
+		this.shippingFullName = shippingFullName;
+	}
+
+	public String getShippingPhoneNumber() {
+		return shippingPhoneNumber;
+	}
+
+	public void setShippingPhoneNumber(String shippingPhoneNumber) {
+		this.shippingPhoneNumber = shippingPhoneNumber;
 	}
 
 	public int getMethodPayment() {

@@ -30,11 +30,7 @@ public class AccountServiceImpl implements AccountService{
 	public void saveAccount(Account account) {
 		accountRepository.save(account);
 	}
-	@Override
-	public Account findByUser() {
-		return accountRepository.findAll().stream()
-				.filter(acc -> acc.getEmail().equals(session.getSession("user").getEmail())).findFirst().get();
-	}
+	
 	@Override
 	public List<Account> searchByName(String keyword){
 		return accountRepository.findByFullNameContaining(keyword);

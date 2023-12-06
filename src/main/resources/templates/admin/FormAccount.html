@@ -241,7 +241,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Quản lý tài khoản</h4>
-									<form class="forms-sample">
+									<form th:if="${session.user.role.id == 1}" class="forms-sample">
 										<div class="form-group">
 											<label for="email">Email</label> <input ng-show="!editMode"
 												type="email" class="form-control" id="email"
@@ -256,13 +256,18 @@
 												id="name" placeholder="Fullname">
 										</div>
 										<div class="form-group">
-											<label for="Password" ng-show="!editMode">Mật khẩu</label> <input type="password"
-												class="form-control" id="password" placeholder="Password"
-												ng-model="form.password" ng-show="!editMode">
+											<label for="phone">Số điện thoại</label> <input
+												ng-model="form.phoneNumber" type="text" class="form-control"
+												id="phone" placeholder="Phonenumber">
 										</div>
 										<div class="form-group">
-											<label>Phân quyền</label> <select class="form-control" id="Id"
-												ng-model="form.role.id">
+											<label for="Password">Mật khẩu</label> <input
+												type="password" class="form-control" id="password"
+												placeholder="Password" ng-model="form.password">
+										</div>
+										<div class="form-group">
+											<label>Phân quyền</label> <select class="form-control"
+												id="Id" ng-model="form.role.id">
 												<option ng-repeat="role in roles" ng-value="{{role.id}}">{{role.roleName}}</option>
 
 											</select>
@@ -273,15 +278,14 @@
 										</div>
 										<button type="button" class="btn btn-primary"
 											ng-click="create()" ng-show="!editMode">Create</button>
+										<button type="button" class="btn btn-primary"
+											ng-show="editMode" ng-click="update()">Update</button>
 										<button type="button" class="btn btn-secondary"
-											ng-show="editMode" ng-click="update()">Edit</button>
-										<button type="button" class="btn btn-secondary"
-											ng-click="reset()" ng-show="!editMode">Reset</button>
+											ng-click="reset()">{{editMode ? 'Cancel' :
+											'Reset'}}</button>
 									</form>
 								</div>
-
 							</div>
-
 						</div>
 
 						<!--TABLE-->
@@ -290,21 +294,24 @@
 								<div class="card-body">
 									<div class="form-group">
 										<div class="input-group">
-											<input ng-model="searchKeyword" type="text" ng-keyup="searchCustomerByName()"
-												class="form-control" placeholder="Nhập họ và tên"
+											<input ng-model="searchKeyword" type="text"
+												ng-keyup="searchCustomerByName()" class="form-control"
+												placeholder="Nhập họ và tên"
 												aria-label="Recipient's username">
-											<div class="input-group-append">
-											</div>
+											<div class="input-group-append"></div>
 										</div>
 									</div>
 									<div class="table-responsive">
-										<table class="table">
+										<table class="table" th:if="${session.user.role.id == 1}">
 											<thead>
 												<tr>
 													<th>Email</th>
 													<th>Họ và tên</th>
+													<th>Số điện thoại</th>
 													<th>Quyền</th>
 													<th>Chặn tài khoản</th>
+													<th>Xác minh</th>
+
 													<th th:insert="~{/fragment/_toast}"></th>
 												</tr>
 											</thead>
@@ -312,12 +319,24 @@
 												<tr ng-repeat="item in pager.items">
 													<td>{{item.email}}</td>
 													<td>{{item.fullName}}</td>
+													<td>{{item.phoneNumber==''? 'Chưa có số điện thoại':item.phoneNumber}}</td>
 													<td>{{item.role.roleName}}</td>
-													<td><a ng:if="item.locked == false"
-														ng-click="chan(item.email)" class="btn btn-warning"><i
-															class="fa fa-lock-open"></i></a> <a
-														ng-click="boChan(item.email)" ng:if="item.locked == true"
-														class="btn btn-warning"><i class='fa fa-lock'></i></a></td>
+													<td class="text-center">
+														<div ng-if="item.role.id!=1">
+															<button ng:if="item.locked == false"
+																ng-click="chan(item.email)"
+																class="btn btn-inverse-success btn-rounded btn-icon">
+																<i class="typcn typcn typcn-lock-open"></i>
+															</button>
+															<button ng-click="boChan(item.email)"
+																ng:if="item.locked == true"
+																class="btn btn-inverse-warning btn-rounded btn-icon">
+																<i class='typcn typcn-lock-closed'></i>
+															</button>
+														</div>
+													</td>
+													<td ng-class="{'text-success':item.active}">{{item.active?
+														'Đã xác minh' : 'Chưa xác minh'}}</td>
 													<td>
 														<button ng-click="edit(item.email)" type="button"
 															class="btn btn-inverse-primary btn-rounded btn-icon">
@@ -325,6 +344,30 @@
 														</button>
 													</td>
 
+												</tr>
+											</tbody>
+										</table>
+										<!-- Table for STAFF -->
+										<table th:if="${session.user.role.id == 3}" class="table">
+											<thead>
+												<tr>
+													<th>Email</th>
+													<th>Họ và tên</th>
+													<th>Quyền</th>
+													<th>Trạng thái</th>
+													<th>Xác minh</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="item in pager.items">
+													<td>{{item.email}}</td>
+													<td>{{item.fullName}}</td>
+													<td
+														ng-class="{'text-info':item.role.id==3,'text-success':item.role.id==2,'text-warning':item.role.id==1}">{{item.role.roleName}}</td>
+													<td ng-class="{'text-danger':item.locked}">{{item.locked?
+														'Tạm thời khóa' :'Hoạt động'}}</td>
+													<td ng-class="{'text-success':item.active}">{{item.active?
+														'Đã xác minh' : 'Chưa xác minh'}}</td>
 												</tr>
 											</tbody>
 										</table>
@@ -355,7 +398,7 @@
 				</div>
 				<!-- content-wrapper ends -->
 				<!-- partial:partials/_footer.html -->
-				
+
 				<!-- partial -->
 			</div>
 			<!-- main-panel ends -->

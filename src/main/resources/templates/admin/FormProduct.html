@@ -294,9 +294,9 @@
 											class="btn btn-primary" ng-show="!editMode">Create</button>
 
 										<button ng-click="update()" type="button"
-											class="btn btn-secondary" ng-show="editMode">Edit</button>
+											class="btn btn-primary" ng-show="editMode">Update</button>
 										<button type="button" class="btn btn-secondary"
-											ng-click="reset()" ng-show="!editMode">Reset</button>
+											ng-click="reset()" >{{editMode ? 'Cancel' : 'Reset'}}</button>
 									</form>
 								</div>
 
@@ -325,8 +325,8 @@
 													<th>Loại</th>
 													<th>Tên</th>
 													<th>Số lượng</th>
-													<th>Giá</th>
-													<th>Còn bán</th>
+													<th>Giá VNĐ</th>
+													<th>Trạng thái</th>
 													<th>Hình ảnh</th>
 													<th>Cập nhật</th>
 												</tr>
@@ -338,7 +338,7 @@
 													<td>{{sp.category.name}}</td>
 													<td>{{sp.name}}</td>
 													<td>{{sp.quantity}}</td>
-													<td>{{sp.price | number: 0}} VNĐ</td>
+													<td>{{sp.price | number: 0}} </td>
 													<td>
 														<div class="form-check">
 															<label class="toggle-switch"> <input

@@ -84,12 +84,11 @@
 										aria-labelledby="pills-home-tab">
 										<!--TABLE-->
 										<div class="table-responsive mt-5">
-											<table class="table table-sm">
+											<table class="table table-sm table-hover">
 												<thead>
 													<tr>
 														<th>Mã đơn hàng</th>
-														<th colspan="2">Người nhận</th>
-														<th>Lời nhắn</th>
+														<th>Email người đặt</th>
 														<th>Ngày đặt</th>
 														<th>Ngày lấy</th>
 														<th>Hình thức thanh toán</th>
@@ -97,20 +96,18 @@
 												</thead>
 												<tbody>
 													<tr ng-repeat="order in pager.listOrder">
-														<td>{{order.id}}</td>
-														<td>{{order.fullName}}</td>
-														<td>{{order.phoneNumber}}</td>
-														<td>{{order.note}}</td>
+														<td class="text-center">{{order.id}}</td>
+														<td>{{order.email.email}}</td>														
 														<td>{{order.orderDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 														<td>{{order.pickUpDate | date: "dd/MM/yyyy, HH:mm"}}</td>
-														<td ng-show="order.methodPayment==0"><label
+														<td class="text-center" ng-show="order.methodPayment==0"><label
 															class="badge badge-success">CK</label></td>
-														<td ng-show="order.methodPayment==1"><label
+														<td class="text-center" ng-show="order.methodPayment==1"><label
 															class="badge badge-info">COD</label></td>
 														<td>
 															<button title="Chi tiết đơn hàng"
 																ng-mouseover="showTooltip()"
-																ng-click="getOrderDetails(order.id)" type="button"
+																ng-click="getOrderById(order.id)" type="button"
 																data-toggle="modal" data-target="#cart"
 																class="btn btn-inverse-info btn-rounded btn-icon">
 																<i class="fa fa-clipboard-list"></i>
@@ -144,7 +141,7 @@
 															</button> <!-- Hủy đơn-->
 															<button data-toggle="modal" data-target="#noteStatus"
 																ng-click="getOrderDetails(order.id)"
-																ng-show="order.status.statusId!=2&&order.status.statusId!=3"
+																ng-show="order.status.statusId<3&&order.status.statusId!=3"
 																title="Hủy đơn hàng" ng-mouseover="showTooltip()"
 																type="button"
 																class="btn btn-inverse-danger btn-rounded btn-icon">
@@ -202,6 +199,27 @@
 						</button>
 					</div>
 					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-6">
+								<h6>Thông tin người đặt</h6>
+								<ul>
+									<li>{{oneOrder.billingFullName}}</li>
+									<li>{{oneOrder.billingPhoneNumber}}</li>
+								</ul>
+							</div>
+							<div class="col-md-6">
+								<h6>Thông tin người nhận</h6>
+								<ul>
+									<li>{{oneOrder.shippingFullName}}</li>
+									<li>{{oneOrder.shippingPhoneNumber}}</li>
+								</ul>
+							</div>
+							<div class="col-12">
+								<h6>Thông điệp</h6>
+								<p>{{oneOrder.note}}</p>
+							</div>
+						</div>
+						<hr>
 						<table class="table-striped col-12">
 
 							<tr>
@@ -472,7 +490,7 @@
 																	style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: left;">
 																	<span
 																	style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">Tên
-																		khách hàng: {{oneOrder.fullName}} </span>
+																		khách hàng: {{oneOrder.billingFullName}} </span>
 																</td>
 																<td style="pointer-events: auto;"></td>
 																<td style="pointer-events: auto;"></td>
@@ -484,7 +502,7 @@
 																	style="pointer-events: auto; text-indent: 0px; vertical-align: middle; text-align: left;">
 																	<span
 																	style="font-family: SVN-Segoe UI; color: #000000; font-size: 12px; line-height: 1.3193359; font-weight: bold;">SĐT:
-																		{{oneOrder.phoneNumber}} </span>
+																		{{oneOrder.billingPhoneNumber}} </span>
 																</td>
 																<td style="pointer-events: auto;"></td>
 																<td style="pointer-events: auto;"></td>

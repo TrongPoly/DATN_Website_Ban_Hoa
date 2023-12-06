@@ -86,8 +86,6 @@
 									<thead>
 										<tr>
 											<th>Mã đơn hàng</th>
-											<th colspan="2">Người nhận</th>
-											<th>Lời nhắn</th>
 											<th>Ngày đặt hàng</th>
 											<th>Ngày lấy</th>
 											<th>Hình thức thanh toán</th>
@@ -97,9 +95,6 @@
 									<tbody>
 										<tr ng-repeat="order in pager.listOrder">
 											<td>{{order.id}}</td>
-											<td>{{order.fullName}}</td>
-											<td>{{order.phoneNumber}}</td>
-											<td>{{order.note}}</td>
 											<td>{{order.orderDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 											<td>{{order.pickUpDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 											<td><label ng-show="order.methodPayment==0"
@@ -118,7 +113,7 @@
 													class="fa fa-solid fa-window-close"></i></a> <a
 												data-bs-toggle="modal" data-bs-target="#orderDetailsModal"
 												class="btn btn-warning text-white"
-												ng-click="getOrderDetails(order.id) "> <i
+												ng-click="getOrderById(order.id) "> <i
 													class="fa fa-fw fa-search"></i>
 											</a>
 											</td>
@@ -160,6 +155,27 @@
 												đơn hàng</h5>
 										</div>
 										<div class="modal-body">
+											<div class="row">
+												<div class="col-md-6">
+													<h6>Thông tin người đặt</h6>
+													<ul>
+														<li>{{oneOrder.billingFullName}}</li>
+														<li>{{oneOrder.billingPhoneNumber}}</li>
+													</ul>
+												</div>
+												<div class="col-md-6">
+													<h6>Thông tin người nhận</h6>
+													<ul>
+														<li>{{oneOrder.shippingFullName}}</li>
+														<li>{{oneOrder.shippingPhoneNumber}}</li>
+													</ul>
+												</div>
+												<div>
+													<h6>Thông điệp</h6>
+													<p>{{oneOrder.note}}</p>
+												</div>
+											</div>
+
 											<table class="table table-striped col-12">
 												<tr ng:repeat="stt in listStatus">
 													<td>{{stt.changeDate | date: "dd/MM/yyyy, HH:mm"}}</td>

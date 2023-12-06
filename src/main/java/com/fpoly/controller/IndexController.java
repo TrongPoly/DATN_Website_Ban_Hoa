@@ -13,7 +13,7 @@ public class IndexController {
 	
 	@GetMapping("/index")
 	public String index() {
-		if(session.getSession("user").getRole().getId()==1) {
+		if(session.getSession("user").getRole().getId()!=2) {
 			return "redirect:/admin/order";
 		}
 		return "index";

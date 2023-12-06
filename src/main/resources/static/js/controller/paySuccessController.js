@@ -12,13 +12,17 @@ app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartSer
 			let methodPayment = sessionStorage.getItem("methodPayment");
 			let pickUpdate = sessionStorage.getItem("pickUpDate");
 			let email = sessionStorage.getItem("email");
-			let fullName = sessionStorage.getItem("fullName");
-			let phoneNumber = sessionStorage.getItem("phoneNumber");
+			let billing_fullName = sessionStorage.getItem("billing_fullName");
+			let billing_phoneNumber = sessionStorage.getItem("billing_phoneNumber");
+			let shipping_fullName = sessionStorage.getItem("shipping_fullName");
+			let shipping_phoneNumber = sessionStorage.getItem("shipping_phoneNumber");
 			let note = sessionStorage.getItem("note");
 
 			var url = location.origin +
 				`/api/order/save/` + email + "?methodPayment=" +
-				methodPayment + "&pickUpDate=" + pickUpdate + "&fullName=" + fullName + "&phoneNumber=" + phoneNumber + "&note=" + note;
+				methodPayment + "&pickUpDate=" + pickUpdate + "&billingFullName=" + billing_fullName 
+				+"&billingPhoneNumber=" + billing_phoneNumber +" &shippingFullName="+shipping_fullName+"&shippingPhoneNumber="+shipping_phoneNumber
+				 +"&note=" + note;
 
 			$scope.productList = CheckoutService.getSelectedProduct();
 			$http
@@ -37,9 +41,9 @@ app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartSer
 		$scope.backIndex = function() {
 			location.href = location.origin;
 		}
-		
+
 		//Xóa sản phẩm đã mua khỏi giỏ hàng, update số lượng sản phẩm còn lại sau khi mua
-		$scope.updateCartAndProduct = function(){
+		$scope.updateCartAndProduct = function() {
 			var productList1 = CartService.getCart();
 			var productList = [];
 			for (var i = 0; i < productList1.length; i++) {
@@ -53,7 +57,7 @@ app.controller('paySuccessCtrl', ['$scope', 'CheckoutService', '$http', 'CartSer
 				CartService.removeFromCart(productList[i]);
 			}
 		}
-		
+
 		//if dùng để đảm bảo đoạn mã trong if chỉ thực hiện 1 lần
 		if (check == true) {
 			$scope.saveOrder();

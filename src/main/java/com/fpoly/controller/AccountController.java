@@ -111,7 +111,7 @@ public class AccountController {
 		} else {
 			String password = Long.toHexString(System.currentTimeMillis());
 			String name = oauth2.getPrincipal().getAttribute("name");
-			Account account2 = new Account(email, password, name, roleService.findById(2), true, false);
+			Account account2 = new Account(email, password, name,"", roleService.findById(2), true, false);
 			accountService.saveAccount(account2);
 			sessionService.setSession("user", account2, 300);
 		}
