@@ -55,12 +55,13 @@ public class OrderRestController {
 		List<Order> listOrders = orderService.findAllOrder();
 		return ResponseEntity.ok(listOrders);
 	}
+
 	@GetMapping("/order/id")
-	public ResponseEntity<Order> getOneOrder(@RequestParam("idOrder") int idOrder){
+	public ResponseEntity<Order> getOneOrder(@RequestParam("idOrder") int idOrder) {
 		Order order = orderService.findById(idOrder);
 		return ResponseEntity.ok(order);
 	}
-	
+
 	@GetMapping("/order/get_all/{email}")
 	public ResponseEntity<List<Order>> getAllByEmail(@PathVariable("email") String email) {
 		List<Order> listOrders = orderService.findByCustomer(accountService.findByid(email));
@@ -70,14 +71,24 @@ public class OrderRestController {
 	@PostMapping("/order/save/{email}")
 	public ResponseEntity<List<OrderDetail>> saveOrder(@RequestBody List<OrderDTO> orderDTO,
 			@PathVariable("email") String emailCustomer, @RequestParam("pickUpDate") String pickUpDate,
-			@RequestParam("methodPayment") Integer methodPayment, @RequestParam("fullName") String fullName,
-			@RequestParam("phoneNumber") String phoneNumber,@RequestParam("note") String note) {
+			@RequestParam("methodPayment") Integer methodPayment,
+			@RequestParam("billingFullName") String billingFullName,
+			@RequestParam("billingPhoneNumber") String billingPhoneNumber, @RequestParam("note") String note,
+			@RequestParam("shippingFullName") String shippingFullName,
+			@RequestParam("shippingPhoneNumber") String shippingPhoneNumber) {
 		Order order = new Order();
 
 		Account account = accountService.findByid(emailCustomer);
+
+		account.setPhoneNumber(billingPhoneNumber);
+		account.setFullName(billingFullName);
+		accountService.saveAccount(account);
+
 		order.setEmail(account);
-		order.setFullName(fullName);
-		order.setPhoneNumber(phoneNumber);
+		order.setBillingFullName(billingFullName);
+		order.setBillingPhoneNumber(billingPhoneNumber);
+		order.setShippingFullName(shippingFullName);
+		order.setShippingPhoneNumber(shippingPhoneNumber);
 		order.setNote(note);
 		Instant od = Instant.now();
 		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
@@ -133,7 +144,8 @@ public class OrderRestController {
 
 	@PutMapping("/order/update_status/{idOrder}")
 	public ResponseEntity<Order> requestCancel(@PathVariable("idOrder") Integer idOrder,
-			@RequestParam("statusId") Integer statusId, @RequestParam("note") Optional<String> note, @RequestParam("email") String email) {
+			@RequestParam("statusId") Integer statusId, @RequestParam("note") Optional<String> note,
+			@RequestParam("email") String email) {
 		Order order = orderService.findById(idOrder);
 		OrderStatus orderStatus = orderStatusService.findById(statusId);
 		order.setStatus(orderStatus);

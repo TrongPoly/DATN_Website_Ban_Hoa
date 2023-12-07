@@ -17,4 +17,6 @@ public interface OrderService {
 	void saveOrder(Order order);
 	
 	List<Order> findByStatus(OrderStatus status);
+
+	List<Order> findOrderInMonth(Integer month);
 }

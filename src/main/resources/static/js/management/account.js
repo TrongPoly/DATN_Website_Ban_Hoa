@@ -12,6 +12,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 	$scope.reset = function() {
 		$scope.form = { active: true };
 		$scope.key = null;
+	$scope.editMode = false;
 	}
 
 
@@ -41,7 +42,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 		$http
 			.put(url)
 			.then((resp) => {
-				ToastService.createToast("info", "Chặn thành công!", $scope.toasts);
+				ToastService.createToast("info", "Đã chặn tài khoản", $scope.toasts);
 				$scope.load_all();
 				$scope.load_all_role();
 				$scope.reset();
@@ -55,7 +56,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 		$http
 			.put(url)
 			.then((resp) => {
-				ToastService.createToast("info", "Bỏ chặn thành công!", $scope.toasts);
+				ToastService.createToast("info", "Đã bỏ chặn tài khoản", $scope.toasts);
 				$scope.load_all();
 				$scope.load_all_role();
 				$scope.reset();
@@ -89,19 +90,19 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 		//lỗi email đã tồn tại
 		let existingEmail = $scope.items.find(item => item.email === $scope.form.email);
 		if (existingEmail) {
-			ToastService.createToast("warning", "email đã tồn tại!!", $scope.toasts);
+			ToastService.createToast("warning", "Email đã tồn tại", $scope.toasts);
 			/*$scope.errorMessage = "Tên sản phẩm đã tồn tại!!";
 			$('#errorModal').modal('show'); // Show the modal*/
 			return;
 		}
 		//lỗi bỏ trống email
 		if (!$scope.form.email) {
-			ToastService.createToast("warning", "Không để trống email", $scope.toasts);
+			ToastService.createToast("warning", "Không để trống Email", $scope.toasts);
 			return;
 		}
 		//lỗi bỏ trống fullname
 		if (!$scope.form.fullName) {
-			ToastService.createToast("warning", "Không để trống fullname", $scope.toasts);
+			ToastService.createToast("warning", "Không để trống họ và tên", $scope.toasts);
 			return;
 		}
 		//lỗi bỏ trống password
@@ -111,7 +112,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 		}
 		//lỗi bỏ trống role
 		if (!$scope.form.role) {
-			ToastService.createToast("warning", "Không để trống role", $scope.toasts);
+			ToastService.createToast("warning", "Không để trống quyền", $scope.toasts);
 			return;
 		}
 
@@ -125,22 +126,20 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 			$scope.load_all();
 			$scope.load_all_role();
 			$scope.reset();
-			console.log("Success", resp);
 		}).catch((error) => {
 			ToastService.createToast("error", "thêm thất bại!", $scope.toasts);
-			console.log("Error", error);
 		});
 	}
 	$scope.update = function() {
 
 		//lỗi bỏ trống email
 		if (!$scope.form.email) {
-			ToastService.createToast("warning", "Không để trống email", $scope.toasts);
+			ToastService.createToast("warning", "Không để trống Email", $scope.toasts);
 			return;
 		}
 		//lỗi bỏ trống fullname
 		if (!$scope.form.fullName) {
-			ToastService.createToast("warning", "Không để trống fullname", $scope.toasts);
+			ToastService.createToast("warning", "Không để trống họ và tên", $scope.toasts);
 			return;
 		}
 		//lỗi bỏ trống password
@@ -150,7 +149,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 		}
 		//lỗi bỏ trống role
 		if (!$scope.form.role) {
-			ToastService.createToast("warning", "Không để trống role", $scope.toasts);
+			ToastService.createToast("warning", "Không để trống quyền", $scope.toasts);
 			return;
 		}
 
@@ -160,7 +159,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 			.put(url, item).then(resp => {
 				var index = $scope.items.findIndex(item =>
 					item.email == $scope.form.email);
-				ToastService.createToast("success", "cập nhật thành công!", $scope.toasts);
+				ToastService.createToast("success", "Cập nhật thành công!", $scope.toasts);
 				$scope.editMode = false;
 				$scope.items[index] = resp.data;
 				$scope.load_all();
@@ -168,7 +167,7 @@ app.controller("AdminAccCtrl", function($scope, $http, ToastService) {
 				$scope.reset();
 				console.log("Succes", resp);
 			}).catch((error) => {
-				ToastService.createToast("error", "cập nhật thất bại!", $scope.toasts);
+				ToastService.createToast("error", "Cập nhật thất bại!", $scope.toasts);
 				console.log("Error", error)
 			});
 

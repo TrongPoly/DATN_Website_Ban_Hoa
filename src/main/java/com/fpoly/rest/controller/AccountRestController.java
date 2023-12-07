@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,9 +32,9 @@ public class AccountRestController {
 	@GetMapping("/userLogin")
 	public Account getUser() {
 		Account account = sessionService.getSession("user");
-		if (account == null) {
-			return null;
-		}
+//		if (account == null) {
+//			return null;
+//		}
 		return account;
 	}
 
@@ -50,18 +51,18 @@ public class AccountRestController {
 	}
 
 	@PostMapping("/account/register")
-	public ResponseEntity<Account> register(@RequestParam("email") String email, @RequestParam("password") String pass,
-			@RequestParam("fullName") String fullName) {
-		if (accountService.findByid(email) != null) {
+	public ResponseEntity<Account> register(@RequestBody Account account) {
+		if (accountService.findByid(account.getEmail()) != null) {
 			return ResponseEntity.badRequest().build();
 		}
-		Account account = new Account(email, pass, fullName, roleService.findById(2), false, false);
+		account.setRole(roleService.findById(2));
+		account.setActive(false);
+		account.setLocked(false);
 		accountService.saveAccount(account);
 		try {
-			String url = "http://localhost:8080/api/account/verify/" + email;
-			mailService.activeAccountEmail(email, account.getFullName(), url);
+			String url = "http://localhost:8080/api/account/verify/" + account.getEmail();
+			mailService.activeAccountEmail(account.getEmail(), account.getFullName(), url);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ResponseEntity.ok().build();

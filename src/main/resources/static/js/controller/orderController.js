@@ -23,6 +23,14 @@ app.controller('orderCtrl', ["$scope", "OrderService", "ToastService",
 			}
 			return sum;
 		}
+		$scope.getOrderById = function(idOrder){
+			OrderService.getOrderById(idOrder)
+			.then((resp)=>{
+				$scope.oneOrder = resp.data;
+				$scope.getOrderDetails(idOrder);
+			})
+		}
+		
 		$scope.getOrderDetails = function(idOrder) {
 			OrderService.getOrderDetails(idOrder)
 				.then((resp) => {
@@ -80,7 +88,6 @@ app.controller('orderCtrl', ["$scope", "OrderService", "ToastService",
 					};
 
 					$scope.allOrder.forEach((order) => {
-						console.log(order.status);
 						switch (order.status.statusId) {
 							case 0: // Chờ xử lý
 								$scope.orderCounts.pending++;

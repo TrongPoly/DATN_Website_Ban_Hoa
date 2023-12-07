@@ -50,28 +50,40 @@
 							<h6 class="font-weight-light">Đăng ký rất dễ dàng. Chỉ mất
 								vài bước</h6>
 							<form class="pt-3">
-
 								<div class="form-group">
 									<input type="email" class="form-control form-control-lg"
-										id="exampleInputEmail1" ng-model="account.email"
-										placeholder="Email">
+										ng-keypress="preventSpace($event)" id="exampleInputEmail1"
+										ng-model="account.email" placeholder="Email">
 								</div>
 								<div class="form-group">
 									<input type="text" class="form-control form-control-lg"
-										id="exampleInputEmail1" ng-model="account.fullName"
+										 ng-model="account.fullName"
 										placeholder="Họ và tên">
 								</div>
+								<div class="form-group">
+									<input type="text" class="form-control form-control-lg"
+										 ng-model="account.phoneNumber"
+										placeholder="Số điện thoại">
+								</div>
 
-								<div class="input-group">
+								<div class="form-group">
 									<input type="password" class="form-control form-control-lg"
-										ng-model="account.password" placeholder="Mật khẩu">
+										ng-model="account.password" ng-keypress="preventSpace($event)"
+										placeholder="Mật khẩu">
 
+								</div>
+								<div class="form-group">
+									<input type="password" ng-keyup="checkPassword()"
+										ng-keypress="preventSpace($event)"
+										ng-class="{'form-control form-control-lg': true, 'border-danger': !checkPassword()}"
+										ng-model="confirmPassword" placeholder="Xác nhận mật khẩu">
 								</div>
 
 								<div class="mt-3">
 									<button type="submit" ng-click="register()"
-										class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN
-										UP</button>
+										ng-disabled="!checkPassword()"
+										class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Đăng
+										ký</button>
 								</div>
 								<div class="text-center mt-4 font-weight-light">
 									Bạn đã có tài khoản? <a href="/auth/login" class="text-primary">Đăng

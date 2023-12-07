@@ -31,6 +31,7 @@
 
 </head>
 <body ng-app="AdminCatApp" ng-controller="AdminCatCtrl">
+<div th:insert="~{/fragment/_toast}"></div>
 	<div class="container-scroller">
 		<!-- partial:../admin/partials/_navbar.html -->
 		<nav th:replace="~{fragment/_adminHeader.html::adminHeader}"></nav>
@@ -273,9 +274,7 @@
 										<button type="button" class="btn btn-secSondary"
 											ng-show="editMode" ng-click="update()">Edit</button>
 										<button type="button" class="btn btn-secondary"
-											ng-click="reset()" ng-show="!editMode">Reset</button>
-											
-											
+											ng-click="reset()" >{{editMode ? 'Cancel' : 'Reset'}}</button>
 									</form>
 								</div>
 

@@ -75,12 +75,20 @@ https://templatemo.com/tm-559-zay-shop
 				<form class="needs-validation" novalidate>
 					<div class="row">
 						<div class="col-md-6 mb-3">
+							<label for="firstName">Họ và tên người đặt</label> <input ng-model="account.fullName" type="text"
+								class="form-control" id="billing_fullName" placeholder="" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="lastName">Số điện thoại</label> <input type="text" ng-model="account.phoneNumber"
+								class="form-control" ng-keypress="preventSpace($event)" id="billing_phoneNumber" placeholder="" required>
+						</div>
+						<div class="col-md-6 mb-3">
 							<label for="firstName">Họ và tên người nhận</label> <input type="text"
-								class="form-control" id="fullName" placeholder="" required>
+								class="form-control" id="shipping_fullName" placeholder="" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="lastName">Số điện thoại</label> <input type="text"
-								class="form-control" id="phoneNumber" placeholder="" required>
+								class="form-control" ng-keypress="preventSpace($event)" id="shipping_phoneNumber" placeholder="" required>
 						</div>
 						<div class="col-md-12 mb-3">
 							<label for="note">Nội dung thông điệp</label> 
@@ -151,6 +159,8 @@ https://templatemo.com/tm-559-zay-shop
 	<script src="../js/service/toastService.js"></script>
 	<script src="../js/service/customerService.js"></script>
 	<script src="../js/controller/checkoutController.js"></script>
+	<script src="../js/service/productService.js"></script>
+	<script src="../js/service/cartService.js"></script>
 
 	<!-- Start Slider Script -->
 	<script src="../assets/js/slick.min.js"></script>

@@ -10,6 +10,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 	$scope.reset = function() {
 		$scope.form = { trangThai: true };
 		$scope.key = null;
+	$scope.editMode = false;
 	}
 
 	$scope.load_all_category = function() {
@@ -33,7 +34,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 	}
 
 	$scope.edit = function(id) {
-		var url = `${host}/product/${id}`;
+		var url = host+"/product/"+id;
 		$scope.editMode = true;
 		$http.get(url).then(resp => {
 			$scope.form = resp.data;
@@ -46,14 +47,14 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 	$scope.create = function() {
 		//Không chọn thương hiệu
 		if (!$scope.form.category || !$scope.form.category.id) {
-			ToastService.createToast("warning", "vui lòng chọn loại sản phẩm", $scope.toasts);
+			ToastService.createToast("warning", "Vui lòng chọn loại sản phẩm", $scope.toasts);
 			/*	$scope.errorMessage = "Vui lòng chọn thương hiệu!";
 				$('#errorModal').modal('show'); // Show the modal*/
 			return;
 		}
 		//Không chọn thương hiệu
 		if (!$scope.form.category || !$scope.form.category.id) {
-			ToastService.createToast("warning", "vui lòng chọn loại sản phẩm", $scope.toasts);
+			ToastService.createToast("warning", "Vui lòng chọn loại sản phẩm", $scope.toasts);
 			/*	$scope.errorMessage = "Vui lòng chọn thương hiệu!";
 				$('#errorModal').modal('show'); // Show the modal*/
 			return;
@@ -61,7 +62,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 
 		//Lỗi bỏ trống tên sản phẩm 
 		if (!$scope.form.name) {
-			ToastService.createToast("warning", "Vui lòng nhập tên sản phẩm!!", $scope.toasts);
+			ToastService.createToast("warning", "Vui lòng nhập tên sản phẩm", $scope.toasts);
 			/*$scope.errorMessage = "Vui lòng nhập tên sản phẩm!!";
 			$('#errorModal').modal('show'); // Show the modal*/
 			return;
@@ -69,7 +70,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 		//Lỗi trùng tên sản phẩm
 		let existingProduct = $scope.sps.find(sp => sp.name === $scope.form.name);
 		if (existingProduct) {
-			ToastService.createToast("warning", "tên sản phẩm đã tồn tại!!", $scope.toasts);
+			ToastService.createToast("warning", "Tên sản phẩm đã tồn tại", $scope.toasts);
 			/*$scope.errorMessage = "Tên sản phẩm đã tồn tại!!";
 			$('#errorModal').modal('show'); // Show the modal*/
 			return;
@@ -77,51 +78,41 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 
 		//Lỗi bỏ trống đơn giá
 		if (!$scope.form.quantity) {
-			ToastService.createToast("warning", "Vui lòng nhập số lượng!!", $scope.toasts);
+			ToastService.createToast("warning", "Vui lòng nhập số lượng", $scope.toasts);
 			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
 			$('#errorModal').modal('show'); // Show the modal*/
+			return;
+		}
+		//Lỗi bỏ trống đơn giá
+		if ($scope.form.quantity<0) {
+			ToastService.createToast("warning", "Số lượng phải lớn hơn 0", $scope.toasts);
 			return;
 		}
 
 		//Lỗi bỏ trống đơn giá
 		if (!$scope.form.price) {
-			ToastService.createToast("warning", "Vui lòng nhập đơn giá!!", $scope.toasts);
-			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
-			$('#errorModal').modal('show'); // Show the modal*/
+			ToastService.createToast("warning", "Vui lòng nhập đơn giá", $scope.toasts);
 			return;
 		}
 		//lỗi đơn giá không được nhỏ hơn 1000
 		if ($scope.form.price < 1000) {
-			ToastService.createToast("warning", "Vui lòng nhập đơn giá lớn hơn 1000!!", $scope.toasts);
-			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
-			$('#errorModal').modal('show'); // Show the modal*/
+			ToastService.createToast("warning", "Giá sản phẩm phải lớn hơn 1000", $scope.toasts);
 			return;
 		}
-
-		//Lỗi nhập đơn giá không hợp lệ
-		if (!$scope.form.quantity < 0) {
-			ToastService.createToast("warning", "Đơn giá không hợp lệ!!", $scope.toasts);
-			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
-			$('#errorModal').modal('show'); // Show the modal*/
-			return;
-		}
-
 
 		var item = angular.copy($scope.form);
-		var url = `${host}/product`;
+		var url = host+"/product?file="+$scope.form.image;
 		$http.post(url, item).then(resp => {
-
 			$scope.sps.push(item);
-
 			$scope.reset();
 			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
-			ToastService.createToast("success", "Thêm mới thành công!", $scope.toasts);
+			ToastService.createToast("success", "Thêm sản phẩm mới thành công!", $scope.toasts);
 			console.log("Success", resp);
 			$scope.load_all();
 	$scope.load_all_category();
 	$scope.reset();
 		}).catch((error) => {
-			ToastService.createToast("error", "thêm thất bại!", $scope.toasts);
+			ToastService.createToast("error", "Thêm thất bại", $scope.toasts);
 			console.log("Error", error);
 		});
 	}
@@ -130,7 +121,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 
 		//Không chọn thương hiệu
 		if (!$scope.form.category || !$scope.form.category.id) {
-			ToastService.createToast("warning", "vui lòng chọn loại sản phẩm!!", $scope.toasts);
+			ToastService.createToast("warning", "Vui lòng chọn loại sản phẩm", $scope.toasts);
 			/*	$scope.errorMessage = "Vui lòng chọn thương hiệu!";
 				$('#errorModal').modal('show'); // Show the modal*/
 			return;
@@ -138,7 +129,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 
 		//Lỗi bỏ trống tên sản phẩm 
 		if (!$scope.form.name) {
-			ToastService.createToast("warning", "Vui lòng nhập tên sản phẩm!!", $scope.toasts);
+			ToastService.createToast("warning", "Vui lòng nhập tên sản phẩm", $scope.toasts);
 			/*$scope.errorMessage = "Vui lòng nhập tên sản phẩm!!";
 			$('#errorModal').modal('show'); // Show the modal*/
 			return;
@@ -147,7 +138,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 
 		//Lỗi bỏ trống đơn giá
 		if (!$scope.form.quantity) {
-			ToastService.createToast("warning", "Vui lòng nhập số lượng!!", $scope.toasts);
+			ToastService.createToast("warning", "Vui lòng nhập số lượng", $scope.toasts);
 			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
 			$('#errorModal').modal('show'); // Show the modal*/
 			return;
@@ -155,27 +146,18 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 
 		//Lỗi bỏ trống đơn giá
 		if (!$scope.form.price) {
-			ToastService.createToast("warning", "Vui lòng nhập đơn giá!!", $scope.toasts);
+			ToastService.createToast("warning", "Vui lòng nhập đơn giá", $scope.toasts);
 			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
 			$('#errorModal').modal('show'); // Show the modal*/
 			return;
 		}
 		//lỗi đơn giá không được nhỏ hơn 1000
 		if ($scope.form.price < 1000) {
-			ToastService.createToast("warning", "Vui lòng nhập đơn giá lớn hơn 1000!!", $scope.toasts);
+			ToastService.createToast("warning", "Giá sản phẩm phải lớn hơn 1000", $scope.toasts);
 			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
 			$('#errorModal').modal('show'); // Show the modal*/
 			return;
 		}
-
-		//Lỗi nhập đơn giá không hợp lệ
-		if (!$scope.form.quantity < 0) {
-			ToastService.createToast("warning", "Đơn giá không hợp lệ!!", $scope.toasts);
-			/*$scope.errorMessage = "Vui lòng nhập đơn giá!!";
-			$('#errorModal').modal('show'); // Show the modal*/
-			return;
-		}
-
 
 		var item = angular.copy($scope.form);
 		var cat = angular.copy($scope.form.category.id);
@@ -188,8 +170,8 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 				ToastService.createToast("success", "cập nhật thành công!", $scope.toasts);
 				$scope.sps[index] = resp.data;
 				$scope.load_all();
-	$scope.load_all_category();
-	$scope.reset();
+				$scope.load_all_category();
+				$scope.reset();
 				console.log("Succes", resp);
 			}).catch((error) => {
 				ToastService.createToast("error", "cập nhật thất bại!", $scope.toasts);
@@ -221,7 +203,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 		$http
 			.put(url)
 			.then((resp) => {
-				ToastService.createToast("info", "Còn kinh doanh!", $scope.toasts);
+				ToastService.createToast("info", "Còn kinh doanh", $scope.toasts);
 				$scope.load_all();
 	$scope.load_all_category();
 	$scope.reset();
@@ -235,7 +217,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 		$http
 			.put(url)
 			.then((resp) => {
-				ToastService.createToast("info", "Ngừng kinh doanh!!", $scope.toasts);
+				ToastService.createToast("info", "Ngừng kinh doanh", $scope.toasts);
 				$scope.load_all();
 	$scope.load_all_category();
 	$scope.reset();

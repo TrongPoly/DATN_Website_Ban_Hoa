@@ -8,6 +8,7 @@ app.controller("AdminCatCtrl", function($scope, $http, ToastService) {
 
 	$scope.reset = function() {
 		$scope.form = { trangThai: true };
+		$scope.editMode = false;
 		$scope.key = null;
 	}
 

@@ -19,7 +19,7 @@
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
-              <span class="nav-profile-name" th:text="${session.user.fullName}"></span>
+              <span class="nav-profile-name" th:text="${session.user.role.roleName+' '+ session.user.fullName}"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               

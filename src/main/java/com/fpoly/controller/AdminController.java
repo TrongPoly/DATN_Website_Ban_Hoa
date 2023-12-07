@@ -21,10 +21,13 @@ public class AdminController {
 	@GetMapping("/order")
 	public String getOrder() {
 		return "admin/FormOrder";
-	}@GetMapping("/dashboard")
+	}
+	
+	@GetMapping("/dashboard")
 	public String getDashboard() {
 		return "admin/index";
 	}
+	
 	@GetMapping("/product")
 	public String getProduct(Model model) {
 		Product pr = new Product();

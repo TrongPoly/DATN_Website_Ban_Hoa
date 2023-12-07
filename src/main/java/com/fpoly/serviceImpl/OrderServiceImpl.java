@@ -42,4 +42,9 @@ public class OrderServiceImpl implements OrderService{
 		return orderRepository.findByStatus(status,Sort.by(Sort.Order.desc("id")));
 	}
 
+	@Override
+	public List<Order> findOrderInMonth(Integer month) {
+		return orderRepository.findOrderInMonth(month);
+	}
+
 }

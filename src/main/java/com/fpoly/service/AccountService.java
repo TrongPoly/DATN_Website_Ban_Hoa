@@ -11,8 +11,6 @@ public interface AccountService {
 
 	void saveAccount(Account account);
 
-	Account findByUser();
-
 	List<Account> searchByName(String keyword);
 	
 }
