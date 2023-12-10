@@ -1,10 +1,11 @@
-app.controller('adminOrder', ["$scope", "OrderService", "ToastService",
-	function($scope, OrderService, ToastService) {
+app.controller('adminOrder', ["$scope", "OrderService", "ToastService","$http",
+	function($scope, OrderService, ToastService,$http) {
 		$scope.listOrder = [];
 		$scope.listOrderDetails = [];
 		$scope.allOrder = [];
 		$scope.toasts = [];
 		$scope.oneOrder = {}
+		$scope.methodSearch = true;
 		$scope.getOrder = function(status) {
 			if (status === undefined) {
 				status = 0;
@@ -17,15 +18,42 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService",
 					console.log(error.status);
 				});
 		}
-		
-		$scope.getOrderById = function(idOrder){
+		//Tìm kiếm đơn hàng theo ID
+		$scope.searchOrderById = function() {
+			if ($scope.searchKeyword && $scope.searchKeyword.trim() !== "") {
+				$http.get("/api/order/search?key="+$scope.searchKeyword).then(resp => {
+					$scope.listOrder = resp.data;
+				}).catch(error => {
+					ToastService.createToast("error", "Lỗi tìm kiếm tên đơn hàng", $scope.toasts);
+					console.log("Error", error);
+				});
+			} else {
+				// Nếu không có từ khóa tìm kiếm, hiển thị tất cả sản phảm
+				$scope.getOrder(0);
+			}
+		};
+		$scope.searchOrderByEmail = function() {
+			if ($scope.searchEmail && $scope.searchEmail.trim() !== "") {
+				$http.get("/api/order/search_by_email?email="+$scope.searchEmail).then(resp => {
+					$scope.listOrder = resp.data;
+				}).catch(error => {
+					ToastService.createToast("error", "Lỗi tìm kiếm tên đơn hàng", $scope.toasts);
+					console.log("Error", error);
+				});
+			} else {
+				// Nếu không có từ khóa tìm kiếm, hiển thị tất cả sản phảm
+				$scope.getOrder(0);
+			}
+		};
+
+		$scope.getOrderById = function(idOrder) {
 			OrderService.getOrderById(idOrder)
-			.then((resp)=>{
-				$scope.oneOrder = resp.data;
-				$scope.getOrderDetails(idOrder);
-			})
+				.then((resp) => {
+					$scope.oneOrder = resp.data;
+					$scope.getOrderDetails(idOrder);
+				})
 		}
-		
+
 		$scope.getOrderDetails = function(idOrder) {
 			OrderService.getOrderDetails(idOrder)
 				.then((resp) => {
@@ -63,6 +91,7 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService",
 			OrderService.getAllOrder()
 				.then((resp) => {
 					$scope.allOrder = resp.data;
+					console.log($scope.allOrder.length);
 					$scope.orderCounts = {
 						pending: 0,
 						confirmed: 0,
@@ -72,7 +101,6 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService",
 					};
 
 					$scope.allOrder.forEach((order) => {
-						console.log(order.status);
 						switch (order.status.statusId) {
 							case 0: // Chờ xử lý
 								$scope.orderCounts.pending++;
@@ -165,37 +193,37 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService",
 			}
 		}
 		$scope.pager = {
-		page: 0,
-		size: 8,
+			page: 0,
+			size: 8,
 
-		get listOrder() {
-			var start = this.page * this.size;
-			return $scope.listOrder.slice(start, start + this.size);
-		},
+			get listOrder() {
+				var start = this.page * this.size;
+				return $scope.listOrder.slice(start, start + this.size);
+			},
 
-		get count() {
-			return Math.ceil(1.0 * $scope.listOrder.length / this.size);
-		},
-		first() {
-			this.page = 0;
-		},
-		prev() {
-			this.page--;
-			if (this.page < 0) {
-				this.last();
+			get count() {
+				return Math.ceil(1.0 * $scope.listOrder.length / this.size);
+			},
+			first() {
+				this.page = 0;
+			},
+			prev() {
+				this.page--;
+				if (this.page < 0) {
+					this.last();
+				}
+			},
+			next() {
+				this.page++;
+				if (this.page >= this.count) {
+					this.first();
+				}
+			},
+			last() {
+				this.page = this.count - 1;
 			}
-		},
-		next() {
-			this.page++;
-			if (this.page >= this.count) {
-				this.first();
-			}
-		},
-		last() {
-			this.page = this.count - 1;
-		}
 
-	};
+		};
 		//điếm số đơn
 		$scope.countOrder();;
 		//Load đơn hàng

@@ -9,7 +9,10 @@ import com.fpoly.model.ReportCost;
 public interface ReportCostRepo extends JpaRepository<ReportCost, Long> {
 	@Query("SELECT NEW ReportCost(o.orderDate, COUNT(DISTINCT o.id), SUM(od.quantity * od.price) ) "
 			+ "FROM Order o, OrderDetail od  "
-			+ "WHERE o.id = od.order.id AND YEAR(o.orderDate) = YEAR(CURRENT_DATE) AND MONTH(o.orderDate) = :month "
+			+ "WHERE o.id = od.order.id AND o.status.statusId =3  AND YEAR(o.orderDate) = :year AND MONTH(o.orderDate) = :month "
 			+ "GROUP BY o.orderDate")
-	List<ReportCost> reportCost(@Param("month") Integer month);
+	List<ReportCost> reportCost(@Param("month") Integer month, @Param("year") Integer year);
+	
+
+	
 }

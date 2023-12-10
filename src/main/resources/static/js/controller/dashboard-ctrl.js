@@ -2,6 +2,8 @@ const app = angular.module("reportApp", []);
 app.controller("dashboard-ctrl", function($scope, $http) {
 	$scope.tota = 0;
 	$scope.month = 11;
+	$scope.year = 2023;
+	$scope.listYear = [];
 	$scope.costInMonth = [];
 	$scope.costDate = [];
 	$scope.costData = [];
@@ -20,10 +22,16 @@ app.controller("dashboard-ctrl", function($scope, $http) {
 	// Gán giá trị tháng vào $scope để sử dụng trong HTML
 	$scope.currentMonth = currentMonth;
 
+	$http.get(location.origin + '/admin/rest/report/data/year')
+		.then(resp => {
+			$scope.listYear = resp.data;
+		})
 	$scope.getDoanhThu = function() {
 		$scope.costDate = [];
 		$scope.costData = [];
-		$http.get(location.origin + '/admin/rest/report/total?month=' + $scope.month).then(resp => {
+
+
+		$http.get(location.origin + '/admin/rest/report/total?month=' + $scope.month + "&year=" + $scope.year).then(resp => {
 			$scope.tota = resp.data;
 			console.log($scope.total)
 		}).catch(error => {
@@ -31,7 +39,7 @@ app.controller("dashboard-ctrl", function($scope, $http) {
 			console.log(error);
 		});
 
-		$http.get(location.origin + '/admin/rest/report/reportcost?month=' + $scope.month).then(resp => {
+		$http.get(location.origin + '/admin/rest/report/reportcost?month=' + $scope.month+"&year="+$scope.year).then(resp => {
 
 			$scope.costInMonth = resp.data;
 			console.log($scope.costInMonth)

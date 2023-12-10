@@ -6,5 +6,5 @@ import com.fpoly.model.ReportCost;
 
 public  interface ReportService {
 	
-	List<ReportCost> generateReport(int month);
+		List<ReportCost> generateReport(int month, int year);
 }

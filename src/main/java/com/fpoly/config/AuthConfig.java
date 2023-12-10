@@ -33,7 +33,6 @@ public class AuthConfig {
 	}
 
 	@Bean
-	// authentication
 	public UserDetailsService userDetailsService(PasswordEncoder pe) {
 		return new UserDetailsService() {
 

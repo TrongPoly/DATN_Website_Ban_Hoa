@@ -61,6 +61,16 @@ public class OrderRestController {
 		Order order = orderService.findById(idOrder);
 		return ResponseEntity.ok(order);
 	}
+	@GetMapping("/order/search")
+	public ResponseEntity<List<Order>> searchOrder(@RequestParam("key") int key) {
+		List<Order> order = orderService.searchById(key);
+		return ResponseEntity.ok(order);
+	}
+	@GetMapping("/order/search_by_email")
+	public ResponseEntity<List<Order>> searchOrderByEmail(@RequestParam("email") String key) {
+		List<Order> order = orderService.searchByEmail(key);
+		return ResponseEntity.ok(order);
+	}
 
 	@GetMapping("/order/get_all/{email}")
 	public ResponseEntity<List<Order>> getAllByEmail(@PathVariable("email") String email) {

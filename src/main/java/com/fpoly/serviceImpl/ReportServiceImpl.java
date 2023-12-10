@@ -15,7 +15,7 @@ public class ReportServiceImpl implements ReportService {
 	ReportCostRepo reportCostRepo;
 
 	@Override
-	public List<ReportCost> generateReport(int month) {
-		return reportCostRepo.reportCost(month);
+	public List<ReportCost> generateReport(int month, int year) {
+		return reportCostRepo.reportCost(month,year);
 	}
 }

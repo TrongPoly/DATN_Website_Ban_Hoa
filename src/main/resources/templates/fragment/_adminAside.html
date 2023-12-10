@@ -6,24 +6,39 @@
 </head>
 <body>
 	<nav class="sidebar sidebar-offcanvas" id="sidebar" th:fragment="adminAside">
-        <ul class="nav">
-          <li class="nav-item">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#revenue" aria-expanded="false" aria-controls="revenue">
+                <i class="typcn typcn-chart-line-outline menu-icon"></i>
+                <span class="menu-title">Thống kê</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="revenue">
+                <ul class="nav flex-column sub-menu">
+                      <li class="nav-item"> <a class="nav-link" href="/admin/dashboard">Doanh thu</a></li>
+                    <!-- Thêm các mục khác liên quan đến doanh thu nếu cần -->
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-              <i class="typcn typcn-th-small-outline menu-icon"></i>
-              <span class="menu-title">Quản lý</span>
-              <i class="menu-arrow"></i>
+                <i class="typcn typcn-th-small-outline menu-icon"></i>
+                <span class="menu-title">Quản lý</span>
+                <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="tables">
-              <ul class="nav flex-column sub-menu">
-              	<li class="nav-item"> <a class="nav-link" href="/admin/dashboard">Doanh thu</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/product">Sản phẩm</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/category">Loại sản phẩm</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/account">Tài khoản</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/order">Đơn hàng</a></li>
-              </ul>
+                <ul class="nav flex-column sub-menu">
+                  
+                    <li class="nav-item"> <a class="nav-link" href="/admin/product">Sản phẩm</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/admin/category">Loại sản phẩm</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/admin/account">Tài khoản</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/admin/order">Đơn hàng</a></li>
+                </ul>
             </div>
-          </li>
-        </ul>
-      </nav>
+        </li>
+    </ul>
+</nav>
+
+
 </body>
 </html>

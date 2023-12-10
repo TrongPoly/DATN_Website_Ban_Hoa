@@ -4,13 +4,14 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
-import jakarta.persistence.Table;
 
 @Entity
 public class ReportCost implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private Instant ngayBan;
 

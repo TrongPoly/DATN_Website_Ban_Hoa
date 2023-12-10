@@ -51,6 +51,24 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Quản lý đơn hàng</h4>
+								<div class="form-group">
+									<select class="form-control" ng-model="methodSearch">
+										<option ng-value="true">Tìm theo mã đơn</option>
+										<option ng-value="false">Tìm theo email đặt hàng</option>
+									</select>
+								</div>
+								<div ng-show="methodSearch" class="form-group">
+									<input ng-keyup="searchOrderById()" ng-model="searchKeyword"
+										type="text" class="form-control"
+										placeholder="Nhập mã đơn hàng"
+										aria-label="Recipient's username">
+								</div>
+								<div ng-show="!methodSearch" class="form-group">
+									<input ng-keyup="searchOrderByEmail()" ng-model="searchEmail"
+										type="text" class="form-control"
+										placeholder="Nhập Email đặt hàng"
+										aria-label="Recipient's username">
+								</div>
 								<ul class="nav nav-tabs" id="pills-tab" role="tablist">
 									<li class="nav-item"><a class="nav-link active"
 										ng-click="getOrder(0)" id="pills-home-tab" data-toggle="pill"
@@ -92,18 +110,20 @@
 														<th>Ngày đặt</th>
 														<th>Ngày lấy</th>
 														<th>Hình thức thanh toán</th>
+														<th>Trạng thái</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr ng-repeat="order in pager.listOrder">
 														<td class="text-center">{{order.id}}</td>
-														<td>{{order.email.email}}</td>														
+														<td>{{order.email.email}}</td>
 														<td>{{order.orderDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 														<td>{{order.pickUpDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 														<td class="text-center" ng-show="order.methodPayment==0"><label
 															class="badge badge-success">CK</label></td>
 														<td class="text-center" ng-show="order.methodPayment==1"><label
 															class="badge badge-info">COD</label></td>
+															<td>{{order.status.statusName}}</td>
 														<td>
 															<button title="Chi tiết đơn hàng"
 																ng-mouseover="showTooltip()"
@@ -834,64 +854,65 @@
 				</div>
 			</div>
 		</div>
-		<script>
-			function generatePDF() {
-				const element = document.getElementById("Bill_Print");
-				// Tạo một đối tượng Date để lấy thời gian hiện tại
-				const currentTime = new Date();
+	</div>
+	<script>
+		function generatePDF() {
+			const element = document.getElementById("Bill_Print");
+			// Tạo một đối tượng Date để lấy thời gian hiện tại
+			const currentTime = new Date();
 
-				// Format thời gian thành một chuỗi
-				const options = {
-					timeZone : 'Asia/Ho_Chi_Minh'
-				};
-				const timestamp = currentTime.toLocaleString('en-US', options)
-						.replace(/[:.]/g, "-").replace("T", "_").slice(0, -5);
+			// Format thời gian thành một chuỗi
+			const options = {
+				timeZone : 'Asia/Ho_Chi_Minh'
+			};
+			const timestamp = currentTime.toLocaleString('en-US', options)
+					.replace(/[:.]/g, "-").replace("T", "_").slice(0, -5);
 
-				// Đặt tên file PDF với thời gian hiện tại
-				const fileName = `${timestamp}.pdf`;
+			// Đặt tên file PDF với thời gian hiện tại
+			const fileName = `${timestamp}.pdf`;
 
-				// Sử dụng thư viện html2pdf để tạo và tải file PDF
-				html2pdf().from(element).save("HD-DaisyShop - " + fileName);
-			}
-		</script>
-		<script>
-			var today = new Date();
-			var date = today.getDate() + '-' + (today.getMonth() + 1) + '-'
-					+ today.getFullYear();
-			var time = today.getHours() + ":" + today.getMinutes() + ":"
-					+ today.getSeconds();
-			var dateTime = date + ' ' + time;
+			// Sử dụng thư viện html2pdf để tạo và tải file PDF
+			html2pdf().from(element).save("HD-DaisyShop - " + fileName);
+		}
+	</script>
+	<script>
+		var today = new Date();
+		var date = today.getDate() + '-' + (today.getMonth() + 1) + '-'
+				+ today.getFullYear();
+		var time = today.getHours() + ":" + today.getMinutes() + ":"
+				+ today.getSeconds();
+		var dateTime = date + ' ' + time;
 
-			document.getElementById("hvn").innerHTML = dateTime;
-		</script>
-		<!-- container-scroller -->
-		<!-- base:js -->
-		<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
-		<!-- endinject -->
-		<!-- inject:js -->
-		<script src="../_admin/js/off-canvas.js"></script>
-		<script src="../_admin/js/hoverable-collapse.js"></script>
-		<script src="../_admin/js/template.js"></script>
-		<script src="../_admin/js/settings.js"></script>
-		<script src="../_admin/js/todolist.js"></script>
-		<!-- endinject -->
-		<!-- plugin js for this page -->
-		<script src="../_admin/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-		<script src="../_admin/vendors/select2/select2.min.js"></script>
-		<!-- End plugin js for this page -->
-		<!-- Custom js for this page-->
-		<script src="../_admin/js/file-upload.js"></script>
-		<script src="../_admin/js/typeahead.js"></script>
-		<script src="../_admin/js/select2.js"></script>
-		<!-- End custom js for this page-->
-		<script src="../_admin/js/tabs.js"></script>
-		<!--AngurlarJS -->
-		<script src="../js/app/app.js"></script>
-		<script src="../js/service/orderService.js"></script>
-		<script src="../js/controller/_adminOrder.js"></script>
-		<script src="../js/service/toastService.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+		document.getElementById("hvn").innerHTML = dateTime;
+	</script>
+	<!-- container-scroller -->
+	<!-- base:js -->
+	<script src="../_admin/vendors/js/vendor.bundle.base.js"></script>
+	<!-- endinject -->
+	<!-- inject:js -->
+	<script src="../_admin/js/off-canvas.js"></script>
+	<script src="../_admin/js/hoverable-collapse.js"></script>
+	<script src="../_admin/js/template.js"></script>
+	<script src="../_admin/js/settings.js"></script>
+	<script src="../_admin/js/todolist.js"></script>
+	<!-- endinject -->
+	<!-- plugin js for this page -->
+	<script src="../_admin/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+	<script src="../_admin/vendors/select2/select2.min.js"></script>
+	<!-- End plugin js for this page -->
+	<!-- Custom js for this page-->
+	<script src="../_admin/js/file-upload.js"></script>
+	<script src="../_admin/js/typeahead.js"></script>
+	<script src="../_admin/js/select2.js"></script>
+	<!-- End custom js for this page-->
+	<script src="../_admin/js/tabs.js"></script>
+	<!--AngurlarJS -->
+	<script src="../js/app/app.js"></script>
+	<script src="../js/service/orderService.js"></script>
+	<script src="../js/controller/_adminOrder.js"></script>
+	<script src="../js/service/toastService.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 
 </html>

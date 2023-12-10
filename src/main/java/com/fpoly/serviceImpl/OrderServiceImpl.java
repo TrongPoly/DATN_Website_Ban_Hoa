@@ -43,8 +43,23 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<Order> findOrderInMonth(Integer month) {
-		return orderRepository.findOrderInMonth(month);
+	public List<Order> findOrderInMonth(Integer month,Integer year) {
+		return orderRepository.findOrderInMonth(month, year);
+	}
+
+	@Override
+	public List<Order> searchById(int key) {
+		return orderRepository.findByIdContains(key);
+	}
+
+	@Override
+	public List<Order> searchByEmail(String key) {
+		return orderRepository.findByEmailContains(key);
+	}
+
+	@Override
+	public List<Integer> getYearOrder() {
+		return orderRepository.getOrderYear();
 	}
 
 }

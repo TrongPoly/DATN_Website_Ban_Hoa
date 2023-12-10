@@ -18,5 +18,11 @@ public interface OrderService {
 	
 	List<Order> findByStatus(OrderStatus status);
 
-	List<Order> findOrderInMonth(Integer month);
+	List<Order> findOrderInMonth(Integer month, Integer year);
+
+	List<Order> searchById(int key);
+
+	List<Order> searchByEmail(String key);
+
+	List<Integer> getYearOrder();
 }

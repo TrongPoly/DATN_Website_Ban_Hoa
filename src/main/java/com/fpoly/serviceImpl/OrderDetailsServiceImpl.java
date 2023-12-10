@@ -7,14 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.fpoly.model.Order;
 import com.fpoly.model.OrderDetail;
+import com.fpoly.model.OrderStatus;
 import com.fpoly.repository.OrderDetailsRepository;
 import com.fpoly.service.OrderDetailsService;
 
 @Service
-public class OrderDetailsServiceImpl implements OrderDetailsService{
+public class OrderDetailsServiceImpl implements OrderDetailsService {
 
 	@Autowired
 	OrderDetailsRepository orderDetailsRepository;
+
 	@Override
 	public List<OrderDetail> findAllOrderDetails() {
 		return orderDetailsRepository.findAll();
@@ -34,6 +36,11 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
 	public void saveAll(List<OrderDetail> orderDetails) {
 		orderDetailsRepository.saveAll(orderDetails);
 	}
-	
+
+	@Override
+	public List<OrderDetail> findAllByOrderStatus(Order order, OrderStatus status) {
+		return orderDetailsRepository.findByOrder(order).stream().filter(od -> od.getOrder().getStatus().equals(status))
+				.toList();
+	}
 
 }

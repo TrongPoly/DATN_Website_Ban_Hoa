@@ -1,6 +1,5 @@
 package com.fpoly.rest.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fpoly.model.Order;
 import com.fpoly.model.OrderDetail;
+import com.fpoly.model.OrderStatus;
 import com.fpoly.model.ReportCost;
 import com.fpoly.service.OrderDetailsService;
 import com.fpoly.service.OrderService;
+import com.fpoly.service.OrderStatusService;
 import com.fpoly.service.ReportService;
 
 @RestController
@@ -24,19 +25,16 @@ public class ReportRestController {
 	@Autowired OrderService orderService;
 	@Autowired ReportService reportService;
 	@Autowired OrderDetailsService orderDetailsService;
-	
-	public Integer monthCurrent() {
-		Date date = new Date();
-		return date.getMonth()+1;
-	}
+	@Autowired OrderStatusService orderStatusService;
 	
 	@GetMapping("/total")
-	public double total(@RequestParam("month") int month) {
+	public double total(@RequestParam("month") int month,@RequestParam("year") int year) {
 		
-		List<Order> orders = orderService.findOrderInMonth(month);
+		List<Order> orders = orderService.findOrderInMonth(month,year);
 		double totalCost = 0.0;
+		OrderStatus orderStatus = orderStatusService.findById(3);
 		for(Order order : orders ) {
-			List<OrderDetail> orderDetail = orderDetailsService.findByOrder(order);
+			List<OrderDetail> orderDetail = orderDetailsService.findAllByOrderStatus(order, orderStatus);
 			for(OrderDetail od : orderDetail) {
 				totalCost += od.getPrice().doubleValue() *  od.getQuantity() ;
 			}
@@ -44,14 +42,16 @@ public class ReportRestController {
 		return totalCost;
 	}
 	@GetMapping("/reportcost")
-	public List<ReportCost> reportCostInMonth(@RequestParam("month") int month){
-		List<ReportCost> lst = reportService.generateReport(month);
+	public List<ReportCost> reportCostInMonth(@RequestParam("month") int month,@RequestParam("year") int year){
+		List<ReportCost> lst = reportService.generateReport(month,year);
 		return lst;
 	}
-	@GetMapping("/reportcost/compare")
-	public List<ReportCost> compare(@RequestParam("month") int month){
-		List<ReportCost> lst1 = reportService.generateReport(month);
-		return lst1;
+	
+	@GetMapping("/data/year")
+	public List<Integer> getDataYear(){
+		
+		return orderService.getYearOrder();
 	}
+	
 	
 }
