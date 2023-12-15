@@ -21,7 +21,6 @@ import jakarta.websocket.server.PathParam;
 @RestController
 @RequestMapping("/rest")
 public class UploadRestController {
-	
 	@Autowired
 	UploadService uploadService;
 
@@ -29,7 +28,6 @@ public class UploadRestController {
 	public JsonNode upload(@PathParam("file") MultipartFile file,
 			@PathVariable("folder") String folder) {
 		File savedFile = uploadService.save(file,folder);
-		
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode node = mapper.createObjectNode();
 		node.put("name", savedFile.getName());

@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> findAllSP(Boolean ascending, Integer idCategory) {
-		System.out.println(idCategory);
+	
 		if (ascending != null) {
 			String property = "price";
 			Sort.Order order = ascending ? Sort.Order.asc(property) : Sort.Order.desc(property);

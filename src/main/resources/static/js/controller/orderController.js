@@ -1,5 +1,5 @@
-app.controller('orderCtrl', ["$scope", "OrderService", "ToastService",
-	function($scope, OrderService, ToastService) {
+app.controller('orderCtrl', ["$scope", "OrderService", "ToastService","$interval",
+	function($scope, OrderService, ToastService,$interval) {
 		$scope.listOrder = [];
 		$scope.toasts = [];
 		$scope.listOrderDetails = [];
@@ -108,9 +108,29 @@ app.controller('orderCtrl', ["$scope", "OrderService", "ToastService",
 								break;
 						}
 					});
-					console.log($scope.orderCounts);
 				})
 		}
+		
+		
+		var checkOrderConfirm = function() {
+			OrderService.getOrder(0)
+				.then((resp) => {
+					if(resp.data.length<$scope.listOrder.length){
+						$scope.getOrder();
+						$scope.countOrder();
+						ToastService.createToast("info", "Một đơn hàng vừa được cập nhật", $scope.toasts);
+					}		
+				});
+		};
+
+		// Sử dụng $interval để gọi hàm updateMessage mỗi 5 giây
+		var intervalPromise = $interval(checkOrderConfirm, 1000);
+
+		// Xóa interval khi scope bị hủy để tránh rò rỉ bộ nhớ
+		$scope.$on('$destroy', function() {
+			$interval.cancel(checkOrderConfirm);
+		});		
+		
 		$scope.pager = {
 		page: 0,
 		size: 8,

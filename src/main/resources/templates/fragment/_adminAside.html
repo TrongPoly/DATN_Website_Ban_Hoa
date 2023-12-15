@@ -7,7 +7,7 @@
 <body>
 	<nav class="sidebar sidebar-offcanvas" id="sidebar" th:fragment="adminAside">
     <ul class="nav">
-        <li class="nav-item">
+        <li class="nav-item" th:if="${session.user.role.id==1}">
             <a class="nav-link" data-toggle="collapse" href="#revenue" aria-expanded="false" aria-controls="revenue">
                 <i class="typcn typcn-chart-line-outline menu-icon"></i>
                 <span class="menu-title">Thống kê</span>
@@ -15,7 +15,8 @@
             </a>
             <div class="collapse" id="revenue">
                 <ul class="nav flex-column sub-menu">
-                      <li class="nav-item"> <a class="nav-link" href="/admin/dashboard">Doanh thu</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="/revenue/report">Doanh thu</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="/revenue/report_product">Sản phẩm</a></li>
                     <!-- Thêm các mục khác liên quan đến doanh thu nếu cần -->
                 </ul>
             </div>
@@ -29,10 +30,10 @@
             <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
                   
-                    <li class="nav-item"> <a class="nav-link" href="/admin/product">Sản phẩm</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="/admin/category">Loại sản phẩm</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="/admin/account">Tài khoản</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="/admin/order">Đơn hàng</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/manage/product">Sản phẩm</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/manage/category">Loại sản phẩm</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/manage/account">Tài khoản</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/manage/order">Đơn hàng</a></li>
                 </ul>
             </div>
         </li>

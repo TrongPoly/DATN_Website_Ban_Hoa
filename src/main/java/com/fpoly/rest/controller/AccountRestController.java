@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.fpoly.model.Account;
 import com.fpoly.service.AccountService;
+import com.fpoly.service.Base64Service;
 import com.fpoly.service.RoleService;
 import com.fpoly.service.SessionService;
 import com.fpoly.serviceImpl.MailService;
@@ -28,6 +29,8 @@ public class AccountRestController {
 	RoleService roleService;
 	@Autowired
 	MailService mailService;
+	@Autowired
+	Base64Service base64Service;
 
 	@GetMapping("/userLogin")
 	public Account getUser() {
@@ -39,7 +42,8 @@ public class AccountRestController {
 	}
 
 	@GetMapping("/account/verify/{email}")
-	public RedirectView verifyEmail(@PathVariable("email") String email) {
+	public RedirectView verifyEmail(@PathVariable("email") String emailEncoded) {
+		String email = base64Service.decode(emailEncoded);
 		Account account = accountService.findByid(email);
 		// Tài khoản đã được kích hoạt
 		if (account.getActive()) {
@@ -59,8 +63,9 @@ public class AccountRestController {
 		account.setActive(false);
 		account.setLocked(false);
 		accountService.saveAccount(account);
+		String email = base64Service.encode(account.getEmail());
 		try {
-			String url = "http://localhost:8080/api/account/verify/" + account.getEmail();
+			String url = "http://localhost:8080/api/account/verify/" + email;
 			mailService.activeAccountEmail(account.getEmail(), account.getFullName(), url);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,7 +79,8 @@ public class AccountRestController {
 			return ResponseEntity.notFound().build();
 		}
 		try {
-			String url = "http://localhost:8080/api/account/verify/" + email;
+			String emailEncoded = base64Service.encode(email);
+			String url = "http://localhost:8080/api/account/verify/" + emailEncoded;
 			mailService.activeAccountEmail(email, null, url);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

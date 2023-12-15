@@ -1,5 +1,5 @@
-const app = angular.module("reportApp", []);
-app.controller("dashboard-ctrl", function($scope, $http) {
+const newApp = angular.module("reportApp", []);
+newApp.controller("dashboard-ctrl", function($scope, $http) {
 	$scope.tota = 0;
 	$scope.month = 11;
 	$scope.year = 2023;
@@ -118,92 +118,5 @@ app.controller("dashboard-ctrl", function($scope, $http) {
 	}
 
 	$scope.getDoanhThu();
-	/* $scope.reportCost = function () {
-	   let date = (new Date()).toLocaleString('default', { month: 'short' });
-   
-	   const data = {
-		 labels: $scope.costDate,
-		 datasets: [
-		   {
-		   label: 'Cost in '+date,
-		   data: $scope.costData,
-		   fill: false,
-		   borderColor: 'rgb(75, 192, 192)',
-		   tension: 0.1
-		 }
-	   ]
-	   };
-   
-	   const config = {
-		 type: 'line',
-		 data: data,
-	   };
-	   const myChart = new Chart(
-		 document.getElementById('costChart'),
-		 config
-	   );
-	 }*/
+	
 });
-
-
-/* 
-
-  $scope.reportCost = function () {
-	let date = (new Date()).toLocaleString('default', { month: 'short' });
-
-	const data = {
-	  labels: $scope.costDate,
-	  datasets: [
-		{
-		label: 'Cost in '+date,
-		data: $scope.costData,
-		fill: false,
-		borderColor: 'rgb(75, 192, 192)',
-		tension: 0.1
-	  }
-	]
-	};
-
-	const config = {
-	  type: 'line',
-	  data: data,
-	};
-	const myChart = new Chart(
-	  document.getElementById('costChart'),
-	  config
-	);
-  }*/
-/* $scope.reportProduct = function(){
-   let date = (new Date()).toLocaleString('default', { month: 'short' });
-   const data = {
-	 labels: $scope.productName,
-	 datasets: [
-	   {
-	   label: 'Best seller in '+date,
-	   data: $scope.productCount,
-	   fill: false,
-	   backgroundColor: [
-		 'rgb(255, 99, 132)',
-		 'rgb(54, 162, 235)',
-		 'rgb(255, 205, 86)',
-		 'rgb(4, 76, 153 )',
-		 'rgb(181, 216, 253 )',
-	   ],
-	   hoverOffset: 4
-	 }
-   ]
-   };
-
-   const config = {
-	 type: 'pie',
-	 data: data,
-   };
-   const bestSeller = new Chart(
-	 document.getElementById('bestSeller'),
-	 config
-   );
- }
- $scope.reportProduct();*/
-/*   $scope.reportCost();*/
-
-

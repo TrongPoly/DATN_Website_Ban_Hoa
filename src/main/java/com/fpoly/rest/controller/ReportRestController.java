@@ -13,6 +13,7 @@ import com.fpoly.model.Order;
 import com.fpoly.model.OrderDetail;
 import com.fpoly.model.OrderStatus;
 import com.fpoly.model.ReportCost;
+import com.fpoly.model.ReportProduct;
 import com.fpoly.service.OrderDetailsService;
 import com.fpoly.service.OrderService;
 import com.fpoly.service.OrderStatusService;
@@ -44,6 +45,11 @@ public class ReportRestController {
 	@GetMapping("/reportcost")
 	public List<ReportCost> reportCostInMonth(@RequestParam("month") int month,@RequestParam("year") int year){
 		List<ReportCost> lst = reportService.generateReport(month,year);
+		return lst;
+	}
+	@GetMapping("/product")
+	public List<ReportProduct> reportProduct(@RequestParam("month") int month,@RequestParam("year") int year){
+		List<ReportProduct> lst = reportService.getReportProduct(month,year);
 		return lst;
 	}
 	

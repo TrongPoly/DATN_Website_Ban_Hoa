@@ -18,7 +18,7 @@ app.controller('loginCtrl',
 			ToastService.createToast("success", "Xác minh tài khoản thành công", $scope.toasts);
 		}
 		if (location.href === origin + "/auth/determined") {
-			ToastService.createToast("info", "Tài khoản đã được xác minh trước đó", $scope.toasts);
+			ToastService.createToast("info", "Tài khoản đã được xác minh", $scope.toasts);
 		}
 		if (location.href === origin + "/auth/success_change_pw") {
 			ToastService.createToast("success", "Đổi mật khẩu thành công", $scope.toasts);

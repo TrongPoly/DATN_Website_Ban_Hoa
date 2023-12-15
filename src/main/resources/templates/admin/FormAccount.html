@@ -338,7 +338,7 @@
 													<td ng-class="{'text-success':item.active}">{{item.active?
 														'Đã xác minh' : 'Chưa xác minh'}}</td>
 													<td>
-														<button ng-click="edit(item.email)" type="button"
+														<button ng-if="item.role.id!=1" ng-click="edit(item.email)" type="button"
 															class="btn btn-inverse-primary btn-rounded btn-icon">
 															<i class=" typcn typcn-pen"></i>
 														</button>

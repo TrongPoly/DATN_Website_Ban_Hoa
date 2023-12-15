@@ -57,7 +57,8 @@ public class AuthConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeHttpRequests().requestMatchers("/admin/**").hasAnyRole("Admin","Staff").and()
+		http.csrf().disable().authorizeHttpRequests().requestMatchers("/manage/**").hasAnyRole("Admin","Staff").and()
+				.authorizeHttpRequests().requestMatchers("/revenue/**").hasRole("Admin").and()
 				.authorizeHttpRequests().requestMatchers("/cart/**", "/checkout/**","/order/**").authenticated().and()
 				.authorizeHttpRequests().anyRequest().permitAll().and().exceptionHandling()
 				.accessDeniedPage("/auth/access/denied").and().formLogin().loginPage("/auth/login")

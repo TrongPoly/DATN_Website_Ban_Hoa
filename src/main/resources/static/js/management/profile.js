@@ -71,7 +71,7 @@ app.controller("AdminPfCtrl", function($scope, $http, ToastService) {
 		var url = host + "/profile/update";
 		$http
 			.put(url, $scope.account).then(resp => {
-				ToastService.createToast("success", "Cập nhật khẩu thành công", $scope.toasts)
+				ToastService.createToast("success", "Cập nhật thông tin thành công", $scope.toasts)
 			}).catch((error) => {
 				ToastService.createToast("error", "Cập nhật thất bại", $scope.toasts)
 			});

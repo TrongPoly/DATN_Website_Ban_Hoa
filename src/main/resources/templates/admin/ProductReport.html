@@ -33,7 +33,7 @@
 <!-- Chart -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body ng-app="reportApp" ng-controller="dashboard-ctrl">
+<body ng-app="reportProductApp" ng-controller="reportCtrl">
 	<div class="container-scroller">
 		<nav th:replace="~{fragment/_adminHeader.html::adminHeader}"></nav>
 		<!-- partial -->
@@ -46,19 +46,13 @@
 		<ul th:insert="~{fragment/_toast}"></ul>
 		<div class="container mt-5">
     <div class="row">
-        <div class="col-12">
-            <h4 class="mb-3">Doanh thu tháng {{month}}/{{year}}</h4>
-        </div>
         <div class="col-12 col-md-3">
-            <h3>{{tota | number:0}} VNĐ</h3>
-        </div>
-        <div class="col-12 col-md-3">
-            <select ng-model="month" ng-change="getDoanhThu()" class="form-control">
+            <select ng-model="month" ng-change="getDoanhthuSanPham()" class="form-control">
                 <option ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]" ng-value="i" ng-selected="i === month">{{i}}</option>
             </select>
         </div>
         <div class="col-12 col-md-3">
-            <select class="form-control ml-md-2 mt-2 mt-md-0" ng-model="year" ng-change="getDoanhThu()">
+            <select class="form-control ml-md-2 mt-2 mt-md-0" ng-model="year" ng-change="getDoanhthuSanPham()">
                 <option ng-value="item" ng-repeat="item in listYear" ng-selected="item === year">{{item}}</option>
             </select>
         </div>
@@ -96,7 +90,7 @@
 	<!--AngurlarJS -->
 	<script src="../js/app/app.js"></script>
 	<script src="../js/service/orderService.js"></script>
-	<script src="../js/controller/dashboard-ctrl.js"></script>
+	<script src="../js/controller/productReport.js"></script>
 	<script src="../js/service/toastService.js"></script>
 
 	<script

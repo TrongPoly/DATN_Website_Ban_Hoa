@@ -32,7 +32,6 @@ public class UploadServiceImpl implements UploadService{
 			
 			try {	
 			file.transferTo(savedFile);	
-			System.out.println(savedFile.getAbsolutePath());
 			return savedFile;
 		} catch (IOException e) {
 			throw new RuntimeException("Lỗi lưu tệp", e); // Ném lỗi nếu xảy ra lỗi khi lưu tệp

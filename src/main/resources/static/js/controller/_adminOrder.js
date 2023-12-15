@@ -1,5 +1,5 @@
-app.controller('adminOrder', ["$scope", "OrderService", "ToastService","$http",
-	function($scope, OrderService, ToastService,$http) {
+app.controller('adminOrder', ["$scope", "OrderService", "ToastService", "$http", "$interval",
+	function($scope, OrderService, ToastService, $http, $interval) {
 		$scope.listOrder = [];
 		$scope.listOrderDetails = [];
 		$scope.allOrder = [];
@@ -18,10 +18,11 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService","$http",
 					console.log(error.status);
 				});
 		}
+
 		//Tìm kiếm đơn hàng theo ID
 		$scope.searchOrderById = function() {
 			if ($scope.searchKeyword && $scope.searchKeyword.trim() !== "") {
-				$http.get("/api/order/search?key="+$scope.searchKeyword).then(resp => {
+				$http.get("/api/order/search?key=" + $scope.searchKeyword).then(resp => {
 					$scope.listOrder = resp.data;
 				}).catch(error => {
 					ToastService.createToast("error", "Lỗi tìm kiếm tên đơn hàng", $scope.toasts);
@@ -34,7 +35,7 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService","$http",
 		};
 		$scope.searchOrderByEmail = function() {
 			if ($scope.searchEmail && $scope.searchEmail.trim() !== "") {
-				$http.get("/api/order/search_by_email?email="+$scope.searchEmail).then(resp => {
+				$http.get("/api/order/search_by_email?email=" + $scope.searchEmail).then(resp => {
 					$scope.listOrder = resp.data;
 				}).catch(error => {
 					ToastService.createToast("error", "Lỗi tìm kiếm tên đơn hàng", $scope.toasts);
@@ -91,7 +92,6 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService","$http",
 			OrderService.getAllOrder()
 				.then((resp) => {
 					$scope.allOrder = resp.data;
-					console.log($scope.allOrder.length);
 					$scope.orderCounts = {
 						pending: 0,
 						confirmed: 0,
@@ -123,6 +123,37 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService","$http",
 					});
 				})
 		}
+
+		var checkNewOrder = function() {
+			OrderService.getAllOrder()
+				.then((resp) => {
+					if(resp.data.length>$scope.allOrder.length){
+						$scope.getOrder();
+						$scope.countOrder();
+						ToastService.createToast("info", "Có đơn hàng mới", $scope.toasts);
+					}		
+				});
+		};
+		var checkCancelOrder = function() {
+			OrderService.getAllOrderByStatus(0)
+				.then((resp) => {
+					if(resp.data.length<$scope.listOrder.length){
+						$scope.getOrder();
+						$scope.countOrder();
+						ToastService.createToast("info", "Có đơn bị hủy", $scope.toasts);
+					}		
+				});
+		};
+
+		// Sử dụng $interval để gọi hàm updateMessage mỗi 5 giây
+		var intervalPromise = $interval(checkNewOrder, 5000);
+		$interval(checkCancelOrder, 5000);
+
+		// Xóa interval khi scope bị hủy để tránh rò rỉ bộ nhớ
+		$scope.$on('$destroy', function() {
+			$interval.cancel(checkNewOrder);
+		});
+
 		//Hủy đơn, status =4
 		$scope.cancelOrder = function(idOrder) {
 			if ($scope.note == undefined) {
@@ -225,7 +256,7 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService","$http",
 
 		};
 		//điếm số đơn
-		$scope.countOrder();;
+		$scope.countOrder();
 		//Load đơn hàng
 		$scope.getOrder();
 	}]);

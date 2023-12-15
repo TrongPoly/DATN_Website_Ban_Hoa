@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fpoly.model.Product;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/manage")
 public class AdminController {
 	@GetMapping("/account")
 	public String getAccount() {
@@ -21,11 +21,6 @@ public class AdminController {
 	@GetMapping("/order")
 	public String getOrder() {
 		return "admin/FormOrder";
-	}
-	
-	@GetMapping("/dashboard")
-	public String getDashboard() {
-		return "admin/index";
 	}
 	
 	@GetMapping("/product")
