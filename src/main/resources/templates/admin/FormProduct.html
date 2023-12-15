@@ -301,8 +301,9 @@
 										<button ng-click="update()" type="button"
 											class="btn btn-primary" ng-show="editMode">Update</button>
 										<button type="button" class="btn btn-secondary"
-											ng-click="reset()">{{editMode ? 'Cancel' :
-											'Reset'}}</button>
+											ng-click="reset()">{{editMode ? 'Cancel' : 'Reset'}}</button>
+										<button ng-show="editMode" type="button" class="btn btn-secondary"
+											ng-click="delete()">Delete</button>
 									</form>
 								</div>
 
@@ -360,6 +361,12 @@
 														<button ng-click="edit(sp.id)" type="button"
 															class="btn btn-inverse-primary btn-rounded btn-icon">
 															<i class=" typcn typcn-pen"></i>
+														</button>
+													</td>
+													<td>
+														<button ng-click="delete(sp.id)" type="button"
+															class="btn btn-inverse-primary btn-rounded btn-icon">
+															<i class=" typcn typcn-delete"></i>
 														</button>
 													</td>
 												</tr>

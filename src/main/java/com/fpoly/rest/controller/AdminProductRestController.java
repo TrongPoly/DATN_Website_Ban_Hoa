@@ -2,7 +2,6 @@ package com.fpoly.rest.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,6 @@ import com.fpoly.repository.ProductRepository;
 import com.fpoly.service.ProductService;
 
 import jakarta.servlet.annotation.MultipartConfig;
-
 
 @RestController
 @MultipartConfig
@@ -65,8 +63,11 @@ public class AdminProductRestController {
 
 	@DeleteMapping("/product/{id}")
 	public ResponseEntity<Void> DeleteId(@PathVariable("id") Integer id) {
-
-		if (!prRep.existsById(id)) {
+		try {
+			if (!prRep.existsById(id)) {
+				return ResponseEntity.notFound().build();
+			}
+		} catch (Exception e) {
 			return ResponseEntity.notFound().build();
 		}
 
