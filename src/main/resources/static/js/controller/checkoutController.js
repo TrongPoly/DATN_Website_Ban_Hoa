@@ -1,5 +1,5 @@
-app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$http", "ProductService", "CartService",
-	function($scope, ToastService, CheckoutService, $http, ProductService, CartServive) {
+app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$http", "ProductService", "CartService","$interval",
+	function($scope, ToastService, CheckoutService, $http, ProductService, CartServive,$interval) {
 		$scope.orders = [];
 		$scope.toasts = [];
 		$scope.totalOrder = 0;
@@ -18,7 +18,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 				console.log(error.status)
 			});
 
-		$scope.checkQuantProduct = async function() {
+		var checkQuantProduct = async function() {
 			$scope.carts = CartServive.getCart();
 			for (let i = 0; i < $scope.carts.length; i++) {
 				try {
@@ -34,6 +34,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 					console.log(error.status);
 				}
 			}
+			return true;
 		}
 		$scope.get = function() {
 			$scope.orders = CheckoutService.getSelectedProduct();
@@ -56,8 +57,6 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 			}
 		}
 		$scope.checkout = function(amount) {
-			$scope.checkQuantProduct();
-
 			let datePU = document.getElementById("datePickUp").value;
 			let billing_fullName = document.getElementById("billing_fullName").value.trim();
 			let billing_phoneNumber = document.getElementById("billing_phoneNumber").value.trim();
@@ -104,7 +103,7 @@ app.controller('CheckoutCtrl', ["$scope", "ToastService", "CheckoutService", "$h
 			}
 		}
 
-
+$interval(checkQuantProduct, 1000);
 
 		$scope.get();
 	}]);

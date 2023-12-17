@@ -31,6 +31,22 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 
+
+<style>
+.unread-message {
+	position: relative;
+	display: inline-block;
+}
+
+.unread-message::after {
+	content: '\2022'; /* Unicode character for a bullet point */
+	position: absolute;
+	font-size: 40px;
+	top: -25px;
+	right: 20px;
+	color: red; /* You can customize the color as needed */
+}
+</style>
 </head>
 <body ng-app="myApp" ng-controller="adminOrder">
 	<div class="container-scroller">
@@ -115,7 +131,9 @@
 												</thead>
 												<tbody>
 													<tr ng-repeat="order in pager.listOrder">
-														<td class="text-center">{{order.id}}</td>
+														<td class="text-center"><span
+															ng-show="order.checked==false"
+															class="message unread-message"></span> {{order.id}}</td>
 														<td>{{order.email.email}}</td>
 														<td>{{order.orderDate | date: "dd/MM/yyyy, HH:mm"}}</td>
 														<td>{{order.pickUpDate | date: "dd/MM/yyyy, HH:mm"}}</td>
@@ -123,7 +141,7 @@
 															class="badge badge-success">CK</label></td>
 														<td class="text-center" ng-show="order.methodPayment==1"><label
 															class="badge badge-info">COD</label></td>
-															<td>{{order.status.statusName}}</td>
+														<td>{{order.status.statusName}}</td>
 														<td>
 															<button title="Chi tiết đơn hàng"
 																ng-mouseover="showTooltip()"
@@ -204,6 +222,27 @@
 			</div>
 		</div>
 		<!-- main-panel ends -->
+
+		<div class="modal fade" id="noteStatus" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Hủy đơn</h5>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Lý do hủy đơn</label>
+							<textarea ng-model="note" class="form-control" rows="10"
+								cols="20"></textarea>
+						</div>
+						<br>
+						<button class="btn btn-info" type="button"
+							ng-click="cancelOrder(idOrderForCancel) ">Xác nhận</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- Modal -->
 		<div class="modal fade" id="cart" tabindex="-1" role="dialog"
@@ -290,6 +329,7 @@
 			</div>
 		</div>
 		<!--END MODAL-->
+
 		<!-- Modal -->
 		<div class="modal fade" id="in" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -772,10 +812,6 @@
 								<td width="50%">&nbsp;</td>
 							</tr>
 						</table>
-
-
-
-
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
@@ -788,71 +824,8 @@
 			</div>
 			<!--END MODAL-->
 			<!--MODAL EDIT-->
-			<div class="modal fade" id="edit" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Wait for
-								confirmation</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
 
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>Id</th>
-											<th>Product</th>
-											<th></th>
-											<th>Price</th>
-											<th>Quantity</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>01</td>
-											<td>(anh.jpg )</td>
-											<td>Hoa Hồng</td>
-											<td>2</td>
-											<td>30.000</td>
 
-										</tr>
-										<tr class="table-secondary ">
-											<th colspan="4">Tổng:</th>
-											<td colspan="1">10.000</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal fade" id="noteStatus" tabindex="-1"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Hủy đơn</h5>
-						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<label>Lý do hủy đơn</label>
-								<textarea ng-model="note" class="form-control" rows="10"
-									cols="20"></textarea>
-							</div>
-							<br>
-							<button class="btn btn-info" type="button"
-								ng-click="cancelOrder(idOrderForCancel) ">Xác nhận</button>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<script>

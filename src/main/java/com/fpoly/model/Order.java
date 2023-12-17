@@ -50,8 +50,21 @@ public class Order {
 	@Column(name = "method_payment")
 	private int methodPayment;
 
+
+	@NotNull
+	@Column(name = "checked")
+	private boolean checked;
+	
 	public Integer getId() {
 		return id;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 
 	public void setId(Integer id) {

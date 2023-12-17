@@ -1,4 +1,4 @@
-let host = location.origin+"/rest";
+let host = location.origin + "/rest";
 const app = angular.module("AdminSpApp", []);
 app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 	$scope.form = {};
@@ -10,7 +10,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 	$scope.reset = function() {
 		$scope.form = { trangThai: true };
 		$scope.key = null;
-	$scope.editMode = false;
+		$scope.editMode = false;
 	}
 
 	$scope.load_all_category = function() {
@@ -34,7 +34,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 	}
 
 	$scope.edit = function(id) {
-		var url = host+"/product/"+id;
+		var url = host + "/product/" + id;
 		$scope.editMode = true;
 		$http.get(url).then(resp => {
 			$scope.form = resp.data;
@@ -84,7 +84,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 			return;
 		}
 		//Lỗi bỏ trống đơn giá
-		if ($scope.form.quantity<0) {
+		if ($scope.form.quantity < 0) {
 			ToastService.createToast("warning", "Số lượng phải lớn hơn 0", $scope.toasts);
 			return;
 		}
@@ -101,7 +101,7 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 		}
 
 		var item = angular.copy($scope.form);
-		var url = host+"/product?file="+$scope.form.image;
+		var url = host + "/product?file=" + $scope.form.image;
 		$http.post(url, item).then(resp => {
 			$scope.sps.push(item);
 			$scope.reset();
@@ -109,8 +109,8 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 			ToastService.createToast("success", "Thêm sản phẩm mới thành công!", $scope.toasts);
 			console.log("Success", resp);
 			$scope.load_all();
-	$scope.load_all_category();
-	$scope.reset();
+			$scope.load_all_category();
+			$scope.reset();
 		}).catch((error) => {
 			ToastService.createToast("error", "Thêm thất bại", $scope.toasts);
 			console.log("Error", error);
@@ -188,11 +188,11 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 				var index = $scope.sps.findIndex(item => item.id == id);
 
 				$scope.sps.splice(index, 1);
-				ToastService.createToast("success", "xóa thành công", $scope.toasts);
+				ToastService.createToast("success", "Xóa thành công", $scope.toasts);
 				$scope.reset();
 				console.log("Succes", resp);
 			}).catch((error) => {
-				ToastService.createToast("error", "xóa không thành công", $scope.toasts);
+				ToastService.createToast("error", "Sản phẩm này không thể xóa", $scope.toasts);
 				console.log("Error", error)
 			});
 		}
@@ -205,8 +205,8 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 			.then((resp) => {
 				ToastService.createToast("info", "Còn kinh doanh", $scope.toasts);
 				$scope.load_all();
-	$scope.load_all_category();
-	$scope.reset();
+				$scope.load_all_category();
+				$scope.searchProductByName();
 			})
 			.catch((error) => {
 				ToastService.createToast("error", "Lỗi", $scope.toasts);
@@ -219,8 +219,8 @@ app.controller("AdminSpCtrl", function($scope, $http, ToastService) {
 			.then((resp) => {
 				ToastService.createToast("info", "Ngừng kinh doanh", $scope.toasts);
 				$scope.load_all();
-	$scope.load_all_category();
-	$scope.reset();
+				$scope.load_all_category();
+				$scope.searchProductByName();
 			})
 			.catch((error) => {
 				ToastService.createToast("error", "Lỗi", $scope.toasts);

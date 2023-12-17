@@ -33,6 +33,7 @@ import com.fpoly.service.OrderService;
 import com.fpoly.service.OrderStatusHistoryService;
 import com.fpoly.service.OrderStatusService;
 import com.fpoly.service.ProductService;
+import com.fpoly.service.SessionService;
 
 @RestController
 @RequestMapping("/api")
@@ -49,6 +50,8 @@ public class OrderRestController {
 	OrderStatusService orderStatusService;
 	@Autowired
 	OrderStatusHistoryService orderStatusHistoryService;
+	@Autowired
+	SessionService sessionService;
 
 	@GetMapping("/order/get_all")
 	public ResponseEntity<List<Order>> getAll() {
@@ -100,6 +103,7 @@ public class OrderRestController {
 		order.setShippingFullName(shippingFullName);
 		order.setShippingPhoneNumber(shippingPhoneNumber);
 		order.setNote(note);
+		order.setChecked(false);
 		Instant od = Instant.now();
 		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 		LocalDateTime localDateTime = LocalDateTime.parse(pickUpDate, inputFormatter);
@@ -148,7 +152,12 @@ public class OrderRestController {
 
 	@GetMapping("/order/details/{idOrder}")
 	public ResponseEntity<List<OrderDetail>> getOrderDetails(@PathVariable("idOrder") int idOrder) {
-		List<OrderDetail> listOrderDetails = orderDetailsService.findByOrder(orderService.findById(idOrder));
+		Order order = orderService.findById(idOrder);
+		if(sessionService.getSession("user").getRole().getId()!=2) {
+		order.setChecked(true);
+		orderService.saveOrder(order);
+		}
+		List<OrderDetail> listOrderDetails = orderDetailsService.findByOrder(order);
 		return ResponseEntity.ok(listOrderDetails);
 	}
 
@@ -159,6 +168,7 @@ public class OrderRestController {
 		Order order = orderService.findById(idOrder);
 		OrderStatus orderStatus = orderStatusService.findById(statusId);
 		order.setStatus(orderStatus);
+		order.setChecked(false);
 		orderService.saveOrder(order);
 		// set status
 		OrderStatusHistory orderStatusHistory = new OrderStatusHistory();

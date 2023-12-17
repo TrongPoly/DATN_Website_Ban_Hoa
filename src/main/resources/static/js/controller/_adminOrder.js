@@ -13,6 +13,7 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService", "$http",
 			OrderService.getAllOrderByStatus(status)
 				.then((resp) => {
 					$scope.listOrder = resp.data;
+					sessionStorage.setItem("status4Order",status);
 				})
 				.catch((error) => {
 					console.log(error.status);
@@ -61,6 +62,8 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService", "$http",
 					$scope.listOrderDetails = resp.data;
 					$scope.getStatus(idOrder);
 					$scope.idOrderForCancel = idOrder;
+					//Load đơn hàng
+					$scope.getOrder(sessionStorage.getItem("status4Order"));
 				})
 				.catch((error) => {
 					console.log(error.status);
@@ -128,7 +131,7 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService", "$http",
 			OrderService.getAllOrder()
 				.then((resp) => {
 					if(resp.data.length>$scope.allOrder.length){
-						$scope.getOrder();
+						$scope.getOrder(sessionStorage.getItem("status4Order"));
 						$scope.countOrder();
 						ToastService.createToast("info", "Có đơn hàng mới", $scope.toasts);
 					}		
@@ -137,8 +140,8 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService", "$http",
 		var checkCancelOrder = function() {
 			OrderService.getAllOrderByStatus(0)
 				.then((resp) => {
-					if(resp.data.length<$scope.listOrder.length){
-						$scope.getOrder();
+					if(resp.data.length<$scope.orderCounts.pending){
+						$scope.getOrder(sessionStorage.getItem("status4Order"));
 						$scope.countOrder();
 						ToastService.createToast("info", "Có đơn bị hủy", $scope.toasts);
 					}		
@@ -166,7 +169,7 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService", "$http",
 							//điếm số đơn
 							$scope.countOrder();
 							//Load đơn hàng
-							$scope.getOrder();
+							$scope.getOrder(sessionStorage.getItem("status4Order"));
 							$('#noteStatus').modal('hide');
 						})
 						.catch((error) => {
@@ -184,7 +187,7 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService", "$http",
 						//điếm số đơn
 						$scope.countOrder();
 						//Load đơn hàng
-						$scope.getOrder();
+						$scope.getOrder(sessionStorage.getItem("status4Order"));
 					})
 					.catch((error) => {
 						console.log(error.status);
@@ -200,7 +203,7 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService", "$http",
 						//điếm số đơn
 						$scope.countOrder();
 						//Load đơn hàng
-						$scope.getOrder();
+						$scope.getOrder(sessionStorage.getItem("status4Order"));
 					})
 					.catch((error) => {
 						console.log(error.status);
@@ -216,7 +219,7 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService", "$http",
 						//điếm số đơn
 						$scope.countOrder();
 						//Load đơn hàng
-						$scope.getOrder();
+						$scope.getOrder(sessionStorage.getItem("status4Order"));
 					})
 					.catch((error) => {
 						console.log(error.status);
@@ -259,4 +262,5 @@ app.controller('adminOrder', ["$scope", "OrderService", "ToastService", "$http",
 		$scope.countOrder();
 		//Load đơn hàng
 		$scope.getOrder();
+		
 	}]);

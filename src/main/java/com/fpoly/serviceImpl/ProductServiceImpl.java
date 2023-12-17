@@ -71,4 +71,10 @@ public class ProductServiceImpl implements ProductService {
 		return null;
 	}
 
+	@Override
+	public List<Product> findAll4Admin() {
+		String property = "id";
+		return productRepository.findAll(Sort.by(Sort.Order.desc(property)));
+	}
+
 }

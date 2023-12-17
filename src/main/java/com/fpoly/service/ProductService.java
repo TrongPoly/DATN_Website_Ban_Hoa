@@ -21,4 +21,7 @@ public interface ProductService {
 	List<Product> searchByName(String keyword);
 
 	Product findByOrderDetails(OrderDetail ordDtail);
+	
+	//Admin	
+	List<Product> findAll4Admin();
 }

@@ -36,7 +36,7 @@ public class AdminProductRestController {
 
 	@GetMapping("/product")
 	public ResponseEntity<List<Product>> getProduct() {
-		List<Product> listProducts = PrAd.findAllSP(true, 0);
+		List<Product> listProducts = PrAd.findAll4Admin();
 		return ResponseEntity.status(HttpStatus.OK).body(listProducts);
 	}
 
@@ -67,13 +67,11 @@ public class AdminProductRestController {
 			if (!prRep.existsById(id)) {
 				return ResponseEntity.notFound().build();
 			}
+			prRep.deleteById(id);
+			return ResponseEntity.ok().build();
 		} catch (Exception e) {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.badRequest().build();
 		}
-
-		prRep.deleteById(id);
-		return ResponseEntity.ok().build();
-
 	}
 
 	@GetMapping("/product/search")

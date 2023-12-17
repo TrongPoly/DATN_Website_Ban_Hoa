@@ -52,6 +52,21 @@ app.controller('loginCtrl',
 					ToastService.createToast("error", "Mã OTP không chính xác", $scope.toasts);
 				});
 		}
+		$scope.preventSpace = function(event) {
+		if (event.keyCode === 32) { // 32 là mã ký tự cho phím space
+			event.preventDefault(); // Ngăn chặn sự kiện mặc định của phím space
+		}
+	}
+
+	$scope.checkPassword = function() {
+		let password = $scope.newPassword;
+		let confirm = $scope.confirmPassword;
+		if (password != confirm) {
+			return false;
+		}
+		return true;
+	}
+
 		$scope.changePassword = function() {
 			if ($scope.newPassword == "" || $scope.confirmPassword == "") {
 				ToastService.createToast("warning", "Vui lòng điền đầy đủ các ô nhập", $scope.toasts);

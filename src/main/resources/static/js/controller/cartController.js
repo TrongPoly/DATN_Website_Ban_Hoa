@@ -1,5 +1,5 @@
-app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductService",
-	function($scope, CartService, ToastService, ProductService) {
+app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductService","$interval",
+	function($scope, CartService, ToastService, ProductService,$interval) {
 		$scope.carts = [];
 		$scope.toasts = [];
 		$scope.total = 0;
@@ -30,17 +30,19 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 			$scope.totalCart();
 		}
 
-		$scope.checkQuantProduct = async function() {
+		var checkQuantProduct = async function() {
 			for (let i = 0; i < $scope.carts.length; i++) {
 				try {
-					const resp = await ProductService.getOneProduct($scope.carts[i].id);
-					console.log(resp.data.isAvailable);
-					if ($scope.carts[i].selected === true && $scope.carts[i].quant > resp.data.quantity) {
-						location.href = location.origin + "/cart/refresh";
-					} else if ($scope.carts[i].selected === true && resp.data.isAvailable==false) { 
-						//Sản phẩm tạm ngừng kinh doanh
-						location.href = location.origin + "/cart/refresh";
-					}
+					await ProductService.getOneProduct($scope.carts[i].id).then(resp => {
+						if ($scope.carts[i].selected == true && $scope.carts[i].quant > resp.data.quantity) {
+							location.href = location.origin + "/cart/refresh";
+						}
+						if ($scope.carts[i].selected == true && resp.data.isAvailable == false) {
+							//Sản phẩm tạm ngừng kinh doanh
+							location.href = location.origin + "/cart/refresh";
+						}
+					})
+
 				} catch (error) {
 					console.log(error.status);
 				}
@@ -75,9 +77,7 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 			}
 		}
 		$scope.checkCartSelect = function() {
-			$scope.checkQuantProduct();
-
-			console.log(sessionStorage.getItem("checkQuant"));
+			checkQuantProduct();
 			var check = false;
 			for (var i = 0; i < $scope.carts.length; i++) {
 				if ($scope.carts[i].selected === true) {
@@ -93,9 +93,11 @@ app.controller('CartCtrl', ["$scope", "CartService", "ToastService", "ProductSer
 
 		}
 
+
 		$scope.select = function(item) {
 			CartService.selectProduct(item);
 			$scope.totalCart();
 		}
 		$scope.get();
+		$interval(checkQuantProduct, 1000);
 	}]);
